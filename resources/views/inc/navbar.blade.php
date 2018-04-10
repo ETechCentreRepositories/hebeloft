@@ -2,7 +2,7 @@
     <div class="container">
         <a class="nav navbar-left" href="{{ url('/') }}">
             {{-- {{ config('app.name', 'Hebeloft') }} --}}
-            <img src="storage/logo/hebeloft_logo.png" width="100%" height="20%"/>
+            
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -11,6 +11,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
+                    <img src="storage/logo/hebeloft_logo.png" width="10%" height="20%"/>
                 <li><a class="nav-link" style="color:#e3b417;" href="/inventory">Inventory</a></li>
                 <li><a class="nav-link" style="color:#e3b417;" href="/salesorder">Sales order</a></li>
             </ul>
