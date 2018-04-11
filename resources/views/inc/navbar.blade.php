@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                    <img src="storage/logo/hebeloft_logo.png" width="10%" height="20%"/>
+                <img src="storage/logo/hebeloft_logo.png" width="10%" height="20%"/>
                 <li><a class="nav-link" style="color:#e3b417;" href="/inventory">Inventory</a></li>
                 <li><a class="nav-link" style="color:#e3b417;" href="/salesorder">Sales order</a></li>
                 {{-- @if(!Auth::guest()) --}}
@@ -21,6 +21,31 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
+<<<<<<< HEAD
+                                                              <!-- Authentication Links -->
+                                                              @guest
+                                                              <li><a class="nav-link" style="color:#e3b417;" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                                                              <li><a class="nav-link" style="color:#e3b417;" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                                                          @else
+                                                              <li class="nav-item dropdown">
+                                                                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                                                      {{ Auth::user()->name }}<span class="caret"></span>
+                                                                  </a>
+                                          
+                                                                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                                      <a class="dropdown-item" href="{{ route('logout') }}"
+                                                                         onclick="event.preventDefault();
+                                                                                       document.getElementById('logout-form').submit();">
+                                                                          {{ __('Logout') }}
+                                                                      </a>
+                                          
+                                                                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                                          @csrf
+                                                                      </form>
+                                                                  </div>
+                                                              </li>
+                                                          @endguest 
+=======
                 <!-- Authentication Links -->
                 @guest
                 <li><a class="nav-link" style="color:#e3b417;" href="{{ route('login') }}">{{ __('Login') }}</a></li>
@@ -44,6 +69,7 @@
                         </div>
                     </li>
                 @endguest 
+>>>>>>> ad00cc0375478775c6c12be78fda0c9de67d9497
             </ul>
         </div>
     </div>

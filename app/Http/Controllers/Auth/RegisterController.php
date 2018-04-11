@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Wholesaler;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -51,7 +52,11 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'phone_number' => 'required',
+            'company_name' => 'required',
+            'billing_address' => 'required',
+            'shipping_address' => 'required',
+            'password' => 'required|string|min:6|confirmed'
         ]);
     }
 
@@ -63,10 +68,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        // dd($data['name']);
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'phone_number'=>$data['phone_number'],
             'password' => Hash::make($data['password']),
         ]);
+        
+        $wholesaler =  Wholesaler::create([
+            'company_name'=>$data['company_name'],
+            'billing_address'=>$data['billing_address'],
+            'shipping_address'=>$data['shipping_address']
+        ]);
+        return $user;
     }
 }

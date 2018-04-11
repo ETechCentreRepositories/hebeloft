@@ -19,7 +19,7 @@ class User extends model
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password',
+        'name', 'email','phone_number','billing_address','shipping_address', 'password',
     ];
 
     /**
@@ -30,4 +30,8 @@ class User extends model
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function wholesaler(){
+        return $this->hasOne('App\Wholesaler');
+    }
 }
