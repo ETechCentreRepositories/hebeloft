@@ -11,15 +11,13 @@
 |
 */
 
-<<<<<<< HEAD
 Route::get('/', function () {
     return view('auth.login');
 });
-=======
+
 Route::get('/', 'PagesController@home');
 Route::get('/stafftable', 'PagesController@stafftable');
 Route::get('/staffsignup', 'PagesController@staffsignup');
->>>>>>> ad00cc0375478775c6c12be78fda0c9de67d9497
 
 Route::resource('stafftable', 'UsersController');
 

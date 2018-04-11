@@ -15,7 +15,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <p>{{$users->roles_id}}</p>
+                    {{-- <p>{{$users->roles_id}}</p> --}}
                     {{-- @foreach($users as $user)
                         {{$user->roles_id}}
                     @endforeach --}}
