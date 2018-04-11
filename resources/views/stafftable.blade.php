@@ -12,7 +12,6 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>#</th>
                     <th>Username</th>
                     <th>Email</th>
                     <th></th>
@@ -20,7 +19,6 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>1</td>
                     <td>Doe</td>
                     <td>john@example.com</td>
                     <td>
@@ -35,7 +33,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>2</td>
                     <td>Moe</td>
                     <td>mary@example.com</td>
                     <td>
@@ -50,7 +47,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>3</td>
                     <td>Dooley</td>
                     <td>july@example.com</td>
                     <td>
