@@ -35,6 +35,23 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
+
+                                    @if ($errors->has('password'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('password') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm password" required>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                                 <div class="row">
                             <div class="col-md-6">
@@ -85,23 +102,6 @@
                             <div class="col-md-12">
                                     <input type="checkbox" name="address" value="same"> My billing address is the same as my shipping address.<br>
                             </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <div class="row">
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm password" required>
-                            </div>
-                                </div>
                         </div>
 
                         <div class="form-group">

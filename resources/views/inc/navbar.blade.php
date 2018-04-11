@@ -14,6 +14,7 @@
                     <img src="storage/logo/hebeloft_logo.png" width="10%" height="20%"/>
                 <li><a class="nav-link" style="color:#e3b417;" href="/inventory">Inventory</a></li>
                 <li><a class="nav-link" style="color:#e3b417;" href="/salesorder">Sales order</a></li>
+                <li><a class="nav-link" style="color:#e3b417;" href="/staff">Users</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
