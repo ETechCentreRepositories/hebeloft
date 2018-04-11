@@ -15,6 +15,8 @@ Route::get('/', 'PagesController@home');
 Route::get('/stafftable', 'PagesController@stafftable');
 Route::get('/staffsignup', 'PagesController@staffsignup');
 
+Route::resource('stafftable', 'UsersController');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -18,8 +18,9 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach($users as $user)
                 <tr>
-                    <td>Doe</td>
+                    <td>{{$user->uname}}</td>
                     <td>john@example.com</td>
                     <td>
                         <div class="d-flex flex-row">
@@ -32,34 +33,7 @@
                         </div>
                     </td>
                 </tr>
-                <tr>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
-                    <td>
-                        <div class="d-flex flex-row">
-                            <div class="p-2">
-                                <a href="/"><button type="button" class="btn btn-primary">Edit</button></a>
-                            </div>
-                            <div class="p-2">
-                                <a href="/"><button type="button" class="btn btn-danger">Delete</button></a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
-                    <td>
-                        <div class="d-flex flex-row">
-                            <div class="p-2">
-                                <a href="/staffsignup"><button type="button" class="btn btn-primary">Edit</button></a>
-                            </div>
-                            <div class="p-2">
-                                <a href="/staffsignup"><button type="button" class="btn btn-danger">Delete</button></a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
