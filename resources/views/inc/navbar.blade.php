@@ -15,7 +15,7 @@
                 <li><a class="nav-link" style="color:#e3b417;" href="/inventory">Inventory</a></li>
                 <li><a class="nav-link" style="color:#e3b417;" href="/salesorder">Sales order</a></li>
                 {{-- @if(!Auth::guest()) --}}
-                    <li><a class="nav-link" style="color:#e3b417;" href="/staff">Staffs</a></li>
+                    <li><a class="nav-link" style="color:#e3b417;" href="/stafftable">Staffs</a></li>
                 {{-- @endif --}}
             </ul>
 

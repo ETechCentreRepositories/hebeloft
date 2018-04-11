@@ -11,13 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-
-Route::get('/staff', function () {
-    return view('auth.staff');
-});
+Route::get('/', 'PagesController@home');
+Route::get('/stafftable', 'PagesController@stafftable');
+Route::get('/staffsignup', 'PagesController@staffsignup');
 
 Auth::routes();
 
