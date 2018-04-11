@@ -25,15 +25,15 @@
                         {{-- <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}"> --}}
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                             <div class="row">
-                            <div class="col-md-12">
-                                <input id="username" type="text" class="form-control" name="username" placeholder="Username" value="{{ old('username') }}" required autofocus>
+                                <div class="col-md-12">
+                                    <input id="username" type="text" class="form-control" name="username" placeholder="Username" value="{{ old('username') }}" required autofocus>
 
-                                @if ($errors->has('username'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                                    @if ($errors->has('username'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('username') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
 

@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-end">
         <div>
-            <a href="/staffsignup"><button type="button" class="btn btn-outline-warning">Add new staff</button></a>
+            <a href="/staffsignup"><button type="button" class="btn btn-warning">Add new staff</button></a>
         </div>
     </div>
     <br><br>
