@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+@include('inc.navbar_superadmin')
+<br><br>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -13,7 +15,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                    <p>{{$users->roles_id}}</p>
+                    {{-- @foreach($users as $user)
+                        {{$user->roles_id}}
+                    @endforeach --}}
                     You are logged in!
                 </div>
             </div>
