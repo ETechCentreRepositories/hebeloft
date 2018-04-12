@@ -17,7 +17,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('stafftable')->with('users', $users);
+        return view('user')->with('users', $users);
     }
 
     /**
@@ -83,6 +83,8 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return redirect('/user')->with('success', 'Post Removed');
     }
 }

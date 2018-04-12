@@ -12,13 +12,18 @@ class PagesController extends Controller
         return view('home')->with('title', $title);
     }
 
-    public function stafftable(){
-        $title = 'Staff Table';
-        return view('stafftable')->with('title', $title);
+    public function user(){
+        $title = 'User';
+        return view('user')->with('title', $title);
     }
 
     public function staffsignup(){
         $title = 'Staff Sign Up';
         return view('auth.staffsignup')->with('title', $title);
+    }
+
+    public function outlet(){
+        $title = 'Outlet';
+        return view('outlet')->with('title', $title);
     }
 }
