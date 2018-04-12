@@ -19,7 +19,7 @@
                     {{-- @foreach($users as $user)
                         {{$user->roles_id}}
                     @endforeach --}}
-                    You are logged in!
+                    This is the homepage.
                 </div>
             </div>
         </div>

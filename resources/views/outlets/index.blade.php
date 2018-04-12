@@ -24,6 +24,7 @@
                 </tr>
             </thead>
             <tbody>
+                @if(count($outlets) > 0)
                 @foreach($outlets as $outlet)
                 <tr>
                     <td>{{$outlet->id}}</td>
@@ -34,7 +35,7 @@
                     <td>{{$outlet->fax}}</td>
                     <td>
                         <div class="d-flex flex-column">
-                            <div class="d-flex flex-row centered-buttons">
+                            <div class="d-flex flex-row outlet-buttons">
                                 <div class="p-2">
                                 <button type="button" class="btn btn-primary action-buttons" onclick="openUpdateOutletModal()">Edit</button>
                                 </div>
@@ -45,13 +46,16 @@
                                     {!!Form::close()!!}
                                 </div>
                             </div>
-                            <div class="p-2 no-side-paddings">
+                            <div class="p-2 no-side-paddings outlet-buttons">
                                 <a href="/"><button type="button" class="btn btn-secondary centered-buttons threshold-button" >Threshold</button></a>
                             </div>
                         </div>
                     </td>
                 </tr>
                 @endforeach
+                @else
+                    <p>No outlets found</p>
+                @endif
             </tbody>
         </table>
     </div>
@@ -59,58 +63,66 @@
 
 <div id="createOutletModal" class="modal">
     <span class="close cursor" onclick="closeCreateOutletModal()">&times;</span>
-    <div class="card">
+    <div class="card outlet-card">
         <div class="card-body">
-            <h5 class="card-title">Create outlet</h5>
+            <br>
+            <h3 class="card-title">Create outlet</h3>
+            <br>
             {!! Form::open(['action' => 'OutletsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-            <div class="form-group">
+            <div class="form-group modal-fields">
                 {{Form::text('outlet_name', '', ['class' => 'form-control', 'placeholder' => 'Branch name'])}}
             </div>
-            <div class="form-group">
+            <div class="form-group modal-fields">
                 {{Form::text('address', '', ['class' => 'form-control', 'placeholder' => 'Address'])}}
             </div>
-            <div class="form-group">
+            <div class="form-group modal-fields">
                 {{Form::text('email', '', ['class' => 'form-control', 'placeholder' => 'Email'])}}
             </div>
-            <div class="form-group">
+            <div class="form-group modal-fields">
                 {{Form::text('telephone_number', '', ['class' => 'form-control', 'placeholder' => 'Telephone number'])}}
             </div>
-            <div class="form-group">
+            <div class="form-group modal-fields">
                 {{Form::text('fax', '', ['class' => 'form-control', 'placeholder' => 'Fax'])}}
             </div>
-            <div class="form-group">
-                {{Form::submit('Create outlet', ['class'=>'btn btn-primary'])}}
+            <br>
+            <div class="form-group modal-button">
+                {{Form::submit('Create outlet', ['class'=>'btn btn-primary btn-lg'])}}
             </div>
+            <br>
         {!! Form::close() !!}
         </div>
     </div>
 </div>
 
 <div id="updateOutletModal" class="modal">
-        <span class="close cursor" onclick="closeCreateOutletModal()">&times;</span>
-        <div class="card">
+        <span class="close cursor" onclick="closeUpdateOutletModal()">&times;</span>
+        <div class="card outlet-card">
             <div class="card-body">
-                <h5 class="card-title">Create outlet</h5>
+                <br>
+                <h3 class="card-title">Edit outlet</h3>
+                <br>
                 {!! Form::open(['action' => ['OutletsController@update', $outlet->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-                <div class="form-group">
+                <div class="form-group modal-fields">
                     {{Form::text('outlet_name', $outlet->outlet_name, ['class' => 'form-control', 'placeholder' => 'Branch name'])}}
                 </div>
-                <div class="form-group">
+                <div class="form-group modal-fields">
                     {{Form::text('address', $outlet->address, ['class' => 'form-control', 'placeholder' => 'Address'])}}
                 </div>
-                <div class="form-group">
+                <div class="form-group modal-fields">
                     {{Form::text('email', $outlet->email, ['class' => 'form-control', 'placeholder' => 'Email'])}}
                 </div>
-                <div class="form-group">
+                <div class="form-group modal-fields">
                     {{Form::text('telephone_number', $outlet->telephone_number, ['class' => 'form-control', 'placeholder' => 'Telephone number'])}}
                 </div>
-                <div class="form-group">
+                <div class="form-group modal-fields">
                     {{Form::text('fax', $outlet->fax, ['class' => 'form-control', 'placeholder' => 'Fax'])}}
                 </div>
                 {{Form::hidden('_method', 'PUT')}}
-                <div class="form-group">
-                    {{Form::submit('Create outlet', ['class'=>'btn btn-primary'])}}
+                <br>
+                <div class="form-group modal-button">
+                    {{Form::submit('Edit outlet', ['class'=>'btn btn-primary btn-lg'])}}
                 </div>
+                <br>
             {!! Form::close() !!}
             </div>
         </div>

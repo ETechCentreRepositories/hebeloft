@@ -19,7 +19,6 @@
                     <li><a class="nav-link" style="color:#e3b417;" href="/user">User</a></li>
                     <li><a class="nav-link" style="color:#e3b417;" href="/outlet">Outlet</a></li>
                     <li><a class="nav-link" style="color:#e3b417;" href="/sales_record">Sales Record</a></li>
-                    <li><a class="nav-link" style="color:#e3b417;" href="/customers">Customers</a></li>
                 </ul>
     
                 <!-- Right Side Of Navbar -->

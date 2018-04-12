@@ -32,10 +32,13 @@ select {
   margin: auto;
 }
 
-.centered-buttons {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.user-buttons {
+  width: 50%;
+  margin: auto;
+}
+
+.outlet-buttons {
+  margin: auto;
 }
 
 .table td {
@@ -58,10 +61,45 @@ select {
   background-color: rgba(0,0,0,0.7);
 }
 
-.card {
-  width: 70%;
+.outlet-card {
+  width: 60%;
   position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.close {
+  color: white;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #999;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.card-title {
+  text-align: center;
+  font-weight: bold;
+}
+
+.modal-fields {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.modal-button {
+  text-align: center;
+}
+
+.pagination {
+  margin: auto;
 }

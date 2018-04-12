@@ -20,12 +20,13 @@
                 </tr>
             </thead>
             <tbody>
+                @if(count($users) > 0)
                 @foreach($users as $user)
                 <tr>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
                     <td>
-                        <div class="d-flex flex-row" class="centered-buttons">
+                        <div class="d-flex flex-row user-buttons">
                             <div class="p-2">
                                 <a href="/"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                             </div>
@@ -39,8 +40,14 @@
                     </td>
                 </tr>
                 @endforeach
+                @else
+                    <p>No users found</p>
+                @endif
             </tbody>
         </table>
     </div>
+</div>
+<div class="pagination">
+    {{$users->links()}}
 </div>
 @endsection
