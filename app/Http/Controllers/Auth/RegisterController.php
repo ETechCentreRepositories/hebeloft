@@ -26,7 +26,7 @@ class RegisterController extends Controller
 
     /**
      * Where to redirect users after registration.
-     *
+     *x
      * @var string
      */
     protected $redirectTo = '/home';
@@ -68,19 +68,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // dd($data['name']);
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'phone_number'=>$data['phone_number'],
+            'roles_id'=> (int) $data['roles_id'],
             'password' => Hash::make($data['password']),
         ]);
-        
+    
         $wholesaler =  Wholesaler::create([
             'company_name'=>$data['company_name'],
             'billing_address'=>$data['billing_address'],
             'shipping_address'=>$data['shipping_address']
         ]);
         return $user;
+        
     }
 }

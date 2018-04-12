@@ -22,7 +22,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $fillable = [
-        'name', 'email','phone_number','billing_address','shipping_address', 'password',
+        'name', 'email','phone_number','roles_id','billing_address','shipping_address', 'password',
     ];
 
     /**
@@ -31,7 +31,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','role_id'
     ];
 
     public function wholesaler(){
