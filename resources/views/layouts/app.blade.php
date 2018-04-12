@@ -23,6 +23,7 @@
 <body>
     <div id="app">
         <main class="pb-5">
+            @include('inc.messages')
             @yield('content')
         </main>
     </div>

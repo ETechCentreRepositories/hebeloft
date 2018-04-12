@@ -10398,6 +10398,14 @@ select {
   width: 100%;
 }
 
+.navbar {
+  background: #566B30 !important;
+}
+
+.nav-link:hover {
+  background: #46552C;
+}
+
 .logo {
   display: block;
   width: 100px;
@@ -10427,7 +10435,16 @@ select {
   padding: 0.5rem !important;
 }
 
-.nav-link:hover {
-  background: #46552C;
+.modal {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.card {
+  width: 70%;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 

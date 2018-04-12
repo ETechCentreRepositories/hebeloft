@@ -22,7 +22,7 @@
             <tbody>
                 @foreach($users as $user)
                 <tr>
-                    <td>{{$user->uname}}</td>
+                    <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
                     <td>
                         <div class="d-flex flex-row" class="centered-buttons">

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
 use App\Outlet;
 
 class OutletsController extends Controller
@@ -37,7 +36,24 @@ class OutletsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'outlet_name' => 'required',
+            'address' => 'required',
+            'email' => 'required',
+            'telephone_number' => 'required',
+            'fax' => 'required',
+        ]);
+
+        // Create Outlet
+        $outlet = new Outlet;
+        $outlet->outlet_name = $request->input('outlet_name');
+        $outlet->address = $request->input('address');
+        $outlet->email = $request->input('email');
+        $outlet->telephone_number = $request->input('telephone_number');
+        $outlet->fax = $request->input('fax');
+        $outlet->save();
+
+        return redirect('/outlet')->with('success', 'Outlet Created');
     }
 
     /**
@@ -59,7 +75,8 @@ class OutletsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $outlet = Outlet::find($id);
+        return view('outlets.edit')->with('outlet', $outlet);
     }
 
     /**
@@ -71,7 +88,24 @@ class OutletsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'outlet_name' => 'required',
+            'address' => 'required',
+            'email' => 'required',
+            'telephone_number' => 'required',
+            'fax' => 'required',
+        ]);
+
+        // Create Outlet
+        $outlet = Outlet::find($id);
+        $outlet->outlet_name = $request->input('outlet_name');
+        $outlet->address = $request->input('address');
+        $outlet->email = $request->input('email');
+        $outlet->telephone_number = $request->input('telephone_number');
+        $outlet->fax = $request->input('fax');
+        $outlet->save();
+
+        return redirect('/outlet')->with('success', 'Outlet Updated');
     }
 
     /**
@@ -82,6 +116,9 @@ class OutletsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $outlet = Outlet::find($id);
+        $outlet->delete();
+
+        return redirect('/outlet')->with('success', 'Outlet Removed');
     }
 }

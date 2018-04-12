@@ -8,5 +8,8 @@ class Outlet extends Model
 {
     // Table Name
     protected $table = 'outlets';
+
+    //Timestamps
+    public $timestamps = false;
     
 }
