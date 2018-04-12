@@ -99,7 +99,7 @@
                         
                         <div class="form-group row mb-0">
                             <div class="col-md-12 offset-md-5">
-                                <input type="hidden" name="role_id" value="4">
+                                <input id="roles_id" type="hidden" name="roles_id" value="4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
