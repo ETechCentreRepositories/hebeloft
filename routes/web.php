@@ -16,10 +16,10 @@ Route::get('/', function () {
 });
 
 Route::get('/', 'PagesController@home');
-Route::get('/user', 'PagesController@stafftable');
+Route::get('/user', 'PagesController@user');
 Route::get('/staffsignup', 'PagesController@staffsignup');
 
-Route::resource('stafftable', 'UsersController');
+Route::resource('user', 'UsersController');
 
 Auth::routes();
 

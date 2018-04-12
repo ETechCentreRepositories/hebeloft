@@ -93,7 +93,7 @@
                                     <input type="checkbox" name="role" value="ogop"> OG ORCHARD POINT<br>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="checkbox" name="role" value="ogct"> OG PEOPLE'S PARK (CHINATOWN)<br>
+                                    <input type="checkbox" name="role" value="ogct"> OG CHINATOWN<br>
                                 </div>
                             </div>
                             <div class="row">
