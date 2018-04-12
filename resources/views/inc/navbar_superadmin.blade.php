@@ -11,12 +11,12 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-                    <img src="storage/logo/hebeloft_logo.png" width="10%" height="20%"/>
+                    <a href="/"><img src="storage/logo/hebeloft_logo.png" class="logo"/></a>
                     <li><a class="nav-link" style="color:#e3b417;" href="/home">Home</a></li>
                     <li><a class="nav-link" style="color:#e3b417;" href="/inventory">Inventory</a></li>
                     <li><a class="nav-link" style="color:#e3b417;" href="/transfer_request">Transfer Request</a></li>
                     <li><a class="nav-link" style="color:#e3b417;" href="/sales_order">Sales Order</a></li>
-                    <li><a class="nav-link" style="color:#e3b417;" href="/stafftable">User</a></li>
+                    <li><a class="nav-link" style="color:#e3b417;" href="/user">User</a></li>
                     <li><a class="nav-link" style="color:#e3b417;" href="/outlet">Outlet</a></li>
                     <li><a class="nav-link" style="color:#e3b417;" href="/sales_record">Sales Record</a></li>
                     <li><a class="nav-link" style="color:#e3b417;" href="/customers">Customers</a></li>

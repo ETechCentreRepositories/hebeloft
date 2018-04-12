@@ -11,12 +11,9 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                <img src="storage/logo/hebeloft_logo.png" width="10%" height="20%"/>
+                <a href="/"><img src="storage/logo/hebeloft_logo.png" class="logo"/></a>
                 <li><a class="nav-link" style="color:#e3b417;" href="/inventory">Inventory</a></li>
                 <li><a class="nav-link" style="color:#e3b417;" href="/salesorder">Sales order</a></li>
-                {{-- @if(!Auth::guest()) --}}
-                    <li><a class="nav-link" style="color:#e3b417;" href="/stafftable">Staffs</a></li>
-                {{-- @endif --}}
             </ul>
 
             <!-- Right Side Of Navbar -->
