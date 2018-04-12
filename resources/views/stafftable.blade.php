@@ -23,14 +23,17 @@
                 @foreach($users as $user)
                 <tr>
                     <td>{{$user->uname}}</td>
-                    <td>john@example.com</td>
+                    <td>{{$user->email}}</td>
                     <td>
                         <div class="d-flex flex-row">
                             <div class="p-2">
                                 <a href="/staffsignup"><button type="button" class="btn btn-primary">Edit</button></a>
                             </div>
                             <div class="p-2">
-                                <a href="/staffsignup"><button type="button" class="btn btn-danger">Delete</button></a>
+                                {!!Form::open(['action' => ['UsersController@destroy', $user->id], 'method' => 'POST'])!!}
+                                    {{Form::hidden('_method', 'DELETE')}}
+                                    {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+                                {!!Form::close()!!}
                             </div>
                         </div>
                     </td>
