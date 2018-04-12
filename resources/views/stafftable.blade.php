@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+@include('inc.navbar_superadmin')
+<br><br>
 <div class="container">
     <div class="row justify-content-end">
         <div>

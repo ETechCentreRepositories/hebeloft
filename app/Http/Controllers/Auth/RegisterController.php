@@ -26,7 +26,7 @@ class RegisterController extends Controller
 
     /**
      * Where to redirect users after registration.
-     *
+     *x
      * @var string
      */
     protected $redirectTo = '/home';
@@ -73,6 +73,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'phone_number'=>$data['phone_number'],
+            'role_id'=>$data['role_id'],
             'password' => Hash::make($data['password']),
         ]);
         
