@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/', 'PagesController@home');
-Route::get('/stafftable', 'PagesController@stafftable');
+Route::get('/user', 'PagesController@stafftable');
 Route::get('/staffsignup', 'PagesController@staffsignup');
 
 Route::resource('stafftable', 'UsersController');

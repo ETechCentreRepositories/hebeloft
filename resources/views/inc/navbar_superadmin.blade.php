@@ -16,7 +16,7 @@
                     <li><a class="nav-link" style="color:#e3b417;" href="/inventory">Inventory</a></li>
                     <li><a class="nav-link" style="color:#e3b417;" href="/transfer_request">Transfer Request</a></li>
                     <li><a class="nav-link" style="color:#e3b417;" href="/sales_order">Sales Order</a></li>
-                    <li><a class="nav-link" style="color:#e3b417;" href="/user">User</a></li>
+                    <li><a class="nav-link" style="color:#e3b417;" href="/stafftable">User</a></li>
                     <li><a class="nav-link" style="color:#e3b417;" href="/outlet">Outlet</a></li>
                     <li><a class="nav-link" style="color:#e3b417;" href="/sales_record">Sales Record</a></li>
                     <li><a class="nav-link" style="color:#e3b417;" href="/customers">Customers</a></li>
