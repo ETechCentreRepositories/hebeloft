@@ -18,8 +18,10 @@ Route::get('/', function () {
 Route::get('/', 'PagesController@home');
 Route::get('/user', 'PagesController@user');
 Route::get('/staffsignup', 'PagesController@staffsignup');
+Route::get('/outlet', 'PagesController@outlet');
 
 Route::resource('user', 'UsersController');
+Route::resource('outlet', 'OutletsController');
 
 Auth::routes();
 

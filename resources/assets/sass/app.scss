@@ -23,3 +23,29 @@ select {
   position: relative;
   margin: auto;
 }
+
+.centered-buttons {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.action-buttons {
+  width: 70px;
+}
+
+.threshold-button {
+  width:156px;
+}
+
+.no-side-paddings {
+  padding: 0.5rem !important;
+}
+
+.nav-link:hover { 
+  background: #46552C;
+}

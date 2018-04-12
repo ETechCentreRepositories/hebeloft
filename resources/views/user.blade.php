@@ -2,14 +2,14 @@
 
 @section('content')
 @include('inc.navbar_superadmin')
-<br><br>
+<br>
 <div class="container">
     <div class="row justify-content-end">
         <div>
             <a href="/staffsignup"><button type="button" class="btn btn-warning">Add new staff</button></a>
         </div>
     </div>
-    <br><br>
+    <br>
     <div>
         <table class="table table-striped">
             <thead>
@@ -25,14 +25,14 @@
                     <td>{{$user->uname}}</td>
                     <td>{{$user->email}}</td>
                     <td>
-                        <div class="d-flex flex-row">
+                        <div class="d-flex flex-row" class="centered-buttons">
                             <div class="p-2">
-                                <a href="/staffsignup"><button type="button" class="btn btn-primary">Edit</button></a>
+                                <a href="/"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                             </div>
                             <div class="p-2">
                                 {!!Form::open(['action' => ['UsersController@destroy', $user->id], 'method' => 'POST'])!!}
                                     {{Form::hidden('_method', 'DELETE')}}
-                                    {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+                                    {{Form::submit('Delete', ['class' => 'btn btn-danger action-buttons'])}}
                                 {!!Form::close()!!}
                             </div>
                         </div>
