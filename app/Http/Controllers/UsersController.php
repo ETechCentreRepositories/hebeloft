@@ -45,7 +45,15 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->outlet);
+        $outlets = $request->outlet; 
+        $num_outlet = count($outlets);
+        // dd(count($num_outlet));
+        $i = 0;
+        for($i = 0 ; $i < $num_outlet ; $i++){
+            echo $i;
+        }
+        
+        
         // dd($request->input('outlet_id'));
         // // Create Internal User
         // $role = (int)$request->input('role');
@@ -57,10 +65,10 @@ class UsersController extends Controller
         // $user->password = $request->input('password');
         // $user->save();
 
-        $userOutlet = new UserOutlet;
-        // $userOutlet->users_id = $user->id;
-        $userOutlet->outlet_id = $request->outlet;
-        $userOutlet->save();
+        // $userOutlet = new UserOutlet;
+        // // $userOutlet->users_id = $user->id;
+        // $userOutlet->outlet_id = implode(",",$request->outlet);
+        // $userOutlet->save();
         
         // return redirect('/user')->with('success', 'User Created');
     }
