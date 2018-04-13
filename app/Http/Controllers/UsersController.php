@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\UserOutlet;
 use App\Outlet;
+use Illuminate\Support\Facades\Input;
 
 use DB;
 
@@ -44,22 +45,24 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        // Create Internal User
-        $role = (int)$request->input('role');
-        $user = new User;
-        $user->roles_id = $role;
-        $user->name = $request->input('username');
-        $user->email = $request->input('email');
-        $user->phone_number = $request->input('phone_number');
-        $user->password = $request->input('password');
-        $user->save();
+        // dd($request->outlet);
+        // dd($request->input('outlet_id'));
+        // // Create Internal User
+        // $role = (int)$request->input('role');
+        // $user = new User;
+        // $user->roles_id = $role;
+        // $user->name = $request->input('username');
+        // $user->email = $request->input('email');
+        // $user->phone_number = $request->input('phone_number');
+        // $user->password = $request->input('password');
+        // $user->save();
 
         $userOutlet = new UserOutlet;
-        $userOutlet->users_id = $user->id;
-        // $userOutlet->outlet_id = $request->input('outlet_id');
+        // $userOutlet->users_id = $user->id;
+        $userOutlet->outlet_id = $request->outlet;
         $userOutlet->save();
         
-        return redirect('/user')->with('success', 'User Created');
+        // return redirect('/user')->with('success', 'User Created');
     }
 
     /**
