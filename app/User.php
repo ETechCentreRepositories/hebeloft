@@ -37,4 +37,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function wholesaler(){
         return $this->hasOne('App\Wholesaler');
     }
+
+    public function outlet(){
+        return $this->hasMany('App\Outlet');
+    }
 }

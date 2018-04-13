@@ -40,7 +40,17 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Create Internal User
+        $role = (int)$request->input('role');
+        $user = new User;
+        $user->roles_id = $role;
+        $user->name = $request->input('username');
+        $user->email = $request->input('email');
+        $user->phone_number = $request->input('phone_number');
+        $user->password = $request->input('password');
+        $user->save();
+        
+        return redirect('/user')->with('success', 'User Created');
     }
 
     /**

@@ -10,7 +10,8 @@
                 <div class="card-header">Staff Sign Up</div>
 
                 <div class="card-body">
-                    <form class="form-horizontal" role="form" method="POST" action="UsersController@create">
+                        {!! Form::open(['action' => ['UsersController@store'], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+                    {{-- <form class="form-horizontal" role="form" method="POST" action="UsersController@create"> --}}
                         {{ csrf_field() }}
 
                         <div class="form-group">
@@ -140,7 +141,8 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    {!! Form::close() !!}
+                    {{-- </form> --}}
                 </div>
             </div>
         </div>
