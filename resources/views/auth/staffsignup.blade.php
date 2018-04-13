@@ -7,6 +7,8 @@
     <div class="row justify-content-center">
         <div class="col-md-8 col-md-offset-2">
             <div class="card">
+                    {{-- {{dd(count($outlets))}}s --}}
+                
                 <div class="card-header">Staff Sign Up</div>
 
                 <div class="card-body">
@@ -86,9 +88,14 @@
                         </div>
 
                         <br><hr><br>
-
-                        <div class="form-group">
-                            <div class="row">
+                        <label >Outlet:</label>
+                        <div class="form-group row">  
+                            @foreach($outlets as $outlet)
+                                <div class="col-md-5">
+                                <label class="checkbox-inline"><input id="outlet_id" type="checkbox" value="{{$outlet->id}}"> {{$outlet->outlet_name}} </label>
+                                    </div>
+                            @endforeach
+                            {{-- <div class="row">
                                 <div class="col-md-4">
                                     <input type="checkbox" name="outlet" value="ogal"> OG ALBERT<br>
                                 </div>
@@ -101,7 +108,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <input type="checkbox" name="outlet" value="bhgbj"> BHG BISHAN JUNCTION 8<br>
+                                    <input type="checkbox" name="outlet" value="bhgj8"> BHG BISHAN JUNCTION 8<br>
                                 </div>
                                 <div class="col-md-4">
                                     <input type="checkbox" name="outlet" value="bhgcck"> BHG CHOA CHU KANG<br>
@@ -118,20 +125,20 @@
                                     <input type="checkbox" name="outlet" value="metp"> METRO PARAGON<br>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="checkbox" name="outlet" value="nfbt"> NTUC FINEST BUKIT TIMAH<br>
+                                    <input type="checkbox" name="outlet" value="ntucbt"> NTUC FINEST BUKIT TIMAH<br>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <input type="checkbox" name="outlet" value="nfmp"> NTUC FINEST MARINE PARADE<br>
+                                    <input type="checkbox" name="outlet" value="ntucmp"> NTUC FINEST MARINE PARADE<br>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="checkbox" name="outlet" value="nxjp"> NTUC JURONG POINT XTRA<br>
+                                    <input type="checkbox" name="outlet" value="ntucjpx"> NTUC JURONG POINT XTRA<br>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="checkbox" name="outlet" value="nxnc"> NTUC NORTHPOINT CITY<br>
+                                    <input type="checkbox" name="outlet" value="ntucnc"> NTUC NORTHPOINT CITY<br>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
 
                         <div class="form-group">

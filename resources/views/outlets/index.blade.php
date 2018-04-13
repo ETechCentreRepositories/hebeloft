@@ -10,6 +10,8 @@
         </div>
     </div>
     <br>
+    {{-- {!!dd(count($outlets));!!} --}}
+    @if(count($outlets) > 0)
     <div>
         <table class="table table-striped">
             <thead>
@@ -24,7 +26,6 @@
                 </tr>
             </thead>
             <tbody>
-                @if(count($outlets) > 0)
                 @foreach($outlets as $outlet)
                 <tr>
                     <td>{{$outlet->id}}</td>
@@ -53,14 +54,16 @@
                     </td>
                 </tr>
                 @endforeach
-                @else
-                    <p>No outlets found</p>
-                @endif
+               
             </tbody>
         </table>
     </div>
+    @else
+    <p>No outlets found</p> 
+    @endif
 </div>
 
+@if(count($outlets) > 0)
 <div id="createOutletModal" class="modal">
     <span class="close cursor" onclick="closeCreateOutletModal()">&times;</span>
     <div class="card outlet-card">
@@ -128,6 +131,7 @@
         </div>
     </div>
 
+    @endif
 <script>
     function openCreateOutletModal() {
         document.getElementById('createOutletModal').style.display = "block";

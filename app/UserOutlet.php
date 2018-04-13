@@ -10,7 +10,7 @@ class UserOutlet extends Model
     protected $table = 'users_has_outlets';
 
     //Timestamps
-    public $timestamp = false;
+    public $timestamps = false;
 
     public function user(){
         return $this -> belongsTo('\App\User');
