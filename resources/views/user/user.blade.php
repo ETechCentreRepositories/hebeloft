@@ -28,7 +28,7 @@
                     <td>
                         <div class="d-flex flex-row user-buttons">
                             <div class="p-2">
-                                <a href="/"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
+                                <a href="/editUser"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                             </div>
                             <div class="p-2">
                                 {!!Form::open(['action' => ['UsersController@destroy', $user->id], 'method' => 'POST'])!!}

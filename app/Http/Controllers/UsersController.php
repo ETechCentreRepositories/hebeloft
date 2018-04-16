@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\UserOutlet;
-use App\Outlet;
+use App\Models\UserOutlet;
+use App\Models\Outlet;
 use Illuminate\Support\Facades\Input;
 
 use DB;
@@ -23,7 +23,7 @@ class UsersController extends Controller
 
         $users = User::orderBy('created_at','desc')->paginate(10);
         $outlet = Outlet::all();
-        return view('user')->with('users', $users);
+        return view('user.user')->with('users', $users);
     }
 
     /**

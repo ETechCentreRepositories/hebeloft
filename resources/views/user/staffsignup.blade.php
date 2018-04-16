@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8 col-md-offset-2">
             <div class="card">
-                    {{-- {{dd(count($outlets))}}s --}}
+                    {{-- {{dd(count($outlets))}} --}}
                 
                 <div class="card-header">Staff Sign Up</div>
 
