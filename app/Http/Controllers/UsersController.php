@@ -22,10 +22,7 @@ class UsersController extends Controller
         // $users = User::all();
 
         $users = User::orderBy('created_at','desc')->paginate(10);
-<<<<<<< HEAD
-=======
         $outlet = Outlet::all();
->>>>>>> 7555232f213ee7fe1f7080d1f113282673cb3e64
         return view('user.user')->with('users', $users);
     }
 
@@ -37,7 +34,7 @@ class UsersController extends Controller
     public function create()
     {
         $outlets = Outlet::all();
-        return view('auth.staffsignup')->with('outlets',$outlets);
+        return view('user.staffsignup')->with('outlets',$outlets);
     }
 
     /**
@@ -91,7 +88,9 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('user.edit')->with('user', $user);
+        $outlets = Outlet::all();
+        
+        return view('user.edit')->with('user', $user)->with('outlets',$outlets);
     }
 
     /**
