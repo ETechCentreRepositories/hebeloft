@@ -19,7 +19,7 @@ class UsersController extends Controller
         // $users = User::all();
 
         $users = User::orderBy('created_at','desc')->paginate(10);
-        return view('user')->with('users', $users);
+        return view('user.user')->with('users', $users);
     }
 
     /**
@@ -62,7 +62,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('user.edit')->with('user', $user);
     }
 
     /**
@@ -74,7 +75,11 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->username = $request->input('username');
+        $user->save();
+
+        return redirect('/user')->with('success', 'User Updated');
     }
 
     /**
