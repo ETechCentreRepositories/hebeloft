@@ -13,10 +13,10 @@ class UserOutlet extends Model
     public $timestamps = false;
 
     public function user(){
-        return $this -> belongsTo('\App\User');
+        return $this -> belongsTo('App\User');
     }
 
     public function outlet(){
-        return belongsTo('\App\Outlet');
+        return belongsTo('App\Models\Outlet');
     }
 }

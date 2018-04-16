@@ -39,6 +39,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     public function outlet(){
-        return $this->hasMany('App\Outlet');
+        return $this->hasMany('App\Models\Outlet');
+    }
+
+    public function roles(){
+        return $this->belongsTo('App\Models\Role');
     }
 }

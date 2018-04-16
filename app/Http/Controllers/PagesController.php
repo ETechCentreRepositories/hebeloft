@@ -24,6 +24,6 @@ class PagesController extends Controller
 
     public function outlet(){
         $title = 'Outlet';
-        return view('outlet')->with('title', $title);
+        return view('outlets.index')->with('title', $title);
     }
 }

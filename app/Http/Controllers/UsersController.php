@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Models\UserOutlet;
 use App\Models\Outlet;
+use App\Models\Role;
 use Illuminate\Support\Facades\Input;
 
 use DB;
@@ -23,6 +24,7 @@ class UsersController extends Controller
 
         $users = User::orderBy('created_at','desc')->paginate(10);
         $outlet = Outlet::all();
+
         return view('user.user')->with('users', $users);
     }
 
@@ -89,8 +91,15 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $outlets = Outlet::all();
+        $outletsId = Outlet::find($id);
+        $userOutlets = DB::select('SELECT outlets_id FROM users_has_outlets');
+
+        $roles = Role::select('id', 'roles_name')->get();
+        foreach ($roles as $role) {
+            $roleList[$role->id] = $role->roles_name;
+        }
         
-        return view('user.edit')->with('user', $user)->with('outlets',$outlets);
+        return view('user.edit', compact('roleList'))->with('user', $user)->with('outlets',$outlets)->with('roles', $user->roles)->with('outletsId', $outletsId)->with('userOutlets', $userOutlets);
     }
 
     /**
@@ -103,7 +112,7 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-        $user->username = $request->input('username');
+        $user->name = $request->input('name');
         $user->save();
 
         return redirect('/user')->with('success', 'User Updated');
