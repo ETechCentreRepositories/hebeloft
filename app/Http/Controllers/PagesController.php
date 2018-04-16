@@ -14,13 +14,13 @@ class PagesController extends Controller
 
     public function user(){
         $title = 'User';
-        return view('user')->with('title', $title);
+        return view('user.user')->with('title', $title);
     }
 
-    public function staffsignup(){
-        $title = 'Staff Sign Up';
-        return view('auth.staffsignup')->with('title', $title);
-    }
+    // public function staffsignup(){
+    //     $title = 'Staff Sign Up';
+    //     return view('auth.staffsignup')->with('title', $title);
+    // }
 
     public function outlet(){
         $title = 'Outlet';

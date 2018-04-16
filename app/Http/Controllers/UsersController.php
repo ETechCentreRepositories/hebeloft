@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Models\UserOutlet;
+use App\Models\Outlet;
+use Illuminate\Support\Facades\Input;
 
 use DB;
 
@@ -19,6 +22,10 @@ class UsersController extends Controller
         // $users = User::all();
 
         $users = User::orderBy('created_at','desc')->paginate(10);
+<<<<<<< HEAD
+=======
+        $outlet = Outlet::all();
+>>>>>>> 7555232f213ee7fe1f7080d1f113282673cb3e64
         return view('user.user')->with('users', $users);
     }
 
@@ -29,7 +36,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        $outlets = Outlet::all();
+        return view('auth.staffsignup')->with('outlets',$outlets);
     }
 
     /**
@@ -39,8 +47,28 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        // Create Internal User
+        $role = (int)$request->input('role');
+        $user = new User;
+        $user->roles_id = $role;
+        $user->name = $request->input('username');
+        $user->email = $request->input('email');
+        $user->phone_number = $request->input('phone_number');
+        $user->password = $request->input('password');
+        $user->save();
+
+        $outlets = $request->outlet; 
+        $num_outlet = count($outlets);
+        for($i = 0 ; $i < $num_outlet ; $i++){
+            // echo "<br>". $outlets[$i];
+            $userOutlet = new UserOutlet;
+            $userOutlet->users_id = $user->id;
+            $userOutlet->outlets_id = $outlets[$i];
+            $userOutlet->save();
+        }
+        
+        return redirect('/user')->with('success', 'User Created');
     }
 
     /**

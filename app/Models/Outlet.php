@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,5 +11,9 @@ class Outlet extends Model
 
     //Timestamps
     public $timestamps = false;
+
+    public function user(){
+        return $this->hasMany('App\User');
+    }
     
 }
