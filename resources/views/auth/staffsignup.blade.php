@@ -92,7 +92,7 @@
                         <div class="form-group row">  
                             @foreach($outlets as $outlet)
                                 <div class="col-md-5">
-                                <label class="checkbox-inline"><input id="outlet" name="outlet" type="checkbox" class="form-check-input" value="{{$outlet->id}}"> {{$outlet->outlet_name}} </label>
+                                <label class="checkbox-inline"><input name="outlet[]" type="checkbox" value="{{$outlet->id}}"> {{$outlet->outlet_name}} </label>
                                     </div>
                             @endforeach
                         </div>

@@ -44,33 +44,28 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        // Create Internal User
+        $role = (int)$request->input('role');
+        $user = new User;
+        $user->roles_id = $role;
+        $user->name = $request->input('username');
+        $user->email = $request->input('email');
+        $user->phone_number = $request->input('phone_number');
+        $user->password = $request->input('password');
+        $user->save();
+
         $outlets = $request->outlet; 
         $num_outlet = count($outlets);
-        // dd(count($num_outlet));
-        $i = 0;
         for($i = 0 ; $i < $num_outlet ; $i++){
-            echo $i;
+            // echo "<br>". $outlets[$i];
+            $userOutlet = new UserOutlet;
+            $userOutlet->users_id = $user->id;
+            $userOutlet->outlets_id = $outlets[$i];
+            $userOutlet->save();
         }
         
-        
-        // dd($request->input('outlet_id'));
-        // // Create Internal User
-        // $role = (int)$request->input('role');
-        // $user = new User;
-        // $user->roles_id = $role;
-        // $user->name = $request->input('username');
-        // $user->email = $request->input('email');
-        // $user->phone_number = $request->input('phone_number');
-        // $user->password = $request->input('password');
-        // $user->save();
-
-        // $userOutlet = new UserOutlet;
-        // // $userOutlet->users_id = $user->id;
-        // $userOutlet->outlet_id = implode(",",$request->outlet);
-        // $userOutlet->save();
-        
-        // return redirect('/user')->with('success', 'User Created');
+        return redirect('/user')->with('success', 'User Created');
     }
 
     /**

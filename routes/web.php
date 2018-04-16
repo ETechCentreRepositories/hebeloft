@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/', 'PagesController@home');
+// Route::get('/', 'PagesController@home');
 Route::get('/user', 'PagesController@user');
 Route::get('/staffsignup', 'UsersController@create');
 Route::get('/outlet', 'PagesController@outlet');
