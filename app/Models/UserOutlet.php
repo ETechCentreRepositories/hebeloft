@@ -17,6 +17,6 @@ class UserOutlet extends Model
     }
 
     public function outlet(){
-        return belongsTo('\App\Outlet');
+        return belongsTo('\App\Models\Outlet');
     }
 }

@@ -21,6 +21,7 @@ Route::get('/staffsignup', 'UsersController@create');
 Route::get('/outlet', 'PagesController@outlet');
 
 Route::resource('user', 'UsersController');
+Route::resource('inventory', 'InventoryController');
 Route::resource('outlet', 'OutletsController');
 
 Auth::routes();
