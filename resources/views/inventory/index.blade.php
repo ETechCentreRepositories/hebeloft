@@ -27,13 +27,14 @@
                 </tr>
             </thead>
             <tbody>
-               @if(count($products) > 0) 
-                @foreach($products as $product)
+               @if(count($inventorys) > 0) 
+                @foreach($inventorys as $inventory)
                 <tr>
-                    <td>{{$product->image}}</td>
-                    <td>{{$product->Brand}}</td>
-                    <td>{{$product->Name}}</td>
-                    <td>{{$product->UnitPrice}}</td>
+                    {{-- {{dd($inventory->Name)}} --}}
+                    <td>{{$inventory->products->image}}</td> 
+                    <td>{{$inventory->Brand}}</td>
+                    <td>{{$inventory->Name}}</td>
+                    <td>{{$inventory->UnitPrice}}</td>
                     <td>
                         {{-- <div class="d-flex flex-row user-buttons">
                             <div class="p-2">
@@ -51,7 +52,7 @@
                 @endforeach
                 @else
                     <p>No Inventory found</p>
-                @endif --}}
+                @endif
             </tbody>
         </table>
     </div>

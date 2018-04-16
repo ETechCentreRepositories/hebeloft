@@ -12,9 +12,9 @@ class Products extends Model
     //Timestamps
     public $timestamps = false;
 
-    // public function user(){
-    //     return $this -> belongsTo('\App\User');
-    // }
+    public function inventory(){
+        return $this -> belongsTo('\App\Models\Inventory');
+    }
 
     // public function outlet(){
     //     return belongsTo('\App\Outlet');
