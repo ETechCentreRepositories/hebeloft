@@ -13,7 +13,7 @@ class Inventory extends Model
     public $timestamps = false;
 
     public function products(){
-        return $this -> hasMany('\App\Models\Products');
+        return $this -> belongsTo('\App\Models\Products');
     }
 
     // public function outlet(){

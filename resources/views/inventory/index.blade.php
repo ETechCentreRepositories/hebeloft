@@ -31,10 +31,12 @@
                 @foreach($inventorys as $inventory)
                 <tr>
                     {{-- {{dd($inventory->Name)}} --}}
-                    <td>{{$inventory->products->image}}</td> 
-                    <td>{{$inventory->Brand}}</td>
-                    <td>{{$inventory->Name}}</td>
-                    <td>{{$inventory->UnitPrice}}</td>
+                    <td>
+                        <img style="width:60px; height:60px" src="/storage/product_images/{{$inventory->products['image']}}">    
+                    </td>
+                    <td>{{$inventory->products['Brand']}}</td>
+                    <td>{{$inventory->products['Name']}}</td>
+                    <td>{{$inventory->products['UnitPrice']}}</td>
                     <td>
                         {{-- <div class="d-flex flex-row user-buttons">
                             <div class="p-2">
@@ -48,6 +50,10 @@
                             </div>
                         </div> --}}
                     </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{$inventory->stock_level}}</td>
                 </tr>
                 @endforeach
                 @else

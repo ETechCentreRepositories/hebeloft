@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Inventory;
 
+use DB;
+
 class InventoryController extends Controller
 {
     /**
@@ -17,7 +19,8 @@ class InventoryController extends Controller
     {
         $inventorys = Inventory::all();
         $products = Products::all();
-        return view('inventory.index')->with('inventorys',$inventorys);
+        
+        return view('inventory.index')->with('inventorys',$inventorys)->with('products',$products);
     }
 
     /**
