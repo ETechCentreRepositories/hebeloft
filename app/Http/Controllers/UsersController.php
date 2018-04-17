@@ -91,14 +91,13 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $outlets = Outlet::all();
-        $outletsId = Outlet::find($id);
 
         $roles = Role::select('id', 'roles_name')->get();
         foreach ($roles as $role) {
             $roleList[$role->id] = $role->roles_name;
         }
         
-        return view('user.edit', compact('roleList'))->with('user', $user)->with('outlets',$outlets)->with('roles', $user->roles)->with('outletsId', $outletsId);
+        return view('user.edit', compact('roleList'))->with('user', $user)->with('outlets',$outlets)->with('roles', $user->roles);
     }
 
     /**
