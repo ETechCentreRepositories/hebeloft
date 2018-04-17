@@ -32,7 +32,7 @@
                 <tr>
                     {{-- {{dd($inventory->Name)}} --}}
                     <td>
-                        <img style="width:50px; height:50px" src="/storage/product_images/{{$product->image}}">    
+                        <img style="width:60px; height:60px" src="/storage/product_images/{{$product->image}}">    
                     </td> 
                     <td>{{$product->Brand}}</td>
                     <td>{{$product->Name}}</td>

@@ -10486,3 +10486,13 @@ select {
   margin: auto;
 }
 
+th {
+  cursor: pointer;
+}
+
+th:hover {
+  background: gray;
+  text-decoration: none;
+  cursor: pointer;
+}
+
