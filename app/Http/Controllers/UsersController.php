@@ -92,19 +92,16 @@ class UsersController extends Controller
         $user = User::find($id);
         $user_id = $user->id;
         $outlets = Outlet::all();
-<<<<<<< HEAD
         $outletsId = Outlet::find($id);
         $userOutlets = DB::select('SELECT outlets_id FROM users_has_outlets WHERE users_id ='. $user_id);
         // dd($userOutlets);
-=======
 
->>>>>>> ac9aedc1417d0a3d3d843ef20caa3485d920f741
         $roles = Role::select('id', 'roles_name')->get();
         foreach ($roles as $role) {
             $roleList[$role->id] = $role->roles_name;
         }
         
-        return view('user.edit', compact('roleList'))->with('user', $user)->with('outlets',$outlets)->with('roles', $user->roles);
+        return view('user.edit', compact('roleList'))->with('user', $user)->with('outlets',$outlets)->with('roles', $user->roles)->with('userOutlets',$userOutlets);
     }
 
     /**
