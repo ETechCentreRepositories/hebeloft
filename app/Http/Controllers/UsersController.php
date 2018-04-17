@@ -90,10 +90,11 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
+        $user_id = $user->id;
         $outlets = Outlet::all();
         $outletsId = Outlet::find($id);
-        $userOutlets = DB::select('SELECT outlets_id FROM users_has_outlets');
-
+        $userOutlets = DB::select('SELECT outlets_id FROM users_has_outlets WHERE users_id ='. $user_id);
+        // dd($userOutlets);
         $roles = Role::select('id', 'roles_name')->get();
         foreach ($roles as $role) {
             $roleList[$role->id] = $role->roles_name;

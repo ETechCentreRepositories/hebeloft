@@ -60,11 +60,20 @@
                     <br><hr><br>
 
                     <label >Outlet:</label>
-                    <div class="form-group row">  
-                        @foreach($outlets as $outlet)
-                            <div class="col-md-5">
-                                <label class="checkbox-inline"><input name="outlet[]" type="checkbox" value="{{$outlet->id}}"> {{$outlet->outlet_name}} </label>
-                            </div>
+                    <div class="form-group row"> 
+                            {{-- @foreach (array_combine($outlets, $userOutlets) as $outlet => $userOutlet) 
+                                <p>{{$outlet->id}}</p>
+                            @endforeach     --}}
+                        @foreach($outlets as $outlet) 
+                            @foreach($userOutlets as $userOutlet)
+                                <div class="col-md-5">
+                                    @if($outlet->id == $userOutlet->outlets_id)
+                                        <label class="checkbox-inline"><input id="cbChecked" name="outlet[]" type="checkbox" value="{{$outlet->id}}" checked> {{$outlet->outlet_name}} </label>
+                                    @elseif($outlet->id != $userOutlet->outlets_id)
+                                        <label class="checkbox-inline"><input  name="outlet[]" type="checkbox" value="{{$outlet->id}}"> {{$outlet->outlet_name}} </label>
+                                    @endif
+                                </div>
+                            @endforeach
                         @endforeach
                     </div>
 
