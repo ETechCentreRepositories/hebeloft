@@ -12,7 +12,13 @@
       </select> --}}
     <br>
     <div>
-        <table class="table table-striped">
+
+        <div class="row">
+            <a href="{{ route('export.file',['type'=>'csv']) }}">Download CSV</a>
+        </div>
+
+
+        <table class="table table-striped" >
             <thead>
                 <tr>
                     <th>Image</th>
