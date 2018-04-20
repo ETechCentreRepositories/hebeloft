@@ -27,4 +27,9 @@ Route::resource('outlet', 'OutletsController');
 
 Auth::routes();
 
+//Import outlets
+// Route::get('import-export-view', 'ExcelController@importExportView')->name('import.export.view');
 
+Route::post('import-inventory', 'InventoryController@importFile')->name('import.file');
+
+Route::get('export-inventory/{type}', 'InventoryController@exportFile')->name('export.file');
