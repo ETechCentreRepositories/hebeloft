@@ -168,7 +168,7 @@ class InventoryController extends Controller
                         ->select('inventory.id','products.Name', 'products.Category','products.Brand', 'products.ItemType','inventory.threshold_level','inventory.stock_level')
                         ->get()->toArray();
 
-        return response($inventoryexcel);
+        return response($inventory);
     }
 
     public function getInventoryById($inventoryId){
