@@ -52,7 +52,7 @@
                 </tr>
             </thead>
             <tbody>
-               @if(count($inventorys) > 0) 
+                @if(count($inventorys) > 0) 
                 @foreach($inventorys as $inventory)
                 <tr>
                     {{-- {{dd($inventory->Name)}} --}}

@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
-    public function home(){
-        $title = 'Welcome To Laravel!';
+    public function dashboard(){
+        $title = 'Dashboard';
         //return view('pages.index', compact('title'));
-        return view('home')->with('title', $title);
+        return view('dashboard')->with('title', $title);
     }
 
     public function user(){
