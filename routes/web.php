@@ -28,6 +28,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/ajax/inventory', 'InventoryController@getInventory');
+Route::get('/ajax/inventory/{id}', 'InventoryController@getInventoryById');
 
 //Import outlets
 // Route::get('import-export-view', 'ExcelController@importExportView')->name('import.export.view');
