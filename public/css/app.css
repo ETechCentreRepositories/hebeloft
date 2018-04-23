@@ -10392,6 +10392,10 @@ a.text-dark:focus {
   background-color: #fff;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 55px;
 }
 
 select {
@@ -10406,11 +10410,87 @@ select {
   background: #46552C;
 }
 
+.container-fluid {
+  padding: 0px;
+}
+
 .logo {
   display: block;
   width: 100px;
   position: relative;
   margin: auto;
+}
+
+.topMargin {
+  margin-top: 55px;
+}
+
+.salesOrder {
+  background-color: #FBFAFA;
+  padding: 20px 0;
+  margin-top: 55px;
+}
+
+.transferRequest {
+  background-color: #fff;
+  padding: 20px 0;
+}
+
+.auditTrails {
+  background-color: #FBFAFA;
+  padding: 20px 0;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.dashboardCards {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.dashboardLabels {
+  margin: 0 0 10px 10px;
+}
+
+.cardContent {
+  text-align: center;
+}
+
+.salesCards {
+  width: 22%;
+  height: 123px;
+  margin: 0 10px 20px 10px;
+}
+
+.salesCardsBody {
+  padding: 0;
+  font-size: 10px;
+  color: #B9C1CE;
+}
+
+.salesNumber {
+  font-size: 28px;
+}
+
+.salesNumber1 {
+  color: #23A2EA;
+}
+
+.salesNumber2 {
+  color: #DD3E1A;
+}
+
+.salesNumber3 {
+  color: #348A00;
+}
+
+.salesNumber4 {
+  color: #DEB717;
+}
+
+.salesProcess {
+  font-size: 10px;
+  color: #000;
 }
 
 .user-buttons {

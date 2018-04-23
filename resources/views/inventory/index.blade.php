@@ -4,26 +4,27 @@
 @include('inc.navbar_superadmin')
 <br>
 <div class="container">
-    <div class="drop-down_brand row">
-        <div class="col-md-3">
-        <p>Search Item name/brand</p>
+    <div class="topMargin">
+        <div class="drop-down_brand row">
+            <div class="col-md-3">
+            <p>Search Item name/brand</p>
+            </div>
+            <div class="col-md-9">
+                <select id="product_brand" class="form-control">
+                </select>
+            </div>
         </div>
-        <div class="col-md-9">
-            <select id="product_brand" class="form-control">
-            </select>
-        </div>
-    </div>
-    <br>
-    <div class="drop-down_location row">
+        <br>
+        <div class="drop-down_location row">
             <div class="col-md-3">
                 <p>Show Location</p>
-                </div>
-                <div class="col-md-9">
-                    <select id="outlet_location" class="form-control" >
-                    </select>
-                </div>
-    </div>
-    <br>
+            </div>
+            <div class="col-md-9">
+                <select id="outlet_location" class="form-control" >
+                </select>
+            </div>
+        </div>
+        <br>
         <div class="row">
             <div class="col-md-10">
                 <input type="text" class="form-control" style="background:transparent; height:0.8cm;">
@@ -32,8 +33,7 @@
                 <button type="button" class="btn btn-default" id="refreshInventory">Refresh</button>
             </div>
         </div>
-    
-    <br>
+        <br>
         <div class="row">
             <a href="{{ route('export.file',['type'=>'csv']) }}">Download CSV</a>
         </div>
@@ -86,18 +86,19 @@
                 @endif
             </tbody>
         </table>
+    </div>
 </div>
 <script>
     $(document).ready(function(){
         $.get("{{ URL::to('ajax/inventory')}}",function(data){
             console.log(data);
             $("#product_brand").empty();
-                    $.each(data,function(i,value){
-                        var brand = value.Brand;
-                        $("#product_brand").append("<option value='" +
-                        value.id + "'>" +brand + "</option>");
-                            // $('#product_brand').append(tr);
-                    });
+            $.each(data,function(i,value){
+                var brand = value.Brand;
+                $("#product_brand").append("<option value='" +
+                value.id + "'>" +brand + "</option>");
+                    // $('#product_brand').append(tr);
+            });
         });
     });
 </script>

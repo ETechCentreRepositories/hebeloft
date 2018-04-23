@@ -12,7 +12,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
                     <a href="/"><img src="storage/logo/hebeloft_logo.png" class="logo"/></a>
-                    <li><a class="nav-link" style="color:#e3b417;" href="/home">Home</a></li>
+                    <li><a class="nav-link" style="color:#e3b417;" href="/">Home</a></li>
                     <li><a class="nav-link" style="color:#e3b417;" href="/inventory">Inventory</a></li>
                     <li><a class="nav-link" style="color:#e3b417;" href="/transfer_request">Transfer Request</a></li>
                     <li><a class="nav-link" style="color:#e3b417;" href="/sales_order">Sales Order</a></li>

@@ -2,27 +2,136 @@
 
 @section('content')
 @include('inc.navbar_superadmin')
-<br><br>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
+<div class="container-fluid">
+    <div class="salesOrder">
+        <div class="topMargin dashboardCards d-flex flex-column">
+            <h3 class="dashboardLabels">Sales Order</h3>
+            <div class="cardContent d-flex flex-row">
+                <div class="p-2 card salesCards card1">
+                    <div class="salesCardsBody card-body">
+                        <div class="salesNumber salesNumber1">
+                            0
                         </div>
-                    @endif
-                    {{-- <p>{{$users->roles_id}}</p> --}}
-                    {{-- @foreach($users as $user)
-                        {{$user->roles_id}}
-                    @endforeach --}}
-                    This is the homepage.
+                        Qty
+                        <br><br>
+                        <div class="salesProcess">
+                            TO BE PACKED
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="p-2 card salesCards card2">
+                    <div class="salesCardsBody card-body">
+                        <div class="salesNumber salesNumber2">
+                            0
+                        </div>
+                        Qty
+                        <br><br>
+                        <div class="salesProcess">
+                            TO BE SHIPPED
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 card salesCards card3">
+                    <div class="salesCardsBody card-body">
+                        <div class="salesNumber salesNumber3">
+                            0
+                        </div>
+                        Qty
+                        <br><br>
+                        <div class="salesProcess">
+                            TO BE DELIVERED
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 card salesCards card4">
+                    <div class="salesCardsBody card-body">
+                        <div class="salesNumber salesNumber4">
+                            0
+                        </div>
+                        Qty
+                        <br><br>
+                        <div class="salesProcess">
+                            TO BE INVOICED
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="transferRequest">
+        <div class="dashboardCards d-flex flex-column">
+            <h3 class="dashboardLabels">Transfer Request</h3>
+            <div class="cardContent d-flex flex-row">
+                <div class="p-2 card salesCards card1">
+                    <div class="salesCardsBody card-body">
+                        <div class="salesNumber salesNumber1">
+                            0
+                        </div>
+                        Qty
+                        <br><br>
+                        <div class="salesProcess">
+                            TO BE PACKED
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="p-2 card salesCards card2">
+                    <div class="salesCardsBody card-body">
+                        <div class="salesNumber salesNumber2">
+                            0
+                        </div>
+                        Qty
+                        <br><br>
+                        <div class="salesProcess">
+                            TO BE SHIPPED
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 card salesCards card3">
+                    <div class="salesCardsBody card-body">
+                        <div class="salesNumber salesNumber3">
+                            0
+                        </div>
+                        Qty
+                        <br><br>
+                        <div class="salesProcess">
+                            TO BE DELIVERED
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 card salesCards card4">
+                    <div class="salesCardsBody card-body">
+                        <div class="salesNumber salesNumber4">
+                            0
+                        </div>
+                        Qty
+                        <br><br>
+                        <div class="salesProcess">
+                            TO BE INVOICED
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="auditTrails">
+        <h3 class="dashboardLabels">Audit Trails</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Date/Time</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 </div>
+
 @endsection
