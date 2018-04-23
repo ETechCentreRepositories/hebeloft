@@ -115,12 +115,12 @@ class OutletsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
         $outlet = Outlet::find($id);
-        $outlet->delete();
         if(!$outlet->delete()){
-            alert("Outlet is link");
+            dd("Outlet is link"); 
         }
+        $outlet->delete();
 
         return redirect('/outlet')->with('success', 'Outlet Removed');
     }
