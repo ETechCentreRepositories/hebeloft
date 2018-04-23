@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('content')
 @include('inc.navbar_superadmin')
@@ -7,13 +7,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8 col-md-offset-2">
             <div class="card">
-                    {{-- {{dd(count($outlets))}} --}}
+                    {{dd(count($outlets))}}
                 
                 <div class="card-header">Staff Sign Up</div>
 
                 <div class="card-body">
                     {!! Form::open(['action' => ['UsersController@store'], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-                    {{-- <form class="form-horizontal" role="form" method="POST" action="UsersController@create"> --}}
+                    <form class="form-horizontal" role="form" method="POST" action="UsersController@create">
                     {{ csrf_field() }}
 
                     <div class="form-group">
@@ -27,7 +27,7 @@
                             </div>
                     </div>
 
-                    {{-- <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}"> --}}
+                    <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                     <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                         <div class="row">
                             <div class="col-md-12">
@@ -105,10 +105,10 @@
                         </div>
                     </div>
                 {!! Form::close() !!}
-                    {{-- </form> --}}
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
+@endsection --}}

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('content')
 @include('inc.navbar_superadmin')
@@ -17,14 +17,14 @@
                     <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                         <div class="row">
                             <div class="col-md-12">
-                                {{-- <p class="idText"> Picture</p> --}}
+                                <p class="idText"> Picture</p>
                                 {{Form::text('name', $user->name, ['class' => 'form-control', 'placeholder' => 'Username'])}}
 
-                                {{-- @if ($errors->has('username'))
+                                @if ($errors->has('username'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('username') }}</strong>
                                     </span>
-                                @endif --}}
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -43,18 +43,18 @@
                         </div>
                     </div>
 
-                    {{-- <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                    <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
                         <div class="row">
                             <div class="col-md-12">
                                 {{Form::text('status', $user->status, ['class' => 'form-control', 'placeholder' => 'Status'])}}
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
 
                     <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
                         <div class="row">
                             <div class="col-md-12">
-                                {{-- {{dd($roleList)}} --}}
+                                {{dd($roleList)}}
                                 {{Form::select('roles_id', $roleList, $user->roles_id)}}
                             </div>
                         </div>
@@ -67,19 +67,19 @@
                         @foreach($outlets as $outlet) 
                         <div class="col-md-5">
                             @foreach($userOutlets as $userOutlet)
-                            {{-- <script>
+                            <script>
                                 $(document).ready(function(){
                                     if($outlet->id == $userOutlet->outlets_id){
                                         $("#cbChecked").prop("checked",true);
-                                    // $(".idtext").css("color","lightgreen");
+                                    $(".idtext").css("color","lightgreen");
                                     }
                                     
                                 })
-                            </script> --}}
+                            </script>
                                 @if($outlet->id == $userOutlet->outlets_id)
-                                    {{-- <label class="checkbox-inline"><input id="cbChecked" name="outlet[]" type="checkbox" value="{{$outlet->id}}" checked> {{$outlet->outlet_name}} </label> --}}
-                             {{-- @else
-                                <label class="checkbox-inline"><input  name="outlet[]" type="checkbox" value="{{$outlet->id}}"> {{$outlet->outlet_name}} </label> --}}
+                                    <label class="checkbox-inline"><input id="cbChecked" name="outlet[]" type="checkbox" value="{{$outlet->id}}" checked> {{$outlet->outlet_name}} </label>
+                             @else
+                                <label class="checkbox-inline"><input  name="outlet[]" type="checkbox" value="{{$outlet->id}}"> {{$outlet->outlet_name}} </label>
                                     
                                 @endif
                                 
@@ -102,4 +102,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
