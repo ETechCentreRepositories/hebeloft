@@ -120,6 +120,23 @@ class UsersController extends Controller
         $user->password = Hash::make($request->input('password'));
         $user->save();
 
+        $userOutletExists = UserOutlet::where('users_id',$id)->get();
+        if($userOutletExists){
+            foreach($userOutletExists as $userOutletExist){
+                $userOutletExist->delete();
+            }
+        }
+
+        $outlets = $request->outlet; 
+        $num_outlet = count($outlets);
+        for($i = 0 ; $i < $num_outlet ; $i++){
+            // echo "<br>". $outlets[$i];
+            $userOutlet = new UserOutlet;
+            $userOutlet->users_id = $id;
+            $userOutlet->outlets_id = $outlets[$i];
+            $userOutlet->save();
+        }
+
         return redirect('/user')->with('success', 'User Updated');
     }
 
@@ -133,6 +150,12 @@ class UsersController extends Controller
     {
         // $userOutlet = UserOutlet::find("users_id");
         // dd($userOutlet);
+        $userOutletExists = UserOutlet::where('users_id',$id)->get();
+        if($userOutletExists){
+            foreach($userOutletExists as $userOutletExist){
+                $userOutletExist->delete();
+            }
+        }
         $user = User::find($id);
         $user->delete();
         return redirect('/user')->with('success', 'Post Removed');

@@ -2,7 +2,7 @@
 
 @section('content')
 @include('inc.navbar_superadmin')
-<br>
+<br><br>
 
 <div class="container" onload="checkbox">
     <div class="row justify-content-center">
@@ -103,3 +103,5 @@
         </div>
     </div>
 </div>
+
+@endsection
