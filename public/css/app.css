@@ -10034,7 +10034,6 @@ select {
 .salesOrder {
   background-color: #FBFAFA;
   padding: 20px 0;
-  margin-top: 55px;
 }
 
 .transferRequest {
@@ -10043,7 +10042,7 @@ select {
 }
 
 .auditTrails {
-  background-color: #FBFAFA;
+  background-color: transparent;
   padding: 20px 0;
   width: 50%;
   margin: 0 auto;
@@ -10128,7 +10127,7 @@ select {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-.outlet-card {
+.modalCard {
   width: 60%;
   position: relative;
   top: 50%;

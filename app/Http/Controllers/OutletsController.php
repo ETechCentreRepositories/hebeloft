@@ -119,7 +119,7 @@ class OutletsController extends Controller
         $outlet = Outlet::find($id);
         $outlet->delete();
         if(!$outlet->delete()){
-            alert("Outlet is link ");
+            alert("Outlet is link");
         }
 
         return redirect('/outlet')->with('success', 'Outlet Removed');

@@ -3,7 +3,7 @@
 @section('content')
 @include('inc.navbar_superadmin')
 <br><br>
-<div class="container">
+<div class="topMargin container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

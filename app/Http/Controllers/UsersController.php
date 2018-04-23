@@ -22,11 +22,18 @@ class UsersController extends Controller
     public function index()
     {
         // $users = User::all();
-
         $users = User::orderBy('created_at','desc')->paginate(10);
-        $outlet = Outlet::all();
+        // $user = User::find($id);
+        // $user_id = $users->id;
+        $outlets = Outlet::all();
+        // $userOutlets = DB::select('SELECT outlets_id FROM users_has_outlets WHERE users_id ='. $user_id);
 
-        return view('user.user')->with('users', $users);
+        $roles = Role::select('id', 'roles_name')->get();
+        foreach ($roles as $role) {
+            $roleList[$role->id] = $role->roles_name;
+        }
+
+        return view('user.index', compact('roleList'))->with('users', $users)->with('outlets',$outlets);
     }
 
     /**
@@ -91,18 +98,20 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $user_id = $user->id;
-        $outlets = Outlet::all();
-        $outletsId = Outlet::find($id);
-        $userOutlets = DB::select('SELECT outlets_id FROM users_has_outlets WHERE users_id ='. $user_id);
+        // $user_id = $user->id;
+        // $outlets = Outlet::all();
+        // $outletsId = Outlet::find($id);
+        // $userOutlets = DB::select('SELECT outlets_id FROM users_has_outlets WHERE users_id ='. $user_id);
         // dd($userOutlets);
 
-        $roles = Role::select('id', 'roles_name')->get();
-        foreach ($roles as $role) {
-            $roleList[$role->id] = $role->roles_name;
-        }
+        // $roles = Role::select('id', 'roles_name')->get();
+        // foreach ($roles as $role) {
+        //     $roleList[$role->id] = $role->roles_name;
+        // }
+
+        return view('users.edit')->with('user', $user);
         
-        return view('user.edit', compact('roleList'))->with('user', $user)->with('outlets',$outlets)->with('roles', $user->roles)->with('userOutlets',$userOutlets);
+        // return view('user.edit', compact('roleList'))->with('user', $user)->with('outlets',$outlets)->with('roles', $user->roles)->with('userOutlets',$userOutlets);
     }
 
     /**

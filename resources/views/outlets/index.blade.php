@@ -3,7 +3,7 @@
 @section('content')
 @include('inc.navbar_superadmin')
 <br>
-<div class="container">
+<div class="topMargin container">
     <div class="row justify-content-end">
         <div>
             <button type="button" class="btn btn-warning" onclick="openCreateOutletModal()">Add new outlet</button>
@@ -38,7 +38,7 @@
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row outlet-buttons">
                                 <div class="p-2">
-                                <button type="button" class="btn btn-primary action-buttons" onclick="openUpdateOutletModal()">Edit</button>
+                                <a href="/outlet/{{$outlet->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
                                 <div class="p-2">
                                     {!!Form::open(['action' => ['OutletsController@destroy', $outlet->id], 'method' => 'POST'])!!}
@@ -66,7 +66,7 @@
 @if(count($outlets) > 0)
 <div id="createOutletModal" class="modal">
     <span class="close cursor" onclick="closeCreateOutletModal()">&times;</span>
-    <div class="card outlet-card">
+    <div class="card modalCard">
         <div class="card-body">
             <br>
             <h3 class="card-title">Create outlet</h3>
@@ -97,9 +97,10 @@
     </div>
 </div>
 
+@include('outlets.edit')
 <div id="updateOutletModal" class="modal">
     <span class="close cursor" onclick="closeUpdateOutletModal()">&times;</span>
-    <div class="card outlet-card">
+    <div class="card modalCard">
         <div class="card-body">
             <br>
             <h3 class="card-title">Edit outlet</h3>
@@ -130,10 +131,15 @@
         </div>
     </div>
 </div>
+<<<<<<< HEAD
 @endif
 <div class="pagination">
     {{$outlets->links()}}
 </div>
+=======
+
+@endif
+>>>>>>> fca84630665841f45801b392c61fd49c6a0c77d8
 <script>
     function openCreateOutletModal() {
         document.getElementById('createOutletModal').style.display = "block";
