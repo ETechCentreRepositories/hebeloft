@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -17,8 +18,18 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    {{-- <script type="text/javascript" rel="stylesheet" src="js/app.js" ></script> --}}
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> --}}
     @yield('script')
+    {{-- <script>
+        $(document).ready(function(){
+            if($outlet->id == $userOutlet->outlets_id){
+                $("#cbChecked").attr("checked","checked");
+            // $(".idtext").css("color","lightgreen");
+            }
+            
+        })
+    </script> --}}
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>

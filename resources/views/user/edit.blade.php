@@ -3,7 +3,8 @@
 @section('content')
 @include('inc.navbar_superadmin')
 <br>
-<div class="container">
+
+<div class="container" onload="checkbox">
     <div class="row justify-content-center">
         <div class="col-md-8 col-md-offset-2">
             <div class="card">
@@ -16,6 +17,7 @@
                     <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                         <div class="row">
                             <div class="col-md-12">
+                                <p class="idText"> Picture</p>
                                 {{Form::text('name', $user->name, ['class' => 'form-control', 'placeholder' => 'Username'])}}
 
                                 {{-- @if ($errors->has('username'))
@@ -64,17 +66,21 @@
                         @foreach($outlets as $outlet) 
                         <div class="col-md-5">
                             @foreach($userOutlets as $userOutlet)
-                                @if($outlet->id == $userOutlet->outlets_id)
-                                    <label class="checkbox-inline"><input id="cbChecked" name="outlet[]" type="checkbox" value="{{$outlet->id}}" checked> {{$outlet->outlet_name}} </label>
-                                    {{-- @section('script')
-                                        $(document).ready(function(){
-                                            $("#cbChecked").attr("checked","checked");
-                                        });
-                                    @endsection --}}
-                            {{-- @else
-                                <label class="checkbox-inline"><input  name="outlet[]" type="checkbox" value="{{$outlet->id}}"> {{$outlet->outlet_name}} </label> --}}
+                            <script>
+                                $(document).ready(function(){
+                                    if($outlet->id == $userOutlet->outlets_id){
+                                        $("#cbChecked").prop("checked",true);
+                                    // $(".idtext").css("color","lightgreen");
+                                    }
                                     
-                                @endif
+                                })
+                            </script>
+                                {{-- @if($outlet->id == $userOutlet->outlets_id)
+                                    <label class="checkbox-inline"><input id="cbChecked" name="outlet[]" type="checkbox" value="{{$outlet->id}}" checked> {{$outlet->outlet_name}} </label>
+                             @else
+                                <label class="checkbox-inline"><input  name="outlet[]" type="checkbox" value="{{$outlet->id}}"> {{$outlet->outlet_name}} </label>
+                                    
+                                @endif --}}
                                 
                             @endforeach
                                 <label class="checkbox-inline"><input id="cbChecked" name="outlet[]" type="checkbox" value="{{$outlet->id}}"> {{$outlet->outlet_name}} </label>

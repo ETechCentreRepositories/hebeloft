@@ -162,4 +162,22 @@ class InventoryController extends Controller
         })->download($type);
 
     }      
+    
+    public function getInventory(){
+        $inventory = Inventory::join('products', 'inventory.products_id', '=', 'products.id')
+                        ->select('inventory.id','products.Name', 'products.Category','products.Brand', 'products.ItemType','inventory.threshold_level','inventory.stock_level')
+                        ->get()->toArray();
+
+        return response($inventory);
+    }
+
+    public function getInventoryById($inventoryId){
+        $inventoryById = DB::table('inventory')  
+                        ->join('products', 'inventory.products_id', '=', 'products.id')
+                        ->select('inventory.id','products.Name', 'products.Category','products.Brand', 'products.ItemType','inventory.threshold_level','inventory.stock_level')
+                        ->where('inventory.inventory_id' , $inventoryId)
+                        ->get()->toArray();
+
+        return response($inventoryById);
+    }
 }
