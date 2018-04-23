@@ -7,6 +7,7 @@ use App\User;
 use App\Models\UserOutlet;
 use App\Models\Outlet;
 use App\Models\Role;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 
 use DB;
@@ -54,7 +55,7 @@ class UsersController extends Controller
         $user->name = $request->input('username');
         $user->email = $request->input('email');
         $user->phone_number = $request->input('phone_number');
-        $user->password = $request->input('password');
+        $user->password = Hash::make($request->input('password'));
         $user->save();
 
         $outlets = $request->outlet; 
@@ -115,6 +116,8 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $user->name = $request->input('name');
+        $user->roles_id = $request->input('roles_id');
+        $user->password = Hash::make($request->input('password'));
         $user->save();
 
         return redirect('/user')->with('success', 'User Updated');
@@ -128,6 +131,8 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
+        // $userOutlet = UserOutlet::find("users_id");
+        // dd($userOutlet);
         $user = User::find($id);
         $user->delete();
         return redirect('/user')->with('success', 'Post Removed');
