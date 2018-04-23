@@ -6,10 +6,9 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
-    public function dashboard(){
+    public function home(){
         $title = 'Dashboard';
-        //return view('pages.index', compact('title'));
-        return view('dashboard')->with('title', $title);
+        return view('home')->with('title', $title);
     }
 
     public function user(){
