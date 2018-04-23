@@ -3,7 +3,7 @@
 @section('content')
 @include('inc.navbar_superadmin')
 <br>
-<div class="container">
+<div class="topMargin container">
     <div class="row justify-content-end">
         <div>
             <a href="/staffsignup"><button type="button" class="btn btn-warning">Add new staff</button></a>

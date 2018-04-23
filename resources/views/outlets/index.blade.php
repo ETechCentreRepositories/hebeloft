@@ -3,7 +3,7 @@
 @section('content')
 @include('inc.navbar_superadmin')
 <br>
-<div class="container">
+<div class="topMargin container">
     <div class="row justify-content-end">
         <div>
             <button type="button" class="btn btn-warning" onclick="openCreateOutletModal()">Add new outlet</button>

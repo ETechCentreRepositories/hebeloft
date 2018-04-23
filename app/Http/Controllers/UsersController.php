@@ -25,7 +25,7 @@ class UsersController extends Controller
         $users = User::orderBy('created_at','desc')->paginate(10);
         $outlet = Outlet::all();
 
-        return view('user.user')->with('users', $users);
+        return view('user.index')->with('users', $users);
     }
 
     /**

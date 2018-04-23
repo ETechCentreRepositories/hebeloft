@@ -11,9 +11,14 @@ class PagesController extends Controller
         return view('home')->with('title', $title);
     }
 
+    public function salesorder(){
+        $title = 'Sales Order';
+        return view('salesorder.index')->with('title', $title);
+    }
+
     public function user(){
         $title = 'User';
-        return view('user.user')->with('title', $title);
+        return view('user.index')->with('title', $title);
     }
 
     // public function staffsignup(){
