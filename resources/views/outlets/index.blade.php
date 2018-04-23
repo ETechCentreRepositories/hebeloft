@@ -131,15 +131,10 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
 @endif
 <div class="pagination">
     {{$outlets->links()}}
 </div>
-=======
-
-@endif
->>>>>>> fca84630665841f45801b392c61fd49c6a0c77d8
 <script>
     function openCreateOutletModal() {
         document.getElementById('createOutletModal').style.display = "block";

@@ -102,6 +102,6 @@
     });
 </script>
 <div class="pagination">
-    {{$users->links()}}
+    {{$inventorys->links()}}
 </div>
 @endsection
