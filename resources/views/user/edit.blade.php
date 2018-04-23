@@ -66,21 +66,21 @@
                         @foreach($outlets as $outlet) 
                         <div class="col-md-5">
                             @foreach($userOutlets as $userOutlet)
-                            {{-- <script>
+                            <script>
                                 $(document).ready(function(){
                                     if($outlet->id == $userOutlet->outlets_id){
-                                        $("#cbChecked").attr("checked","checked");
+                                        $("#cbChecked").prop("checked",true);
                                     // $(".idtext").css("color","lightgreen");
                                     }
                                     
                                 })
-                            </script> --}}
-                                @if($outlet->id == $userOutlet->outlets_id)
+                            </script>
+                                {{-- @if($outlet->id == $userOutlet->outlets_id)
                                     <label class="checkbox-inline"><input id="cbChecked" name="outlet[]" type="checkbox" value="{{$outlet->id}}" checked> {{$outlet->outlet_name}} </label>
-                            {{-- @else
-                                <label class="checkbox-inline"><input  name="outlet[]" type="checkbox" value="{{$outlet->id}}"> {{$outlet->outlet_name}} </label> --}}
+                             @else
+                                <label class="checkbox-inline"><input  name="outlet[]" type="checkbox" value="{{$outlet->id}}"> {{$outlet->outlet_name}} </label>
                                     
-                                @endif
+                                @endif --}}
                                 
                             @endforeach
                                 <label class="checkbox-inline"><input id="cbChecked" name="outlet[]" type="checkbox" value="{{$outlet->id}}"> {{$outlet->outlet_name}} </label>

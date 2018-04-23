@@ -73,12 +73,16 @@
 
                             <div class="col-md-6">
                                 <input id="shipping_address" type="text" class="form-control{{ $errors->has('shipping_address') ? ' is-invalid' : '' }}" name="shipping_address" value="{{ old('shipping_address') }}" placeholder="Shipping Address" required>
-
                                 @if ($errors->has('shipping_address'))
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('shipping_address') }}</strong>
                                     </span>
                                 @endif
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label><input id="cbSameAddress" type="checkbox" name="sameAddress[]" value=""> Same as Billing Address</label>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -111,6 +115,25 @@
         </div>
     </div>
 </div>
-
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#cbSameAddress").click(function(){
+            $status = $(this).is(":checked");
+            if($status){
+                $billing_address = $("#billing_address").val();
+                if($billing_address == ""){
+                    alert("Billing Address is empty");
+                    $("#cbSameAddress").prop("checked", false);
+                }else{
+                    // alert($billing_address);
+                    $("#shipping_address").val($billing_address);
+                }
+            }else{
+                $("#shipping_address").val(""); 
+            }
+            
+        });
+    });
+</script>
 @endsection
 

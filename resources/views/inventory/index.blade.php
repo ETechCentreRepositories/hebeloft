@@ -44,9 +44,9 @@
                     <th>Brand</th>
                     <th>Item</th>
                     <th>Normal Price</th>
-                    <th>BHG SKU</th>
+                    {{-- <th>BHG SKU</th>
                     <th>OG SKU</th>
-                    <th>Metro SKU</th>
+                    <th>Metro SKU</th> --}}
                     <th>SKU</th>
                     <th>Quantity/Thresold</th>
                 </tr>
@@ -75,9 +75,9 @@
                             </div>
                         </div> --}}
                     </td>
+                    {{-- <td></td>
                     <td></td>
-                    <td></td>
-                    <td></td>
+                    <td></td> --}}
                     <td>{{$inventory->stock_level}}</td>
                 </tr>
                 @endforeach
