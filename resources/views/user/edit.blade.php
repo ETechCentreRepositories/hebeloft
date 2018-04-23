@@ -17,7 +17,7 @@
                     <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                         <div class="row">
                             <div class="col-md-12">
-                                <p class="idText"> Picture</p>
+                                {{-- <p class="idText"> Picture</p> --}}
                                 {{Form::text('name', $user->name, ['class' => 'form-control', 'placeholder' => 'Username'])}}
 
                                 {{-- @if ($errors->has('username'))
@@ -54,7 +54,8 @@
                     <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
                         <div class="row">
                             <div class="col-md-12">
-                                {{Form::select('role', $roleList, $user->roles_id)}}
+                                {{-- {{dd($roleList)}} --}}
+                                {{Form::select('roles_id', $roleList, $user->roles_id)}}
                             </div>
                         </div>
                     </div>
@@ -66,7 +67,7 @@
                         @foreach($outlets as $outlet) 
                         <div class="col-md-5">
                             @foreach($userOutlets as $userOutlet)
-                            <script>
+                            {{-- <script>
                                 $(document).ready(function(){
                                     if($outlet->id == $userOutlet->outlets_id){
                                         $("#cbChecked").prop("checked",true);
@@ -74,13 +75,13 @@
                                     }
                                     
                                 })
-                            </script>
-                                {{-- @if($outlet->id == $userOutlet->outlets_id)
-                                    <label class="checkbox-inline"><input id="cbChecked" name="outlet[]" type="checkbox" value="{{$outlet->id}}" checked> {{$outlet->outlet_name}} </label>
-                             @else
-                                <label class="checkbox-inline"><input  name="outlet[]" type="checkbox" value="{{$outlet->id}}"> {{$outlet->outlet_name}} </label>
+                            </script> --}}
+                                @if($outlet->id == $userOutlet->outlets_id)
+                                    {{-- <label class="checkbox-inline"><input id="cbChecked" name="outlet[]" type="checkbox" value="{{$outlet->id}}" checked> {{$outlet->outlet_name}} </label> --}}
+                             {{-- @else
+                                <label class="checkbox-inline"><input  name="outlet[]" type="checkbox" value="{{$outlet->id}}"> {{$outlet->outlet_name}} </label> --}}
                                     
-                                @endif --}}
+                                @endif
                                 
                             @endforeach
                                 <label class="checkbox-inline"><input id="cbChecked" name="outlet[]" type="checkbox" value="{{$outlet->id}}"> {{$outlet->outlet_name}} </label>

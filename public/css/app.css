@@ -10392,7 +10392,10 @@ a.text-dark:focus {
   background-color: #fff;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  position: fixed;
+  top: 0;
   width: 100%;
+  height: 55px;
 }
 
 select {
@@ -10418,10 +10421,13 @@ select {
   margin: auto;
 }
 
+.topMargin {
+  margin-top: 55px;
+}
+
 .salesOrder {
   background-color: #FBFAFA;
   padding: 20px 0;
-  margin-top: 55px;
 }
 
 .transferRequest {
@@ -10430,7 +10436,7 @@ select {
 }
 
 .auditTrails {
-  background-color: #FBFAFA;
+  background-color: transparent;
   padding: 20px 0;
   width: 50%;
   margin: 0 auto;

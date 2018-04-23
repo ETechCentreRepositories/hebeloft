@@ -3,8 +3,8 @@
 @section('content')
 @include('inc.navbar_superadmin')
 <div class="container-fluid">
-    <div class="salesOrder">
-        <div class="topMargin dashboardCards d-flex flex-column">
+    <div class="topMargin salesOrder">
+        <div class="dashboardCards d-flex flex-column">
             <h3 class="dashboardLabels">Sales Order</h3>
             <div class="cardContent d-flex flex-row">
                 <div class="p-2 card salesCards card1">
