@@ -115,22 +115,43 @@
             </div>
         </div>
     </div>
-    <div class="auditTrails">
-        <h3 class="dashboardLabels">Audit Trails</h3>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Date/Time</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Action</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="dashboardTables">
+                <h3 class="dashboardLabels">Audit Trails</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Date/Time</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="dashboardTables">
+                <h3 class="dashboardLabels">Sales Record</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>oh god
+                            <th>Date</th>
+                            <th>Outlet</th>
+                            <th>Revenue</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 
