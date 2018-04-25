@@ -84,7 +84,7 @@
                 var brand = value.Brand;
                 $("#product_brand").append("<option value='" +
                 value.id + "'>" +brand + "</option>");
-                    //  $('#product_brand').append(tr);
+                    // $('#product_brand').append(tr);
             });
         });
     });
