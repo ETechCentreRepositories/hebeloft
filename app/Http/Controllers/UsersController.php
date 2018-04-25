@@ -98,6 +98,8 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
+        $outlets = Outlet::all();
+        $roles = Role::all();
         // $user_id = $user->id;
         // $outlets = Outlet::all();
         // $outletsId = Outlet::find($id);
@@ -109,7 +111,7 @@ class UsersController extends Controller
         //     $roleList[$role->id] = $role->roles_name;
         // }
 
-        return view('users.edit')->with('user', $user);
+        return view('user.edit')->with('user', $user)->with('outlets',$outlets)->with('roles', $roles);
         
         // return view('user.edit', compact('roleList'))->with('user', $user)->with('outlets',$outlets)->with('roles', $user->roles)->with('userOutlets',$userOutlets);
     }
