@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<<<<<<< HEAD
 <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color:#46552c;"  >
     <div class="container">
         <a class="nav navbar-left" href="{{ url('/') }}">
@@ -54,10 +53,6 @@
         </div>
     </div>
 </nav>
-=======
-@include('inc.navbar_superadmin')
-<br><br>
->>>>>>> 561a70de613c8f174c36f9a266dcdfe49380f902
 
 <div class="topMargin container" onload="checkbox">
     <br>
