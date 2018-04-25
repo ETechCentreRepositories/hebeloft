@@ -13,7 +13,7 @@ class InventoryOutlet extends Model
         return $this -> belongsTo('App\Models\Products');
     }
 
-    public function outlet(){
+    public function outlets(){
         return $this -> belongsTo('App\Models\Outlet');
     }
 }

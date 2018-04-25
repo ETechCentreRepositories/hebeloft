@@ -26,7 +26,7 @@
     <br>
     <div class="row">
         <div class="col-md-10">
-            <input type="text" class="form-control" style="background:transparent; height:0.8cm;">
+            <input type="text" id="search" class="form-control" style="background:transparent; height:0.8cm;">
         </div>
         <div class="col-md-2">
             <button type="button" class="btn btn-default" id="refreshInventory">Refresh</button>
@@ -82,10 +82,32 @@
             $("#product_brand").empty();
             $.each(data,function(i,value){
                 var brand = value.Brand;
+                var outlet = value.outlet_name;
                 $("#product_brand").append("<option value='" +
                 value.id + "'>" +brand + "</option>");
-                    // $('#product_brand').append(tr);
+                // $("#outlet_location").append("<option value='" +
+                // value.id + "'>" +outlet + "</option>");
             });
+        });
+        $.get("{{ URL::to('ajax/outlet')}}",function(data){
+            console.log(data);
+            $("#outlet_location").empty();
+            $.each(data,function(i,value){
+                var id = value.id;
+                var outlet = value.outlet_name;
+                $("#outlet_location").append("<option value='" +
+                id + "'>" +outlet + "</option>");
+            });
+        });
+        var availableConsoles = [
+                    "PC",
+                    "Playstation3",
+                    "PSP",
+                    "Nintendo Wii",
+                    "XBox 360"
+                ];
+        $("#search").autocomplete({
+            source: availableConsoles
         });
     });
 </script>

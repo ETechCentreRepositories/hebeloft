@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Inventory;
 use App\Models\InventoryOutlet;
+use App\Models\Outlet;
 
 use DB;
 
@@ -164,20 +165,27 @@ class InventoryController extends Controller
     }      
     
     public function getInventory(){
-        $inventory = Inventory::join('products', 'inventory.products_id', '=', 'products.id')
-                        ->select('inventory.id','products.Name', 'products.Category','products.Brand', 'products.ItemType','inventory.threshold_level','inventory.stock_level')
-                        ->get()->toArray();
+        $inventory = InventoryOutlet::join('products', 'inventory_has_outlets.products_id', '=', 'products.id')
+                     ->join('outlets', 'inventory_has_outlets.outlets_id', '=', 'outlets.id')
+                     ->select('inventory_has_outlets.id','products.Name', 'products.Category','products.Brand', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level', 'outlets.outlet_name')
+                     ->get()->toArray();
 
         return response($inventory);
     }
 
-    public function getInventoryById($inventoryId){
-        $inventoryById = DB::table('inventory')  
-                        ->join('products', 'inventory.products_id', '=', 'products.id')
-                        ->select('inventory.id','products.Name', 'products.Category','products.Brand', 'products.ItemType','inventory.threshold_level','inventory.stock_level')
-                        ->where('inventory.inventory_id' , $inventoryId)
+    public function getInventoryById($inventoryById){
+        $inventoryById = DB::table('inventory_has_outlets')  
+                        ->join('products', 'inventory_has_outlets.products_id', '=', 'products.id')
+                        ->select('inventory_has_outlets.id','products.Name', 'products.Category','products.Brand', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level')
+                        // ->where('inventory_has_outlets.inventory_id' , $inventoryId)
                         ->get()->toArray();
 
         return response($inventoryById);
+    }
+
+        public function getOutlet(){
+        $inventory = Outlet::get()->toArray();
+
+        return response($inventory);
     }
 }
