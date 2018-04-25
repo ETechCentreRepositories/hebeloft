@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Inventory;
+use App\Models\InventoryOutlet;
 
 use DB;
 
@@ -17,10 +18,9 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        // $inventorys = Inventory::orderBy('id','asc')->paginate(10);;
+        $inventoryOutlets = InventoryOutlet::orderBy('id','asc')->paginate(10);;
         // $products = Products::all();
-        return view('inventory.index');
-        // return view('inventory.index')->with('inventorys',$inventorys)->with('products',$products);
+        return view('inventory.index')->with('inventoryOutlets',$inventoryOutlets);
     }
 
     /**

@@ -2,7 +2,7 @@
 
 @section('content')
 @include('inc.navbar_superadmin')
-{{-- <br>
+<br>
 <div class="topMargin container">
     <div class="drop-down_brand row">
         <div class="col-md-3">
@@ -43,30 +43,31 @@
                 <th>Brand</th>
                 <th>Item</th>
                 <th>Normal Price</th>
-                <th>BHG SKU</th>
+                {{-- <th>BHG SKU</th>
                 <th>OG SKU</th>
-                <th>Metro SKU</th>
+                <th>Metro SKU</th> --}}
                 <th>SKU</th>
                 <th>Quantity/Thresold</th>
             </tr>
         </thead>
         <tbody>
-            @if(count($inventorys) > 0) 
-            @foreach($inventorys as $inventory)
+            @if(count($inventoryOutlets) > 0) 
+            @foreach($inventoryOutlets as $inventoryOutlet)
             <tr>
-                //{{dd($inventory->Name)}} 
                 <td>
-                    <img style="width:60px; height:60px" src="/storage/product_images/{{$inventory->products['image']}}">    
+                    <img style="width:60px; height:60px" src="/storage/product_images/{{$inventoryOutlet->products['image']}}">    
                 </td>
-                <td>{{$inventory->products['Brand']}}</td>
-                <td>{{$inventory->products['Name']}}</td>
-                <td>{{$inventory->products['UnitPrice']}}</td>
+                <td>{{$inventoryOutlet->products['Brand']}}</td>
+                <td>{{$inventoryOutlet->products['Name']}}</td>
+                <td>{{$inventoryOutlet->products['UnitPrice']}}</td>
+                {{-- <td></td>
                 <td></td>
+                <td></td> --}}
                 <td></td>
-                <td></td>
-                <td>{{$inventory->stock_level}}</td>
+            <td>{{$inventoryOutlet->stock_level}}/{{$inventoryOutlet->threshold_level}}</td>
             </tr>
             @endforeach
+            {{-- {{dd($inventoryOutlet->products['Brand'])}}  --}}
             @else
                 <p>No Inventory found</p>
             @endif
@@ -89,6 +90,6 @@
     });
 </script>
 <div class="pagination">
-    {{$inventorys->links()}}
-</div> --}}
+    {{$inventoryOutlets->links()}}
+</div>
 @endsection
