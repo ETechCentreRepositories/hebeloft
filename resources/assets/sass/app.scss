@@ -180,6 +180,15 @@ select {
   text-align: center;
 }
 
+.termsAndConditionsTitle {
+  text-align: center;
+}
+
+.termsAndConditionsContent {
+  height: 400px;
+  overflow: auto;
+}
+
 .pagination {
   margin: auto;
 }

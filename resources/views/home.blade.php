@@ -141,7 +141,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>#</th>oh god
+                            <th>#</th>
                             <th>Date</th>
                             <th>Outlet</th>
                             <th>Revenue</th>
