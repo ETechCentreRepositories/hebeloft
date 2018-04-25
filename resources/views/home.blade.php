@@ -115,7 +115,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="gray row">
         <div class="col-md-6">
             <div class="dashboardTables">
                 <h3 class="dashboardLabels">Audit Trails</h3>

@@ -66,14 +66,14 @@
                     {{ csrf_field() }}
 
                     <div class="form-group">
-                            <div class="row">
-                        <div class="col-md-6">
-                            <input id="role" type="radio" name="role" value="5"> Warehouse staff<br>
-                        </div>
-                        <div class="col-md-6">
-                            <input id="role" type="radio" name="role" value="3"> Outlet staff<br>
-                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input id="role" type="radio" name="role" value="5"> Warehouse staff<br>
                             </div>
+                            <div class="col-md-6">
+                                <input id="role" type="radio" name="role" value="3"> Outlet staff<br>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">

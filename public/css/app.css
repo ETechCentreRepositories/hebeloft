@@ -10436,6 +10436,10 @@ select {
   padding: 20px 0;
 }
 
+.gray {
+  background-color: #FBFAFA;
+}
+
 .dashboardTables {
   background-color: transparent;
   padding: 20px 0;
@@ -10569,6 +10573,7 @@ select {
 .termsAndConditionsContent {
   height: 400px;
   overflow: auto;
+  padding: 0 15px 15px 15px;
 }
 
 .pagination {
@@ -10580,7 +10585,7 @@ th {
 }
 
 th:hover {
-  background: gray;
+  background: lightgray;
   text-decoration: none;
   cursor: pointer;
 }
