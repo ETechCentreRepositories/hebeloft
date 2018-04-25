@@ -75,13 +75,14 @@ class RegisterController extends Controller
             'phone_number'=>$data['phone_number'],
             'roles_id'=> (int) $data['roles_id'],
             'password' => Hash::make($data['password']),
-        ]);
-    
+        ]);       
         $wholesaler =  Wholesaler::create([
+            'users_id'=> $user->id,
             'company_name'=>$data['company_name'],
             'billing_address'=>$data['billing_address'],
             'shipping_address'=>$data['shipping_address']
         ]);
+        
         return $user;
         
     }
