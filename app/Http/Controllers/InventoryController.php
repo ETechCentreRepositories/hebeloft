@@ -17,10 +17,10 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        $inventorys = Inventory::all();
-        $products = Products::all();
-        
-        return view('inventory.index')->with('inventorys',$inventorys)->with('products',$products);
+        // $inventorys = Inventory::orderBy('id','asc')->paginate(10);;
+        // $products = Products::all();
+        return view('inventory.index');
+        // return view('inventory.index')->with('inventorys',$inventorys)->with('products',$products);
     }
 
     /**

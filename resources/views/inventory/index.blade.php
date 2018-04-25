@@ -2,7 +2,7 @@
 
 @section('content')
 @include('inc.navbar_superadmin')
-<br>
+{{-- <br>
 <div class="topMargin container">
     <div class="drop-down_brand row">
         <div class="col-md-3">
@@ -43,9 +43,9 @@
                 <th>Brand</th>
                 <th>Item</th>
                 <th>Normal Price</th>
-                {{-- <th>BHG SKU</th>
+                <th>BHG SKU</th>
                 <th>OG SKU</th>
-                <th>Metro SKU</th> --}}
+                <th>Metro SKU</th>
                 <th>SKU</th>
                 <th>Quantity/Thresold</th>
             </tr>
@@ -54,29 +54,16 @@
             @if(count($inventorys) > 0) 
             @foreach($inventorys as $inventory)
             <tr>
-                {{-- {{dd($inventory->Name)}} --}}
+                //{{dd($inventory->Name)}} 
                 <td>
                     <img style="width:60px; height:60px" src="/storage/product_images/{{$inventory->products['image']}}">    
                 </td>
                 <td>{{$inventory->products['Brand']}}</td>
                 <td>{{$inventory->products['Name']}}</td>
                 <td>{{$inventory->products['UnitPrice']}}</td>
-                <td>
-                    {{-- <div class="d-flex flex-row user-buttons">
-                        <div class="p-2">
-                            <a href="/user/{{$user->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
-                        </div>
-                        <div class="p-2">
-                            {!!Form::open(['action' => ['UsersController@destroy', $user->id], 'method' => 'POST'])!!}
-                                {{Form::hidden('_method', 'DELETE')}}
-                                {{Form::submit('Delete', ['class' => 'btn btn-danger action-buttons'])}}
-                            {!!Form::close()!!}
-                        </div>
-                    </div> --}}
-                </td>
-                {{-- <td></td>
                 <td></td>
-                <td></td> --}}
+                <td></td>
+                <td></td>
                 <td>{{$inventory->stock_level}}</td>
             </tr>
             @endforeach
@@ -96,12 +83,12 @@
                 var brand = value.Brand;
                 $("#product_brand").append("<option value='" +
                 value.id + "'>" +brand + "</option>");
-                    // $('#product_brand').append(tr);
+                    //  $('#product_brand').append(tr);
             });
         });
     });
 </script>
-{{-- <div class="pagination">
-    {{$users->links()}}
+<div class="pagination">
+    {{$inventorys->links()}}
 </div> --}}
 @endsection

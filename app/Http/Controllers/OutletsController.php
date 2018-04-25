@@ -14,7 +14,7 @@ class OutletsController extends Controller
      */
     public function index()
     {
-        $outlets = Outlet::all();
+        $outlets = Outlet::orderBy('id','asc')->paginate(10);
         return view('outlets.index')->with('outlets', $outlets);
     }
 
@@ -115,8 +115,11 @@ class OutletsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
         $outlet = Outlet::find($id);
+        if(!$outlet->delete()){
+            dd("Outlet is link"); 
+        }
         $outlet->delete();
 
         return redirect('/outlet')->with('success', 'Outlet Removed');
