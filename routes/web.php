@@ -21,6 +21,7 @@ Route::get('/salesorder', 'PagesController@salesorder');
 Route::get('/user', 'PagesController@user');
 Route::get('/staffsignup', 'UsersController@create');
 Route::get('/outlet', 'PagesController@outlet');
+Route::get('/salesrecord', 'PagesController@salesrecord');
 
 Route::resource('user', 'UsersController');
 Route::resource('inventory', 'InventoryController');
