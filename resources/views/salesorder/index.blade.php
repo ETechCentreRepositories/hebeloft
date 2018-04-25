@@ -6,7 +6,7 @@
 <div class="topMargin container">
     <div class="drop-down_brand row">
         <div class="col-md-3">
-        <p>Search Item name/brand</p>
+        <p>From Date:</p>
         </div>
         <div class="col-md-9">
             <select id="product_brand" class="form-control">
@@ -16,7 +16,7 @@
     <br>
     <div class="drop-down_location row">
         <div class="col-md-3">
-            <p>Show Location</p>
+            <p>To Date:</p>
         </div>
         <div class="col-md-9">
             <select id="outlet_location" class="form-control" >
@@ -33,6 +33,20 @@
         </div>
     </div>
     <br>
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Order Id</th>
+                    <th>Order Date</th>
+                    <th>Status</th>
+                    <th>More details</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 @endsection
