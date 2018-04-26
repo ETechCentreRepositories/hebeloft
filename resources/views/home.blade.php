@@ -2,6 +2,7 @@
 
 @section('content')
 @include('inc.navbar_superadmin')
+
 <div class="container-fluid">
     <div class="topMargin salesOrder">
         <div class="dashboardCards d-flex flex-column">
@@ -154,5 +155,11 @@
         </div>
     </div>
 </div>
-
 @endsection
+
+<style>
+    .homeNav {
+        background-color: #e3b417 !important;
+        color: #566B30 !important;
+    }
+</style>

@@ -22,7 +22,7 @@
                     <th>Email</th>
                     <th>Telephone Number</th>
                     <th>Fax</th>
-                    <th></th>
+                    <th class="emptyHeader"></th>
                 </tr>
             </thead>
             <tbody>
@@ -71,7 +71,7 @@
             <br>
             <h3 class="card-title">Create outlet</h3>
             <br>
-            {!! Form::open(['action' => 'OutletsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['action' => 'OutletsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'style' => 'margin-bottom: 0']) !!}
             <div class="form-group modal-fields">
                 {{Form::text('outlet_name', '', ['class' => 'form-control', 'placeholder' => 'Branch name'])}}
             </div>
@@ -111,3 +111,10 @@
     }
 </script>
 @endsection
+
+<style>
+    .outletNav {
+        background-color: #e3b417 !important;
+        color: #566B30 !important;
+    }
+</style>

@@ -10,19 +10,19 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav mr-auto">
+            <ul class="leftNavbar navbar-nav mr-auto">
                 <a href="/"><img src="storage/logo/hebeloft_logo.png" class="logo"/></a>
-                <li><a class="nav-link" style="color:#e3b417;" href="/inventory">Inventory</a></li>
-                <li><a class="nav-link" style="color:#e3b417;" href="/salesorder">Sales order</a></li>
+                <li><a class="inventoryNav nav-link" style="color:#e3b417;" href="/inventory">Inventory</a></li>
+                <li><a class="salesOrderNav nav-link" style="color:#e3b417;" href="/salesorder">Sales order</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ml-auto">
+            <ul class="rightNavbar navbar-nav ml-auto">
                                                               <!-- Authentication Links -->
                 @guest
-                <li><a class="nav-link" style="color:#e3b417;" onclick="openTermsAndConditions()">Terms and Conditions</a></li>
-                <li><a class="nav-link" style="color:#e3b417;" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                <li><a class="nav-link" style="color:#e3b417;" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                <li><a class="termsAndConditionsNav Nav nav-link" style="color:#e3b417;" onclick="openTermsAndConditions()">Terms and Conditions</a></li>
+                <li><a class="loginNav nav-link" style="color:#e3b417;" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                <li><a class="registerNav nav-link" style="color:#e3b417;" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                 @else
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
