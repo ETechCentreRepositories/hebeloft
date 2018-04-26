@@ -25,17 +25,17 @@
     </div>
     <br>
     <div class="row">
-        <div class="col-md-10">
-            <input type="text" id="search" class="form-control" style="background:transparent; height:0.8cm;">
+        <div class="col-md-2">
+                <a href="{{ route('export.file',['type'=>'csv']) }}"><button type="button" class="btn btn-inflow">Download CSV</button></a>
+        </div>
+        <div class="col-md-8">
+            <input type="text" id="search" class="form-control" style="background:transparent">
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-default" id="SearchInventory">Search</button>
+            <button type="button" class="btn btn-default btn-search" id="SearchInventory">Search</button>
         </div>
     </div>
     <br>
-    <div class="row">
-        <a href="{{ route('export.file',['type'=>'csv']) }}">Download CSV</a>
-    </div>
     <table class="table table-striped" id="inventoryTable" >
         <thead>
             <tr>

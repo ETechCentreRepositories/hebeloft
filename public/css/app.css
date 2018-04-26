@@ -10416,6 +10416,16 @@ a.text-dark:focus {
   background-color: #46552C;
 }
 
+.navList {
+  -webkit-transform: skew(20deg);
+          transform: skew(20deg);
+}
+
+.navLabels {
+  -webkit-transform: skew(-20deg);
+          transform: skew(-20deg);
+}
+
 .leftNavbar {
   position: absolute;
   left: 0;
@@ -10530,6 +10540,16 @@ select {
   color: #000;
 }
 
+.btn-inflow {
+  background-color: #ECB118;
+  color: #fff;
+  width: 100%;
+}
+
+.btn-search {
+  width: 100%;
+}
+
 .user-buttons {
   width: 50%;
   margin: auto;
@@ -10619,6 +10639,7 @@ th:hover {
 
 .termsAndConditionsTitle {
   text-align: center;
+  margin-bottom: 0;
 }
 
 .termsAndConditionsContent {

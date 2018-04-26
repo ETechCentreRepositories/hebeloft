@@ -74,7 +74,7 @@
                         </div>
                     </div>
                 </div>
-
+                
                 {{-- <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}"> --}}
                 <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                     <div class="row">

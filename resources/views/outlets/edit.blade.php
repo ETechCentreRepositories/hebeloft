@@ -15,21 +15,21 @@
             <!-- Left Side Of Navbar -->
             <ul class="leftNavbar navbar-nav mr-auto">
                 <a href="/"><img src="../../storage/logo/hebeloft_logo.png" class="logo"/></a>
-                <li><a class="homeNav nav-link" style="color:#e3b417;" href="/">Home</a></li>
-                <li><a class="inventoryNav nav-link" style="color:#e3b417;" href="/inventory">Inventory</a></li>
-                <li><a class="transferRequestNav nav-link" style="color:#e3b417;" href="/transfer_request">Transfer Request</a></li>
-                <li><a class="salesOrderNav nav-link" style="color:#e3b417;" href="/salesorder">Sales Order</a></li>
-                <li><a class="userNav nav-link" style="color:#e3b417;" href="/user">User</a></li>
-                <li><a class="outletNav nav-link" style="color:#e3b417;" href="/outlet">Outlet</a></li>
-                <li><a class="salesRecordNav nav-link" style="color:#e3b417;" href="/salesrecord">Sales Record</a></li>
+                <li class="navList"><a class="homeNav nav-link" style="color:#e3b417;" href="/"><div class="navLabels">Home</div></a></li>
+                <li class="navList"><a class="inventoryNav nav-link" style="color:#e3b417;" href="/inventory"><div class="navLabels">Inventory</div></a></li>
+                <li class="navList"><a class="transferRequestNav nav-link" style="color:#e3b417;" href="/transfer_request"><div class="navLabels">Transfer Request</div></a></li>
+                <li class="navList"><a class="salesOrderNav nav-link" style="color:#e3b417;" href="/salesorder"><div class="navLabels">Sales Order</div></a></li>
+                <li class="navList"><a class="userNav nav-link" style="color:#e3b417;" href="/user"><div class="navLabels">User</div></a></li>
+                <li class="navList"><a class="outletNav nav-link" style="color:#e3b417;" href="/outlet"><div class="navLabels">Outlet</div></a></li>
+                <li class="navList"><a class="salesRecordNav nav-link" style="color:#e3b417;" href="/salesrecord"><div class="navLabels">Sales Record</div></a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
             <ul class="rightNavbar navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @guest
-                <li><a class="nav-link" style="color:#e3b417;" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                <li><a class="nav-link" style="color:#e3b417;" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                <li class="navList"><a class="nav-link" style="color:#e3b417;" href="{{ route('login') }}"><div class="navLabels">{{ __('Login') }}</div></a></li>
+                <li class="navList"><a class="nav-link" style="color:#e3b417;" href="{{ route('register') }}"><div class="navLabels">{{ __('Register') }}</div></a></li>
             @else
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

@@ -12,8 +12,8 @@
             <!-- Left Side Of Navbar -->
             <ul class="leftNavbar navbar-nav mr-auto">
                 <a href="/"><img src="storage/logo/hebeloft_logo.png" class="logo"/></a>
-                <li><a class="inventoryNav nav-link" style="color:#e3b417;" href="/inventory">Inventory</a></li>
-                <li><a class="salesOrderNav nav-link" style="color:#e3b417;" href="/salesorder">Sales order</a></li>
+                <li class="navList"><a class="inventoryNav nav-link" style="color:#e3b417;" href="/inventory"><div class="navLabels">Inventory</div></a></li>
+                <li class="navList"><a class="salesOrderNav nav-link" style="color:#e3b417;" href="/salesorder"><div class="navLabels">Sales order</div></a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -21,8 +21,8 @@
                                                               <!-- Authentication Links -->
                 @guest
                 <li><a class="termsAndConditionsNav Nav nav-link" style="color:#e3b417;" onclick="openTermsAndConditions()">Terms and Conditions</a></li>
-                <li><a class="loginNav nav-link" style="color:#e3b417;" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                <li><a class="registerNav nav-link" style="color:#e3b417;" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                <li class="navList"><a class="loginNav nav-link" style="color:#e3b417;" href="{{ route('login') }}"><div class="navLabels">{{ __('Login') }}</div></a></li>
+                <li class="navList"><a class="registerNav nav-link" style="color:#e3b417;" href="{{ route('register') }}"><div class="navLabels">{{ __('Register') }}</div></a></li>
                 @else
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
