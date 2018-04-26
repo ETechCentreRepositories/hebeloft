@@ -2,6 +2,13 @@
 
 @section('content')
 @include('inc.navbar_superadmin')
+
+<style>
+    .homeNav {
+        background: white !important;
+    }
+</style>
+
 <div class="container-fluid">
     <div class="topMargin salesOrder">
         <div class="dashboardCards d-flex flex-column">

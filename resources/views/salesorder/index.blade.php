@@ -9,8 +9,7 @@
         <p>From Date:</p>
         </div>
         <div class="col-md-9">
-            <select id="product_brand" class="form-control">
-            </select>
+            <input type="date" name="from" class="form-control">
         </div>
     </div>
     <br>
@@ -19,8 +18,7 @@
             <p>To Date:</p>
         </div>
         <div class="col-md-9">
-            <select id="outlet_location" class="form-control" >
-            </select>
+            <input type="date" name="to" class="form-control">
         </div>
     </div>
     <br>
