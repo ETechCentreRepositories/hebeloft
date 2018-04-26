@@ -10,19 +10,19 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav mr-auto">
+            <ul class="leftNavbar navbar-nav mr-auto">
                 <a href="/"><img src="storage/logo/hebeloft_logo.png" class="logo"/></a>
                 <li><a class="homeNav nav-link" style="color:#e3b417;" href="/">Home</a></li>
-                <li><a class="nav-link" style="color:#e3b417;" href="/inventory">Inventory</a></li>
-                <li><a class="nav-link" style="color:#e3b417;" href="/transfer_request">Transfer Request</a></li>
-                <li><a class="nav-link" style="color:#e3b417;" href="/salesorder">Sales Order</a></li>
-                <li><a class="nav-link" style="color:#e3b417;" href="/user">User</a></li>
-                <li><a class="nav-link" style="color:#e3b417;" href="/outlet">Outlet</a></li>
-                <li><a class="nav-link" style="color:#e3b417;" href="/salesrecord">Sales Record</a></li>
+                <li><a class="inventoryNav nav-link" style="color:#e3b417;" href="/inventory">Inventory</a></li>
+                <li><a class="transferRequestNav nav-link" style="color:#e3b417;" href="/transfer_request">Transfer Request</a></li>
+                <li><a class="salesOrderNav nav-link" style="color:#e3b417;" href="/salesorder">Sales Order</a></li>
+                <li><a class="userNav nav-link" style="color:#e3b417;" href="/user">User</a></li>
+                <li><a class="outletNav nav-link" style="color:#e3b417;" href="/outlet">Outlet</a></li>
+                <li><a class="salesRecordNav nav-link" style="color:#e3b417;" href="/salesrecord">Sales Record</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ml-auto">
+            <ul class="rightNavbar navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @guest
                 <li><a class="nav-link" style="color:#e3b417;" href="{{ route('login') }}">{{ __('Login') }}</a></li>

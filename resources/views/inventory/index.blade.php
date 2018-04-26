@@ -142,4 +142,12 @@
 <div class="pagination">
     {{$inventoryOutlets->links()}}
 </div>
+
 @endsection
+
+<style>
+    .inventoryNav {
+        background-color: #e3b417 !important;
+        color: #566B30 !important;
+    }
+</style>

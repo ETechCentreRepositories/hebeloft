@@ -71,7 +71,7 @@
             <br>
             <h3 class="card-title">Create outlet</h3>
             <br>
-            {!! Form::open(['action' => 'OutletsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['action' => 'OutletsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'style' => 'margin-bottom: 0']) !!}
             <div class="form-group modal-fields">
                 {{Form::text('outlet_name', '', ['class' => 'form-control', 'placeholder' => 'Branch name'])}}
             </div>
@@ -110,4 +110,12 @@
         document.getElementById('createOutletModal').style.display = "none";
     }
 </script>
+
 @endsection
+
+<style>
+    .outletNav {
+        background-color: #e3b417 !important;
+        color: #566B30 !important;
+    }
+</style>
