@@ -10400,12 +10400,20 @@ a.text-dark:focus {
   padding: 0.5rem 0;
 }
 
-.navbar-light .navbar-nav .nav-link {
+.navbar {
+  background-color: #566B30 !important;
+}
+
+.nav-link {
   border-width: 1px 1px 0 1px;
   border-color: #e3b417;
   border-style: solid;
   border-radius: 5px 5px 0 0;
   margin: 0 5px;
+}
+
+.nav-link:hover {
+  background-color: #46552C;
 }
 
 .leftNavbar {
@@ -10434,14 +10442,6 @@ a.text-dark:focus {
 
 select {
   width: 100%;
-}
-
-.navbar {
-  background-color: #566B30 !important;
-}
-
-.nav-link:hover {
-  background-color: #46552C;
 }
 
 .container-fluid {
@@ -10526,7 +10526,7 @@ select {
 }
 
 .salesProcess {
-  font-size: 10px;
+  font-size: 12px;
   color: #000;
 }
 
