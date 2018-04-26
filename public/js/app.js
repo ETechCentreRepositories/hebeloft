@@ -31689,7 +31689,6 @@ module.exports = function(module) {
     var ARROW_LEFT_KEYCODE = 37; // KeyboardEvent.which value for left arrow key
 
     var ARROW_RIGHT_KEYCODE = 39; // KeyboardEvent.which value for right arrow key
-<<<<<<< HEAD
 
     var TOUCHEVENT_COMPAT_WAIT = 500; // Time for mouse compat events to fire after touch
 
@@ -31790,108 +31789,6 @@ module.exports = function(module) {
         }
       };
 
-=======
-
-    var TOUCHEVENT_COMPAT_WAIT = 500; // Time for mouse compat events to fire after touch
-
-    var Default = {
-      interval: 5000,
-      keyboard: true,
-      slide: false,
-      pause: 'hover',
-      wrap: true
-    };
-    var DefaultType = {
-      interval: '(number|boolean)',
-      keyboard: 'boolean',
-      slide: '(boolean|string)',
-      pause: '(string|boolean)',
-      wrap: 'boolean'
-    };
-    var Direction = {
-      NEXT: 'next',
-      PREV: 'prev',
-      LEFT: 'left',
-      RIGHT: 'right'
-    };
-    var Event = {
-      SLIDE: "slide" + EVENT_KEY,
-      SLID: "slid" + EVENT_KEY,
-      KEYDOWN: "keydown" + EVENT_KEY,
-      MOUSEENTER: "mouseenter" + EVENT_KEY,
-      MOUSELEAVE: "mouseleave" + EVENT_KEY,
-      TOUCHEND: "touchend" + EVENT_KEY,
-      LOAD_DATA_API: "load" + EVENT_KEY + DATA_API_KEY,
-      CLICK_DATA_API: "click" + EVENT_KEY + DATA_API_KEY
-    };
-    var ClassName = {
-      CAROUSEL: 'carousel',
-      ACTIVE: 'active',
-      SLIDE: 'slide',
-      RIGHT: 'carousel-item-right',
-      LEFT: 'carousel-item-left',
-      NEXT: 'carousel-item-next',
-      PREV: 'carousel-item-prev',
-      ITEM: 'carousel-item'
-    };
-    var Selector = {
-      ACTIVE: '.active',
-      ACTIVE_ITEM: '.active.carousel-item',
-      ITEM: '.carousel-item',
-      NEXT_PREV: '.carousel-item-next, .carousel-item-prev',
-      INDICATORS: '.carousel-indicators',
-      DATA_SLIDE: '[data-slide], [data-slide-to]',
-      DATA_RIDE: '[data-ride="carousel"]'
-      /**
-       * ------------------------------------------------------------------------
-       * Class Definition
-       * ------------------------------------------------------------------------
-       */
-
-    };
-
-    var Carousel =
-    /*#__PURE__*/
-    function () {
-      function Carousel(element, config) {
-        this._items = null;
-        this._interval = null;
-        this._activeElement = null;
-        this._isPaused = false;
-        this._isSliding = false;
-        this.touchTimeout = null;
-        this._config = this._getConfig(config);
-        this._element = $$$1(element)[0];
-        this._indicatorsElement = $$$1(this._element).find(Selector.INDICATORS)[0];
-
-        this._addEventListeners();
-      } // Getters
-
-
-      var _proto = Carousel.prototype;
-
-      // Public
-      _proto.next = function next() {
-        if (!this._isSliding) {
-          this._slide(Direction.NEXT);
-        }
-      };
-
-      _proto.nextWhenVisible = function nextWhenVisible() {
-        // Don't call next when the page isn't visible
-        // or the carousel or its parent isn't visible
-        if (!document.hidden && $$$1(this._element).is(':visible') && $$$1(this._element).css('visibility') !== 'hidden') {
-          this.next();
-        }
-      };
-
-      _proto.prev = function prev() {
-        if (!this._isSliding) {
-          this._slide(Direction.PREV);
-        }
-      };
-
->>>>>>> 87a742cf70f43941612f2110cf006c3e519fcb39
       _proto.pause = function pause(event) {
         if (!event) {
           this._isPaused = true;
@@ -31931,7 +31828,6 @@ module.exports = function(module) {
         if (index > this._items.length - 1 || index < 0) {
           return;
         }
-<<<<<<< HEAD
 
         if (this._isSliding) {
           $$$1(this._element).one(Event.SLID, function () {
@@ -31948,24 +31844,6 @@ module.exports = function(module) {
 
         var direction = index > activeIndex ? Direction.NEXT : Direction.PREV;
 
-=======
-
-        if (this._isSliding) {
-          $$$1(this._element).one(Event.SLID, function () {
-            return _this.to(index);
-          });
-          return;
-        }
-
-        if (activeIndex === index) {
-          this.pause();
-          this.cycle();
-          return;
-        }
-
-        var direction = index > activeIndex ? Direction.NEXT : Direction.PREV;
-
->>>>>>> 87a742cf70f43941612f2110cf006c3e519fcb39
         this._slide(direction, this._items[index]);
       };
 
@@ -32070,7 +31948,6 @@ module.exports = function(module) {
         var itemIndex = (activeIndex + delta) % this._items.length;
         return itemIndex === -1 ? this._items[this._items.length - 1] : this._items[itemIndex];
       };
-<<<<<<< HEAD
 
       _proto._triggerSlideEvent = function _triggerSlideEvent(relatedTarget, eventDirectionName) {
         var targetIndex = this._getItemIndex(relatedTarget);
@@ -32093,30 +31970,6 @@ module.exports = function(module) {
 
           var nextIndicator = this._indicatorsElement.children[this._getItemIndex(element)];
 
-=======
-
-      _proto._triggerSlideEvent = function _triggerSlideEvent(relatedTarget, eventDirectionName) {
-        var targetIndex = this._getItemIndex(relatedTarget);
-
-        var fromIndex = this._getItemIndex($$$1(this._element).find(Selector.ACTIVE_ITEM)[0]);
-
-        var slideEvent = $$$1.Event(Event.SLIDE, {
-          relatedTarget: relatedTarget,
-          direction: eventDirectionName,
-          from: fromIndex,
-          to: targetIndex
-        });
-        $$$1(this._element).trigger(slideEvent);
-        return slideEvent;
-      };
-
-      _proto._setActiveIndicatorElement = function _setActiveIndicatorElement(element) {
-        if (this._indicatorsElement) {
-          $$$1(this._indicatorsElement).find(Selector.ACTIVE).removeClass(ClassName.ACTIVE);
-
-          var nextIndicator = this._indicatorsElement.children[this._getItemIndex(element)];
-
->>>>>>> 87a742cf70f43941612f2110cf006c3e519fcb39
           if (nextIndicator) {
             $$$1(nextIndicator).addClass(ClassName.ACTIVE);
           }
@@ -32223,7 +32076,6 @@ module.exports = function(module) {
             data = new Carousel(this, _config);
             $$$1(this).data(DATA_KEY, data);
           }
-<<<<<<< HEAD
 
           if (typeof config === 'number') {
             data.to(config);
@@ -32232,16 +32084,6 @@ module.exports = function(module) {
               throw new TypeError("No method named \"" + action + "\"");
             }
 
-=======
-
-          if (typeof config === 'number') {
-            data.to(config);
-          } else if (typeof action === 'string') {
-            if (typeof data[action] === 'undefined') {
-              throw new TypeError("No method named \"" + action + "\"");
-            }
-
->>>>>>> 87a742cf70f43941612f2110cf006c3e519fcb39
             data[action]();
           } else if (_config.interval) {
             data.pause();
@@ -32773,7 +32615,6 @@ module.exports = function(module) {
        * Class Definition
        * ------------------------------------------------------------------------
        */
-<<<<<<< HEAD
 
     };
 
@@ -32803,37 +32644,6 @@ module.exports = function(module) {
 
         var isActive = $$$1(this._menu).hasClass(ClassName.SHOW);
 
-=======
-
-    };
-
-    var Dropdown =
-    /*#__PURE__*/
-    function () {
-      function Dropdown(element, config) {
-        this._element = element;
-        this._popper = null;
-        this._config = this._getConfig(config);
-        this._menu = this._getMenuElement();
-        this._inNavbar = this._detectNavbar();
-
-        this._addEventListeners();
-      } // Getters
-
-
-      var _proto = Dropdown.prototype;
-
-      // Public
-      _proto.toggle = function toggle() {
-        if (this._element.disabled || $$$1(this._element).hasClass(ClassName.DISABLED)) {
-          return;
-        }
-
-        var parent = Dropdown._getParentFromElement(this._element);
-
-        var isActive = $$$1(this._menu).hasClass(ClassName.SHOW);
-
->>>>>>> 87a742cf70f43941612f2110cf006c3e519fcb39
         Dropdown._clearMenus();
 
         if (isActive) {
@@ -32926,7 +32736,6 @@ module.exports = function(module) {
         $$$1(this._element).on(Event.CLICK, function (event) {
           event.preventDefault();
           event.stopPropagation();
-<<<<<<< HEAD
 
           _this.toggle();
         });
@@ -32942,23 +32751,6 @@ module.exports = function(module) {
         if (!this._menu) {
           var parent = Dropdown._getParentFromElement(this._element);
 
-=======
-
-          _this.toggle();
-        });
-      };
-
-      _proto._getConfig = function _getConfig(config) {
-        config = _objectSpread({}, this.constructor.Default, $$$1(this._element).data(), config);
-        Util.typeCheckConfig(NAME, config, this.constructor.DefaultType);
-        return config;
-      };
-
-      _proto._getMenuElement = function _getMenuElement() {
-        if (!this._menu) {
-          var parent = Dropdown._getParentFromElement(this._element);
-
->>>>>>> 87a742cf70f43941612f2110cf006c3e519fcb39
           this._menu = $$$1(parent).find(Selector.MENU)[0];
         }
 
@@ -33183,7 +32975,6 @@ module.exports = function(module) {
           return DefaultType;
         }
       }]);
-<<<<<<< HEAD
 
       return Dropdown;
     }();
@@ -33198,31 +32989,10 @@ module.exports = function(module) {
       event.preventDefault();
       event.stopPropagation();
 
-=======
-
-      return Dropdown;
-    }();
-    /**
-     * ------------------------------------------------------------------------
-     * Data Api implementation
-     * ------------------------------------------------------------------------
-     */
-
-
-    $$$1(document).on(Event.KEYDOWN_DATA_API, Selector.DATA_TOGGLE, Dropdown._dataApiKeydownHandler).on(Event.KEYDOWN_DATA_API, Selector.MENU, Dropdown._dataApiKeydownHandler).on(Event.CLICK_DATA_API + " " + Event.KEYUP_DATA_API, Dropdown._clearMenus).on(Event.CLICK_DATA_API, Selector.DATA_TOGGLE, function (event) {
-      event.preventDefault();
-      event.stopPropagation();
-
->>>>>>> 87a742cf70f43941612f2110cf006c3e519fcb39
       Dropdown._jQueryInterface.call($$$1(this), 'toggle');
     }).on(Event.CLICK_DATA_API, Selector.FORM_CHILD, function (e) {
       e.stopPropagation();
     });
-<<<<<<< HEAD
-    /**
-     * ------------------------------------------------------------------------
-     * jQuery
-=======
     /**
      * ------------------------------------------------------------------------
      * jQuery
@@ -33251,7 +33021,6 @@ module.exports = function(module) {
     /**
      * ------------------------------------------------------------------------
      * Constants
->>>>>>> 87a742cf70f43941612f2110cf006c3e519fcb39
      * ------------------------------------------------------------------------
      */
     var NAME = 'modal';
@@ -33446,66 +33215,6 @@ module.exports = function(module) {
           return;
         }
 
-<<<<<<< HEAD
-        this._isShown = false;
-        var transition = $$$1(this._element).hasClass(ClassName.FADE);
-
-        if (transition) {
-          this._isTransitioning = true;
-        }
-
-        this._setEscapeEvent();
-
-        this._setResizeEvent();
-
-        $$$1(document).off(Event.FOCUSIN);
-        $$$1(this._element).removeClass(ClassName.SHOW);
-        $$$1(this._element).off(Event.CLICK_DISMISS);
-        $$$1(this._dialog).off(Event.MOUSEDOWN_DISMISS);
-
-        if (transition) {
-          var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-          $$$1(this._element).one(Util.TRANSITION_END, function (event) {
-            return _this2._hideModal(event);
-          }).emulateTransitionEnd(transitionDuration);
-        } else {
-          this._hideModal();
-        }
-      };
-
-      _proto.dispose = function dispose() {
-        $$$1.removeData(this._element, DATA_KEY);
-        $$$1(window, document, this._element, this._backdrop).off(EVENT_KEY);
-        this._config = null;
-        this._element = null;
-        this._dialog = null;
-        this._backdrop = null;
-        this._isShown = null;
-        this._isBodyOverflowing = null;
-        this._ignoreBackdropClick = null;
-        this._scrollbarWidth = null;
-      };
-
-      _proto.handleUpdate = function handleUpdate() {
-        this._adjustDialog();
-      }; // Private
-
-
-      _proto._getConfig = function _getConfig(config) {
-        config = _objectSpread({}, Default, config);
-        Util.typeCheckConfig(NAME, config, DefaultType);
-        return config;
-      };
-
-      _proto._showElement = function _showElement(relatedTarget) {
-        var _this3 = this;
-
-        var transition = $$$1(this._element).hasClass(ClassName.FADE);
-
-        if (!this._element.parentNode || this._element.parentNode.nodeType !== Node.ELEMENT_NODE) {
-          // Don't move modal's DOM position
-          document.body.appendChild(this._element);
-=======
       _proto._getConfig = function _getConfig(config) {
         config = _objectSpread({}, Default, config);
         Util.typeCheckConfig(NAME, config, DefaultType);
@@ -33522,45 +33231,6 @@ module.exports = function(module) {
           document.body.appendChild(this._element);
         }
 
-        this._element.style.display = 'block';
-
-        this._element.removeAttribute('aria-hidden');
-
-        this._element.scrollTop = 0;
-
-        if (transition) {
-          Util.reflow(this._element);
-        }
-
-        $$$1(this._element).addClass(ClassName.SHOW);
-
-        if (this._config.focus) {
-          this._enforceFocus();
-        }
-
-        var shownEvent = $$$1.Event(Event.SHOWN, {
-          relatedTarget: relatedTarget
-        });
-
-        var transitionComplete = function transitionComplete() {
-          if (_this3._config.focus) {
-            _this3._element.focus();
-          }
-
-          _this3._isTransitioning = false;
-          $$$1(_this3._element).trigger(shownEvent);
-        };
-
-        if (transition) {
-          var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-          $$$1(this._dialog).one(Util.TRANSITION_END, transitionComplete).emulateTransitionEnd(transitionDuration);
-        } else {
-          transitionComplete();
->>>>>>> 87a742cf70f43941612f2110cf006c3e519fcb39
-        }
-      };
-
-<<<<<<< HEAD
         this._element.style.display = 'block';
 
         this._element.removeAttribute('aria-hidden');
@@ -33737,162 +33407,8 @@ module.exports = function(module) {
       // the following methods are used to handle overflowing modals
       // todo (fat): these should probably be refactored out of modal.js
       // ----------------------------------------------------------------------
-=======
-      _proto._enforceFocus = function _enforceFocus() {
-        var _this4 = this;
-
-        $$$1(document).off(Event.FOCUSIN) // Guard against infinite focus loop
-        .on(Event.FOCUSIN, function (event) {
-          if (document !== event.target && _this4._element !== event.target && $$$1(_this4._element).has(event.target).length === 0) {
-            _this4._element.focus();
-          }
-        });
-      };
-
-      _proto._setEscapeEvent = function _setEscapeEvent() {
-        var _this5 = this;
-
-        if (this._isShown && this._config.keyboard) {
-          $$$1(this._element).on(Event.KEYDOWN_DISMISS, function (event) {
-            if (event.which === ESCAPE_KEYCODE) {
-              event.preventDefault();
-
-              _this5.hide();
-            }
-          });
-        } else if (!this._isShown) {
-          $$$1(this._element).off(Event.KEYDOWN_DISMISS);
-        }
-      };
-
-      _proto._setResizeEvent = function _setResizeEvent() {
-        var _this6 = this;
-
-        if (this._isShown) {
-          $$$1(window).on(Event.RESIZE, function (event) {
-            return _this6.handleUpdate(event);
-          });
-        } else {
-          $$$1(window).off(Event.RESIZE);
-        }
-      };
-
-      _proto._hideModal = function _hideModal() {
-        var _this7 = this;
-
-        this._element.style.display = 'none';
-
-        this._element.setAttribute('aria-hidden', true);
-
-        this._isTransitioning = false;
-
-        this._showBackdrop(function () {
-          $$$1(document.body).removeClass(ClassName.OPEN);
-
-          _this7._resetAdjustments();
-
-          _this7._resetScrollbar();
-
-          $$$1(_this7._element).trigger(Event.HIDDEN);
-        });
-      };
-
-      _proto._removeBackdrop = function _removeBackdrop() {
-        if (this._backdrop) {
-          $$$1(this._backdrop).remove();
-          this._backdrop = null;
-        }
-      };
-
-      _proto._showBackdrop = function _showBackdrop(callback) {
-        var _this8 = this;
-
-        var animate = $$$1(this._element).hasClass(ClassName.FADE) ? ClassName.FADE : '';
-
-        if (this._isShown && this._config.backdrop) {
-          this._backdrop = document.createElement('div');
-          this._backdrop.className = ClassName.BACKDROP;
-
-          if (animate) {
-            $$$1(this._backdrop).addClass(animate);
-          }
-
-          $$$1(this._backdrop).appendTo(document.body);
-          $$$1(this._element).on(Event.CLICK_DISMISS, function (event) {
-            if (_this8._ignoreBackdropClick) {
-              _this8._ignoreBackdropClick = false;
-              return;
-            }
-
-            if (event.target !== event.currentTarget) {
-              return;
-            }
-
-            if (_this8._config.backdrop === 'static') {
-              _this8._element.focus();
-            } else {
-              _this8.hide();
-            }
-          });
-
-          if (animate) {
-            Util.reflow(this._backdrop);
-          }
-
-          $$$1(this._backdrop).addClass(ClassName.SHOW);
-
-          if (!callback) {
-            return;
-          }
-
-          if (!animate) {
-            callback();
-            return;
-          }
-
-          var backdropTransitionDuration = Util.getTransitionDurationFromElement(this._backdrop);
-          $$$1(this._backdrop).one(Util.TRANSITION_END, callback).emulateTransitionEnd(backdropTransitionDuration);
-        } else if (!this._isShown && this._backdrop) {
-          $$$1(this._backdrop).removeClass(ClassName.SHOW);
-
-          var callbackRemove = function callbackRemove() {
-            _this8._removeBackdrop();
-
-            if (callback) {
-              callback();
-            }
-          };
-
-          if ($$$1(this._element).hasClass(ClassName.FADE)) {
-            var _backdropTransitionDuration = Util.getTransitionDurationFromElement(this._backdrop);
-
-            $$$1(this._backdrop).one(Util.TRANSITION_END, callbackRemove).emulateTransitionEnd(_backdropTransitionDuration);
-          } else {
-            callbackRemove();
-          }
-        } else if (callback) {
-          callback();
-        }
-      }; // ----------------------------------------------------------------------
-      // the following methods are used to handle overflowing modals
-      // todo (fat): these should probably be refactored out of modal.js
-      // ----------------------------------------------------------------------
 
 
-      _proto._adjustDialog = function _adjustDialog() {
-        var isModalOverflowing = this._element.scrollHeight > document.documentElement.clientHeight;
-
-        if (!this._isBodyOverflowing && isModalOverflowing) {
-          this._element.style.paddingLeft = this._scrollbarWidth + "px";
-        }
->>>>>>> 87a742cf70f43941612f2110cf006c3e519fcb39
-
-        if (this._isBodyOverflowing && !isModalOverflowing) {
-          this._element.style.paddingRight = this._scrollbarWidth + "px";
-        }
-      };
-
-<<<<<<< HEAD
       _proto._adjustDialog = function _adjustDialog() {
         var isModalOverflowing = this._element.scrollHeight > document.documentElement.clientHeight;
 
@@ -33967,70 +33483,6 @@ module.exports = function(module) {
 
         var padding = $$$1(document.body).data('padding-right');
 
-=======
-      _proto._resetAdjustments = function _resetAdjustments() {
-        this._element.style.paddingLeft = '';
-        this._element.style.paddingRight = '';
-      };
-
-      _proto._checkScrollbar = function _checkScrollbar() {
-        var rect = document.body.getBoundingClientRect();
-        this._isBodyOverflowing = rect.left + rect.right < window.innerWidth;
-        this._scrollbarWidth = this._getScrollbarWidth();
-      };
-
-      _proto._setScrollbar = function _setScrollbar() {
-        var _this9 = this;
-
-        if (this._isBodyOverflowing) {
-          // Note: DOMNode.style.paddingRight returns the actual value or '' if not set
-          //   while $(DOMNode).css('padding-right') returns the calculated value or 0 if not set
-          // Adjust fixed content padding
-          $$$1(Selector.FIXED_CONTENT).each(function (index, element) {
-            var actualPadding = $$$1(element)[0].style.paddingRight;
-            var calculatedPadding = $$$1(element).css('padding-right');
-            $$$1(element).data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + _this9._scrollbarWidth + "px");
-          }); // Adjust sticky content margin
-
-          $$$1(Selector.STICKY_CONTENT).each(function (index, element) {
-            var actualMargin = $$$1(element)[0].style.marginRight;
-            var calculatedMargin = $$$1(element).css('margin-right');
-            $$$1(element).data('margin-right', actualMargin).css('margin-right', parseFloat(calculatedMargin) - _this9._scrollbarWidth + "px");
-          }); // Adjust navbar-toggler margin
-
-          $$$1(Selector.NAVBAR_TOGGLER).each(function (index, element) {
-            var actualMargin = $$$1(element)[0].style.marginRight;
-            var calculatedMargin = $$$1(element).css('margin-right');
-            $$$1(element).data('margin-right', actualMargin).css('margin-right', parseFloat(calculatedMargin) + _this9._scrollbarWidth + "px");
-          }); // Adjust body padding
-
-          var actualPadding = document.body.style.paddingRight;
-          var calculatedPadding = $$$1(document.body).css('padding-right');
-          $$$1(document.body).data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + this._scrollbarWidth + "px");
-        }
-      };
-
-      _proto._resetScrollbar = function _resetScrollbar() {
-        // Restore fixed content padding
-        $$$1(Selector.FIXED_CONTENT).each(function (index, element) {
-          var padding = $$$1(element).data('padding-right');
-
-          if (typeof padding !== 'undefined') {
-            $$$1(element).css('padding-right', padding).removeData('padding-right');
-          }
-        }); // Restore sticky content and navbar-toggler margin
-
-        $$$1(Selector.STICKY_CONTENT + ", " + Selector.NAVBAR_TOGGLER).each(function (index, element) {
-          var margin = $$$1(element).data('margin-right');
-
-          if (typeof margin !== 'undefined') {
-            $$$1(element).css('margin-right', margin).removeData('margin-right');
-          }
-        }); // Restore body padding
-
-        var padding = $$$1(document.body).data('padding-right');
-
->>>>>>> 87a742cf70f43941612f2110cf006c3e519fcb39
         if (typeof padding !== 'undefined') {
           $$$1(document.body).css('padding-right', padding).removeData('padding-right');
         }
@@ -34837,99 +34289,6 @@ module.exports = function(module) {
     var DefaultType = _objectSpread({}, Tooltip.DefaultType, {
       content: '(string|element|function)'
     });
-<<<<<<< HEAD
-
-    var ClassName = {
-      FADE: 'fade',
-      SHOW: 'show'
-    };
-    var Selector = {
-      TITLE: '.popover-header',
-      CONTENT: '.popover-body'
-    };
-    var Event = {
-      HIDE: "hide" + EVENT_KEY,
-      HIDDEN: "hidden" + EVENT_KEY,
-      SHOW: "show" + EVENT_KEY,
-      SHOWN: "shown" + EVENT_KEY,
-      INSERTED: "inserted" + EVENT_KEY,
-      CLICK: "click" + EVENT_KEY,
-      FOCUSIN: "focusin" + EVENT_KEY,
-      FOCUSOUT: "focusout" + EVENT_KEY,
-      MOUSEENTER: "mouseenter" + EVENT_KEY,
-      MOUSELEAVE: "mouseleave" + EVENT_KEY
-      /**
-       * ------------------------------------------------------------------------
-       * Class Definition
-       * ------------------------------------------------------------------------
-       */
-
-    };
-
-    var Popover =
-    /*#__PURE__*/
-    function (_Tooltip) {
-      _inheritsLoose(Popover, _Tooltip);
-
-      function Popover() {
-        return _Tooltip.apply(this, arguments) || this;
-      }
-
-      var _proto = Popover.prototype;
-
-      // Overrides
-      _proto.isWithContent = function isWithContent() {
-        return this.getTitle() || this._getContent();
-      };
-
-      _proto.addAttachmentClass = function addAttachmentClass(attachment) {
-        $$$1(this.getTipElement()).addClass(CLASS_PREFIX + "-" + attachment);
-      };
-
-      _proto.getTipElement = function getTipElement() {
-        this.tip = this.tip || $$$1(this.config.template)[0];
-        return this.tip;
-      };
-
-      _proto.setContent = function setContent() {
-        var $tip = $$$1(this.getTipElement()); // We use append for html objects to maintain js events
-
-        this.setElementContent($tip.find(Selector.TITLE), this.getTitle());
-
-        var content = this._getContent();
-
-        if (typeof content === 'function') {
-          content = content.call(this.element);
-        }
-
-        this.setElementContent($tip.find(Selector.CONTENT), content);
-        $tip.removeClass(ClassName.FADE + " " + ClassName.SHOW);
-      }; // Private
-
-
-      _proto._getContent = function _getContent() {
-        return this.element.getAttribute('data-content') || this.config.content;
-      };
-
-      _proto._cleanTipClass = function _cleanTipClass() {
-        var $tip = $$$1(this.getTipElement());
-        var tabClass = $tip.attr('class').match(BSCLS_PREFIX_REGEX);
-
-        if (tabClass !== null && tabClass.length > 0) {
-          $tip.removeClass(tabClass.join(''));
-        }
-      }; // Static
-
-
-      Popover._jQueryInterface = function _jQueryInterface(config) {
-        return this.each(function () {
-          var data = $$$1(this).data(DATA_KEY);
-
-          var _config = typeof config === 'object' ? config : null;
-
-          if (!data && /destroy|hide/.test(config)) {
-            return;
-=======
 
     var ClassName = {
       FADE: 'fade',
@@ -35034,23 +34393,6 @@ module.exports = function(module) {
             }
 
             data[config]();
->>>>>>> 87a742cf70f43941612f2110cf006c3e519fcb39
-          }
-        });
-      };
-
-<<<<<<< HEAD
-          if (!data) {
-            data = new Popover(this, _config);
-            $$$1(this).data(DATA_KEY, data);
-          }
-
-          if (typeof config === 'string') {
-            if (typeof data[config] === 'undefined') {
-              throw new TypeError("No method named \"" + config + "\"");
-            }
-
-            data[config]();
           }
         });
       };
@@ -35093,46 +34435,6 @@ module.exports = function(module) {
         }
       }]);
 
-=======
-      _createClass(Popover, null, [{
-        key: "VERSION",
-        // Getters
-        get: function get() {
-          return VERSION;
-        }
-      }, {
-        key: "Default",
-        get: function get() {
-          return Default;
-        }
-      }, {
-        key: "NAME",
-        get: function get() {
-          return NAME;
-        }
-      }, {
-        key: "DATA_KEY",
-        get: function get() {
-          return DATA_KEY;
-        }
-      }, {
-        key: "Event",
-        get: function get() {
-          return Event;
-        }
-      }, {
-        key: "EVENT_KEY",
-        get: function get() {
-          return EVENT_KEY;
-        }
-      }, {
-        key: "DefaultType",
-        get: function get() {
-          return DefaultType;
-        }
-      }]);
-
->>>>>>> 87a742cf70f43941612f2110cf006c3e519fcb39
       return Popover;
     }(Tooltip);
     /**

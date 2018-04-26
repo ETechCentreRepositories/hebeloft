@@ -99,11 +99,12 @@
                 $("#outlet_location").append("<option value='" +
                 outlet_id + "'>" +outlet + "</option>");
             });
+            
         });
     
         $("#search").autocomplete({
             source: "{{URL::to('autocomplete-search')}}",
-            // minLength:1,
+            minLength:1,
             select:function(key,value)
             {
                 console.log(value);
@@ -116,20 +117,22 @@
             $("#inventoryContent").empty();
             $.ajax({
                     type: "GET",
-                    url: "{{URL::TO('/retrieve-inventory-by-outlet')}}",
-                    data: "outlet=" + outlet,
+                    url: "{{URL::TO('/retrieve-inventory-by-outlet')}}/" +outlet,
+                    // data: "outlet=" + outlet,
                     cache: false,
                     dataType: "JSON",
                     success: function (response) {
-                        var message = "";
-                        message +=
-                                "<tr><td>" + response.Name + "</td>"
-                                + "<td>" + response.Category + "</td>"
-                                + "<td>" + response.ItemType + "</td>"
-                                + "<td>" + response.threshold_level + "</td>"
-                                + "<td>" + response.stock_level + "</td></tr>";
+                        for (i = 0; i < response.length; i++) {
+                            $("#inventoryContent").append(
+                                "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
+                                + "<td>" + response[i].Brand + "</td>"
+                                + "<td>" + response[i].Name + "</td>"
+                                + "<td>" + response[i].UnitPrice + "</td>"
+                                + "<td></td>" 
+                                + "<td>" + response[i].stock_level + "/" + response[i].threshold_level + "</td></tr>"
+                            );
+                        }
 
-                        $("#inventoryContent").html(message);
                     },
                     error: function (obj, textStatus, errorThrown) {
                         console.log("Error " + textStatus + ": " + errorThrown);
