@@ -18,7 +18,7 @@
                     <li><a class="nav-link" style="color:#e3b417;" href="/salesorder">Sales Order</a></li>
                     <li><a class="nav-link" style="color:#e3b417;" href="/user">User</a></li>
                     <li><a class="nav-link" style="color:#e3b417;" href="/outlet">Outlet</a></li>
-                    <li><a class="nav-link" style="color:#e3b417;" href="/sales_record">Sales Record</a></li>
+                    <li><a class="nav-link" style="color:#e3b417;" href="/salesrecord">Sales Record</a></li>
                 </ul>
     
                 <!-- Right Side Of Navbar -->

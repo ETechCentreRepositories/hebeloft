@@ -30,4 +30,9 @@ class PagesController extends Controller
         $title = 'Outlet';
         return view('outlets.index')->with('title', $title);
     }
+
+    public function salesrecord(){
+        $title = 'Sales Record';
+        return view('salesrecord.index')->with('title', $title);
+    }
 }
