@@ -26,17 +26,17 @@
     <br>
     <div class="row">
         <div class="col-md-10">
-            <input type="text" class="form-control" style="background:transparent; height:0.8cm;">
+            <input type="text" id="search" class="form-control" style="background:transparent; height:0.8cm;">
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-default" id="refreshInventory">Refresh</button>
+            <button type="button" class="btn btn-default" id="SearchInventory">Search</button>
         </div>
     </div>
     <br>
     <div class="row">
         <a href="{{ route('export.file',['type'=>'csv']) }}">Download CSV</a>
     </div>
-    <table class="table table-striped" >
+    <table class="table table-striped" id="inventoryTable" >
         <thead>
             <tr>
                 <th>Image</th>
@@ -50,36 +50,24 @@
                 <th>Quantity/Thresold</th>
             </tr>
         </thead>
-        <tbody>
-            @if(count($inventorys) > 0) 
-            @foreach($inventorys as $inventory)
+        <tbody id="inventoryContent">
+            @if(count($inventoryOutlets) > 0) 
+            @foreach($inventoryOutlets as $inventoryOutlet)
             <tr>
-                {{-- {{dd($inventory->Name)}} --}}
                 <td>
-                    <img style="width:60px; height:60px" src="/storage/product_images/{{$inventory->products['image']}}">    
+                    <img style="width:60px; height:60px" src="/storage/product_images/{{$inventoryOutlet->products['image']}}">    
                 </td>
-                <td>{{$inventory->products['Brand']}}</td>
-                <td>{{$inventory->products['Name']}}</td>
-                <td>{{$inventory->products['UnitPrice']}}</td>
-                <td>
-                    {{-- <div class="d-flex flex-row user-buttons">
-                        <div class="p-2">
-                            <a href="/user/{{$user->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
-                        </div>
-                        <div class="p-2">
-                            {!!Form::open(['action' => ['UsersController@destroy', $user->id], 'method' => 'POST'])!!}
-                                {{Form::hidden('_method', 'DELETE')}}
-                                {{Form::submit('Delete', ['class' => 'btn btn-danger action-buttons'])}}
-                            {!!Form::close()!!}
-                        </div>
-                    </div> --}}
-                </td>
+                <td>{{$inventoryOutlet->products['Brand']}}</td>
+                <td>{{$inventoryOutlet->products['Name']}}</td>
+                <td>{{$inventoryOutlet->products['UnitPrice']}}</td>
                 {{-- <td></td>
                 <td></td>
                 <td></td> --}}
-                <td>{{$inventory->stock_level}}</td>
+                <td></td>
+            <td>{{$inventoryOutlet->stock_level}}/{{$inventoryOutlet->threshold_level}}</td>
             </tr>
             @endforeach
+            {{-- {{dd($inventoryOutlet->products['Brand'])}}  --}}
             @else
                 <p>No Inventory found</p>
             @endif
@@ -94,14 +82,64 @@
             $("#product_brand").empty();
             $.each(data,function(i,value){
                 var brand = value.Brand;
+                var outlet = value.outlet_name;
                 $("#product_brand").append("<option value='" +
                 value.id + "'>" +brand + "</option>");
-                    // $('#product_brand').append(tr);
+                // $("#outlet_location").append("<option value='" +
+                // value.id + "'>" +outlet + "</option>");
             });
         });
+        $.get("{{ URL::to('ajax/outlet')}}",function(data){
+            console.log(data);
+            $("#outlet_location").empty();
+            $.each(data,function(i,value){
+                var id = value.id;
+                var outlet = value.outlet_name;
+                var outlet_id = value.id;
+                $("#outlet_location").append("<option value='" +
+                outlet_id + "'>" +outlet + "</option>");
+            });
+        });
+    
+        $("#search").autocomplete({
+            source: "{{URL::to('autocomplete-search')}}",
+            // minLength:1,
+            select:function(key,value)
+            {
+                console.log(value);
+            }
+        });
+
+        $("#outlet_location").change(function(){
+            var outlet = $(this).val();
+            console.log(outlet);
+            $("#inventoryContent").empty();
+            $.ajax({
+                    type: "GET",
+                    url: "{{URL::TO('/retrieve-inventory-by-outlet')}}",
+                    data: "outlet=" + outlet,
+                    cache: false,
+                    dataType: "JSON",
+                    success: function (response) {
+                        var message = "";
+                        message +=
+                                "<tr><td>" + response.Name + "</td>"
+                                + "<td>" + response.Category + "</td>"
+                                + "<td>" + response.ItemType + "</td>"
+                                + "<td>" + response.threshold_level + "</td>"
+                                + "<td>" + response.stock_level + "</td></tr>";
+
+                        $("#inventoryContent").html(message);
+                    },
+                    error: function (obj, textStatus, errorThrown) {
+                        console.log("Error " + textStatus + ": " + errorThrown);
+                    }
+                });
+        });
+        // $("#search").datepicker();
     });
 </script>
-{{-- <div class="pagination">
-    {{$users->links()}}
-</div> --}}
+<div class="pagination">
+    {{$inventoryOutlets->links()}}
+</div>
 @endsection

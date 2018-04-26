@@ -13,7 +13,14 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+     <!-- Styles -->
+     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+     
+     <script src="{{asset('js/jquery-ui.min.js')}}" type="text/javascript"></script>
+     <link href="{{asset('css/jquery-ui.min.css')}} rel="stylesheet" type="text/css"/> 
+     {{-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" /> --}}
+{{-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> --}}
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
@@ -30,8 +37,7 @@
             
         })
     </script> --}}
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+   
 </head>
 <body>
     <div id="app">

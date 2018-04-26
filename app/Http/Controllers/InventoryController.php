@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Inventory;
+use App\Models\InventoryOutlet;
+use App\Models\Outlet;
 
 use DB;
 
@@ -17,10 +19,9 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        $inventorys = Inventory::orderBy('id','asc')->paginate(10);;
-        $products = Products::all();
-        // return view('inventory.index');
-        return view('inventory.index')->with('inventorys',$inventorys)->with('products',$products);
+        $inventoryOutlets = InventoryOutlet::orderBy('id','asc')->paginate(10);;
+        // $products = Products::all();
+        return view('inventory.index')->with('inventoryOutlets',$inventoryOutlets);
     }
 
     /**
@@ -164,20 +165,55 @@ class InventoryController extends Controller
     }      
     
     public function getInventory(){
-        $inventory = Inventory::join('products', 'inventory.products_id', '=', 'products.id')
-                        ->select('inventory.id','products.Name', 'products.Category','products.Brand', 'products.ItemType','inventory.threshold_level','inventory.stock_level')
-                        ->get()->toArray();
+        $inventory = InventoryOutlet::leftJoin('products', 'inventory_has_outlets.products_id', '=', 'products.id')
+                     ->leftJoin('outlets', 'inventory_has_outlets.outlets_id', '=', 'outlets.id')
+                     ->select('inventory_has_outlets.id','inventory_has_outlets.outlets_id','inventory_has_outlets.products_id','products.Name', 'products.Category','products.Brand', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level', 'outlets.outlet_name')
+                    //  ->where('products.Category','=', 'orange')
+                     ->get()->toArray();
 
         return response($inventory);
     }
 
     public function getInventoryById($inventoryId){
-        $inventoryById = DB::table('inventory')  
-                        ->join('products', 'inventory.products_id', '=', 'products.id')
-                        ->select('inventory.id','products.Name', 'products.Category','products.Brand', 'products.ItemType','inventory.threshold_level','inventory.stock_level')
-                        ->where('inventory.inventory_id' , $inventoryId)
+        $inventoryById = DB::table('inventory_has_outlets')  
+                        ->join('products', 'inventory_has_outlets.products_id', '=', 'products.id')
+                        ->select('inventory_has_outlets.id','products.Name', 'products.Category','products.Brand', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level')
+                        ->where('inventory_has_outlets.inventory_id', $inventoryId)
                         ->get()->toArray();
 
         return response($inventoryById);
+    }
+
+        public function getOutlet(){
+        $inventoryOutlets = Outlet::get()->toArray();
+
+        return response($inventoryOutlets);
+    }
+
+    public function search(Request $request){
+        $search = $request->keyword;
+        $inventoryOutlets = InventoryOutlet::join('products', 'inventory_has_outlets.products_id', '=', 'products.id')
+                            ->join('outlets', 'inventory_has_outlets.outlets_id', '=', 'outlets.id')
+                            ->where('outlet_name','LIKE','%'.$search.'%')
+                            ->orWhere('Name','LIKE','%'.$search.'%')
+                            ->get();
+        $data = [];
+
+        foreach($inventoryOutlets as $key => $value){
+            $data [] = ['id' => $value->id, 'value'=>$value->Name];
+        }
+
+        return response($data);
+            
+
+    }
+    public function getInventoryByOutlet($outlet){
+        $inventoryByOutlet = InventoryOutlet::leftJoin('products', 'inventory_has_outlets.products_id', '=', 'products.id')
+                    ->leftJoin('outlets', 'inventory_has_outlets.outlets_id', '=', 'outlets.id')
+                    ->select('inventory_has_outlets.id','inventory_has_outlets.outlets_id','inventory_has_outlets.products_id','products.Name', 'products.Category','products.Brand', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level', 'outlets.outlet_name')
+                    ->where('inventory_has_outlets.outlets_id','=',$outlet)
+                    ->get()->toArray();
+
+        return response($inventoryByOutlet);
     }
 }

@@ -34,6 +34,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/ajax/inventory', 'InventoryController@getInventory');
 Route::get('/ajax/inventory/{id}', 'InventoryController@getInventoryById');
 
+Route::get('/autocomplete-search', 'InventoryController@search');
+Route::get('/retrieve-inventory-by-outlet/{outlet}', 'InventoryController@getInventoryByOutlet');
+
+//Retrieve Outlets
+Route::get('/ajax/outlet', 'InventoryController@getOutlet');
+
 //Import outlets
 // Route::get('import-export-view', 'ExcelController@importExportView')->name('import.export.view');
 
