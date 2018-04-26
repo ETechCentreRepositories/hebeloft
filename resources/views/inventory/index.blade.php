@@ -142,7 +142,6 @@
 <div class="pagination">
     {{$inventoryOutlets->links()}}
 </div>
-
 @endsection
 
 <style>

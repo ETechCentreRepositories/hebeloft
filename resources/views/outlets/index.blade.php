@@ -22,7 +22,7 @@
                     <th>Email</th>
                     <th>Telephone Number</th>
                     <th>Fax</th>
-                    <th></th>
+                    <th class="emptyHeader"></th>
                 </tr>
             </thead>
             <tbody>
@@ -110,7 +110,6 @@
         document.getElementById('createOutletModal').style.display = "none";
     }
 </script>
-
 @endsection
 
 <style>

@@ -16,7 +16,7 @@
                 <tr>
                     <th>Username</th>
                     <th>Email</th>
-                    <th></th>
+                    <th class="emptyHeader"></th>
                 </tr>
             </thead>
             <tbody>

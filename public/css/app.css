@@ -10422,16 +10422,26 @@ a.text-dark:focus {
   margin-right: 5%;
 }
 
+.termsAndConditionsNav {
+  border: none !important;
+  border-radius: 0 !important;
+  cursor: pointer;
+}
+
+.termsAndConditionsNav:hover {
+  background-color: transparent !important;
+}
+
 select {
   width: 100%;
 }
 
 .navbar {
-  background: #566B30 !important;
+  background-color: #566B30 !important;
 }
 
 .nav-link:hover {
-  background: #46552C;
+  background-color: #46552C;
 }
 
 .container-fluid {
@@ -10529,6 +10539,21 @@ select {
   margin: auto;
 }
 
+th {
+  cursor: pointer;
+}
+
+th:hover {
+  background-color: lightgray;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.emptyHeader {
+  cursor: default !important;
+  background-color: transparent !important;
+}
+
 .table td {
   vertical-align: middle;
 }
@@ -10604,15 +10629,5 @@ select {
 
 .pagination {
   margin: auto;
-}
-
-th {
-  cursor: pointer;
-}
-
-th:hover {
-  background: lightgray;
-  text-decoration: none;
-  cursor: pointer;
 }
 

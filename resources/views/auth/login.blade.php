@@ -71,3 +71,10 @@
     </div>
 </div>
 @endsection
+
+<style>
+    .loginNav {
+        background-color: #e3b417 !important;
+        color: #566B30 !important;
+    }
+</style>

@@ -82,7 +82,6 @@
     <br>
 {!! Form::close() !!}
 </div>
-
 @endsection
 
 <style>
