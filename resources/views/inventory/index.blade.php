@@ -29,10 +29,10 @@
                 <a href="{{ route('export.file',['type'=>'csv']) }}"><button type="button" class="btn btn-inflow">Download CSV</button></a>
         </div>
         <div class="col-md-8">
-            <input type="text" id="search" class="form-control" style="background:transparent">
+            <input type="text" id="searchField" class="form-control" style="background:transparent">
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-default btn-search" id="SearchInventory">Search</button>
+            <button type="button" class="btn btn-default btn-search" id="searchInventory">Search</button>
         </div>
     </div>
     <br>
@@ -78,7 +78,6 @@
 <script>
     $(document).ready(function(){
         $.get("{{ URL::to('ajax/inventory')}}",function(data){
-            console.log(data);
             $("#product_brand").empty();
             $.each(data,function(i,value){
                 var brand = value.Brand;
@@ -90,7 +89,6 @@
             });
         });
         $.get("{{ URL::to('ajax/outlet')}}",function(data){
-            console.log(data);
             $("#outlet_location").empty();
             $.each(data,function(i,value){
                 var id = value.id;
@@ -102,7 +100,7 @@
             
         });
     
-        $("#search").autocomplete({
+        $("#searchField").autocomplete({
             source: "{{URL::to('autocomplete-search')}}",
             minLength:1,
             select:function(key,value)
@@ -113,7 +111,6 @@
 
         $("#outlet_location").change(function(){
             var outlet = $(this).val();
-            console.log(outlet);
             $("#inventoryContent").empty();
             $.ajax({
                     type: "GET",
@@ -139,7 +136,35 @@
                     }
                 });
         });
-        // $("#search").datepicker();
+        $("#searchInventory").click(function(){
+            var productName = $("#searchField").val();
+            console.log(productName);
+            $("#inventoryContent").empty();
+            $.ajax({
+                    type: "GET",
+                    url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
+                    // data: "products.Name=" + productName,
+                    cache: false,
+                    dataType: "JSON",
+                    success: function (response) {
+                        console.log(response);
+                        for (i = 0; i < response.length; i++) {
+                            $("#inventoryContent").append(
+                                "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
+                                + "<td>" + response[i].Brand + "</td>"
+                                + "<td>" + response[i].Name + "</td>"
+                                + "<td>" + response[i].UnitPrice + "</td>"
+                                + "<td></td>" 
+                                + "<td>" + response[i].stock_level + "/" + response[i].threshold_level + "</td></tr>"
+                            );
+                        }
+
+                    },
+                    error: function (obj, textStatus, errorThrown) {
+                        console.log("Error " + textStatus + ": " + errorThrown);
+                    }
+                });
+        });
     });
 </script>
 <div class="pagination">

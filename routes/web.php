@@ -34,8 +34,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/ajax/inventory', 'InventoryController@getInventory');
 Route::get('/ajax/inventory/{id}', 'InventoryController@getInventoryById');
 
+
 Route::get('/autocomplete-search', 'InventoryController@search');
 Route::get('/retrieve-inventory-by-outlet/{outlet}', 'InventoryController@getInventoryByOutlet');
+Route::get('/retrieve-inventory-by-product-name/{productName}', 'InventoryController@getInventoryByProductName');
 
 //Retrieve Outlets
 Route::get('/ajax/outlet', 'InventoryController@getOutlet');
