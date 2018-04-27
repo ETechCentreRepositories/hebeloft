@@ -5,9 +5,7 @@
 <br>
 <div class="topMargin container">
     <div class="row justify-content-end">
-            <div>
-                <a href="/salesrecord/create"><button type="button" class="btn btn-warning">Add Sales Record</button></a>
-            </div>
+            <button type="button" class="btn btn-warning" onclick="openCreateSalesRecordModal()">Add Sales Record</button>
     </div>
     <br>
     <div class="drop-down_brand row">
@@ -52,6 +50,27 @@
         </table>
     </div>
 </div>
+
+<div id="createSalesRecordModal" class="modal">
+        <span class="close cursor" onclick="closeCreateSalesRecordModal()">&times;</span>
+        <div class="card modalCard">
+            <div class="card-body">
+                    <br>
+                    <h3 class="card-title">Create Sales Record</h3>
+                    <br>
+            </div>
+        </div>
+</div>
+
+<script>
+    function openCreateSalesRecordModal() {
+        document.getElementById('createSalesRecordModal').style.display = "block";
+    }
+
+    function closeCreateSalesRecordModal() {
+        document.getElementById('createSalesRecordModal').style.display = "none";
+    }
+</script>
 @endsection
 
 <style>
