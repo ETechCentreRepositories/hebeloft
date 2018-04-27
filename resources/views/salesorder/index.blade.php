@@ -24,10 +24,10 @@
     <br>
     <div class="row">
         <div class="col-md-10">
-            <input type="text" class="form-control" style="background:transparent; height:0.8cm;">
+            <input type="text" class="form-control" style="background:transparent;">
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-default" id="refreshInventory">Refresh</button>
+            <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
         </div>
     </div>
     <br>

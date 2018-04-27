@@ -5,9 +5,7 @@
 <br>
 <div class="topMargin container">
     <div class="row justify-content-end">
-        <div>
-            <button type="button" class="btn btn-warning" onclick="openCreateUserModal()">Add new staff</button>
-        </div>
+        <button type="button" class="btn btn-warning" onclick="openCreateUserModal()">Add new staff</button>
     </div>
     <br>
     <div>

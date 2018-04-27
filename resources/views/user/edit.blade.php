@@ -68,10 +68,10 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-6">
-                                <input id="role" type="radio" name="role" value="5"> Warehouse staff<br>
+                                <input id="roles_id" type="radio" name="roles_id" value="5"> Warehouse staff<br>
                             </div>
                             <div class="col-md-6">
-                                <input id="role" type="radio" name="role" value="3"> Outlet staff<br>
+                                <input id="roles_id" type="radio" name="roles_id" value="3"> Outlet staff<br>
                             </div>
                         </div>
                     </div>

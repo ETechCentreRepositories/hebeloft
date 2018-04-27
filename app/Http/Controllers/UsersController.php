@@ -127,11 +127,11 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $user->name = $request->input('name');
-        $user->roles_id = $request->input('roles_id');
+        $user->roles_id = $request->roles_id;
         $user->password = Hash::make($request->input('password'));
         $user->save();
 
-        $userOutletExists = UserOutlet::where('users_id',$id)->get();
+        $userOutletExists = UserOutlet::where('users_id', $id)->get();
         if($userOutletExists){
             foreach($userOutletExists as $userOutletExist){
                 $userOutletExist->delete();
