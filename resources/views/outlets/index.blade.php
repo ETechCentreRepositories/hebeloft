@@ -10,7 +10,6 @@
         </div>
     </div>
     <br>
-    {{-- {!!dd(count($outlets));!!} --}}
     @if(count($outlets) > 0)
     <div>
         <table class="table table-striped">
