@@ -39,35 +39,17 @@
                 <thead>
                     <tr>
                         <th>Picture</th>
+                        <th>Brand</th>
                         <th>Name</th>
                         <th>Price</th>
-                        <th>Quantity Price</th>
+                        <th>Quantity</th>
                         <th>Discount</th>
                         <th>Total Price</th>
                     </tr>
                 </thead>
-                {{-- <tbody id="inventoryContent">
-                    @if(count($inventoryOutlets) > 0) 
-                    @foreach($inventoryOutlets as $inventoryOutlet)
-                    <tr>
-                        <td>
-                            <img style="width:60px; height:60px" src="/storage/product_images/{{$inventoryOutlet->products['image']}}">    
-                        </td>
-                        <td>{{$inventoryOutlet->products['Brand']}}</td>
-                        <td>{{$inventoryOutlet->products['Name']}}</td>
-                        <td>{{$inventoryOutlet->products['UnitPrice']}}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    <td>{{$inventoryOutlet->stock_level}}/{{$inventoryOutlet->threshold_level}}</td>
-                    </tr>
-                    @endforeach
-                    {{dd($inventoryOutlet->products['Brand'])}} 
-                    @else
-                        <p>No Inventory found</p>
-                    @endif
-                    </tbody> --}}
+                <tbody id="addSalesRecordContent">
+                    
+                </tbody>
         </table>
     </form>
 </div>
@@ -93,6 +75,40 @@
             {
                 console.log(value);
             }
+        });
+
+        $("#addSalesRecord").click(function(){
+            var productName = $("#salesRecordSearchField").val();
+            console.log(productName);
+            $.ajax({
+                    type: "GET",
+                    url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
+                    // data: "products.Name=" + productName,
+                    cache: false,
+                    dataType: "JSON",
+                    success: function (response) {
+                        for (i = 0; i < response.length; i++) {
+                            $("#addSalesRecordContent").append(
+                                "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
+                                + "<td>" + response[i].Brand + "</td>"
+                                + "<td>" + response[i].Name + "</td>"
+                                + "<td>" + response[i].UnitPrice + "</td>"
+                                + "<td><input name='quantity' id='quantity' type='text' style='width:60px;' value='1'/></td>"
+                                + "<td><input name='discount' id='discount' type='text' style='width:60px;' value=''/></td>" 
+                                + "<td>" +"</td></tr>"
+                            );
+                        }
+
+                    },
+                    error: function (obj, textStatus, errorThrown) {
+                        console.log("Error " + textStatus + ": " + errorThrown);
+                    }
+                });
+        });
+
+        $("#quantity").click(function(){
+            var quantity = $(this).val();
+            console.log("hellow world");
         });
 
     })
