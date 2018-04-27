@@ -23,7 +23,7 @@ class SalesRecordController extends Controller
      */
     public function create()
     {
-        //
+        return view('salesRecord.create');
     }
 
     /**
