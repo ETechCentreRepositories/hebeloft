@@ -6,7 +6,7 @@
 <div class="topMargin container">
     <div class="row justify-content-end">
             <div>
-                <button type="button" class="btn btn-warning" onclick="openCreateOutletModal()">Add Sales Record</button>
+                <a href="/salesrecord/create"><button type="button" class="btn btn-warning">Add Sales Record</button></a>
             </div>
     </div>
     <br>
