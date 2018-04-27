@@ -10417,13 +10417,13 @@ a.text-dark:focus {
 }
 
 .navList {
-  -webkit-transform: skew(20deg);
-          transform: skew(20deg);
+  -webkit-transform: skew(26deg);
+          transform: skew(26deg);
 }
 
 .navLabels {
-  -webkit-transform: skew(-20deg);
-          transform: skew(-20deg);
+  -webkit-transform: skew(-26deg);
+          transform: skew(-26deg);
 }
 
 .leftNavbar {
@@ -10448,6 +10448,10 @@ a.text-dark:focus {
 
 .termsAndConditionsNav:hover {
   background-color: transparent !important;
+}
+
+.loginIcon {
+  width: 10%;
 }
 
 select {
@@ -10547,6 +10551,10 @@ select {
 }
 
 .btn-search {
+  width: 100%;
+}
+
+.btn-refresh {
   width: 100%;
 }
 

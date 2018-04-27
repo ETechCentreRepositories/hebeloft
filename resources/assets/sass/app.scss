@@ -35,11 +35,11 @@
 }
 
 .navList {
-  transform: skew(20deg);
+  transform: skew(26deg);
 }
 
 .navLabels {
-  transform: skew(-20deg);
+  transform: skew(-26deg);
 }
 
 .leftNavbar {
@@ -64,6 +64,10 @@
 
 .termsAndConditionsNav:hover {
   background-color: transparent !important;
+}
+
+.loginIcon {
+  width: 10%;
 }
 
 select {
@@ -163,6 +167,10 @@ select {
 }
 
 .btn-search {
+  width: 100%;
+}
+
+.btn-refresh {
   width: 100%;
 }
 

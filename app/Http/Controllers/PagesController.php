@@ -16,6 +16,11 @@ class PagesController extends Controller
         return view('salesorder.index')->with('title', $title);
     }
 
+    public function transfer_request(){
+        $title = 'Transfer Request';
+        return view('transfer_request.index')->with('title', $title);
+    }
+
     public function user(){
         $title = 'User';
         return view('user.index')->with('title', $title);

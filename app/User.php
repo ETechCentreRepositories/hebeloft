@@ -16,6 +16,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public $table = "users";
 
+    //Timestamps
+    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -35,7 +38,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     ];
 
     public function wholesaler(){
-        return $this->hasMany('App\Wholesaler');
+        return $this->hasOne('App\Wholesaler');
     }
 
     public function outlet(){
@@ -43,6 +46,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     public function roles(){
-        return $this->belongsTo('App\Models\Role');
+        return $this->belongsToMany('App\Models\Role');
     }
 }
