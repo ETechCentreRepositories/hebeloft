@@ -146,8 +146,8 @@ class InventoryController extends Controller
 
     public function exportFile($type){
 
-        $inventoryexcel = Inventory::join('products', 'inventory.products_id', '=', 'products.id')
-                        ->select('inventory.id','products.Name', 'products.Category', 'products.ItemType','inventory.threshold_level','inventory.stock_level')
+        $inventoryexcel = InventoryOutlet::join('products', 'inventory_has_outlets.products_id', '=', 'products.id')
+                        ->select('inventory_has_outlets.id','products.Name', 'products.Category', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level')
                         ->get()->toArray();
 
         return \Excel::create('inventory', function($excel) use ($inventoryexcel) {

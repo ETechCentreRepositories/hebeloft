@@ -4,6 +4,12 @@
 @include('inc.navbar_superadmin')
 <br>
 <div class="topMargin container">
+    <div class="row justify-content-end">
+            <div>
+                <button type="button" class="btn btn-warning" onclick="openCreateOutletModal()">Add Sales Record</button>
+            </div>
+    </div>
+    <br>
     <div class="drop-down_brand row">
         <div class="col-md-3">
         <p>From Date:</p>
@@ -39,6 +45,7 @@
                     <th>Date</th>
                     <th>Outlet</th>
                     <th>Revenue</th>
+                    <th>Details</th>
                 </tr>
             </thead>
             <tbody>
