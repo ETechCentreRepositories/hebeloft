@@ -160,9 +160,17 @@ select {
   color: #000;
 }
 
+.drop-down_brand {
+  padding: 0.5rem 0;
+}
+
 .btn-inflow {
   background-color: #ECB118;
   color: #fff;
+  width: 100%;
+}
+
+.btn-create {
   width: 100%;
 }
 
@@ -171,6 +179,10 @@ select {
 }
 
 .btn-refresh {
+  width: 100%;
+}
+
+.fullWidth {
   width: 100%;
 }
 
