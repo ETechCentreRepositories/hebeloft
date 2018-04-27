@@ -5,9 +5,7 @@
 <br>
 <div class="topMargin container">
     <div class="row justify-content-end">
-            <div>
-                <button type="button" class="btn btn-warning" onclick="openCreateOutletModal()">Add Sales Record</button>
-            </div>
+            <button type="button" class="btn btn-warning" onclick="openCreateSalesRecordModal()">Add Sales Record</button>
     </div>
     <br>
     <div class="drop-down_brand row">
@@ -30,10 +28,11 @@
     <br>
     <div class="row">
         <div class="col-md-10">
-            <input type="text" class="form-control" style="background:transparent; height:0.8cm;">
+            <input type="text" class="form-control" style="background:transparent;">
+            {{-- height:0.8cm; --}}
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-default" id="refreshInventory">Refresh</button>
+            <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
         </div>
     </div>
     <br>
@@ -52,6 +51,27 @@
         </table>
     </div>
 </div>
+
+<div id="createSalesRecordModal" class="modal">
+        <span class="close cursor" onclick="closeCreateSalesRecordModal()">&times;</span>
+        <div class="card modalCard">
+            <div class="card-body">
+                    <br>
+                    <h3 class="card-title">Create Sales Record</h3>
+                    <br>
+            </div>
+        </div>
+</div>
+
+<script>
+    function openCreateSalesRecordModal() {
+        document.getElementById('createSalesRecordModal').style.display = "block";
+    }
+
+    function closeCreateSalesRecordModal() {
+        document.getElementById('createSalesRecordModal').style.display = "none";
+    }
+</script>
 @endsection
 
 <style>
