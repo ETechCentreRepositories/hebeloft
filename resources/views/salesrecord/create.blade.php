@@ -106,7 +106,7 @@
                 });
         });
 
-        $("#quantity").click(function(){
+        $("img").click(function(){
             var quantity = $(this).val();
             console.log("hellow world");
         });
