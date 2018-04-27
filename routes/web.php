@@ -18,6 +18,7 @@ Route::get('/', function () {
 // Route::get('/', 'PagesController@home');
 Route::get('/', 'PagesController@home');
 Route::get('/salesorder', 'PagesController@salesorder');
+Route::get('/transfer_request', 'PagesController@transfer_request');
 Route::get('/user', 'PagesController@user');
 Route::get('/staffsignup', 'UsersController@create');
 Route::get('/outlet', 'PagesController@outlet');
