@@ -49,4 +49,5 @@ Route::get('/ajax/outlet', 'InventoryController@getOutlet');
 //SalesRecord 
 Route::get('/salesrecord', 'PagesController@salesrecord');
 Route::get('/salesrecord/create', 'SalesRecordController@create');
+Route::get('/salesrecord/addSalesRecordList/{productName}', 'SalesRecordController@addSalesRecordList');
 

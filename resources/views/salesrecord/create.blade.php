@@ -45,10 +45,18 @@
                         <th>Quantity</th>
                         <th>Discount</th>
                         <th>Total Price</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody id="addSalesRecordContent">
-                    
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tbody>
         </table>
     </form>
@@ -82,22 +90,13 @@
             console.log(productName);
             $.ajax({
                     type: "GET",
-                    url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
+                    url: "{{URL::TO('/salesrecord/addSalesRecordList')}}/" +productName,
                     // data: "products.Name=" + productName,
                     cache: false,
                     dataType: "JSON",
                     success: function (response) {
-                        for (i = 0; i < response.length; i++) {
-                            $("#addSalesRecordContent").append(
-                                "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
-                                + "<td>" + response[i].Brand + "</td>"
-                                + "<td>" + response[i].Name + "</td>"
-                                + "<td>" + response[i].UnitPrice + "</td>"
-                                + "<td><input name='quantity' id='quantity' type='text' style='width:60px;' value='1'/></td>"
-                                + "<td><input name='discount' id='discount' type='text' style='width:60px;' value=''/></td>" 
-                                + "<td>" +"</td></tr>"
-                            );
-                        }
+                        console.log(response);
+                        console.log('sales record added successful');
 
                     },
                     error: function (obj, textStatus, errorThrown) {
@@ -106,7 +105,7 @@
                 });
         });
 
-        $("img").click(function(){
+        $("#value").click(function(){
             var quantity = $(this).val();
             console.log("hellow world");
         });

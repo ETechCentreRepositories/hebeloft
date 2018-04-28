@@ -9,8 +9,12 @@ class SalesRecord extends Model
     //Table 
     protected $table = 'sales_record';
 
+    protected $fillable = [
+        'outlets_id','total_price','total_discount', 'remarks',
+    ];
+
     //Timestamps
-    public $timestamp = false;
+    public $timestamps = false;
 
     public function salesRecordLists(){
         return hasMany('\App\Models\SalesRecordList');
