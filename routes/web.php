@@ -25,6 +25,7 @@ Route::get('/outlet', 'PagesController@outlet');
 
 Route::resource('user', 'UsersController');
 Route::resource('outlet', 'OutletsController');
+Route::resource('transfer_request', 'TransferRequestController');
 
 Auth::routes();
 
@@ -50,4 +51,3 @@ Route::get('/ajax/outlet', 'InventoryController@getOutlet');
 Route::get('/salesrecord', 'PagesController@salesrecord');
 Route::get('/salesrecord/create', 'SalesRecordController@create');
 Route::get('/salesrecord/addSalesRecordList/{productName}', 'SalesRecordController@addSalesRecordList');
-
