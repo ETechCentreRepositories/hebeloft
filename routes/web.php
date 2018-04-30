@@ -15,23 +15,26 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-// Route::get('/', 'PagesController@home');
-Route::get('/', 'PagesController@home');
+Route::get('/', 'PagesController@inventory');
 Route::get('/salesorder', 'PagesController@salesorder');
-Route::get('/transfer_request', 'PagesController@transfer_request');
+Route::get('/transferrequest', 'PagesController@transferrequest');
 Route::get('/user', 'PagesController@user');
 Route::get('/staffsignup', 'UsersController@create');
 Route::get('/outlet', 'PagesController@outlet');
+Route::get('/salesrecord', 'PagesController@salesrecord');
 
+Route::resource('inventory', 'InventoryController');
 Route::resource('user', 'UsersController');
 Route::resource('outlet', 'OutletsController');
+Route::resource('transfer_request', 'TransferRequestController');
+Route::resource('salesorder', 'SalesOrdersController');
+Route::resource('salesrecord', 'SalesRecordsController');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/', 'HomeController@index')->name('home');
 
 //Inventory
-Route::resource('inventory', 'InventoryController');
 Route::get('/ajax/inventory', 'InventoryController@getInventory');
 Route::get('/ajax/inventory/{id}', 'InventoryController@getInventoryById');
 Route::get('/autocomplete-search', 'InventoryController@search');
@@ -48,7 +51,6 @@ Route::get('/ajax/inventory-outlet', 'InventoryController@getOutletByInventory')
 // Route::get('import-export-view', 'ExcelController@importExportView')->name('import.export.view');
 
 //SalesRecord 
-Route::get('/salesrecord', 'PagesController@salesrecord');
 Route::get('/salesrecord/create', 'SalesRecordController@create');
 Route::get('/salesrecord/addSalesRecordList/{productName}', 'SalesRecordController@addSalesRecordList');
 Route::get('/salesrecord/retrieveItemBySalesId/{salesRecordId}', 'SalesRecordController@retrieveItemBySalesId');
@@ -58,3 +60,4 @@ Route::get('/salesrecord/addtocart',[
     'as' => 'product.addToCart'
 ]);
 
+Route::get('salesrecord/retrieveitemBySalesId/{salesRecordId}', 'SalesRecordController@retieveItemBySalesId');

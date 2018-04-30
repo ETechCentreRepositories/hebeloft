@@ -11,14 +11,19 @@ class PagesController extends Controller
         return view('home')->with('title', $title);
     }
 
+    public function inventory(){
+        $title = 'Inventory';
+        return view('inventory.index')->with('title', $title);
+    }
+
     public function salesorder(){
         $title = 'Sales Order';
         return view('salesorder.index')->with('title', $title);
     }
 
-    public function transfer_request(){
+    public function transferrequest(){
         $title = 'Transfer Request';
-        return view('transfer_request.index')->with('title', $title);
+        return view('transferrequest.index')->with('title', $title);
     }
 
     public function user(){

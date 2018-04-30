@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Outlet;
-use App\User;
+use App\Models\TransferRequest;
 
-class OutletsController extends Controller
+class TransferRequestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +14,8 @@ class OutletsController extends Controller
      */
     public function index()
     {
-        $user_id = auth()->user()->id;
-        $users_id = User::find($user_id);
-        $outlets = Outlet::orderBy('id','asc')->paginate(10);
-        return view('outlets.index')->with('outlets', $outlets)->with('users_id',$users_id);
+        $transfers = TransferRequest::orderBy('id','asc')->paginate(10);
+        return view('transfer_request.index')->with('transfers', $transfers);
     }
 
     /**
@@ -47,14 +44,14 @@ class OutletsController extends Controller
             'fax' => 'required',
         ]);
 
-        // Create Outlet
-        $outlet = new Outlet;
-        $outlet->outlet_name = $request->input('outlet_name');
-        $outlet->address = $request->input('address');
-        $outlet->email = $request->input('email');
-        $outlet->telephone_number = $request->input('telephone_number');
-        $outlet->fax = $request->input('fax');
-        $outlet->save();
+        // Create Request
+        // $transfers = new Outlet;
+        // $transfers->outlet_name = $request->input('outlet_name');
+        // $transfers->address = $request->input('address');
+        // $transfers->email = $request->input('email');
+        // $transfers->telephone_number = $request->input('telephone_number');
+        // $transfers->fax = $request->input('fax');
+        // $transfers->save();
 
         return redirect('/outlet')->with('success', 'Outlet Created');
     }
@@ -78,10 +75,8 @@ class OutletsController extends Controller
      */
     public function edit($id)
     {
-        $user_id = auth()->user()->id;
-        $users_id = User::find($user_id); 
         $outlet = Outlet::find($id);
-        return view('outlets.edit')->with('outlet', $outlet)->with('users_id',$users_id);
+        return view('transfer_request.edit')->with('transfers', $transfers);
     }
 
     /**
@@ -101,29 +96,29 @@ class OutletsController extends Controller
             'fax' => 'required',
         ]);
 
-        // Create Outlet
-        $outlet = Outlet::find($id);
-        $outlet->outlet_name = $request->input('outlet_name');
-        $outlet->address = $request->input('address');
-        $outlet->email = $request->input('email');
-        $outlet->telephone_number = $request->input('telephone_number');
-        $outlet->fax = $request->input('fax');
-        $outlet->save();
+        // Create Request
+        // $outlet = Outlet::find($id);
+        // $outlet->outlet_name = $request->input('outlet_name');
+        // $outlet->address = $request->input('address');
+        // $outlet->email = $request->input('email');
+        // $outlet->telephone_number = $request->input('telephone_number');
+        // $outlet->fax = $request->input('fax');
+        // $outlet->save();
 
-        return redirect('/outlet')->with('success', 'Outlet Updated');
+        return redirect('/transfer_request')->with('success', 'Request Updated');
     }
 
     /**
      * Remove the specified resource from storage.
-     *
+     *git 
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {   
-        $outlet = Outlet::find($id);
+    {
+        $transfers = TransferRequest::find($id);
+        $transfers->delete();
 
-        $outlet->delete();
-        return redirect('/outlet')->with('success', 'Outlet Removed');
+        return redirect('/transfer_request')->with('success', 'Request Removed');
     }
 }

@@ -8,8 +8,9 @@ use App\Models\SalesRecordList;
 use App\Models\InventoryOutlet;
 use App\Models\Products;
 use Session;
+use App\User;
 
-class SalesRecordController extends Controller
+class SalesRecordsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +19,10 @@ class SalesRecordController extends Controller
      */
     public function index()
     {
-        //
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id);
+
+        return view('salesrecord.index')->with('users_id',$users_id);
     }
 
     /**
