@@ -26,7 +26,7 @@ Route::get('/salesrecord', 'PagesController@salesrecord');
 
 Route::resource('user', 'UsersController');
 Route::resource('outlet', 'OutletsController');
-Route::resource('transferrequest', 'TransferRequestsController');
+Route::resource('transferrequest', 'TransferRequestController');
 Route::resource('salesorder', 'SalesOrdersController');
 Route::resource('salesrecord', 'SalesRecordsController');
 
