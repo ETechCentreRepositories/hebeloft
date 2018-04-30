@@ -76,6 +76,8 @@ class UsersController extends Controller
             $userOutlet->outlets_id = $outlets[$i];
             $userOutlet->save();
         }
+
+        
         
         return redirect('/user')->with('success', 'User Created');
     }

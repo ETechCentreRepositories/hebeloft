@@ -11,6 +11,11 @@ class PagesController extends Controller
         return view('home')->with('title', $title);
     }
 
+    public function inventory(){
+        $title = 'Inventory';
+        return view('inventory.index')->with('title', $title);
+    }
+
     public function salesorder(){
         $title = 'Sales Order';
         return view('salesorder.index')->with('title', $title);
