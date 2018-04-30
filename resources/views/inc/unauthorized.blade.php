@@ -1,5 +1,5 @@
 <div id="unauthorizedModal" class="unauthorized modal">
     <div class="alert alert-danger" role="alert">
-        You are unauthorized to view this page.
+        You are not authorized to view this page.
     </div>
 </div>
