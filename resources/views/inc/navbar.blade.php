@@ -12,8 +12,8 @@
             <!-- Left Side Of Navbar -->
             <ul class="leftNavbar navbar-nav mr-auto">
                 <a href="/"><img src="http://localhost:8000/storage/logo/hebeloft_logo.png" class="logo"/></a>
-                <li class="navList"><a class="inventoryNav nav-link" style="color:#e3b417;" href="/inventory"><div class="navLabels">Inventory</div></a></li>
-                <li class="navList"><a class="salesOrderNav nav-link" style="color:#e3b417;" href="/salesorder"><div class="navLabels">Sales order</div></a></li>
+                {{-- <li class="navList"><a class="inventoryNav nav-link" style="color:#e3b417;" href="/inventory"><div class="navLabels">Inventory</div></a></li>
+                <li class="navList"><a class="salesOrderNav nav-link" style="color:#e3b417;" href="/salesorder"><div class="navLabels">Sales order</div></a></li> --}}
             </ul>
 
             <!-- Right Side Of Navbar -->
