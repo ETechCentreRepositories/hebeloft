@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\SalesRecord;
-use App\Models\SalesRecordList;
-use App\Models\InventoryOutlet;
+use App\User;
 
-class SalesRecordController extends Controller
+class TransferRequestsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +14,10 @@ class SalesRecordController extends Controller
      */
     public function index()
     {
-        //
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id);
+
+        return view('transferrequest.index')->with('users_id',$users_id);
     }
 
     /**
@@ -26,7 +27,7 @@ class SalesRecordController extends Controller
      */
     public function create()
     {
-        return view('salesRecord.create');
+        //
     }
 
     /**
@@ -83,24 +84,5 @@ class SalesRecordController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function addSalesRecordList($productName){
-        $addSalesRecordList = InventoryOutlet::leftJoin('products', 'inventory_has_outlets.products_id', '=', 'products.id')
-                    ->leftJoin('outlets', 'inventory_has_outlets.outlets_id', '=', 'outlets.id')
-                    ->select('inventory_has_outlets.id','inventory_has_outlets.outlets_id','inventory_has_outlets.products_id','products.Name', 'products.Category','products.Brand', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level', 'outlets.outlet_name', 'products.UnitPrice', 'products.image')
-                    ->where('products.Name','=', $productName)
-                    ->get()->toArray();
-
-        $salesRecord = new SalesRecord;
-        $salesRecord->save();
-        $salesRecordList = new SalesRecordList;
-        $salesRecordList->sales_record_id = $salesRecord->id;
-        $salesRecordList->products_id = $addSalesRecordList[0]['products_id'];
-        $salesRecordList->quantity = 1;
-        // $salesRecordList->discount ;
-        $salesRecordList->total = $addSalesRecordList[0]['UnitPrice'];
-        $salesRecordList->save();
-        return response($salesRecord->id);
     }
 }

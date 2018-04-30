@@ -7,6 +7,7 @@ use App\Models\Products;
 use App\Models\Inventory;
 use App\Models\InventoryOutlet;
 use App\Models\Outlet;
+use App\User;
 
 use DB;
 
@@ -19,9 +20,11 @@ class InventoryController extends Controller
      */
     public function index()
     {
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id);
         $inventoryOutlets = InventoryOutlet::orderBy('id','asc')->paginate(10);;
         // $products = Products::all();
-        return view('inventory.index')->with('inventoryOutlets',$inventoryOutlets);
+        return view('inventory.index')->with('inventoryOutlets',$inventoryOutlets)->with('users_id',$users_id);
     }
 
     /**

@@ -21,6 +21,8 @@ class UsersController extends Controller
      */
     public function index()
     {
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id);
         // $users = User::all();
         $users = User::orderBy('created_at','desc')->paginate(10);
         // $user = User::find($id);
@@ -33,7 +35,7 @@ class UsersController extends Controller
             $roleList[$role->id] = $role->roles_name;
         }
 
-        return view('user.index', compact('roleList'))->with('users', $users)->with('outlets',$outlets);
+        return view('user.index', compact('roleList'))->with('users', $users)->with('outlets',$outlets)->with('users_id',$users_id);
     }
 
     /**
@@ -97,6 +99,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id);
         $user = User::find($id);
         $outlets = Outlet::all();
         $roles = Role::all();
@@ -111,7 +115,7 @@ class UsersController extends Controller
         //     $roleList[$role->id] = $role->roles_name;
         // }
 
-        return view('user.edit')->with('user', $user)->with('outlets',$outlets)->with('roles', $roles);
+        return view('user.edit')->with('user', $user)->with('outlets',$outlets)->with('roles', $roles)->with('users_id',$users_id);
         
         // return view('user.edit', compact('roleList'))->with('user', $user)->with('outlets',$outlets)->with('roles', $user->roles)->with('userOutlets',$userOutlets);
     }

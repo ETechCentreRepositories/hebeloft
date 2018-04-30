@@ -34,13 +34,13 @@
   background-color: #46552C;
 }
 
-.navList {
-  transform: skew(26deg);
-}
+// .navList {
+//   transform: skew(26deg);
+// }
 
-.navLabels {
-  transform: skew(-26deg);
-}
+// .navLabels {
+//   transform: skew(-26deg);
+// }
 
 .leftNavbar {
   position: absolute;
@@ -66,8 +66,8 @@
   background-color: transparent !important;
 }
 
-.loginIcon {
-  width: 10%;
+.username {
+  color: rgb(227, 180, 23) !important;
 }
 
 select {
@@ -228,6 +228,11 @@ th:hover{
 
 .modal{
   background-color: rgba(0,0,0,0.7);
+}
+
+.unauthorized {
+  background: #f5f8fa;
+  margin: 1%;
 }
 
 .modalCard {
