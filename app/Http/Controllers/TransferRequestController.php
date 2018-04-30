@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\TransferRequest;
+use App\User;
 
 class TransferRequestController extends Controller
 {
@@ -14,8 +15,11 @@ class TransferRequestController extends Controller
      */
     public function index()
     {
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id);
         $transfers = TransferRequest::orderBy('id','asc')->paginate(10);
-        return view('transfer_request.index')->with('transfers', $transfers);
+
+        return view('transfer_request.index')->with('transfers', $transfers)->with('users_id',$users_id);
     }
 
     /**
