@@ -32,7 +32,10 @@ class SalesRecordsController extends Controller
      */
     public function create()
     {
-        return view('salesRecord.create');
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id);
+
+        return view('salesRecord.create')->with('users_id',$users_id);
     }
 
     /**
