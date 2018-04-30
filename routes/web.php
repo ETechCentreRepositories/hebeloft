@@ -24,6 +24,7 @@ Route::get('/staffsignup', 'UsersController@create');
 Route::get('/outlet', 'PagesController@outlet');
 Route::get('/salesrecord', 'PagesController@salesrecord');
 
+Route::resource('inventory', 'InventoryController');
 Route::resource('user', 'UsersController');
 Route::resource('outlet', 'OutletsController');
 Route::resource('transferrequest', 'TransferRequestController');
@@ -35,7 +36,6 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
 //Inventory
-Route::resource('inventory', 'InventoryController');
 Route::get('/ajax/inventory', 'InventoryController@getInventory');
 Route::get('/ajax/inventory/{id}', 'InventoryController@getInventoryById');
 Route::get('/autocomplete-search', 'InventoryController@search');
