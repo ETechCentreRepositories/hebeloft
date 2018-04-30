@@ -49,14 +49,14 @@
                     </tr>
                 </thead>
                 <tbody id="addSalesRecordContent">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                        <td id="productPicture"></td>
+                        <td id="productBrand"></td>
+                        <td id="productName"></td>
+                        <td id="productPrice"></td>
+                        <td id="productQuantity"><input name='quantity' id='quantity' type='text' style='width:60px;' value='1'/></td>
+                        <td id="productDiscount"><input name='discount' id='discount' type='text' style='width:60px;' value='1'/></td>
+                        <td id="productTotalPrice"></td>
+                        <td id="action"></td>
                 </tbody>
         </table>
     </form>
@@ -89,29 +89,82 @@
             var productName = $("#salesRecordSearchField").val();
             console.log(productName);
             $.ajax({
-                    type: "GET",
-                    url: "{{URL::TO('/salesrecord/addSalesRecordList')}}/" +productName,
-                    // data: "products.Name=" + productName,
-                    cache: false,
-                    dataType: "JSON",
-                    success: function (response) {
-                        console.log(response);
-                        console.log('sales record added successful');
+                     type: "GET",
+                     url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
+                     // data: "products.Name=" + productName,
+                     cache: false,
+                     dataType: "JSON",
+                     success: function (response) {
+                         for (i = 0; i < response.length; i++) {
+                             $("#addSalesRecordContent").append(
+                                 "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
+                                 + "<td>" + response[i].Brand + "</td>"
+                                 + "<td>" + response[i].Name + "</td>"
+                                 + "<td>" + response[i].UnitPrice + "</td>"
+                                 + "<td><input name='quantity' class='quantity"+i+"' onChange='getPrice()' id='itemquantity' type='text' style='width:60px;' value='1'/></td>"
+                                 + "<td><input name='discount' id='discount"+i+"' type='text' style='width:60px;' value=''/></td>" 
+                                  + "<td id='price'></td></tr>"
+                                 
+                             );
+                         }
+ 
+                     },
+                     error: function (obj, textStatus, errorThrown) {
+                 }
+                 
+            });
+            // $.ajax({
+            //         type: "GET",
+            //         url: "{{URL::TO('/salesrecord/addSalesRecordList')}}/" +productName,
+            //         // data: "products.Name=" + productName,
+            //         cache: false,
+            //         dataType: "JSON",
+            //         success: function (response) {
+            //             console.log(response);
+            //             console.log('sales record added successful');
 
-                    },
-                    error: function (obj, textStatus, errorThrown) {
-                        console.log("Error " + textStatus + ": " + errorThrown);
-                    }
-                });
+            //             //retrieve item by sales id 
+            //             $.ajax({
+            //                 type: "GET",
+            //                 url: "{{URL::TO('/salesrecord/retrieveItemBySalesId')}}/" +response,
+            //                 // data: "products.Name=" + productName,
+            //                 cache: false,
+            //                 dataType: "JSON",
+            //                 success: function (response) {
+            //                     console.log(response);
+            //                     console.log("Item retrieve successful");
+            //                     for (i = 0; i < response.length; i++) {
+            //                         $("#productPicture").append("<td>"+ response[i].Name +"</td>");
+            //                         // console.log($("#productPicture").append(response[0].productName));
+            //                         // $("#productPicture").append(response[0].productName);
+            //                     }
+
+            //                 },
+            //                 error: function (obj, textStatus, errorThrown) {
+            //                     console.log("Error " + textStatus + ": " + errorThrown);
+            //                 }
+            //             });
+
+            //         },
+            //         error: function (obj, textStatus, errorThrown) {
+            //             console.log("Error " + textStatus + ": " + errorThrown);
+            //         }
+            // });
+           
         });
-
-        $("#value").click(function(){
-            var quantity = $(this).val();
-            console.log("hellow world");
-        });
-
-    })
+        
+        
+    });
 </script>
+<script>
+    function getPrice(){
+        var value  = $(".quantity").val();
+        console.log(value);
+        $("#price").append(value);
+
+    }
+</script>
+
 
 
 
