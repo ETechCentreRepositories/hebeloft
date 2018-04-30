@@ -26,7 +26,7 @@ Route::get('/salesrecord', 'PagesController@salesrecord');
 Route::resource('inventory', 'InventoryController');
 Route::resource('user', 'UsersController');
 Route::resource('outlet', 'OutletsController');
-Route::resource('transferrequest', 'TransferRequestsController');
+Route::resource('transfer_request', 'TransferRequestController');
 Route::resource('salesorder', 'SalesOrdersController');
 Route::resource('salesrecord', 'SalesRecordsController');
 
@@ -52,4 +52,4 @@ Route::get('/ajax/outlet', 'InventoryController@getOutlet');
 //SalesRecord 
 Route::get('/salesrecord/create', 'SalesRecordController@create');
 Route::get('/salesrecord/addSalesRecordList/{productName}', 'SalesRecordController@addSalesRecordList');
-Route::get('/salesrecord/retrieveItemBySalesId/{salesRecordId}', 'SalesRecordController@retrieveItemBySalesId');
+Route::get('salesrecord/retrieveitemBySalesId/{salesRecordId}', 'SalesRecordController@retieveItemBySalesId');
