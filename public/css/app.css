@@ -10416,16 +10416,6 @@ a.text-dark:focus {
   background-color: #46552C;
 }
 
-.navList {
-  -webkit-transform: skew(26deg);
-          transform: skew(26deg);
-}
-
-.navLabels {
-  -webkit-transform: skew(-26deg);
-          transform: skew(-26deg);
-}
-
 .leftNavbar {
   position: absolute;
   left: 0;
