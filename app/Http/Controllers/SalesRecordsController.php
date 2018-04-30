@@ -8,7 +8,7 @@ use App\Models\SalesRecordList;
 use App\Models\InventoryOutlet;
 use App\User;
 
-class SalesRecordController extends Controller
+class SalesRecordsController extends Controller
 {
     /**
      * Display a listing of the resource.

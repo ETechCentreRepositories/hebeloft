@@ -22,13 +22,14 @@ Route::get('/transferrequest', 'PagesController@transferrequest');
 Route::get('/user', 'PagesController@user');
 Route::get('/staffsignup', 'UsersController@create');
 Route::get('/outlet', 'PagesController@outlet');
+Route::get('/salesrecord', 'PagesController@salesrecord');
 
 
 Route::resource('user', 'UsersController');
 Route::resource('outlet', 'OutletsController');
 Route::resource('transferrequest', 'TransferRequestsController');
 Route::resource('salesorder', 'SalesOrdersController');
-Route::resource('salesrecord', 'SalesRecordController');
+Route::resource('salesrecord', 'SalesRecordsController');
 
 Auth::routes();
 
@@ -51,7 +52,6 @@ Route::get('/ajax/outlet', 'InventoryController@getOutlet');
 // Route::get('import-export-view', 'ExcelController@importExportView')->name('import.export.view');
 
 //SalesRecord 
-Route::get('/salesrecord', 'PagesController@salesrecord');
 Route::get('/salesrecord/create', 'SalesRecordController@create');
 Route::get('/salesrecord/addSalesRecordList/{productName}', 'SalesRecordController@addSalesRecordList');
 Route::get('/salesrecord/retrieveItemBySalesId/{salesRecordId}', 'SalesRecordController@retrieveItemBySalesId');

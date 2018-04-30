@@ -2,11 +2,11 @@
 
 @section('content')
 
-{{-- @if ($users_id->roles_id == '1')
+@if ($users_id->roles_id == '1')
 @include('inc.navbar_superadmin')
 @elseif ($users_id->roles_id == '3')
-@include('inc.outletstaff')
-@endif --}}
+@include('inc.navbar_outletstaff')
+@endif
 
 <br>
 <div class="topMargin container">
