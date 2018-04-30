@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\SalesRecord;
 use App\Models\SalesRecordList;
 use App\Models\InventoryOutlet;
+use App\User;
 
 class SalesRecordController extends Controller
 {
@@ -16,7 +17,10 @@ class SalesRecordController extends Controller
      */
     public function index()
     {
-        //
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id);
+
+        return view('salesrecord.index')->with('users_id',$users_id);
     }
 
     /**

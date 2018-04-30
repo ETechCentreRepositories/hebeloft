@@ -18,17 +18,21 @@ Route::get('/', function () {
 // Route::get('/', 'PagesController@home');
 Route::get('/', 'PagesController@home');
 Route::get('/salesorder', 'PagesController@salesorder');
-Route::get('/transfer_request', 'PagesController@transfer_request');
+Route::get('/transferrequest', 'PagesController@transferrequest');
 Route::get('/user', 'PagesController@user');
 Route::get('/staffsignup', 'UsersController@create');
 Route::get('/outlet', 'PagesController@outlet');
 
+
 Route::resource('user', 'UsersController');
 Route::resource('outlet', 'OutletsController');
+Route::resource('transferrequest', 'TransferRequestsController');
+Route::resource('salesorder', 'SalesOrdersController');
+Route::resource('salesrecord', 'SalesRecordController');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 //Inventory
 Route::resource('inventory', 'InventoryController');
@@ -51,4 +55,3 @@ Route::get('/salesrecord', 'PagesController@salesrecord');
 Route::get('/salesrecord/create', 'SalesRecordController@create');
 Route::get('/salesrecord/addSalesRecordList/{productName}', 'SalesRecordController@addSalesRecordList');
 Route::get('/salesrecord/retrieveItemBySalesId/{salesRecordId}', 'SalesRecordController@retrieveItemBySalesId');
-

@@ -1,7 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+
+@if ($users_id->roles_id == '1')
 @include('inc.navbar_superadmin')
+@elseif ($users_id->roles_id == '2')
+@include('inc.navbar_admin')
+@elseif ($users_id->roles_id == '3')
+@include('inc.navbar_outletstaff')
+@endif
+
 <br>
 <div class="topMargin container">
     <div class="row">
@@ -20,21 +28,21 @@
                 <div class="col-md-4">
                     <input type="date" name="to" class="form-control">
             </div>
-            </div>
-    <br>
         </div>
-        <div class="col-md-3">
-                <div class="p-2 no-side-paddings outlet-buttons">
-                    <button type="button" class="btn btn-warning centered-buttons btn-create" >Create New Request</button>
+    <br>
+    </div>
+    <div class="col-md-3">
+            <div class="p-2 no-side-paddings outlet-buttons">
+                <button type="button" class="btn btn-warning centered-buttons btn-create" >Create New Request</button>
+            </div>
+            <div class="d-flex flex-row outlet-buttons">
+                <div class="p-2 fullWidth">
+                    <button type="button" class="btn btn-sucess btn-search">Search</button>
                 </div>
-                <div class="d-flex flex-row outlet-buttons">
-                    <div class="p-2 fullWidth">
-                        <button type="button" class="btn btn-sucess btn-search">Search</button>
-                    </div>
-                    <div class="p-2 fullWidth">
-                        <button type="button" class="btn btn-primary btn-refresh">Refresh</button>
-                    </div>
+                <div class="p-2 fullWidth">
+                    <button type="button" class="btn btn-primary btn-refresh">Refresh</button>
                 </div>
+            </div>
         </div>
     </div>
     <br>

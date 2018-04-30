@@ -1,7 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+
+@if ($users_id->roles_id == '1')
 @include('inc.navbar_superadmin')
+@elseif ($users_id->roles_id == '2')
+@include('inc.navbar_admin')
+@elseif ($users_id->roles_id == '4')
+@include('inc.navbar_wholesaler')
+@endif
+
 <br>
 <div class="topMargin container">
     <div class="drop-down_brand row">

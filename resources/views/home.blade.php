@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+
+@if ($users_id->roles_id == '1')
 @include('inc.navbar_superadmin')
+@elseif ($users_id->roles_id == '2')
+@include('inc.navbar_admin')
+@endif
 
 <div class="container-fluid">
     <div class="topMargin salesOrder">
