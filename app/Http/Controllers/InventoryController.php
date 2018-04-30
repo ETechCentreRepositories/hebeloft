@@ -187,7 +187,16 @@ class InventoryController extends Controller
         return response($inventoryById);
     }
 
-        public function getOutlet(){
+        public function getOutletByInventory(){
+            $inventoryByOutlet = InventoryOutlet::join('products', 'inventory_has_outlets.products_id', '=', 'products.id')
+                            ->join('outlets', 'inventory_has_outlets.outlets_id', '=', 'outlets.id')
+                            // ->where('outlet_name','LIKE','%'.$search.'%')
+                            ->get();
+            return response($inventoryByOutlet);
+
+    }
+
+    public function getOutlet(){
         $inventoryOutlets = Outlet::get()->toArray();
 
         return response($inventoryOutlets);

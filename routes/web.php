@@ -46,6 +46,7 @@ Route::get('export-inventory/{type}', 'InventoryController@exportFile')->name('e
 
 //Retrieve Outlets
 Route::get('/ajax/outlet', 'InventoryController@getOutlet');
+Route::get('/ajax/inventory-outlet', 'InventoryController@getOutletByInventory');
 
 //Import outlets
 // Route::get('import-export-view', 'ExcelController@importExportView')->name('import.export.view');
@@ -54,3 +55,10 @@ Route::get('/ajax/outlet', 'InventoryController@getOutlet');
 Route::get('/salesrecord/create', 'SalesRecordController@create');
 Route::get('/salesrecord/addSalesRecordList/{productName}', 'SalesRecordController@addSalesRecordList');
 Route::get('/salesrecord/retrieveItemBySalesId/{salesRecordId}', 'SalesRecordController@retrieveItemBySalesId');
+Route::get('/retrieve-add-inventory-by-product-name/{productName}', 'SalesRecordController@getInventoryByProductName');
+Route::get('/salesrecord/addtocart',[
+    'uses' => 'SalesRecordController@getSalesRecordAddToCart',
+    'as' => 'product.addToCart'
+]);
+
+Route::get('salesrecord/retrieveitemBySalesId/{salesRecordId}', 'SalesRecordController@retieveItemBySalesId');
