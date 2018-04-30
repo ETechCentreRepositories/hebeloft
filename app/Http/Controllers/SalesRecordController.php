@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\SalesRecord;
 use App\Models\SalesRecordList;
 use App\Models\InventoryOutlet;
+use App\Models\Products;
+use Session;
 
 class SalesRecordController extends Controller
 {
@@ -92,24 +94,52 @@ class SalesRecordController extends Controller
                     ->where('products.Name','=', $productName)
                     ->get()->toArray();
 
-        $salesRecord = new SalesRecord;
-        $salesRecord->save();
         $salesRecordList = new SalesRecordList;
-        $salesRecordList->sales_record_id = $salesRecord->id;
         $salesRecordList->products_id = $addSalesRecordList[0]['products_id'];
         $salesRecordList->quantity = 1;
-        // $salesRecordList->discount ;
         $salesRecordList->total = $addSalesRecordList[0]['UnitPrice'];
         $salesRecordList->save();
-        return response($salesRecord->id);
+        return view('salesrecord.create')->with('salesRecordList',$salesRecordList);
     }
 
-    public function retrieveItemBySalesId($salesRecordId){
-        $retrieveItemBySalesId = SalesRecordList::leftJoin('sales_record', 'sales_record_list.sales_record_id', '=', 'sales_record.id')
-                    ->leftJoin('products', 'sales_record_list.products_id', '=', 'products.id')
-                    ->where('sales_record_list.sales_record_id','=', $salesRecordId)
+    public function getInventoryByProductName($productName){
+        $inventoryByProductName = InventoryOutlet::leftJoin('products', 'inventory_has_outlets.products_id', '=', 'products.id')
+                    ->leftJoin('outlets', 'inventory_has_outlets.outlets_id', '=', 'outlets.id')
+                    ->select('inventory_has_outlets.id','inventory_has_outlets.outlets_id','inventory_has_outlets.products_id','products.Name', 'products.Category','products.Brand', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level', 'outlets.outlet_name', 'products.UnitPrice', 'products.image')
+                    ->where('products.Name','=', $productName)
                     ->get()->toArray();
-        return response($retrieveItemBySalesId);
-        return view('salesrecord.create')->with('items',$retrieveItemBySalesId);
+
+        $addSalesRecordList = InventoryOutlet::leftJoin('products', 'inventory_has_outlets.products_id', '=', 'products.id')
+        ->leftJoin('outlets', 'inventory_has_outlets.outlets_id', '=', 'outlets.id')
+        ->select('inventory_has_outlets.id','inventory_has_outlets.outlets_id','inventory_has_outlets.products_id','products.Name', 'products.Category','products.Brand', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level', 'outlets.outlet_name', 'products.UnitPrice', 'products.image')
+        ->where('products.Name','=', $productName)
+        ->get()->toArray();
+
+        $salesRecordList = new SalesRecordList;
+        $salesRecordList->products_id = $addSalesRecordList[0]['products_id'];
+        $salesRecordList->quantity = 1;
+        $salesRecordList->total = $addSalesRecordList[0]['UnitPrice'];
+        $salesRecordList->save();
+
+        return response($inventoryByProductName);
+        // return view('salesrecord.create')->with('salesRecordList',$salesRecordList);
     }
+
+    public function getSalesRecordAddToCart(Request $request, $id){
+        $product = Products::find($id);
+        $oldSalesRecordCart = Session::has('salesRecordCart') ? Session::get('cart') : null;
+        $salesRecordCart = new SalesRecord($oldSalesRecordCart);
+        $salesRecordCart->add($product,$product->id);
+        dd( $request->session()->put('cart',$cart));
+        $request->session()->put('cart',$cart);
+    }
+
+    // public function retrieveItemBySalesId($salesRecordId){
+    //     $retrieveItemBySalesId = SalesRecordList::leftJoin('sales_record', 'sales_record_list.sales_record_id', '=', 'sales_record.id')
+    //                 ->leftJoin('products', 'sales_record_list.products_id', '=', 'products.id')
+    //                 ->where('sales_record_list.sales_record_id','=', $salesRecordId)
+    //                 ->get()->toArray();
+    //     return response($retrieveItemBySalesId);
+    //     return view('salesrecord.create')->with('items',$retrieveItemBySalesId);
+    // }
 }

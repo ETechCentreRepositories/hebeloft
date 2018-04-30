@@ -31,11 +31,11 @@
                     <input type="text" id="salesRecordSearchField" class="form-control" style="background:transparent">
                 </div>
                 <div class="col-md-2">
-                    <button type="button" class="btn btn-default btn-search" id="addSalesRecord">Add</button>
+                <button type="button" class="btn btn-default btn-search" id="addSalesRecord">Add</button>
                 </div>
             </div>
         <br>
-        <table class="table table-striped" id="createSalesRecordTable" >
+        <table class="table table-striped" id="createSalesRecordTable">
                 <thead>
                     <tr>
                         <th>Picture</th>
@@ -90,23 +90,25 @@
             console.log(productName);
             $.ajax({
                      type: "GET",
-                     url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
+                     url: "{{URL::TO('/retrieve-add-inventory-by-product-name')}}/" + productName,
                      // data: "products.Name=" + productName,
                      cache: false,
                      dataType: "JSON",
                      success: function (response) {
-                         for (i = 0; i < response.length; i++) {
-                             $("#addSalesRecordContent").append(
-                                 "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
-                                 + "<td>" + response[i].Brand + "</td>"
-                                 + "<td>" + response[i].Name + "</td>"
-                                 + "<td>" + response[i].UnitPrice + "</td>"
-                                 + "<td><input name='quantity' class='quantity"+i+"' onChange='getPrice()' id='itemquantity' type='text' style='width:60px;' value='1'/></td>"
-                                 + "<td><input name='discount' id='discount"+i+"' type='text' style='width:60px;' value=''/></td>" 
-                                  + "<td id='price'></td></tr>"
-                                 
-                             );
-                         }
+                        //  {{ route('product.addToCart', ['id' => 1 ])}}
+                        //  for (i = 0; i < response.length; i++) {
+                        //      $("#addSalesRecordContent").append(
+                        //          "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
+                        //          + "<td>" + response[i].Brand + "</td>"
+                        //          + "<td>" + response[i].Name + "</td>"
+                        //          + "<td>" + response[i].UnitPrice + "</td>"
+                        //          + "<td><input name='quantity' type='number' id='quantity' onChange='getPrice()' type='text' style='width:60px;' value='1'/></td>"
+                        //          + "<td><input name='discount' id='discount' type='text' style='width:60px;' value=''/></td>" 
+                        //          + "<td id='price'></td>"
+                        //          + "<td></td></tr>"
+                        //      );
+                        //  }
+                        
  
                      },
                      error: function (obj, textStatus, errorThrown) {
@@ -158,9 +160,9 @@
 </script>
 <script>
     function getPrice(){
-        var value  = $(".quantity").val();
+        var value  = $("#quantity").val();
         console.log(value);
-        $("#price").append(value);
+        $("#price").html(value);
 
     }
 </script>

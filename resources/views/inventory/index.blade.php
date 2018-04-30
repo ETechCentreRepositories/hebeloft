@@ -88,12 +88,12 @@
                 // value.id + "'>" +outlet + "</option>");
             });
         });
-        $.get("{{ URL::to('ajax/outlet')}}",function(data){
+        $.get("{{ URL::to('ajax/inventory-outlet')}}",function(data){
             $("#outlet_location").empty();
             $.each(data,function(i,value){
                 var id = value.id;
                 var outlet = value.outlet_name;
-                var outlet_id = value.id;
+                var outlet_id = value.outlets_id;
                 $("#outlet_location").append("<option value='" +
                 outlet_id + "'>" +outlet + "</option>");
             });
