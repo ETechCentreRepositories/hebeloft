@@ -10604,6 +10604,11 @@ th:hover {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
+.unauthorized {
+  background: #fff;
+  margin: 1%;
+}
+
 .modalCard {
   width: 60%;
   position: absolute;

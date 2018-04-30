@@ -8,6 +8,11 @@
 @include('inc.navbar_admin')
 @elseif ($users_id->roles_id == '4')
 @include('inc.navbar_wholesaler')
+@else
+@include('inc.unauthorized')
+<script>
+    document.getElementById('unauthorizedModal').style.display = "block";
+</script>
 @endif
 
 <br>

@@ -6,6 +6,11 @@
 @include('inc.navbar_superadmin')
 @elseif ($users_id->roles_id == '3')
 @include('inc.navbar_outletstaff')
+@else
+@include('inc.unauthorized')
+<script>
+    document.getElementById('unauthorizedModal').style.display = "block";
+</script>
 @endif
 
 <br>
