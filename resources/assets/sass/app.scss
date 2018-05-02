@@ -218,16 +218,16 @@ th:hover{
   vertical-align: middle;
 }
 
-.action-buttons {
-  width: 70px;
-}
-
-.threshold-button {
-  width:156px;
+.transferRequestsButtons {
+  width:100%;
 }
 
 .no-side-paddings {
   padding: 0.5rem !important;
+}
+
+.fullWidthButtons {
+  padding: 0;
 }
 
 .modal{

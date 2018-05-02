@@ -16,34 +16,40 @@
 <br>
 <div class="topMargin container">
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-5">
             <br>
             <br>
             <div class="drop-down_brand row">
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <p>From Date:</p>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-8">
                     <input type="date" name="from" class="form-control">
                 </div>
-                <div class="col-md-2">
+            </div>
+        </div>
+        <div class="col-md-5">
+            <br>
+            <br>
+            <div class="drop-down_brand row">
+                <div class="col-md-4">
                     <p>To Date:</p>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-8">
                     <input type="date" name="to" class="form-control">
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 fullWidthButtons">
             <div class="p-2 no-side-paddings transfer-buttons">
-                <button type="button" class="btn btn-warning centered-buttons threshold-button">Create New Request</button>
+                <button type="button" class="btn btn-warning centered-buttons transferRequestButtons">Create New Request</button>
             </div>
             <div class="d-flex flex-row transfer-buttons">
                 <div class="p-2">
-                    <button type="button" class="btn btn-sucess action-buttons">Search</button>
+                    <button type="button" class="btn btn-sucess transferRequestButtons">Search</button>
                 </div>
                 <div class="p-2">
-                    <button type="button" class="btn btn-primary action-buttons">Refresh</button>
+                    <button type="button" class="btn btn-primary transferRequestButtons">Refresh</button>
                 </div>
             </div>
         </div>
