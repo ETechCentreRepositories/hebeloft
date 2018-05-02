@@ -6,11 +6,12 @@
 @include('inc.navbar_superadmin')
 @elseif ($users_id->roles_id == '2')
 @include('inc.navbar_admin')
-@else
+@elseif ($users_id->roles_id == '3')
+@include('inc.navbar_outletstaff')
 @include('inc.unauthorized')
-<script>
-    document.getElementById('unauthorizedModal').style.display = "block";
-</script>
+@elseif ($users_id->roles_id == '4')
+@include('inc.navbar_wholesaler')
+@include('inc.unauthorized')
 @endif
 
 <div class="topMargin container" onload="checkbox">

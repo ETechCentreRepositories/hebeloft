@@ -8,11 +8,9 @@
 @include('inc.navbar_admin')
 @elseif ($users_id->roles_id == '3')
 @include('inc.navbar_outletstaff')
-@else
+@elseif ($users_id->roles_id == '4')
+@include('inc.navbar_wholesaler')
 @include('inc.unauthorized')
-<script>
-    document.getElementById('unauthorizedModal').style.display = "block";
-</script>
 @endif
 
 <br>

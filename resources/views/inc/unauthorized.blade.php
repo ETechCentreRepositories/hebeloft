@@ -3,3 +3,7 @@
         You are not authorized to view this page.
     </div>
 </div>
+
+<script>
+    document.getElementById('unauthorizedModal').style.display = "block";
+</script>
