@@ -8,6 +8,7 @@ use App\Models\Inventory;
 use App\Models\InventoryOutlet;
 use App\Models\Outlet;
 use App\User;
+use Auth;
 
 use DB;
 

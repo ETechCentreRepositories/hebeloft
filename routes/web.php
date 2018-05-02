@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 // Route::get('/', 'PagesController@home');
 Route::get('/home', 'PagesController@home');
-Route::get('/inventory', 'PagesController@inventory');
+Route::get('/', 'PagesController@inventory');
 Route::get('/salesorder', 'PagesController@salesorder');
 Route::get('/transferrequest', 'PagesController@transferrequest');
 Route::get('/user', 'PagesController@user');
@@ -26,7 +26,7 @@ Route::get('/outlet', 'PagesController@outlet');
 Route::get('/salesrecord', 'PagesController@salesrecord');
 
 Route::resource('home', 'HomeController');
-Route::resource('inventory', 'InventoryController');
+// Route::resource('inventory', 'InventoryController');
 Route::resource('user', 'UsersController');
 Route::resource('outlet', 'OutletsController');
 Route::resource('transferrequest', 'TransferRequestController');
@@ -35,7 +35,7 @@ Route::resource('salesrecord', 'SalesRecordsController');
 
 Auth::routes();
 
-// Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'InventoryController@index')->name('inventory');
 
 //Inventory
 Route::get('/ajax/inventory', 'InventoryController@getInventory');

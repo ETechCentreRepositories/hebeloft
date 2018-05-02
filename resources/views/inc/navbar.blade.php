@@ -18,7 +18,7 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="rightNavbar navbar-nav ml-auto">
-                                                              <!-- Authentication Links -->
+                <!-- Authentication Links -->
                 @guest
                 <li><a class="termsAndConditionsNav Nav nav-link" style="color:#e3b417;" onclick="openTermsAndConditions()">Terms and Conditions</a></li>
                 <li class="navList"><a class="loginNav nav-link" style="color:#e3b417;" href="{{ route('login') }}"><div class="navLabels">{{ __('Login') }}</div></a></li>
