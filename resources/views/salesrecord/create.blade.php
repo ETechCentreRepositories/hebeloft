@@ -179,9 +179,4 @@
     }
 </script>
 
-
-
-
-
-
 @endsection

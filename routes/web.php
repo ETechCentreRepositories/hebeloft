@@ -64,3 +64,10 @@ Route::get('/salesrecord/addtocart',[
 ]);
 
 Route::get('salesrecord/retrieveitemBySalesId/{salesRecordId}', 'SalesRecordController@retieveItemBySalesId');
+
+// Route::post('create', array(
+//     'as' => 'create',
+//     function(){
+//         return View::make('create');
+//     }
+// ));

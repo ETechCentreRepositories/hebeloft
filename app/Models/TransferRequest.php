@@ -15,5 +15,9 @@ class TransferRequest extends Model
     // public function user(){
     //     return $this->hasMany('App\User');
     // }
+
+    public function products() {
+        return $this->hasMany('App\Products');
+    }
     
 }   

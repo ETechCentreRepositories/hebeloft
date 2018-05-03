@@ -16,6 +16,7 @@
   height: 50px;
   z-index: 2;
   padding: 0.5rem 0;
+  box-shadow: none;
 }
 
 .navbar {
@@ -23,9 +24,6 @@
 }
 
 .nav-link {
-  border-width: 1px 1px 0 1px;
-  border-color: rgb(227, 180, 23);
-  border-style: solid;
   border-radius: 5px 5px 0 0;
   margin: 0 5px;
 }
@@ -72,6 +70,12 @@
 
 .username {
   color: rgb(227, 180, 23) !important;
+  background-color: #566B30;
+  padding: 13.5 0;
+}
+
+.username:hover {
+  background-color: #566B30;
 }
 
 select {
@@ -94,7 +98,7 @@ select {
 }
 
 .salesOrder {
-  background-color: #FBFAFA;
+  background-color: #f5f8fa;
   padding: 20px 0;
 }
 
@@ -104,7 +108,7 @@ select {
 }
 
 .gray {
-  background-color: #FBFAFA;
+  background-color: #f5f8fa;
 }
 
 .dashboardTables {
@@ -301,4 +305,16 @@ th:hover{
 
 .btn-view-more {
   width: 100%;
+}
+
+.btn-add-item {
+  float: right;
+}
+
+.hiddenField {
+  margin-bottom: 0;
+}
+
+.passwordField {
+  margin-bottom: 1rem;
 }

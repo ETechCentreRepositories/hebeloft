@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="leftNavbar navbar-nav mr-auto">
-                <a href="/"><img src="http://localhost:8000/storage/logo/hebeloft_logo.png" class="logo"/></a>
+                <a href="/"><img src="http://localhost:8000/storage/logo/hebeloft_logo.png" class="logo" style="padding: 7px 0;"/></a>
                 {{-- <li class="navList"><a class="inventoryNav nav-link" style="color:#e3b417;" href="/inventory"><div class="navLabels">Inventory</div></a></li>
                 <li class="navList"><a class="salesOrderNav nav-link" style="color:#e3b417;" href="/salesorder"><div class="navLabels">Sales order</div></a></li> --}}
             </ul>
@@ -21,8 +21,8 @@
                 <!-- Authentication Links -->
                 @guest
                 <li><a class="termsAndConditionsNav Nav nav-link" style="color:#e3b417;" onclick="openTermsAndConditions()">Terms and Conditions</a></li>
-                <li class="navList"><a class="loginNav nav-link" style="color:#e3b417;" href="{{ route('login') }}"><div class="navLabels">{{ __('Login') }}</div></a></li>
-                <li class="navList"><a class="registerNav nav-link" style="color:#e3b417;" href="{{ route('register') }}"><div class="navLabels">{{ __('Register') }}</div></a></li>
+                <li class="navList"><a class="nav-link" style="color:#e3b417;" href="{{ route('login') }}"><div class="navLabels">{{ __('Login') }}</div></a></li>
+                <li class="navList"><a class="nav-link" style="color:#e3b417;" href="{{ route('register') }}"><div class="navLabels">{{ __('Register') }}</div></a></li>
                 @else
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle username" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

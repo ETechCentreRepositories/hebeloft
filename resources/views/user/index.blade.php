@@ -74,7 +74,7 @@
                 {{-- <form class="form-horizontal" role="form" method="POST" action="UsersController@create"> --}}
                 {{ csrf_field() }}
 
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <div class="row">
                         <div class="col-md-6">
                             <input id="role" type="radio" name="role" value="5"> Warehouse staff<br>
@@ -83,7 +83,7 @@
                             <input id="role" type="radio" name="role" value="3"> Outlet staff<br>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 
                 {{-- <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}"> --}}
                 <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
@@ -100,10 +100,10 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group hiddenField">
                     <div class="row">
                         <div class="col-md-12">
-                            <input id="email" type="text" class="form-control" name="email" value="enquiry@hebeloft.com" value="{{ old('email') }}" required>
+                            <input id="email" type="hidden" class="form-control" name="email" value="enquiry@hebeloft.com" value="{{ old('email') }}" required>
 
                             @if ($errors->has('email'))
                                 <span class="help-block">
@@ -129,20 +129,13 @@
                 </div>
 
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
-
-                            @if ($errors->has('password'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('password') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                        <div class="col-md-6">
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm password" required>
-                        </div>
-                    </div>
+                    <input id="password" type="password" class="form-control passwordField" name="password" placeholder="Password" required>
+                    @if ($errors->has('password'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
+                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm password" required>
                 </div>
 
                 <br><hr><br>
@@ -185,7 +178,9 @@
 
 <style>
     .userNav {
-        background-color: #e3b417 !important;
+        background-color: #f5f8fa !important;
         color: #566B30 !important;
+        pointer-events: none;
+        cursor: default;
     }
 </style>

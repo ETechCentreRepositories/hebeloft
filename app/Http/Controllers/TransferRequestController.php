@@ -68,7 +68,7 @@ class TransferRequestController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**

@@ -42,7 +42,7 @@
         </div>
         <div class="col-md-2 fullWidthButtons">
             <div class="p-2 no-side-paddings transfer-buttons">
-                <button type="button" class="btn btn-warning centered-buttons transferRequestButtons">Create New Request</button>
+                <button type="button" class="btn btn-warning centered-buttons transferRequestButtons" onclick="openCreateTransferRequestModal()">Create New Request</button>
             </div>
             <div class="d-flex flex-row transfer-buttons">
                 <div class="p-2">
@@ -79,7 +79,7 @@
                     <td>
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row transfer-buttons">
-                                <button type="button" class="btn btn-primary action-buttons btn-view-more" onclick="openUpdateTransferModal()">View Order</button>
+                                <button type="button" class="btn btn-primary action-buttons btn-view-more"><a href="/show"View Order</button>
                             </div>
                         </div>
                     </td>
@@ -91,28 +91,21 @@
 </div>
 
 <script>
-    function openCreateTransferModal() {
-        document.getElementById('createTransferModal').style.display = "block";
+    function openViewTransferModal() {
+        document.getElementById('viewTransferModal').style.display = "block";
     }
     
-    function closeCreateTransferModal() {
-        document.getElementById('createTransferModal').style.display = "none";
-    }
-
-    function openUpdateTransferModal() {
-        document.getElementById('updateTransferModal').style.display = "block";
-    }
-    
-    function closeUpdateTransferModal() {
-        document.getElementById('updateTransferModal').style.display = "none";
+    function closeViewTransferModal() {
+        document.getElementById('viewTransferModal').style.display = "none";
     }
 </script>
 @endsection
 
 <style>
     .transferRequestNav {
-        
-        background-color: #e3b417 !important;
+        background-color: #f5f8fa !important;
         color: #566B30 !important;
+        pointer-events: none;
+        cursor: default;
     }
 </style>

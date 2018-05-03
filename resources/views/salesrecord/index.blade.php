@@ -17,7 +17,7 @@
 <br>
 <div class="topMargin container">
     <div class="row justify-content-end">
-            <button type="button" class="btn btn-warning" onclick="openCreateSalesRecordModal()">Add Sales Record</button>
+        <a href="/salesrecord/create"><button type="button" class="btn btn-warning">Add Sales Record</button></a>
     </div>
     <br>
     <div class="drop-down_brand row">
@@ -65,14 +65,14 @@
 </div>
 
 <div id="createSalesRecordModal" class="modal">
-        <span class="close cursor" onclick="closeCreateSalesRecordModal()">&times;</span>
-        <div class="card modalCard">
-            <div class="card-body">
-                    <br>
-                    <h3 class="card-title">Create Sales Record</h3>
-                    <br>
-            </div>
+    <span class="close cursor" onclick="closeCreateSalesRecordModal()">&times;</span>
+    <div class="card modalCard">
+        <div class="card-body">
+            <br>
+            <h3 class="card-title">Create Sales Record</h3>
+            <br>
         </div>
+    </div>
 </div>
 
 <script>
@@ -88,7 +88,9 @@
 
 <style>
     .salesRecordNav {
-        background-color: #e3b417 !important;
+        background-color: #f5f8fa !important;
         color: #566B30 !important;
+        pointer-events: none;
+        cursor: default;
     }
 </style>

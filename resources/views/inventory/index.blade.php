@@ -19,8 +19,7 @@
         <p>Search Item name/brand</p>
         </div>
         <div class="col-md-9">
-            <select id="product_brand" class="form-control">
-            </select>
+            <select id="product_brand" class="form-control"></select>
         </div>
     </div>
     <br>
@@ -29,14 +28,13 @@
             <p>Show Location</p>
         </div>
         <div class="col-md-9">
-            <select id="outlet_location" class="form-control" >
-            </select>
+            <select id="outlet_location" class="form-control" ></select>
         </div>
     </div>
     <br>
     <div class="row">
         <div class="col-md-2">
-                <a href="{{ route('export.file',['type'=>'csv']) }}"><button type="button" class="btn btn-inflow">Download CSV</button></a>
+            <a href="{{ route('export.file',['type'=>'csv']) }}"><button type="button" class="btn btn-inflow">Download CSV</button></a>
         </div>
         <div class="col-md-8">
             <input type="text" id="searchField" class="form-control" style="background:transparent">
@@ -74,17 +72,17 @@
                 <td></td>
                 <td></td> --}}
                 <td></td>
-            <td>{{$inventoryOutlet->stock_level}}/{{$inventoryOutlet->threshold_level}}</td>
+                <td>{{$inventoryOutlet->stock_level}}/{{$inventoryOutlet->threshold_level}}</td>
             </tr>
             @endforeach
             {{-- {{dd($inventoryOutlet->products['Brand'])}}  --}}
             @else
                 <p>No Inventory found</p>
             @endif
-            </tbody>
-        </table>
-    </div>
+        </tbody>
+    </table>
 </div>
+
 <script>
     $(document).ready(function(){
         $.get("{{ URL::to('ajax/inventory')}}",function(data){
@@ -177,6 +175,7 @@
         });
     });
 </script>
+
 <div class="pagination">
     {{$inventoryOutlets->links()}}
 </div>
@@ -184,7 +183,9 @@
 
 <style>
     .inventoryNav {
-        background-color: #e3b417 !important;
+        background-color: #f5f8fa !important;
         color: #566B30 !important;
+        pointer-events: none;
+        cursor: default;
     }
 </style>

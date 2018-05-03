@@ -10398,6 +10398,8 @@ a.text-dark:focus {
   height: 50px;
   z-index: 2;
   padding: 0.5rem 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 .navbar {
@@ -10405,9 +10407,6 @@ a.text-dark:focus {
 }
 
 .nav-link {
-  border-width: 1px 1px 0 1px;
-  border-color: #e3b417;
-  border-style: solid;
   border-radius: 5px 5px 0 0;
   margin: 0 5px;
 }
@@ -10446,6 +10445,12 @@ a.text-dark:focus {
 
 .username {
   color: #e3b417 !important;
+  background-color: #566B30;
+  padding: 13.5 0;
+}
+
+.username:hover {
+  background-color: #566B30;
 }
 
 select {
@@ -10468,7 +10473,7 @@ select {
 }
 
 .salesOrder {
-  background-color: #FBFAFA;
+  background-color: #f5f8fa;
   padding: 20px 0;
 }
 
@@ -10478,7 +10483,7 @@ select {
 }
 
 .gray {
-  background-color: #FBFAFA;
+  background-color: #f5f8fa;
 }
 
 .dashboardTables {
@@ -10676,5 +10681,17 @@ th:hover {
 
 .btn-view-more {
   width: 100%;
+}
+
+.btn-add-item {
+  float: right;
+}
+
+.hiddenField {
+  margin-bottom: 0;
+}
+
+.passwordField {
+  margin-bottom: 1rem;
 }
 
