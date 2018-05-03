@@ -17,7 +17,7 @@
 <div class="topMargin container">
     <div class="drop-down_brand row">
         <div class="col-md-3">
-        <p>From Date:</p>
+            <p>From Date:</p>
         </div>
         <div class="col-md-9">
             <input type="date" name="from" class="form-control">

@@ -39,37 +39,37 @@
         </div>
         <br>
         <div class="row">
-                <div class="col-md-10">
-                    <input type="text" id="salesRecordSearchField" class="form-control" style="background:transparent">
-                </div>
-                <div class="col-md-2">
-                <button type="button" class="btn btn-default btn-search" id="addSalesRecord">Add</button>
-                </div>
+            <div class="col-md-10">
+                <input type="text" id="salesRecordSearchField" class="form-control" style="background:transparent">
             </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-default btn-search" id="addSalesRecord">Add</button>
+            </div>
+        </div>
         <br>
         <table class="table table-striped" id="createSalesRecordTable">
-                <thead>
-                    <tr>
-                        <th>Picture</th>
-                        <th>Brand</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Discount</th>
-                        <th>Total Price</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="addSalesRecordContent">
-                        <td id="productPicture"></td>
-                        <td id="productBrand"></td>
-                        <td id="productName"></td>
-                        <td id="productPrice"></td>
-                        <td id="productQuantity"><input name='quantity' id='quantity' type='text' style='width:60px;' value='1'/></td>
-                        <td id="productDiscount"><input name='discount' id='discount' type='text' style='width:60px;' value='1'/></td>
-                        <td id="productTotalPrice"></td>
-                        <td id="action"></td>
-                </tbody>
+            <thead>
+                <tr>
+                    <th>Picture</th>
+                    <th>Brand</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Discount</th>
+                    <th>Total Price</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="addSalesRecordContent">
+                <td id="productPicture"></td>
+                <td id="productBrand"></td>
+                <td id="productName"></td>
+                <td id="productPrice"></td>
+                <td id="productQuantity"><input name='quantity' id='quantity' type='text' style='width:60px;' value='1'/></td>
+                <td id="productDiscount"><input name='discount' id='discount' type='text' style='width:60px;' value='1'/></td>
+                <td id="productTotalPrice"></td>
+                <td id="action"></td>
+            </tbody>
         </table>
     </form>
 </div>
@@ -85,7 +85,6 @@
                 $("#outlet").append("<option value='" +
                 outlet_id + "'>" +outlet + "</option>");
             });
-            
         });
 
         $("#salesRecordSearchField").autocomplete({
@@ -122,9 +121,9 @@
                         //  }
                         
  
-                     },
-                     error: function (obj, textStatus, errorThrown) {
-                 }
+                    },
+                    error: function (obj, textStatus, errorThrown) {
+                }
                  
             });
             // $.ajax({
@@ -166,16 +165,15 @@
             // });
            
         });
-        
-        
+
     });
+    
 </script>
 <script>
     function getPrice(){
         var value  = $("#quantity").val();
         console.log(value);
         $("#price").html(value);
-
     }
 </script>
 
