@@ -33,14 +33,14 @@
     </div>
     <br>
     <div class="row">
-        <div class="col-md-2">
-            <a href="{{ route('export.file',['type'=>'csv']) }}"><button type="button" class="btn btn-inflow">Download CSV</button></a>
-        </div>
         <div class="col-md-8">
             <input type="text" id="searchField" class="form-control" style="background:transparent">
         </div>
         <div class="col-md-2">
             <button type="button" class="btn btn-default btn-search" id="searchInventory">Search</button>
+        </div>
+        <div class="col-md-2">
+            <a href="{{ route('export.file',['type'=>'csv']) }}"><button type="button" class="btn btn-inflow">Export</button></a>
         </div>
     </div>
     <br>
@@ -184,7 +184,7 @@
 <style>
     .inventoryNav {
         background-color: #f5f8fa !important;
-        color: #566B30 !important;
+        color: #000000 !important;
         pointer-events: none;
         cursor: default;
     }

@@ -79,7 +79,9 @@
                     <td>
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row transfer-buttons">
-                                <button type="button" class="btn btn-primary action-buttons btn-view-more"><a href="/show"View Order</button>
+                                <a class="btn" href="/show">
+                                <button type="button" class="btn btn-primary action-buttons btn-view-more">View Order</button>
+                                </a>
                             </div>
                         </div>
                     </td>
@@ -104,7 +106,7 @@
 <style>
     .transferRequestNav {
         background-color: #f5f8fa !important;
-        color: #566B30 !important;
+        color: #000000 !important;
         pointer-events: none;
         cursor: default;
     }
