@@ -25,7 +25,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $fillable = [
-        'name', 'email','phone_number','roles_id','billing_address','shipping_address', 'password',
+        'name', 'email','phone_number','roles_id','billing_address','shipping_address', 'password','audit_trails_id'
     ];
 
     /**
@@ -47,5 +47,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function roles(){
         return $this->belongsToMany('App\Models\Role');
+    }
+
+    public function salesRecordLists(){
+        return hasMany('\App\Models\AuditTrail');
     }
 }

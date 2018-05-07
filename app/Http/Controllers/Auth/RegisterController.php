@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Input;
+use App\Models\AuditTrail;
 
 class RegisterController extends Controller
 {
@@ -69,12 +70,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        $auditTrail = AuditTrail::create([
+            'action' => 'Created Wholesaler',
+            'action_by' => $data['name']
+        ]);
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'phone_number'=>$data['phone_number'],
             'roles_id'=> (int) $data['roles_id'],
             'password' => Hash::make($data['password']),
+            'audit_trails_id' => $auditTrail->id,
         ]);       
         $wholesaler =  Wholesaler::create([
             'users_id'=> $user->id,
