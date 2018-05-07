@@ -26,6 +26,7 @@
                 <tr>
                     <th>Username</th>
                     <th>Email</th>
+                    <th>Role</th>
                     <th class="emptyHeader"></th>
                 </tr>
             </thead>
@@ -35,6 +36,7 @@
                 <tr>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
+                    <td>{{$user->roles_name}}</td>
                     <td>
                         <div class="d-flex flex-row user-buttons">
                             <div class="p-2">
@@ -74,7 +76,7 @@
                 {{-- <form class="form-horizontal" role="form" method="POST" action="UsersController@create"> --}}
                 {{ csrf_field() }}
 
-                {{-- <div class="form-group">
+                <div class="form-group">
                     <div class="row">
                         <div class="col-md-6">
                             <input id="role" type="radio" name="role" value="5"> Warehouse staff<br>
@@ -83,7 +85,7 @@
                             <input id="role" type="radio" name="role" value="3"> Outlet staff<br>
                         </div>
                     </div>
-                </div> --}}
+                </div>
                 
                 {{-- <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}"> --}}
                 <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">

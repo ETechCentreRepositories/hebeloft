@@ -7,10 +7,11 @@ use App\User;
 use App\Models\UserOutlet;
 use App\Models\Outlet;
 use App\Models\Role;
+use App\Models\AuditTrail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
-
 use DB;
+
 
 class UsersController extends Controller
 {
@@ -23,8 +24,8 @@ class UsersController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-        // $users = User::all();
-        $users = User::orderBy('created_at','desc')->paginate(10);
+        $users =User::leftJoin('roles','users.roles_id', '=', 'roles.id')
+                ->orderBy('created_at','desc')->paginate(10);
         // $user = User::find($id);
         // $user_id = $users->id;
         $outlets = Outlet::all();
@@ -57,6 +58,15 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {   
+        //Get the login user
+        $login_user_id = auth()->user()->id;
+        $login_user = User::find($login_user_id);
+
+        $auditTrail = AuditTrail::create([
+            'action' => 'Created Outlet Staff',
+            'action_by' => $login_user->name,
+        ]);
+
         // Create Internal User
         $role = (int)$request->input('role');
         $user = new User;
@@ -65,6 +75,7 @@ class UsersController extends Controller
         $user->email = $request->input('email');
         $user->phone_number = $request->input('phone_number');
         $user->password = Hash::make($request->input('password'));
+        $user->audit_trails_id = $auditTrail->id;
         $user->save();
 
         $outlets = $request->outlet; 
@@ -74,10 +85,9 @@ class UsersController extends Controller
             $userOutlet = new UserOutlet;
             $userOutlet->users_id = $user->id;
             $userOutlet->outlets_id = $outlets[$i];
+            $userOutlet->audit_trails_id = $auditTrail->id;
             $userOutlet->save();
         }
-
-        
         
         return redirect('/user')->with('success', 'User Created');
     }
@@ -90,7 +100,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('user.staffsignup')->with('id',$id);
     }
 
     /**
@@ -101,9 +111,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
+        $user = User::find($id);
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-        $user = User::find($id);
         $outlets = Outlet::all();
         $roles = Role::all();
         // $user_id = $user->id;
@@ -117,7 +127,7 @@ class UsersController extends Controller
         //     $roleList[$role->id] = $role->roles_name;
         // }
 
-        return view('user.edit')->with('user', $user)->with('outlets',$outlets)->with('roles', $roles)->with('users_id',$users_id);
+        return view('user.edit')->with('id',$id)->with('user', $user)->with('outlets',$outlets)->with('roles', $roles)->with('users_id',$users_id);
         
         // return view('user.edit', compact('roleList'))->with('user', $user)->with('outlets',$outlets)->with('roles', $user->roles)->with('userOutlets',$userOutlets);
     }

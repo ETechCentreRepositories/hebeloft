@@ -26,7 +26,7 @@ Route::get('/outlet', 'PagesController@outlet');
 Route::get('/salesrecord', 'PagesController@salesrecord');
 
 Route::resource('home', 'HomeController');
-// Route::resource('inventory', 'InventoryController');
+Route::resource('inventory', 'InventoryController');
 Route::resource('user', 'UsersController');
 Route::resource('outlet', 'OutletsController');
 Route::resource('transferrequest', 'TransferRequestController');
@@ -70,3 +70,5 @@ Route::get('salesrecord/retrieveitemBySalesId/{salesRecordId}', 'SalesRecordsCon
 //         return View::make('create');
 //     }
 // ));
+
+Route::get('/testing/{id}', 'UsersController@show');

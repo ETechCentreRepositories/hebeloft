@@ -1,3 +1,4 @@
+{{dd($id)}}
 {{-- @extends('layouts.app')
 
 @section('content')
