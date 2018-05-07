@@ -43,7 +43,7 @@
                 <input type="text" id="salesRecordSearchField" class="form-control" style="background:transparent">
             </div>
             <div class="col-md-2">
-                <button type="button" class="btn btn-default btn-search" id="addSalesRecord"onClick="getProduct()">Add</button>
+                <button type="button" class="btn btn-default btn-search" id="addSalesRecord" onClick="getProduct()">Add</button>
                 <!-- <a href="{{route('product.addToCart', ['id' => 1 ])}}" class="btn btn-success pull-right" role="button">Add to Cart</a> -->
             </div>
         </div>
@@ -62,14 +62,7 @@
                 </tr>
             </thead>
             <tbody id="addSalesRecordContent">
-                <td id="productPicture"></td>
-                <td id="productBrand"></td>
-                <td id="productName"></td>
-                <td id="productPrice"></td>
-                <td id="productQuantity"><input name='quantity' id='quantity' type='text' style='width:60px;' value='1'/></td>
-                <td id="productDiscount"><input name='discount' id='discount' type='text' style='width:60px;' value='1'/></td>
-                <td id="productTotalPrice"></td>
-                <td id="action"></td>
+                
             </tbody>
         </table>
     </form>
@@ -112,31 +105,32 @@ function getPrice(){
 <script>
 function getProduct() {
     var productName = $("#salesRecordSearchField").val();
-            $.ajax({
-                     type: "GET",
-                     url: "{{URL::TO('/retrieve-add-inventory-by-product-name')}}",
-                     data: productName,
-                     cache: false,
-                     dataType: "JSON",
-                     success: function (response) {
-                         {{ route('product.addToCart', ['id' => 1 ])}}
-                         for (i = 0; i < response.length; i++) {
-                             $("#addSalesRecordContent").append(
-                                 "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
-                                 + "<td>" + response[i].Brand + "</td>"
-                                 + "<td>" + response[i].Name + "</td>"
-                                 + "<td>" + response[i].UnitPrice + "</td>"
-                                 + "<td><input name='quantity' type='number' id='quantity' onChange='getPrice()' type='text' style='width:60px;' value='1'/></td>"
-                                 + "<td><input name='discount' id='discount' type='text' style='width:60px;' value=''/></td>" 
-                                 + "<td id='price'></td>"
-                                 + "<td></td></tr>"
-                             );
-                         }
-                    },   
-                    error: function (obj, textStatus, errorThrown) {
-                }
-                 
-            });
+    $.ajax({
+        type: "GET",
+        url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
+        // data: productName,
+        cache:false,
+        datatype: "JSON",
+        success: function (response) {
+            {{ route('product.addToCart', ['id' => 1 ])}}
+            for (i = 0; i < response.length; i++) {
+             $("#addSalesRecordContent").append(
+                "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
+                + "<td>" + response[i].Brand + "</td>"
+                + "<td>" + response[i].Name + "</td>"
+                + "<td>" + response[i].UnitPrice + "</td>"
+                + "<td><input name='quantity' type='number' id='quantity' onChange='getPrice()' type='text' style='width:60px;' value='1'/></td>"
+                + "<td><input name='discount' id='discount' type='text' style='width:60px;' value='0'/></td>" 
+                + "<td id='price'></td>"
+                + "<td></td></tr>"
+            );
+            }
+        },
+
+        error: function (obj, testStatus, errorThrown) {
+            
+        }
+    });
 }
 </script>
 
