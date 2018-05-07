@@ -89,7 +89,7 @@
 <style>
     .salesRecordNav {
         background-color: #f5f8fa !important;
-        color: #566B30 !important;
+        color: #000000 !important;
         pointer-events: none;
         cursor: default;
     }
