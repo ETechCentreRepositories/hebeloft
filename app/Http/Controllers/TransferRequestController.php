@@ -8,6 +8,7 @@ use App\User;
 
 class TransferRequestController extends Controller
 {
+    protected $transferRequest;
     /**
      * Display a listing of the resource.
      *
@@ -57,6 +58,8 @@ class TransferRequestController extends Controller
         // $transfers->fax = $request->input('fax');
         // $transfers->save();
 
+        $product_name = $request->input('product_name');
+
         return redirect('/outlet')->with('success', 'Outlet Created');
     }
 
@@ -68,7 +71,18 @@ class TransferRequestController extends Controller
      */
     public function show($id)
     {
-        
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id);
+        $transferRequest = TransferRequest::find($id);
+        // $product_name = $request->input('product_name');
+        // $quantity = $request->input('quantity');
+
+        // $this->transferRequest = [
+        //     'product_name' => $product_name,
+        //     'quantity' => $quantity
+        // ];
+
+        return view('transfer_request.show')->with('transferRequest', $transferRequest)->with('users_id',$users_id);
     }
 
     /**

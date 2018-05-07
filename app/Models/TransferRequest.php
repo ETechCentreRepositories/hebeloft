@@ -17,7 +17,10 @@ class TransferRequest extends Model
     // }
 
     public function products() {
-        return $this->hasMany('App\Products');
+        return $this->hasOne('App\Products');
     }
     
+    public function transferRequestList(){
+        return $this -> belongsTo('\App\Models\TransferRequestList');
+    }
 }   

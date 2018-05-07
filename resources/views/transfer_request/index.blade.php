@@ -79,7 +79,9 @@
                     <td>
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row transfer-buttons">
-                                <button type="button" class="btn btn-primary action-buttons btn-view-more"><a href="/show"View Order</button>
+                                <a href="/transferrequest/show">
+                                    <button type="button" class="btn btn-primary action-buttons btn-view-more">View Order</button>
+                                </a>
                             </div>
                         </div>
                     </td>

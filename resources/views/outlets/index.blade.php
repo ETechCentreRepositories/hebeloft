@@ -58,9 +58,6 @@
                                     {!!Form::close()!!}
                                 </div>
                             </div>
-                            <div class="p-2 no-side-paddings outlet-buttons">
-                                <a href="/"><button type="button" class="btn btn-secondary centered-buttons threshold-button" >Threshold</button></a>
-                            </div>
                         </div>
                     </td>
                 </tr>

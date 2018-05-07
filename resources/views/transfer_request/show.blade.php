@@ -19,17 +19,17 @@
     <h3 class="card-title">Transfer Request</h3>
     <button class="btn btn-warning btn-add-item" onclick="openAddItemModal()">Add item</button>
     <br><br>
-    <table class="table table-striped">
+    <table class="table table-striped" id="inventoryTable" >
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Product Name</th>
                 <th>Quantity</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="inventoryContent">
             <tr>
-                <td>{{$product}}</td>
-                <td>{{$quantity}}</td>
+                <td>{{$transferRequest->products['Name']}}</td>
+                <td>{{$transferRequest->transferRequestList['quantity']}}</td>
             </tr>
         </tbody>
     </table>

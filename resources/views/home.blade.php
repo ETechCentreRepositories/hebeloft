@@ -128,7 +128,7 @@
         </div>
     </div>
     <div class="gray row">
-        <div class="col-md-6">
+        {{-- <div class="col-md-6">
             <div class="dashboardTables">
                 <h3 class="dashboardLabels">Audit Trails</h3>
                 <table class="table table-striped">
@@ -146,8 +146,8 @@
                     </tbody>
                 </table>
             </div>
-        </div>
-        <div class="col-md-6">
+        </div> --}}
+        <div class="col-md-12">
             <div class="dashboardTables">
                 <h3 class="dashboardLabels">Sales Record</h3>
                 <table class="table table-striped">
