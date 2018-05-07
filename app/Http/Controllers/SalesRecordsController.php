@@ -109,7 +109,30 @@ class SalesRecordsController extends Controller
         $salesRecordList->save();
         return view('salesrecord.create')->with('salesRecordList',$salesRecordList);
     }
-    
+
+    public function getInventoryByProductName($productName){
+        $inventoryByProductName = InventoryOutlet::leftJoin('products', 'inventory_has_outlets.products_id', '=', 'products.id')
+                    ->leftJoin('outlets', 'inventory_has_outlets.outlets_id', '=', 'outlets.id')
+                    ->select('inventory_has_outlets.id','inventory_has_outlets.outlets_id','inventory_has_outlets.products_id','products.Name', 'products.Category','products.Brand', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level', 'outlets.outlet_name', 'products.UnitPrice', 'products.image')
+                    ->where('products.Name','=', $productName)
+                    ->get()->toArray();
+
+        return response($inventoryByProductName);
+
+        // $addSalesRecordList = InventoryOutlet::leftJoin('products', 'inventory_has_outlets.products_id', '=', 'products.id')
+        // ->leftJoin('outlets', 'inventory_has_outlets.outlets_id', '=', 'outlets.id')
+        // ->select('inventory_has_outlets.id','inventory_has_outlets.outlets_id','inventory_has_outlets.products_id','products.Name', 'products.Category','products.Brand', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level', 'outlets.outlet_name', 'products.UnitPrice', 'products.image')
+        // ->where('products.Name','=', $productName)
+        // ->get()->toArray();
+
+        // $salesRecordList = new SalesRecordList;
+        // $salesRecordList->products_id = $addSalesRecordList[0]['products_id'];
+        // $salesRecordList->quantity = 1;
+        // $salesRecordList->total = $addSalesRecordList[0]['UnitPrice'];
+        // $salesRecordList->save();
+        // return view('salesrecord.create')->with('salesRecordList',$salesRecordList);
+    }
+
     public function getSalesRecordAddToCart(Request $request, $id) {
         $product = Products::find($id);
         $oldSalesRecordCart = Session::has('cartSalesRecord') ? Session::get('cartSalesRecord') : null;
