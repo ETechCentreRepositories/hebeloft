@@ -161,10 +161,6 @@
     </div>
 </div>
 
-<div class="pagination">
-    {{$users->links()}}
-</div>
-
 <script>
     function openCreateUserModal() {
         document.getElementById('createUserModal').style.display = "block";
