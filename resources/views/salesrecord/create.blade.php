@@ -132,8 +132,6 @@ function getProduct() {
                                  + "<td></td></tr>"
                              );
                          }
-                        
- 
                     },   
                     error: function (obj, textStatus, errorThrown) {
                 }
