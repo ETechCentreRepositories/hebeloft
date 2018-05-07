@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\TransferRequest;
+use App\Models\Product;
 use App\User;
 
 class TransferRequestController extends Controller

@@ -55,14 +55,14 @@ Route::get('/ajax/inventory-outlet', 'InventoryController@getOutletByInventory')
 
 //SalesRecord 
 Route::get('/salesrecord/create', 'SalesRecordsController@create');
-Route::get('/salesrecord/addSalesRecordList/{productName}', 'SalesRecordController@addSalesRecordList');
-Route::get('/salesrecord/retrieveItemBySalesId/{salesRecordId}', 'SalesRecordController@retrieveItemBySalesId');
-Route::get('/retrieve-add-inventory-by-product-name/{productName}', 'SalesRecordController@getInventoryByProductName');
+Route::get('/salesrecord/addSalesRecordList/{productName}', 'SalesRecordsController@addSalesRecordList');
+Route::get('/salesrecord/retrieveItemBySalesId/{salesRecordId}', 'SalesRecordsController@retrieveItemBySalesId');
+Route::get('/retrieve-add-inventory-by-product-name/{productName}', 'SalesRecordsController@getInventoryByProductName');
 Route::get('/salesrecord/addtocart/{id}',[
     'uses' => 'SalesRecordsController@getSalesRecordAddToCart',
     'as' => 'product.addToCart'  
 ]);
-Route::get('salesrecord/retrieveitemBySalesId/{salesRecordId}', 'SalesRecordController@retieveItemBySalesId');
+Route::get('salesrecord/retrieveitemBySalesId/{salesRecordId}', 'SalesRecordsController@retieveItemBySalesId');
 
 // Route::post('create', array(
 //     'as' => 'create',

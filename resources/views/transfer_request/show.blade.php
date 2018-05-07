@@ -28,49 +28,12 @@
         </thead>
         <tbody id="inventoryContent">
             <tr>
-                <td>{{$transferRequest->products['Name']}}</td>
-                <td>{{$transferRequest->transferRequestList['quantity']}}</td>
+                <td></td>
+                <td>{{$transferRequest->transfer_requests_list['quantity']}}</td>
             </tr>
         </tbody>
     </table>
 </div>
-
-<div id="addItemModal" class="modal">
-    <span class="close cursor" onclick="closeAddItemModal()">&times;</span>
-    <div class="card modalCard">
-        <div class="card-body">
-            <br>
-            <h3 class="card-title">Add item</h3>
-            <br>
-                <select id="product_name" class="form-control"></select>
-                <input id="quantity" class="form-control" type="text"></input>
-                <button class="btn btn-success" onclick="closeAddItemModal()">Add item</button>
-            {{ Form::close() }}
-            </form>
-        </div>
-    </div>
-</div>
-
-<script>
-function openAddItemModal() {
-    document.getElementById('addItemModal').style.display = "block";
-}
-
-function closeAddItemModal() {
-    document.getElementById('addItemModal').style.display = "none";
-}
-
-$(document).ready(function(){
-    $.get("{{ URL::to('ajax/inventory')}}",function(data){
-        $("#product_name").empty();
-        $.each(data,function(i,value){
-            var name = value.Name;
-            $("#product_name").append("<option value='" +
-            value.id + "'>" +name + "</option>");
-        });
-    });
-});
-</script>
 
 <style>
     .transferRequestNav {

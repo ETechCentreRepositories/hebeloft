@@ -22,7 +22,7 @@
                 <div class="p-2 card salesCards card1">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber1">
-                            0
+                            {{$salesPacks}}
                         </div>
                         Qty
                         <br><br>
@@ -35,7 +35,7 @@
                 <div class="p-2 card salesCards card2">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber2">
-                            0
+                            {{$salesShips}}
                         </div>
                         Qty
                         <br><br>
@@ -47,7 +47,7 @@
                 <div class="p-2 card salesCards card3">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber3">
-                            0
+                            {{$salesDelivers}}
                         </div>
                         Qty
                         <br><br>
@@ -59,7 +59,7 @@
                 <div class="p-2 card salesCards card4">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber4">
-                            0
+                            {{$salesInvoices}}
                         </div>
                         Qty
                         <br><br>
@@ -78,7 +78,7 @@
                 <div class="p-2 card salesCards card1">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber1">
-                            0
+                            {{$transferPacks}}
                         </div>
                         Qty
                         <br><br>
@@ -91,7 +91,7 @@
                 <div class="p-2 card salesCards card2">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber2">
-                            0
+                            {{$transferShips}}
                         </div>
                         Qty
                         <br><br>
@@ -103,7 +103,7 @@
                 <div class="p-2 card salesCards card3">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber3">
-                            0
+                            {{$transferDelivers}}
                         </div>
                         Qty
                         <br><br>
@@ -115,7 +115,7 @@
                 <div class="p-2 card salesCards card4">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber4">
-                            0
+                            {{$transferInvoices}}
                         </div>
                         Qty
                         <br><br>

@@ -29,7 +29,7 @@ class InventoryController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-        $inventoryOutlets = InventoryOutlet::orderBy('id','asc')->paginate(10);;
+        $inventoryOutlets = InventoryOutlet::orderBy('id','asc')->paginate(10);
         // $products = Products::all();
         return view('inventory.index')->with('inventoryOutlets',$inventoryOutlets)->with('users_id',$users_id);
     }

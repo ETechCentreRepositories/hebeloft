@@ -5,21 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use DB;
 
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-
-    /**
-     * Show the application dashboard.
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -27,7 +18,81 @@ class HomeController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
+        $salesPacks = DB::table('sales_order')->where('status_id', 1)->count();
+        $salesShips = DB::table('sales_order')->where('status_id', 2)->count();
+        $salesDelivers = DB::table('sales_order')->where('status_id', 3)->count();
+        $salesInvoices = DB::table('sales_order')->where('status_id', 4)->count();
+        $transferPacks = DB::table('transfer_requests')->where('status_id', 1)->count();
+        $transferShips = DB::table('transfer_requests')->where('status_id', 2)->count();
+        $transferDelivers = DB::table('transfer_requests')->where('status_id', 3)->count();
+        $transferInvoices = DB::table('transfer_requests')->where('status_id', 4)->count();
         
-        return view('home')->with('users_id',$users_id);
+        return view('home')->with('users_id',$users_id)->with('salesPacks', $salesPacks)->with('salesShips', $salesShips)->with('salesDelivers', $salesDelivers)->with('salesInvoices', $salesInvoices)->with('transferPacks', $transferPacks)->with('transferShips', $transferShips)->with('transferDelivers', $transferDelivers)->with('transferInvoices', $transferInvoices);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 }
