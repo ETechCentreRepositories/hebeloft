@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Models\UserOutlet;
+use App\Models\Wholesaler;
 use App\Models\Outlet;
 use App\Models\Role;
 use App\Models\AuditTrail;
@@ -197,11 +198,20 @@ class UsersController extends Controller
         // $userOutlet = UserOutlet::find("users_id");
         // dd($userOutlet);
         $userOutletExists = UserOutlet::where('users_id',$id)->get();
+        $wholesalerExists = Wholesaler::where('users_id',$id)->get();
+
         if($userOutletExists){
             foreach($userOutletExists as $userOutletExist){
                 $userOutletExist->delete();
             }
         }
+
+        if($wholesalerExists){
+            foreach($wholesalerExists as $wholesalerExist){
+                $wholesalerExist->delete();
+            }
+        }
+
         $user = User::find($id);
         $user->delete();
         return redirect('/user')->with('success', 'Post Removed');
