@@ -128,26 +128,30 @@
         </div>
     </div>
     <div class="gray row">
-        {{-- <div class="col-md-6">
+        <div class="col-md-6">
             <div class="dashboardTables">
                 <h3 class="dashboardLabels">Audit Trails</h3>
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Date/Time</th>
                             <th>Name</th>
-                            <th>Email</th>
                             <th>Action</th>
-                            <th></th>
+                            <th>Date/Time</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($auditTrails as $auditTrail)
+                        <tr>
+                            <td>{{$auditTrail->action_by}}</td>
+                            <td>{{$auditTrail->action}}</td>
+                            <td>{{$auditTrail->create_time}}</td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
-        </div> --}}
-        <div class="col-md-12">
+        </div>
+        <div class="col-md-6">
             <div class="dashboardTables">
                 <h3 class="dashboardLabels">Sales Record</h3>
                 <table class="table table-striped">

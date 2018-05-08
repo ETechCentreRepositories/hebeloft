@@ -36,12 +36,12 @@
                 <tr>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
-                    <td>{{$user->roles_name}}</td>
+                    <td>{{$user->roles['roles_name']}}</td>
                     <td>
                         <div class="d-flex flex-row user-buttons">
-                            <div class="p-2">
-                                <a href="/user/{{$user->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
-                            </div>
+                                <div class="p-2">
+                                    <a href="/user/{{$user->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
+                                </div>
                             <div class="p-2">
                                 {!!Form::open(['action' => ['UsersController@destroy', $user->id], 'method' => 'POST'])!!}
                                     {{Form::hidden('_method', 'DELETE')}}
@@ -88,14 +88,14 @@
                 </div>
                 
                 {{-- <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}"> --}}
-                <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
+                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     <div class="row">
                         <div class="col-md-12">
-                            <input id="username" type="text" class="form-control" name="username" placeholder="Username" value="{{ old('username') }}" required autofocus>
+                            <input id="email" type="text" class="form-control" name="email" placeholder="Email" value="{{ old('email') }}" required autofocus>
 
-                            @if ($errors->has('username'))
+                            @if ($errors->has('email'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('username') }}</strong>
+                                    <strong>{{ $errors->first('email') }}</strong>
                                 </span>
                             @endif
                         </div>

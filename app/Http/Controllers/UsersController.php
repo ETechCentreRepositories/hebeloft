@@ -24,8 +24,7 @@ class UsersController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-        $users =User::leftJoin('roles','users.roles_id', '=', 'roles.id')
-                ->orderBy('created_at','desc')->paginate(10);
+        $users =User::orderBy('created_at','asc')->paginate(10);
         // $user = User::find($id);
         // $user_id = $users->id;
         $outlets = Outlet::all();
@@ -57,15 +56,16 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
-        //Get the login user
-        $login_user_id = auth()->user()->id;
-        $login_user = User::find($login_user_id);
-
+    {
+        //Audit Trail for creating outlet staff
         $auditTrail = AuditTrail::create([
             'action' => 'Created Outlet Staff',
             'action_by' => $login_user->name,
         ]);
+
+        //Get the login user
+        $login_user_id = auth()->user()->id;
+        $login_user = User::find($login_user_id);
 
         // Create Internal User
         $role = (int)$request->input('role');
@@ -114,6 +114,7 @@ class UsersController extends Controller
         $user = User::find($id);
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
+        $users = USer::find($id);
         $outlets = Outlet::all();
         $roles = Role::all();
         // $user_id = $user->id;
@@ -127,7 +128,7 @@ class UsersController extends Controller
         //     $roleList[$role->id] = $role->roles_name;
         // }
 
-        return view('user.edit')->with('id',$id)->with('user', $user)->with('outlets',$outlets)->with('roles', $roles)->with('users_id',$users_id);
+        return view('user.edit')->with('id',$id)->with('user', $user)->with('outlets',$outlets)->with('roles', $roles)->with('users_id',$users_id)->with('users', $users);
         
         // return view('user.edit', compact('roleList'))->with('user', $user)->with('outlets',$outlets)->with('roles', $user->roles)->with('userOutlets',$userOutlets);
     }

@@ -75,14 +75,8 @@ class TransferRequestController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-        $transferRequest = TransferRequest::find($id);
-        // $product_name = $request->input('product_name');
-        // $quantity = $request->input('quantity');
-
-        // $this->transferRequest = [
-        //     'product_name' => $product_name,
-        //     'quantity' => $quantity
-        // ];
+        $transferRequestId = TransferRequest::find($id);
+        $transferQuantity = DB::table('transfer_requests')->where('status_id', 3);
 
         return view('transfer_request.show')->with('transferRequest', $transferRequest)->with('users_id',$users_id);
     }

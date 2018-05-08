@@ -101,7 +101,6 @@ function getPrice(){
 }
 </script>
 
-
 <script>
 function getProduct() {
     var productName = $("#salesRecordSearchField").val();
