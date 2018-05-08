@@ -82,7 +82,8 @@ class RegisterController extends Controller
             'roles_id'=> (int) $data['roles_id'],
             'password' => Hash::make($data['password']),
             'audit_trails_id' => $auditTrail->id,
-        ]);       
+        ]);
+        
         $wholesaler =  Wholesaler::create([
             'users_id'=> $user->id,
             'company_name'=>$data['company_name'],

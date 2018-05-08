@@ -133,18 +133,16 @@
                 <h3 class="dashboardLabels">Audit Trails</h3>
                 <table class="table table-striped">
                     <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Action</th>
-                            <th>Date/Time</th>
-                        </tr>
+                        <tr><th class="col-md-4">Name</th></tr>
+                        <tr><th class="col-md-4">Action</th></tr>
+                        <tr><th class="col-md-4">Date/Time</th></tr>
                     </thead>
                     <tbody>
                         @foreach($auditTrails as $auditTrail)
                         <tr>
-                            <td>{{$auditTrail->action_by}}</td>
-                            <td>{{$auditTrail->action}}</td>
-                            <td>{{$auditTrail->create_time}}</td>
+                            <td class="col-md-4">{{$auditTrail->action_by}}</td>
+                            <td class="col-md-4">{{$auditTrail->action}}</td>
+                            <td class="col-md-4">{{$auditTrail->create_time}}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -178,5 +176,34 @@
         color: #000000 !important;
         pointer-events: none;
         cursor: default;
+    }
+
+    table {
+        border: 2px solid #ddd;
+        width: 800px;
+    }
+
+    th {
+        border: none !important;
+    }
+
+    thead, tbody, tr, th, td {
+        display: block;
+    }
+
+    thead{
+        width: 97%;
+    }
+
+    tbody {
+        width: 100%;
+        overflow-y: auto;
+        height: 256px;
+        background-color: #f5f5f5;
+    }
+
+    td, thead > tr > th {
+        float: left;
+        border-bottom-width: 0;
     }
 </style>
