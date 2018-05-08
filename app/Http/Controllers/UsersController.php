@@ -61,7 +61,7 @@ class UsersController extends Controller
         $login_user_id = auth()->user()->id;
         $login_user = User::find($login_user_id);
 
-        //Audit Trail for creating outlet staff
+        //Audit Trail
         $auditTrail = AuditTrail::create([
             'action' => 'Created Outlet Staff',
             'action_by' => $login_user->name,
@@ -142,6 +142,15 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $login_user_id = auth()->user()->id;
+        $login_user = User::find($login_user_id);
+
+        //Audit Trail
+        $auditTrail = AuditTrail::create([
+            'action' => 'Updated Outlet Staff',
+            'action_by' => $login_user->name,
+        ]);
+
         $user = User::find($id);
         $user->name = $request->input('name');
         $user->roles_id = $request->roles_id;
@@ -176,6 +185,15 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
+        $login_user_id = auth()->user()->id;
+        $login_user = User::find($login_user_id);
+
+        //Audit Trail
+        $auditTrail = AuditTrail::create([
+            'action' => 'Deleted Outlet Staff',
+            'action_by' => $login_user->name,
+        ]);
+
         // $userOutlet = UserOutlet::find("users_id");
         // dd($userOutlet);
         $userOutletExists = UserOutlet::where('users_id',$id)->get();

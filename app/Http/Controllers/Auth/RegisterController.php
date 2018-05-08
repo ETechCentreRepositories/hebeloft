@@ -70,7 +70,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
         $auditTrail = AuditTrail::create([
             'action' => 'Created Wholesaler',
             'action_by' => $data['name']
