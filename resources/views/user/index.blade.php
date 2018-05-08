@@ -76,7 +76,7 @@
                 {{-- <form class="form-horizontal" role="form" method="POST" action="UsersController@create"> --}}
                 {{ csrf_field() }}
 
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <div class="row">
                         <div class="col-md-6">
                             <input id="role" type="radio" name="role" value="5"> Warehouse staff<br>
@@ -85,17 +85,17 @@
                             <input id="role" type="radio" name="role" value="3"> Outlet staff<br>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 
                 {{-- <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}"> --}}
-                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                     <div class="row">
                         <div class="col-md-12">
-                            <input id="email" type="text" class="form-control" name="email" placeholder="Email" value="{{ old('email') }}" required autofocus>
+                            <input id="username" type="text" class="form-control" name="username" placeholder="Username" value="{{ old('username') }}" required autofocus>
 
-                            @if ($errors->has('email'))
+                            @if ($errors->has('username'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('email') }}</strong>
+                                    <strong>{{ $errors->first('username') }}</strong>
                                 </span>
                             @endif
                         </div>

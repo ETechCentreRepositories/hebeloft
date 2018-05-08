@@ -57,18 +57,18 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        //Get the login user
+        $login_user_id = auth()->user()->id;
+        $login_user = User::find($login_user_id);
+
         //Audit Trail for creating outlet staff
         $auditTrail = AuditTrail::create([
             'action' => 'Created Outlet Staff',
             'action_by' => $login_user->name,
         ]);
 
-        //Get the login user
-        $login_user_id = auth()->user()->id;
-        $login_user = User::find($login_user_id);
-
         // Create Internal User
-        $role = (int)$request->input('role');
+        $role = 3;
         $user = new User;
         $user->roles_id = $role;
         $user->name = $request->input('username');

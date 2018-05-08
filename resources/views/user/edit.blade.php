@@ -25,14 +25,25 @@
                     {!!Form::open(['action' => ['UsersController@update', $user->id], 'method' => 'POST']) !!}
                     {{ csrf_field() }}
 
-                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                    {{-- <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input id="roles_id" type="radio" name="roles_id" value="5"> Warehouse staff<br>
+                            </div>
+                            <div class="col-md-6">
+                                <input id="roles_id" type="radio" name="roles_id" value="3"> Outlet staff<br>
+                            </div>
+                        </div>
+                    </div> --}}
+
+                    <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                         <div class="row">
                             <div class="col-md-12">
-                                {{Form::text('name', $user->name, ['class' => 'form-control', 'placeholder' => 'Email'])}}
+                                {{Form::text('name', $user->name, ['class' => 'form-control', 'placeholder' => 'Username'])}}
 
-                                @if ($errors->has('email'))
+                                @if ($errors->has('username'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('username') }}</strong>
                                     </span>
                                 @endif
                             </div>
