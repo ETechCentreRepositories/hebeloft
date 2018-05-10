@@ -213,6 +213,6 @@ class UsersController extends Controller
 
         $user = User::find($id);
         $user->delete();
-        return redirect('/user')->with('success', 'Post Removed');
+        return redirect('/user')->with('success', 'User Removed');
     }
 }
