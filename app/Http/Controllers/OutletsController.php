@@ -117,7 +117,6 @@ class OutletsController extends Controller
             'address' => 'required',
             'email' => 'required',
             'telephone_number' => 'required',
-            'fax' => 'required',
         ]);
 
         // Create Outlet
@@ -129,7 +128,7 @@ class OutletsController extends Controller
         $outlet->fax = $request->input('fax');
         $outlet->save();
 
-        return redirect('/outlet')->with('success', 'Outlet Updated');
+        return redirect('/outlet');
     }
 
     /**

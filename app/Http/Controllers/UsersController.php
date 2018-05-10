@@ -174,7 +174,7 @@ class UsersController extends Controller
             $userOutlet->save();
         }
 
-        return redirect('/user')->with('success', 'User Updated');
+        return redirect('/user');
     }
 
     /**
