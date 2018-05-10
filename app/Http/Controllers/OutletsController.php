@@ -128,7 +128,7 @@ class OutletsController extends Controller
         $outlet->fax = $request->input('fax');
         $outlet->save();
 
-        return redirect('/outlet');
+        return redirect('/outlet')->with('success', 'Outlet Updated');
     }
 
     /**

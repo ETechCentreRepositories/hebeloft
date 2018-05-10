@@ -10443,6 +10443,11 @@ a.text-dark:focus {
   min-width: 0;
 }
 
+.laravelAlert {
+  margin-top: 60px;
+  margin-bottom: -60px;
+}
+
 .username {
   color: #e3b417 !important;
   background-color: #566B30;
@@ -10469,7 +10474,7 @@ select {
 }
 
 .topMargin {
-  margin-top: 55px;
+  margin-top: 50px;
 }
 
 .salesOrder {
