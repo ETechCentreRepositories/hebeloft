@@ -55,7 +55,6 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'phone_number' => 'required',
-            'company_name' => 'required',
             'billing_address' => 'required',
             'shipping_address' => 'required',
             'password' => 'required|string|min:6|confirmed'
@@ -86,7 +85,6 @@ class RegisterController extends Controller
         
         $wholesaler =  Wholesaler::create([
             'users_id'=> $user->id,
-            'company_name'=>$data['company_name'],
             'billing_address'=>$data['billing_address'],
             'shipping_address'=>$data['shipping_address']
         ]);

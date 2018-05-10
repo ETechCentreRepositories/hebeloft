@@ -8,7 +8,7 @@ class AuditTrail extends Model
 {
     protected $table =  'audit_trail';
 
-    protected $fillable = ['id', 'action','action_by','created_time'];
+    protected $fillable = ['id', 'action','action_by','created_at', 'updated_at'];
 
     public $timestamps = false;
 

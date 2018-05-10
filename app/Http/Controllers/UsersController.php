@@ -112,10 +112,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $users = User::find($id);
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-        $users = USer::find($id);
         $outlets = Outlet::all();
         $roles = Role::all();
         // $user_id = $user->id;
@@ -129,7 +128,7 @@ class UsersController extends Controller
         //     $roleList[$role->id] = $role->roles_name;
         // }
 
-        return view('user.edit')->with('id',$id)->with('user', $user)->with('outlets',$outlets)->with('roles', $roles)->with('users_id',$users_id)->with('users', $users);
+        return view('user.edit')->with('id',$id)->with('users', $users)->with('outlets',$outlets)->with('roles', $roles)->with('users_id',$users_id);
         
         // return view('user.edit', compact('roleList'))->with('user', $user)->with('outlets',$outlets)->with('roles', $user->roles)->with('userOutlets',$userOutlets);
     }
@@ -152,11 +151,11 @@ class UsersController extends Controller
             'action_by' => $login_user->name,
         ]);
 
-        $user = User::find($id);
-        $user->name = $request->input('name');
-        $user->roles_id = $request->roles_id;
-        $user->password = Hash::make($request->input('password'));
-        $user->save();
+        $users = User::find($id);
+        $users->name = $request->input('name');
+        $users->roles_id = $request->input('roles_id');
+        $users->password = Hash::make($request->input('password'));
+        $users->save();
 
         $userOutletExists = UserOutlet::where('users_id', $id)->get();
         if($userOutletExists){
