@@ -142,7 +142,7 @@
                         <tr>
                             <td class="col-md-4">{{$auditTrail->action_by}}</td>
                             <td class="col-md-4">{{$auditTrail->action}}</td>
-                            <td class="col-md-4">{{$auditTrail->create_time}}</td>
+                            <td class="col-md-4">{{$auditTrail->created_at}}</td>
                         </tr>
                         @endforeach
                     </tbody>

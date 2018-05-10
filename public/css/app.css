@@ -10444,8 +10444,7 @@ a.text-dark:focus {
 }
 
 .laravelAlert {
-  margin-top: 60px;
-  margin-bottom: -60px;
+  margin: 60px 10px -60px 10px;
 }
 
 .username {

@@ -31,12 +31,13 @@ class UsersController extends Controller
         $outlets = Outlet::all();
         // $userOutlets = DB::select('SELECT outlets_id FROM users_has_outlets WHERE users_id ='. $user_id);
 
-        $roles = Role::select('id', 'roles_name')->get();
-        foreach ($roles as $role) {
-            $roleList[$role->id] = $role->roles_name;
-        }
+        // $roles = Role::select('id', 'roles_name')->get();
+        // foreach ($roles as $role) {
+        //     $roleList[$role->id] = $role->roles_name;
+        // }
 
-        return view('user.index', compact('roleList'))->with('users', $users)->with('outlets',$outlets)->with('users_id',$users_id);
+        // return view('user.index', compact('roleList'))->with('users', $users)->with('outlets',$outlets)->with('users_id',$users_id);
+        return view('user.index')->with('users', $users)->with('outlets',$outlets)->with('users_id',$users_id);
     }
 
     /**
@@ -101,7 +102,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        return view('user.staffsignup')->with('id',$id);
+        // return view('user.staffsignup')->with('id',$id);
     }
 
     /**

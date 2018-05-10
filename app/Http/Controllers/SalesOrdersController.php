@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\SalesOrder;
+use App\Models\Status;
 use App\User;
 
 class SalesOrdersController extends Controller
@@ -16,8 +18,8 @@ class SalesOrdersController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-
-        return view('salesorder.index')->with('users_id',$users_id);
+        $salesorders = SalesOrder::orderBy('id','asc')->paginate(10);
+        return view('salesorder.index')->with('users_id',$users_id)->with('salesorders', $salesorders);
     }
 
     /**

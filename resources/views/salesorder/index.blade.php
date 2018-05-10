@@ -53,6 +53,16 @@
                 </tr>
             </thead>
             <tbody>
+                @if(count($salesorders) > 0)
+                @foreach($salesorders as $salesorder)
+                <tr>
+                    <td>{{$salesorder->id}}</td>
+                    <td>{{$salesorder->order_time}}</td>
+                    <td>{{$salesorder->status['status_name']}}</td>
+                    <td><button type="button" class="btn btn-primary action-buttons">View Order</button></td>
+                </tr>
+                @endforeach
+                @endif
             </tbody>
         </table>
     </div>

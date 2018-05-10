@@ -22,7 +22,7 @@
     <br>
     <div class="drop-down_brand row">
         <div class="col-md-3">
-        <p>From Date:</p>
+            <p>From Date:</p>
         </div>
         <div class="col-md-9">
             <input type="date" name="from" class="form-control">
@@ -64,26 +64,6 @@
     </div>
 </div>
 
-<div id="createSalesRecordModal" class="modal">
-    <span class="close cursor" onclick="closeCreateSalesRecordModal()">&times;</span>
-    <div class="card modalCard">
-        <div class="card-body">
-            <br>
-            <h3 class="card-title">Create Sales Record</h3>
-            <br>
-        </div>
-    </div>
-</div>
-
-<script>
-    function openCreateSalesRecordModal() {
-        document.getElementById('createSalesRecordModal').style.display = "block";
-    }
-
-    function closeCreateSalesRecordModal() {
-        document.getElementById('createSalesRecordModal').style.display = "none";
-    }
-</script>
 @endsection
 
 <style>
