@@ -75,7 +75,7 @@
                     <td>{{$transfer->id}}</td>
                     <td>{{$transfer->from_location}}</td>
                     <td>{{$transfer->recipient}}</td>
-                    <td>{{$transfer->status['status_name']}}</td>
+                    <td>{{$transfer->statuses['status_name']}}</td>
                     <td>
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row transfer-buttons">

@@ -6,14 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Status extends Model
 {
-    //Table 
-    protected $table = 'status';
+    protected $table = 'statuses';
 
     public function salesorders(){
         return $this->belongsToMany('App\Models\SalesOrder');
-    }
-
-    public function transferRequests(){
-        return $this->belongsToMany('App\Models\TransferRequest');
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\TransferRequest;
 use App\User;
 use App\Models\Product;
+use App\Models\Status;
 
 
 class TransferRequestController extends Controller

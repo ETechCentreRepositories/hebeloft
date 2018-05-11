@@ -20,7 +20,7 @@ class TransferRequest extends Model
         return $this->belongsTo('App\Models\Products');
     }
 
-    public function status() {
+    public function statuses() {
         return $this->belongsTo('App\Models\Status');
     }
     

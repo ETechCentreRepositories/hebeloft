@@ -58,7 +58,7 @@
                 <tr>
                     <td>{{$salesorder->id}}</td>
                     <td>{{$salesorder->order_time}}</td>
-                    <td>{{$salesorder->status['status_name']}}</td>
+                    <td>{{$salesorder->statuses['status_name']}}</td>
                     <td><button type="button" class="btn btn-primary action-buttons">View Order</button></td>
                 </tr>
                 @endforeach

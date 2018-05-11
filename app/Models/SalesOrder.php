@@ -12,7 +12,7 @@ class SalesOrder extends Model
     //Timestamps
     public $timestamps = false;
 
-    public function status(){
-        return $this -> belongsTo('App\Models\Status');
+    public function statuses(){
+        return $this->belongsTo('App\Models\Status');
     }
 }
