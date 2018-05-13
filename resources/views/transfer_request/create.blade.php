@@ -8,19 +8,18 @@
 @include('inc.navbar_admin')
 @elseif ($users_id->roles_id == '3')
 @include('inc.navbar_outletstaff')
-@include('inc.unauthorized')
 @elseif ($users_id->roles_id == '4')
 @include('inc.navbar_wholesaler')
-
+@include('inc.unauthorized')
 @endif
 
 <br><br><br>
 
-<h2>Sales Order</h2>
+<h2>Transfer Request</h2>
 <br>
 <div class="container">
     <!-- <form id="formCreateSalesRecord" action="SalesRecordsController@store" method="POST"> -->
-    {!! Form::open(['action' => 'SalesOrdersController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'style' => 'margin-bottom: 0']) !!}
+    {!! Form::open(['action' => 'TransferRequestController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'style' => 'margin-bottom: 0']) !!}
         <div class="row">
             <div class="col-md-3">
                 <p>Outlet: </p>
@@ -35,20 +34,20 @@
                 <p>Date:</p>
             </div>
             <div class="col-md-9">
-                <input type="date" id="salesOrderDate" name ="salesOrderDate" class="form-control">
+                <input type="date" id="transferRequestDate" name ="transferRequestDate" class="form-control">
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-md-10">
-                <input type="text" id="salesOrderSearchField" class="form-control" style="background:transparent">
+                <input type="text" id="transferRequestSearchField" class="form-control" style="background:transparent">
             </div>
             <div class="col-md-2">
-                <button type="button" class="btn btn-default btn-search" id="addSalesOrder" onClick="getProduct()">Add</button>
+                <button type="button" class="btn btn-default btn-search" id="addTransferRequest" onClick="getProduct()">Add</button>
             </div>
         </div>
         <br>
-        <table class="table table-striped" id="createSalesOrderTable">
+        <table class="table table-striped" id="createTransferRequestTable">
             <thead>
                 <tr>
                     <th>Picture</th>
@@ -61,8 +60,8 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody id="addSalesOrderContent">
-            @if(Session::has('cartSalesOrder'))
+            <tbody id="addTransferRequestContent">
+            @if(Session::has('cartTransferRequest'))
                 @foreach($products as $product)
                         <tr><td><img style="width:60px; height:60px" src="/storage/product_images/{{$product['item']['image']}}"/></td>
                         <td>{{$product['item']['Brand']}}</td>
@@ -79,8 +78,8 @@
 
         <div class="form-group">
             <div>
-            <button type="button" class="btn btn-primary" onClick="saveOrderProduct()">Save as Draft</button>
-            {{Form::submit('Create sales order', ['class'=>'btn btn-primary btn-lg'])}}
+            <button type="button" class="btn btn-primary" onClick="saveTRProduct()">Save as Draft</button>
+            {{Form::submit('Create sales record', ['class'=>'btn btn-primary btn-lg'])}}
             </div>
         </div>
         {!! Form::close() !!}
@@ -89,7 +88,7 @@
 @endsection
 
 <style>
-    .salesOrderNav {
+    .transferRequestNav {
         background-color: #f5f8fa !important;
         color: #000000 !important;
         pointer-events: none;

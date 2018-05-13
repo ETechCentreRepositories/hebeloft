@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\TransferRequest;
 use App\User;
-use App\Models\Product;
 use App\Models\Status;
-
+use App\Models\Products;
+use Session;
+use App\CartTransferRequest;
 
 class TransferRequestController extends Controller
 {
@@ -44,35 +45,48 @@ class TransferRequestController extends Controller
      */
     public function store(Request $request)
     {
-        $login_user_id = auth()->user()->id;
-        $login_user = User::find($login_user_id);
+        // $login_user_id = auth()->user()->id;
+        // $login_user = User::find($login_user_id);
 
-        //Audit Trail
-        $auditTrail = AuditTrail::create([
-            'action' => 'Created Transfer Request',
-            'action_by' => $login_user->name,
-        ]);
+        // //Audit Trail
+        // $auditTrail = AuditTrail::create([
+        //     'action' => 'Created Transfer Request',
+        //     'action_by' => $login_user->name,
+        // ]);
 
-        $this->validate($request, [
-            'outlet_name' => 'required',
-            'address' => 'required',
-            'email' => 'required',
-            'telephone_number' => 'required',
-            'fax' => 'required',
-        ]);
+        // $this->validate($request, [
+        //     'outlet_name' => 'required',
+        //     'address' => 'required',
+        //     'email' => 'required',
+        //     'telephone_number' => 'required',
+        //     'fax' => 'required',
+        // ]);
 
-        // Create Request
-        // $transfers = new Outlet;
-        // $transfers->outlet_name = $request->input('outlet_name');
-        // $transfers->address = $request->input('address');
-        // $transfers->email = $request->input('email');
-        // $transfers->telephone_number = $request->input('telephone_number');
-        // $transfers->fax = $request->input('fax');
-        // $transfers->save();
+        // // Create Request
+        // // $transfers = new Outlet;
+        // // $transfers->outlet_name = $request->input('outlet_name');
+        // // $transfers->address = $request->input('address');
+        // // $transfers->email = $request->input('email');
+        // // $transfers->telephone_number = $request->input('telephone_number');
+        // // $transfers->fax = $request->input('fax');
+        // // $transfers->save();
 
-        $product_name = $request->input('product_name');
+        // $product_name = $request->input('product_name');
 
-        return redirect('/outlet')->with('success', 'Outlet Created');
+        // return redirect('/outlet')->with('success', 'Outlet Created');
+
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id);
+
+        if(!Session::has('cartTransferRequest')) {
+            return view('transfer_request.create')->with('users_id',$users_id);
+        } else {
+            $oldTransferRequestCart = Session::get('cartTransferRequest');
+            $transferRequestCart = new CartTransferRequest($oldTransferRequestCart);
+
+        }
+
+        return redirect('/transfer_request/create')->with('success', 'Transfer Request Created');
     }
 
     /**
@@ -163,4 +177,33 @@ class TransferRequestController extends Controller
 
         return redirect('/transfer_request')->with('success', 'Request Removed');
     }
+
+    public function getTransferRequestAddToCart(Request $request, $id) {
+        $product = Products::find($id);
+        $oldTransferRequestCart = Session::has('cartTransferRequest') ? Session::get('cartTransferRequest') : null;
+
+        $transferRequestCart = new CartTransferRequest($oldTransferRequestCart);
+        $transferRequestCart->add($product, $product->id);
+
+        $request->session()->put('cartTransferRequest', $transferRequestCart);
+        
+        return redirect()->route('/transfer_request/create/');
+    }
+
+    public function getTransferRequestCart() {
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id);
+
+        if(!Session::has('cartTransferRequest')) {
+            return view('transfer_request.create')->with('users_id',$users_id);
+        } else {
+            $oldTransferRequestCart = Session::get('cartTransferRequest');
+            $transferRequestCart = new CartTransferRequest($oldTransferRequestCart);
+
+            return view('transfer_request.create', [
+                'products' => $transferRequestCart->items
+            ])->with('users_id',$users_id);
+        }
+    }
+
 }

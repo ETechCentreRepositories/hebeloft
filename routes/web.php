@@ -62,3 +62,8 @@ Route::get('/testing/{id}', 'UsersController@show');
 Route::get('/salesOrder/create', 'SalesOrdersController@getSalesOrderCart');
 Route::get('/salesOrder/addtocart/{id}', 'SalesOrdersController@getSalesOrderAddToCart');
 Route::get('/testing/{id}', 'UsersController@show');
+
+//SalesOrder
+Route::get('/transfer_request/create', 'TransferRequestController@getTransferRequestCart');
+Route::get('/transfer_request/addtocart/{id}', 'TransferRequestController@getTransferRequestAddToCart');
+Route::get('/testing/{id}', 'UsersController@show');

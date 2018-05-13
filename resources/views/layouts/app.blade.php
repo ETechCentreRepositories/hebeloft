@@ -71,6 +71,15 @@
             }
         });
 
+        $("#transferRequestSearchField").autocomplete({
+            source: "{{URL::to('autocomplete-search')}}",
+            minLength:1,
+            select:function(key,value)
+            {
+                console.log(value);
+            }
+        });
+
     });
 
 function getPrice(){
@@ -159,6 +168,46 @@ function getProduct() {
     });
 }
 
+var trProducts = [];
+function getProduct() {
+    var productName = $("#transferRequestSearchField").val();
+    $.ajax({
+        type: "GET",
+        url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
+        // data: productName,
+        cache:false,
+        datatype: "JSON",
+        success: function (response) {
+
+            for (i = 0; i < response.length; i++) {
+
+                if (response[i].stock_level > response[i].threshold_level) {
+
+                    var productId = parseInt(response[i].products_id);
+
+                    trProducts.push(productId);
+                    console.log(trProducts);
+                    
+                    $("#addTransferRequestContent").append(
+                        "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
+                        + "<td>" + response[i].Brand + "</td>"
+                        + "<td>" + response[i].Name + "</td>"
+                        + "<td>" + response[i].UnitPrice + "</td>"
+                        + "<td><input name='quantity' type='number' id='quantity' onChange='getPrice()' type='text' style='width:60px;' value='1'/></td>"
+                        + "<td><input name='discount' id='discount' type='text' style='width:60px;' value='0'/></td>" 
+                        + "<td id='price'></td>"
+                        + "<td></td></tr>"
+                    );
+                }
+            }
+        },
+
+        error: function (obj, testStatus, errorThrown) {
+            
+        }
+    });
+}
+
 function saveProduct(){
     console.log("testing");
     console.log(products);
@@ -197,6 +246,33 @@ function saveOrderProduct(){
         $.ajax({
             type: "GET",
             url: "{{URL::TO('/salesOrder/addtocart/')}}/" + productID,
+            // data: "",
+            cache:false,
+            datatype: "JSON",
+            success: function (response) {
+                console.log("successful");
+            },
+
+            error: function (obj, testStatus, errorThrown) {
+                console.log("failure");
+            }
+        });
+    } else {
+        console.log("null");
+    }
+}
+
+function saveTRProduct(){
+    console.log("testing");
+    console.log(trProducts);
+    if(trProducts !== null) {
+        console.log("product not null");
+        console.log(trProducts[0]);
+        var productID = trProducts[0];
+        console.log(productID);
+        $.ajax({
+            type: "GET",
+            url: "{{URL::TO('/transfer_request/addtocart/')}}/" + productID,
             // data: "",
             cache:false,
             datatype: "JSON",
