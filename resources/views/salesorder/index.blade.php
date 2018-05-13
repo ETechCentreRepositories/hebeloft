@@ -15,6 +15,14 @@
 
 <br>
 <div class="topMargin container">
+    @if ($users_id->roles_id == '4')
+    <div class="row justify-content-end">
+        <div>
+            <button type="button" class="btn btn-warning" onclick="openCreateSalesOrderModal()">Create New Sales Order</button>
+        </div>
+    </div>
+    @endif
+    <br>
     <div class="drop-down_brand row">
         <div class="col-md-3">
             <p>From Date:</p>

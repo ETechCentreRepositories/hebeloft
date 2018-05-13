@@ -27,7 +27,7 @@ class HomeController extends Controller
         $transferShips = DB::table('transfer_requests')->where('status_id', 2)->count();
         $transferDelivers = DB::table('transfer_requests')->where('status_id', 3)->count();
         $transferInvoices = DB::table('transfer_requests')->where('status_id', 4)->count();
-        $auditTrails = AuditTrail::orderBy('created_at','desc')->get();
+        $auditTrails = AuditTrail::orderBy('created_at','desc')->paginate(4);
         
         return view('home')->with('users_id',$users_id)->with('salesPacks', $salesPacks)->with('salesShips', $salesShips)->with('salesDelivers', $salesDelivers)->with('salesInvoices', $salesInvoices)->with('transferPacks', $transferPacks)->with('transferShips', $transferShips)->with('transferDelivers', $transferDelivers)->with('transferInvoices', $transferInvoices)->with('auditTrails', $auditTrails);
     }
