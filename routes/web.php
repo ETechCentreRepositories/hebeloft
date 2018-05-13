@@ -55,22 +55,10 @@ Route::get('/ajax/inventory-outlet', 'InventoryController@getOutletByInventory')
 
 //SalesRecord 
 Route::get('/salesrecord/create', 'SalesRecordsController@getSalesRecordCart');
-// Route::get('/salesrecord/addSalesRecordList/{productName}', 'SalesRecordController@addSalesRecordList');
-Route::get('/salesrecord/retrieveItemBySalesId/{salesRecordId}', 'SalesRecordController@retrieveItemBySalesId');
-// Route::get('/retrieve-add-inventory-by-product-name/{productName}', 'SalesRecordController@getInventoryByProductName');
-// Route::get('/salesrecord/addtocart/{id}',[
-//     'uses' => 'SalesRecordsController@getSalesRecordAddToCart',
-//     'as' => 'product.addToCart'  
-// ]);
 Route::get('/salesrecord/addtocart/{id}', 'SalesRecordsController@getSalesRecordAddToCart');
+Route::get('/testing/{id}', 'UsersController@show');
 
-Route::get('salesrecord/retrieveitemBySalesId/{salesRecordId}', 'SalesRecordController@retieveItemBySalesId');
-
-// Route::post('create', array(
-//     'as' => 'create',
-//     function(){
-//         return View::make('create');
-//     }
-// ));
-
+//SalesOrder
+Route::get('/salesOrder/create', 'SalesOrdersController@getSalesOrderCart');
+Route::get('/salesOrder/addtocart/{id}', 'SalesOrdersController@getSalesOrderAddToCart');
 Route::get('/testing/{id}', 'UsersController@show');
