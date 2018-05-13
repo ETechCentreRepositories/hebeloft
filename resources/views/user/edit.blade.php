@@ -22,10 +22,10 @@
                 <div class="card-header">Update Staff</div>
 
                 <div class="card-body">
-                    {!!Form::open(['action' => ['UsersController@update', $user->id], 'method' => 'POST']) !!}
+                    {!!Form::open(['action' => ['UsersController@update', $users->id], 'method' => 'POST']) !!}
                     {{ csrf_field() }}
 
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <div class="row">
                             <div class="col-md-6">
                                 <input id="roles_id" type="radio" name="roles_id" value="5"> Warehouse staff<br>
@@ -34,16 +34,44 @@
                                 <input id="roles_id" type="radio" name="roles_id" value="3"> Outlet staff<br>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
+
+                    {{-- <div class="form-group{{ $errors->has('id') ? ' has-error' : '' }}">
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{Form::hidden('id', $users->id, ['class' => 'form-control', 'placeholder' => 'Id'])}}
+
+                                @if ($errors->has('id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                    </div> --}}
 
                     <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                         <div class="row">
                             <div class="col-md-12">
-                                {{Form::text('name', $user->name, ['class' => 'form-control', 'placeholder' => 'Username'])}}
+                                {{Form::text('name', $users->name, ['class' => 'form-control', 'placeholder' => 'Username'])}}
 
                                 @if ($errors->has('username'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('username') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('roles_id') ? ' has-error' : '' }}">
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{Form::hidden('roles_id', $users->roles_id, ['class' => 'form-control', 'placeholder' => 'Role'])}}
+
+                                @if ($errors->has('roles_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('roles_id') }}</strong>
                                     </span>
                                 @endif
                             </div>

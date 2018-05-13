@@ -19,7 +19,8 @@
 <h2>Sales Record</h2>
 <br>
 <div class="container">
-    <form id="formCreateSalesRecord" action="{{'SalesRecordController@create'}}" method="POST">
+    <!-- <form id="formCreateSalesRecord" action="SalesRecordsController@store" method="POST"> -->
+    {!! Form::open(['action' => 'SalesRecordsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'style' => 'margin-bottom: 0']) !!}
         <div class="row">
             <div class="col-md-3">
                 <p>Outlet: </p>
@@ -44,7 +45,6 @@
             </div>
             <div class="col-md-2">
                 <button type="button" class="btn btn-default btn-search" id="addSalesRecord" onClick="getProduct()">Add</button>
-                <!-- <a href="{{route('product.addToCart', ['id' => 1 ])}}" class="btn btn-success pull-right" role="button">Add to Cart</a> -->
             </div>
         </div>
         <br>
@@ -62,76 +62,28 @@
                 </tr>
             </thead>
             <tbody id="addSalesRecordContent">
-                
+            @if(Session::has('cartSalesRecord'))
+                @foreach($products as $product)
+                        <tr><td><img style="width:60px; height:60px" src="/storage/product_images/{{$product['item']['image']}}"/></td>
+                        <td>{{$product['item']['Brand']}}</td>
+                        <td>{{$product['item']['Name']}}</td>
+                        <td>{{$product['item']['UnitPrice']}}</td>
+                        <td><input name="quantity" type="number" id="quantity" onChange="getPrice()" type="text" style="width:60px;" value="{{$product['item']['qty']}}"/></td>
+                        <td><input name="discount" id="discount" type="text" style="width:60px;" value="0"/></td>
+                        <td id="price"></td>
+                        <td></td></tr>
+                    @endforeach
+                @endif
             </tbody>
         </table>
-    </form>
+
+        <div class="form-group">
+            <div>
+            <button type="button" class="btn btn-primary" onClick="saveProduct()">Save as Draft</button>
+            {{Form::submit('Create sales record', ['class'=>'btn btn-primary btn-lg'])}}
+            </div>
+        </div>
+        {!! Form::close() !!}
 </div>
-
-<script>
-    $(document).ready(function(){
-        $.get("{{ URL::to('ajax/outlet')}}",function(data){
-            $("#outlet").empty();
-            $.each(data,function(i,value){
-                var id = value.id;
-                var outlet = value.outlet_name;
-                var outlet_id = value.id;
-                $("#outlet").append("<option value='" +
-                outlet_id + "'>" +outlet + "</option>");
-            });
-        });
-
-        $("#salesRecordSearchField").autocomplete({
-            source: "{{URL::to('autocomplete-search')}}",
-            minLength:1,
-            select:function(key,value)
-            {
-                console.log(value);
-            }
-        });
-
-});
-
-</script>
-<script>
-function getPrice(){
-    var value  = $("#quantity").val();
-    console.log(value);
-    $("#price").html(value);
-}
-</script>
-
-
-<script>
-function getProduct() {
-    var productName = $("#salesRecordSearchField").val();
-    $.ajax({
-        type: "GET",
-        url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
-        // data: productName,
-        cache:false,
-        datatype: "JSON",
-        success: function (response) {
-            {{ route('product.addToCart', ['id' => 1 ])}}
-            for (i = 0; i < response.length; i++) {
-             $("#addSalesRecordContent").append(
-                "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
-                + "<td>" + response[i].Brand + "</td>"
-                + "<td>" + response[i].Name + "</td>"
-                + "<td>" + response[i].UnitPrice + "</td>"
-                + "<td><input name='quantity' type='number' id='quantity' onChange='getPrice()' type='text' style='width:60px;' value='1'/></td>"
-                + "<td><input name='discount' id='discount' type='text' style='width:60px;' value='0'/></td>" 
-                + "<td id='price'></td>"
-                + "<td></td></tr>"
-            );
-            }
-        },
-
-        error: function (obj, testStatus, errorThrown) {
-            
-        }
-    });
-}
-</script>
 
 @endsection

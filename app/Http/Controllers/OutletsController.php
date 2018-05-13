@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Outlet;
+use App\Models\AuditTrail;
 use App\User;
 
 class OutletsController extends Controller
@@ -39,6 +40,15 @@ class OutletsController extends Controller
      */
     public function store(Request $request)
     {
+        $login_user_id = auth()->user()->id;
+        $login_user = User::find($login_user_id);
+
+        //Audit Trail
+        $auditTrail = AuditTrail::create([
+            'action' => 'Created Outlet',
+            'action_by' => $login_user->name,
+        ]);
+
         $this->validate($request, [
             'outlet_name' => 'required',
             'address' => 'required',
@@ -93,12 +103,20 @@ class OutletsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $login_user_id = auth()->user()->id;
+        $login_user = User::find($login_user_id);
+
+        //Audit Trail
+        $auditTrail = AuditTrail::create([
+            'action' => 'Updated Outlet',
+            'action_by' => $login_user->name,
+        ]);
+        
         $this->validate($request, [
             'outlet_name' => 'required',
             'address' => 'required',
             'email' => 'required',
             'telephone_number' => 'required',
-            'fax' => 'required',
         ]);
 
         // Create Outlet
@@ -120,7 +138,16 @@ class OutletsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {   
+    {
+        $login_user_id = auth()->user()->id;
+        $login_user = User::find($login_user_id);
+
+        //Audit Trail
+        $auditTrail = AuditTrail::create([
+            'action' => 'Deleted Outlet',
+            'action_by' => $login_user->name,
+        ]);
+
         $outlet = Outlet::find($id);
 
         $outlet->delete();

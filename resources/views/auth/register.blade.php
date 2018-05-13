@@ -47,16 +47,6 @@
                                     </span>
                                 @endif
                             </div>
-
-                            <div class="col-md-6">
-                                <input id="company_name" type="text" class="form-control{{ $errors->has('company_name') ? ' is-invalid' : '' }}" name="company_name" value="{{ old('company_name') }}" placeholder="Company Name" required>
-
-                                @if ($errors->has('company_name'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('company_name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
                         </div>
 
                         <div class="form-group row">

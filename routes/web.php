@@ -26,7 +26,7 @@ Route::get('/outlet', 'PagesController@outlet');
 Route::get('/salesrecord', 'PagesController@salesrecord');
 
 Route::resource('home', 'HomeController');
-// Route::resource('inventory', 'InventoryController');
+Route::resource('inventory', 'InventoryController');
 Route::resource('user', 'UsersController');
 Route::resource('outlet', 'OutletsController');
 Route::resource('transferrequest', 'TransferRequestController');
@@ -54,15 +54,17 @@ Route::get('/ajax/inventory-outlet', 'InventoryController@getOutletByInventory')
 // Route::get('import-export-view', 'ExcelController@importExportView')->name('import.export.view');
 
 //SalesRecord 
-Route::get('/salesrecord/create', 'SalesRecordsController@create');
-Route::get('/salesrecord/addSalesRecordList/{productName}', 'SalesRecordsController@addSalesRecordList');
-Route::get('/salesrecord/retrieveItemBySalesId/{salesRecordId}', 'SalesRecordsController@retrieveItemBySalesId');
-Route::get('/retrieve-add-inventory-by-product-name/{productName}', 'SalesRecordsController@getInventoryByProductName');
-Route::get('/salesrecord/addtocart/{id}',[
-    'uses' => 'SalesRecordsController@getSalesRecordAddToCart',
-    'as' => 'product.addToCart'  
-]);
-Route::get('salesrecord/retrieveitemBySalesId/{salesRecordId}', 'SalesRecordsController@retieveItemBySalesId');
+Route::get('/salesrecord/create', 'SalesRecordsController@getSalesRecordCart');
+// Route::get('/salesrecord/addSalesRecordList/{productName}', 'SalesRecordController@addSalesRecordList');
+Route::get('/salesrecord/retrieveItemBySalesId/{salesRecordId}', 'SalesRecordController@retrieveItemBySalesId');
+// Route::get('/retrieve-add-inventory-by-product-name/{productName}', 'SalesRecordController@getInventoryByProductName');
+// Route::get('/salesrecord/addtocart/{id}',[
+//     'uses' => 'SalesRecordsController@getSalesRecordAddToCart',
+//     'as' => 'product.addToCart'  
+// ]);
+Route::get('/salesrecord/addtocart/{id}', 'SalesRecordsController@getSalesRecordAddToCart');
+
+Route::get('salesrecord/retrieveitemBySalesId/{salesRecordId}', 'SalesRecordController@retieveItemBySalesId');
 
 // Route::post('create', array(
 //     'as' => 'create',
@@ -70,3 +72,5 @@ Route::get('salesrecord/retrieveitemBySalesId/{salesRecordId}', 'SalesRecordsCon
 //         return View::make('create');
 //     }
 // ));
+
+Route::get('/testing/{id}', 'UsersController@show');

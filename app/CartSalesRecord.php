@@ -10,16 +10,16 @@ class CartSalesRecord {
 
     public function __construct($oldSalesRecordCart) {
         if($oldSalesRecordCart) {
-            $this ->items = $oldSalesRecordCart->$items;
-            $this->totalQty = $oldSalesRecordCart->$totalQty;
-            $this->totalPrice = $oldSalesRecordCart->$totalPrice;
+            $this->items = $oldSalesRecordCart->items;
+            $this->totalQty = $oldSalesRecordCart->totalQty;
+            $this->totalPrice = $oldSalesRecordCart->totalPrice;
         }
     }
 
     public function add($item, $id) {
         $storedItem = ['qty' => 0, 'price' => $item->price, 'item' => $item];
             if($this->items) {
-                if(array_key_exists($id, $this->$items)) {
+                if(array_key_exists($id, $this->items)) {
                     $storedItem = $this->items[$id];
                 }
             }

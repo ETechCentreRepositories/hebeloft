@@ -8,7 +8,9 @@ class AuditTrail extends Model
 {
     protected $table =  'audit_trail';
 
-    protected $fillable = ['action','action_by','created_at','updated_at'];
+    protected $fillable = ['id', 'action','action_by','created_at', 'updated_at'];
+
+    public $timestamps = false;
 
     public function registers(){
         return $this -> belongsTo('\App\User');

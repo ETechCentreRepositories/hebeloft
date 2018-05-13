@@ -38,7 +38,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     ];
 
     public function wholesaler(){
-        return $this->hasOne('App\Wholesaler');
+        return $this->hasOne('App\Models\Wholesaler');
     }
 
     public function outlet(){
@@ -46,10 +46,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     public function roles(){
-        return $this->belongsToMany('App\Models\Role');
+        return $this->belongsTo('App\Models\Role');
     }
 
-    public function salesRecordLists(){
+    public function auditTrails(){
         return hasMany('\App\Models\AuditTrail');
     }
 }

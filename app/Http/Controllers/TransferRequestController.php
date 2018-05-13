@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\TransferRequest;
 use App\User;
 use App\Models\Product;
+use App\Models\Status;
 
 
 class TransferRequestController extends Controller
@@ -43,6 +44,15 @@ class TransferRequestController extends Controller
      */
     public function store(Request $request)
     {
+        $login_user_id = auth()->user()->id;
+        $login_user = User::find($login_user_id);
+
+        //Audit Trail
+        $auditTrail = AuditTrail::create([
+            'action' => 'Created Transfer Request',
+            'action_by' => $login_user->name,
+        ]);
+
         $this->validate($request, [
             'outlet_name' => 'required',
             'address' => 'required',
@@ -75,14 +85,8 @@ class TransferRequestController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-        $transferRequest = TransferRequest::find($id);
-        // $product_name = $request->input('product_name');
-        // $quantity = $request->input('quantity');
-
-        // $this->transferRequest = [
-        //     'product_name' => $product_name,
-        //     'quantity' => $quantity
-        // ];
+        $transferRequestId = TransferRequest::find($id);
+        $transferQuantity = DB::table('transfer_requests')->where('status_id', 3);
 
         return view('transfer_request.show')->with('transferRequest', $transferRequest)->with('users_id',$users_id);
     }
@@ -108,6 +112,15 @@ class TransferRequestController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $login_user_id = auth()->user()->id;
+        $login_user = User::find($login_user_id);
+
+        //Audit Trail
+        $auditTrail = AuditTrail::create([
+            'action' => 'Updated Transfer Request',
+            'action_by' => $login_user->name,
+        ]);
+
         $this->validate($request, [
             'outlet_name' => 'required',
             'address' => 'required',
@@ -136,6 +149,15 @@ class TransferRequestController extends Controller
      */
     public function destroy($id)
     {
+        $login_user_id = auth()->user()->id;
+        $login_user = User::find($login_user_id);
+
+        //Audit Trail
+        $auditTrail = AuditTrail::create([
+            'action' => 'Deleted Transfer Request',
+            'action_by' => $login_user->name,
+        ]);
+
         $transfers = TransferRequest::find($id);
         $transfers->delete();
 

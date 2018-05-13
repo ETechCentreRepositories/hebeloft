@@ -19,6 +19,10 @@ class TransferRequest extends Model
     public function products() {
         return $this->belongsTo('App\Models\Products');
     }
+
+    public function statuses() {
+        return $this->belongsTo('App\Models\Status');
+    }
     
     public function transferRequestList(){
         return $this -> belongsTo('\App\Models\TransferRequestList');

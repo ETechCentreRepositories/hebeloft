@@ -26,6 +26,7 @@
                 <tr>
                     <th>Username</th>
                     <th>Email</th>
+                    <th>Role</th>
                     <th class="emptyHeader"></th>
                 </tr>
             </thead>
@@ -35,11 +36,12 @@
                 <tr>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
+                    <td>{{$user->roles['roles_name']}}</td>
                     <td>
                         <div class="d-flex flex-row user-buttons">
-                            <div class="p-2">
-                                <a href="/user/{{$user->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
-                            </div>
+                                <div class="p-2">
+                                    <a href="/user/{{$user->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
+                                </div>
                             <div class="p-2">
                                 {!!Form::open(['action' => ['UsersController@destroy', $user->id], 'method' => 'POST'])!!}
                                     {{Form::hidden('_method', 'DELETE')}}
