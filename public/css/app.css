@@ -10443,6 +10443,10 @@ a.text-dark:focus {
   min-width: 0;
 }
 
+.laravelAlert {
+  margin: 60px 10px -60px 10px;
+}
+
 .username {
   color: #e3b417 !important;
   background-color: #566B30;
@@ -10469,7 +10473,7 @@ select {
 }
 
 .topMargin {
-  margin-top: 55px;
+  margin-top: 50px;
 }
 
 .salesOrder {
@@ -10693,5 +10697,9 @@ th:hover {
 
 .passwordField {
   margin-bottom: 1rem;
+}
+
+.laravelAlert {
+  margin: 60px 10px -60 10px;
 }
 
