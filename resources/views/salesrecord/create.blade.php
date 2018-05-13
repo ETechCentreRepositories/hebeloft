@@ -68,7 +68,7 @@
                         <td>{{$product['item']['Brand']}}</td>
                         <td>{{$product['item']['Name']}}</td>
                         <td>{{$product['item']['UnitPrice']}}</td>
-                        <td><input name="quantity" type="number" id="quantity" onChange="getPrice()" type="text" style="width:60px;" value="{{$product['item']['qty']}}"/></td>
+                        <td><input name="quantity" type="number" id="quantity" onChange="getPrice()" type="text" style="width:60px;" value="{{$product['qty']}}"/></td>
                         <td><input name="discount" id="discount" type="text" style="width:60px;" value="0"/></td>
                         <td id="price"></td>
                         <td></td></tr>

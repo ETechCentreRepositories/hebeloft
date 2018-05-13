@@ -54,7 +54,7 @@ class SalesRecordsController extends Controller
 
         }
 
-        return redirect('/salesrecord')->with('success', 'Sales Record Created');
+        return redirect('/salesrecord/create')->with('success', 'Sales Record Created');
     }
     
 
@@ -111,8 +111,6 @@ class SalesRecordsController extends Controller
         $salesrecordCart->add($product, $product->id);
 
         $request->session()->put('cartSalesRecord', $salesrecordCart);
-
-        dd($salesrecordCart);
         
         return redirect()->route('/salesrecord/create/');
     }
@@ -127,7 +125,7 @@ class SalesRecordsController extends Controller
             $oldSalesRecordCart = Session::get('cartSalesRecord');
             $salesrecordCart = new CartSalesRecord($oldSalesRecordCart);
 
-            // dd($salesrecordCart);
+            dd($salesrecordCart);
 
             return view('salesRecord.create', [
                 'products' => $salesrecordCart->items
