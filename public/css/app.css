@@ -10703,3 +10703,9 @@ th:hover {
   margin: 60px 10px -60 10px;
 }
 
+.searchField::before {
+  display: none;
+  font-family: "Font Awesome 5 Solid";
+  content: "\F007";
+}
+

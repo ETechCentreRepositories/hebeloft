@@ -55,7 +55,10 @@
         </div>
     </div>
     <div class="row">
-        <input type="text" class="form-control" style="background:transparent; height:0.8cm;">
+        {{-- <div class="input-group"> --}}
+            {{-- <span class="input-group-addon"><i class="fas fa-search"></i></span> --}}
+        <input type="text" class="form-control searchField" style="background:transparent; height:0.8cm;">
+        {{-- </div> --}}
     </div>
     <br>
     <div>

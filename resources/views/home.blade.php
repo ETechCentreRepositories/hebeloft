@@ -133,7 +133,7 @@
                 <h3 class="dashboardLabels">Audit Trails</h3>
                 <table class="table table-striped">
                     <thead>
-                        <tr><th class="col-md-4">Name</th></tr>
+                        <tr><th class="col-md-4">Done By</th></tr>
                         <tr><th class="col-md-4">Action</th></tr>
                         <tr><th class="col-md-4">Date/Time</th></tr>
                     </thead>
@@ -148,7 +148,11 @@
                     </tbody>
                 </table>
             </div>
+            <div class="pagination">
+                {{$auditTrails->links()}}
+            </div>
         </div>
+        
         <div class="col-md-6">
             <div class="dashboardTables">
                 <h3 class="dashboardLabels">Sales Record</h3>
@@ -165,9 +169,14 @@
                     </tbody>
                 </table>
             </div>
+            <div class="pagination">
+                {{$auditTrails->links()}}
+            </div>
         </div>
     </div>
 </div>
+
+
 @endsection
 
 <style>
