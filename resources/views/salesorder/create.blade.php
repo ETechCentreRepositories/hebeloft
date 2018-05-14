@@ -44,7 +44,7 @@
                 <input type="text" id="salesOrderSearchField" class="form-control" style="background:transparent">
             </div>
             <div class="col-md-2">
-                <button type="button" class="btn btn-default btn-search" id="addSalesOrder" onClick="getProduct()">Add</button>
+                <button type="button" class="btn btn-default btn-search" id="addSalesOrder" onClick="getSalesOrderProduct()">Add</button>
             </div>
         </div>
         <br>
