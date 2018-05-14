@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SalesRecord;
-use App\Models\SalesRecordList;
 use App\Models\InventoryOutlet;
 use App\Models\Products;
 use Session;

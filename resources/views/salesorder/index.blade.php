@@ -18,7 +18,7 @@
     @if ($users_id->roles_id == '4')
     <div class="row justify-content-end">
         <div>
-            <button type="button" class="btn btn-warning" onclick="openCreateSalesOrderModal()">Create New Sales Order</button>
+            <a href="/salesOrder/create"><button type="button" class="btn btn-warning">Create New Sales Order</button>
         </div>
     </div>
     @endif
@@ -61,7 +61,7 @@
                 </tr>
             </thead>
             <tbody>
-                @if(count($salesorders) > 0)
+                {{-- @if(count($salesorders) > 0)
                 @foreach($salesorders as $salesorder)
                 <tr>
                     <td>{{$salesorder->id}}</td>
@@ -70,7 +70,7 @@
                     <td><button type="button" class="btn btn-primary action-buttons">View Order</button></td>
                 </tr>
                 @endforeach
-                @endif
+                @endif --}}
             </tbody>
         </table>
     </div>
