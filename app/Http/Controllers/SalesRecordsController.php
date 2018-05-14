@@ -124,8 +124,6 @@ class SalesRecordsController extends Controller
             $oldSalesRecordCart = Session::get('cartSalesRecord');
             $salesrecordCart = new CartSalesRecord($oldSalesRecordCart);
 
-            dd($salesrcordCart);
-
             return view('salesRecord.create', [
                 'products' => $salesrecordCart->items
             ])->with('users_id',$users_id);

@@ -48,7 +48,7 @@ class TransferRequestController extends Controller
         // $login_user_id = auth()->user()->id;
         // $login_user = User::find($login_user_id);
 
-        // //Audit Trail
+        // Audit Trail
         // $auditTrail = AuditTrail::create([
         //     'action' => 'Created Transfer Request',
         //     'action_by' => $login_user->name,
@@ -86,9 +86,14 @@ class TransferRequestController extends Controller
 
             
             // foreach($products as $product) {
-            //     {{$product['item']['id']}}
+                //  {{$product['item']['id']}}
             //     {{$product['qty']}}
             // }
+
+            $transferRequestList = TransferRequestList::create([
+                'transfer_requests_id' => 'Created Transfer Request',
+                'products_id' => $login_user->name,
+            ]);
 
         }
 
@@ -205,7 +210,6 @@ class TransferRequestController extends Controller
         } else {
             $oldTransferRequestCart = Session::get('cartTransferRequest');
             $transferRequestCart = new CartTransferRequest($oldTransferRequestCart);
-
             return view('transfer_request.create', [
                 'products' => $transferRequestCart->items
             ])->with('users_id',$users_id);
