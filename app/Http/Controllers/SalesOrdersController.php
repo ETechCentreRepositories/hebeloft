@@ -124,6 +124,8 @@ class SalesOrdersController extends Controller
             $oldSalesOrderCart = Session::get('cartSalesOrder');
             $salesOrderCart = new CartSalesOrder($oldSalesOrderCart);
 
+            dd($salesOrderCart);
+
             return view('salesOrder.create', [
                 'products' => $salesOrderCart->items
             ])->with('users_id',$users_id);
