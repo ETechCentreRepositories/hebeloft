@@ -42,7 +42,7 @@
         </div>
         <div class="col-md-2 fullWidthButtons">
             <div class="p-2 no-side-paddings transfer-buttons">
-                <a href="/transfer_request/create"><button type="button" class="btn btn-warning centered-buttons transferRequestButtons">Create New Request</button>
+                <a href="/transferrequest/create"><button type="button" class="btn btn-warning centered-buttons transferRequestButtons">Create New Request</button>
             </div>
             <div class="d-flex flex-row transfer-buttons">
                 <div class="p-2">

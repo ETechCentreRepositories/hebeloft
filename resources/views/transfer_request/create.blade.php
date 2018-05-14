@@ -43,7 +43,7 @@
                 <input type="text" id="transferRequestSearchField" class="form-control" style="background:transparent">
             </div>
             <div class="col-md-2">
-                <button type="button" class="btn btn-default btn-search" id="addTransferRequest" onClick="getProduct()">Add</button>
+                <button type="button" class="btn btn-default btn-search" id="addTransferRequest" onClick="getTransferRequestProduct()">Add</button>
             </div>
         </div>
         <br>

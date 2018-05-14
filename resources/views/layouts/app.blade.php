@@ -89,7 +89,7 @@ function getPrice(){
 }
 
 var products = [];
-function getProduct() {
+function getSalesRecordProduct() {
     var productName = $("#salesRecordSearchField").val();
     $.ajax({
         type: "GET",
@@ -129,7 +129,7 @@ function getProduct() {
 }
 
 var orderProducts = [];
-function getProduct() {
+function getSalesOrderProduct() {
     var productName = $("#salesOrderSearchField").val();
     $.ajax({
         type: "GET",
@@ -169,7 +169,7 @@ function getProduct() {
 }
 
 var trProducts = [];
-function getProduct() {
+function getTransferRequestProduct() {
     var productName = $("#transferRequestSearchField").val();
     $.ajax({
         type: "GET",

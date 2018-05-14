@@ -84,6 +84,12 @@ class TransferRequestController extends Controller
             $oldTransferRequestCart = Session::get('cartTransferRequest');
             $transferRequestCart = new CartTransferRequest($oldTransferRequestCart);
 
+            
+            // foreach($products as $product) {
+            //     {{$product['item']['id']}}
+            //     {{$product['qty']}}
+            // }
+
         }
 
         return redirect('/transfer_request/create')->with('success', 'Transfer Request Created');
