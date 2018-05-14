@@ -53,10 +53,7 @@
                     <th>Picture</th>
                     <th>Brand</th>
                     <th>Name</th>
-                    <th>Price</th>
                     <th>Quantity</th>
-                    <th>Discount</th>
-                    <th>Total Price</th>
                     <th></th>
                 </tr>
             </thead>
@@ -66,10 +63,7 @@
                         <tr><td><img style="width:60px; height:60px" src="/storage/product_images/{{$product['item']['image']}}"/></td>
                         <td>{{$product['item']['Brand']}}</td>
                         <td>{{$product['item']['Name']}}</td>
-                        <td>{{$product['item']['UnitPrice']}}</td>
                         <td><input name="quantity" type="number" id="quantity" onChange="getPrice()" type="text" style="width:60px;" value="{{$product['qty']}}"/></td>
-                        <td><input name="discount" id="discount" type="text" style="width:60px;" value="0"/></td>
-                        <td id="price"></td>
                         <td></td></tr>
                     @endforeach
                 @endif
@@ -79,7 +73,7 @@
         <div class="form-group">
             <div>
             <button type="button" class="btn btn-primary" onClick="saveTRProduct()">Save as Draft</button>
-            {{Form::submit('Create sales record', ['class'=>'btn btn-primary'])}}
+            {{Form::submit('Create Transfer Request', ['class'=>'btn btn-primary'])}}
             </div>
         </div>
         {!! Form::close() !!}

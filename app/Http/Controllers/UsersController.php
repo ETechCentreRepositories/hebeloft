@@ -77,7 +77,6 @@ class UsersController extends Controller
         $user->email = $request->input('email');
         $user->phone_number = $request->input('phone_number');
         $user->password = Hash::make($request->input('password'));
-        $user->audit_trails_id = $auditTrail->id;
         $user->save();
 
         $outlets = $request->outlet; 

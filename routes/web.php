@@ -67,3 +67,7 @@ Route::get('/testing/{id}', 'UsersController@show');
 Route::get('/transferrequest/create', 'TransferRequestController@getTransferRequestCart');
 Route::get('/transferrequest/addtocart/{id}', 'TransferRequestController@getTransferRequestAddToCart');
 Route::get('/testing/{id}', 'UsersController@show');
+
+
+//Forget Password
+Route::get('/mailto/{to, from, subject, message}', 'ForgetPasswordController@mailto');

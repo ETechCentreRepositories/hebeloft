@@ -192,9 +192,7 @@ function getTransferRequestProduct() {
                         "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
                         + "<td>" + response[i].Brand + "</td>"
                         + "<td>" + response[i].Name + "</td>"
-                        + "<td>" + response[i].UnitPrice + "</td>"
                         + "<td><input name='quantity' type='number' id='quantity' onChange='getPrice()' type='text' style='width:60px;' value='1'/></td>"
-                        + "<td><input name='discount' id='discount' type='text' style='width:60px;' value='0'/></td>" 
                         + "<td id='price'></td>"
                         + "<td></td></tr>"
                     );
@@ -265,6 +263,9 @@ function saveOrderProduct(){
 function saveTRProduct(){
     console.log("testing");
     console.log(trProducts);
+
+    var date = $("#transferRequestDate").val();
+    var location = $("#outlet").val();
     if(trProducts !== null) {
         console.log("product not null");
         console.log(trProducts[0]);
@@ -272,8 +273,12 @@ function saveTRProduct(){
         console.log(productID);
         $.ajax({
             type: "GET",
-            url: "{{URL::TO('/transfer_request/addtocart/')}}/" + productID,
-            // data: "",
+            url: "{{URL::TO('/transferrequest/addtocart/')}}/",
+            data:{
+                id: productID,
+                location: location,
+                date: date
+            },
             cache:false,
             datatype: "JSON",
             success: function (response) {
