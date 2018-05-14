@@ -79,7 +79,7 @@
         <div class="form-group">
             <div>
             <button type="button" class="btn btn-primary" onClick="saveTRProduct()">Save as Draft</button>
-            {{Form::submit('Create sales record', ['class'=>'btn btn-primary btn-lg'])}}
+            {{Form::submit('Create sales record', ['class'=>'btn btn-primary'])}}
             </div>
         </div>
         {!! Form::close() !!}
