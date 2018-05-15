@@ -42,7 +42,7 @@
         </div>
         <div class="col-md-2 fullWidthButtons">
             <div class="p-2 no-side-paddings transfer-buttons">
-                <a href="/transferrequest/create"><button type="button" class="btn btn-warning centered-buttons transferRequestButtons">Create New Request</button>
+                <a href="/transferrequest/create"><button type="button" class="btn btn-warning centered-buttons transferRequestButtons">Create New Request</button></a>
             </div>
             <div class="d-flex flex-row transfer-buttons">
                 <div class="p-2">
@@ -82,9 +82,9 @@
                     <td>
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row transfer-buttons">
-                             <a href="/transferrequest/{{$transfer->id}}">
-                                <button type="button" class="btn btn-primary action-buttons btn-view-more">View Order</button>
-                            </a>
+                            <div class="p-2">
+                                <a href="/transferrequest/{{$transfer->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
+                                </div>
                             </div>
                         </div>
                     </td>
@@ -107,13 +107,6 @@
 @endsection
 
 <style>
-    .transferRequestNav {
-        background-color: #f5f8fa !important;
-        color: #000000 !important;
-        pointer-events: none;
-        cursor: default;
-    }
-</style><style>
     .transferRequestNav {
         background-color: #f5f8fa !important;
         color: #000000 !important;

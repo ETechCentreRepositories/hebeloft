@@ -15,4 +15,8 @@ class SalesOrder extends Model
     public function statuses(){
         return $this->belongsTo('App\Models\Status');
     }
+
+    public function products() {
+        return $this->belongsTo('App\Models\Products');
+    }
 }

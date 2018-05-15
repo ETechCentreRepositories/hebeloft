@@ -9,6 +9,7 @@ use App\User;
 use App\Models\Status;
 use App\Models\AuditTrail;
 use App\Models\Products;
+use App\Models\Outlet;
 use Session;
 use App\CartTransferRequest;
 
@@ -100,9 +101,9 @@ class TransferRequestController extends Controller
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
         $transferRequestId = TransferRequest::find($id)->id;
-        $transferRequests = TransferRequestList::where('transfer_requests_id', $transferRequestId)->get();
+        $transfers = TransferRequestList::where('transfer_requests_id', $transferRequestId)->get();
 
-        return view('transfer_request.show')->with('transferRequests',$transferRequests)->with('users_id',$users_id);
+        return view('transfer_request.show')->with('transfers',$transfers)->with('users_id',$users_id);
     }
 
     /**
@@ -113,8 +114,14 @@ class TransferRequestController extends Controller
      */
     public function edit($id)
     {
-        $outlet = Outlet::find($id);
-        return view('transfer_request.edit')->with('transfers', $transfers);
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id); 
+
+        $transferRequests = TransferRequest::find($id);
+        $transferRequestId = TransferRequest::find($id)->id;
+        $transfers = TransferRequestList::where('transfer_requests_id', $transferRequestId)->get();
+
+        return view('transfer_request.edit')->with('transfers', $transfers)->with('users_id',$users_id)->with('transferRequests',$transferRequests);
     }
 
     /**
@@ -136,12 +143,14 @@ class TransferRequestController extends Controller
         ]);
 
         $this->validate($request, [
-            'outlet_name' => 'required',
-            'address' => 'required',
-            'email' => 'required',
-            'telephone_number' => 'required',
-            'fax' => 'required',
+            // 'quantity' => 'required',
+            'status' => 'required',
         ]);
+
+        $transfer = TransferRequest::find($id);
+        // $transfer->quantity = $request->input('quantity');
+        $transfer->status = $request->input('status');
+        $transfer->save();
 
         return redirect('/transferrequest')->with('success', 'Request Updated');
     }

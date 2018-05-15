@@ -10,6 +10,7 @@ use Session;
 use App\User;
 use App\CartSalesOrder;
 use App\Models\AuditTrail;
+use App\Models\SalesOrderList;
 use App\Wholesaler;
 use App\Models\SalesOrderList;
 
@@ -111,7 +112,14 @@ class SalesOrdersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id); 
+
+        $salesOrders = SalesOrder::find($id);
+        $salesOrderId = SalesOrder::find($id)->id;
+        $sales = SalesOrderList::where('sales_order_id', $salesOrderId)->get();
+
+        return view('salesorder.edit')->with('sales', $sales)->with('users_id',$users_id)->with('salesOrders',$salesOrders);
     }
 
     /**
@@ -123,7 +131,26 @@ class SalesOrdersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $login_user_id = auth()->user()->id;
+        $login_user = User::find($login_user_id);
+
+        //Audit Trail
+        $auditTrail = AuditTrail::create([
+            'action' => 'Updated Sales Order',
+            'action_by' => $login_user->name,
+        ]);
+
+        $this->validate($request, [
+            // 'quantity' => 'required',
+            'status' => 'required',
+        ]);
+
+        $sales = SalesOrder::find($id);
+        // $transfer->quantity = $request->input('quantity');
+        $sales->status = $request->input('status');
+        $sales->save();
+
+        return redirect('/salesorder')->with('success', 'Request Updated');
     }
 
     /**

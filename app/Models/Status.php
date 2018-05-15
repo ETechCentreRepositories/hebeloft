@@ -8,7 +8,5 @@ class Status extends Model
 {
     protected $table = 'statuses';
 
-    public function salesorders(){
-        return $this->belongsToMany('App\Models\SalesOrder');
-    }
+    public $timestamps = false;
 }

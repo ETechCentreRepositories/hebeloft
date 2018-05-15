@@ -10709,3 +10709,7 @@ th:hover {
   content: "\F007";
 }
 
+.btn-accept {
+  float: right;
+}
+

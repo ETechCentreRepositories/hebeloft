@@ -1,4 +1,4 @@
-<!-- @extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
 
@@ -11,15 +11,21 @@
 @elseif ($users_id->roles_id == '4')
 @include('inc.navbar_wholesaler')
 @include('inc.unauthorized')
-@endif -->
+@endif
 
-<!-- <br>
+<br>
 
 <div class="topMargin container">
-    <h3 class="card-title">Transfer Request</h3>
-    <button class="btn btn-warning btn-add-item" onclick="openAddItemModal()">Add item</button>
-    <br><br>
-    <table class="table table-striped" id="inventoryTable" >
+<br>
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="card">
+                <div class="card-header">Update Transfer Request</div>
+
+                <div class="card-body">
+                {!!Form::open(['action' => ['TransferRequestController@update', $transferRequests->id], 'method' => 'POST']) !!}
+                    {{ csrf_field() }}
+                    <table class="table table-striped" id="inventoryTable" >
         <thead>
             <tr>
                 <th>Product Name</th>
@@ -37,28 +43,27 @@
             @endif
         </tbody>
     </table>
-    <br>
-    {!!Form::open(['action' => ['TransferRequestController@update', $transferRequests->id], 'method' => 'POST']) !!}
-                    {{ csrf_field() }}
-                    <select name="status">
+    <select name="status" class="form-control">
                         <option value="reject">Reject</option>
                         <option value="accept">Accept</option>
                     </select>
-                <br><br>
+                <br>
                     {{Form::hidden('_method','PUT')}}
-                    {{Form::submit('Edit transfer request', ['class'=>'btn btn-primary'])}}
+                    <div class="modal-button">
+                    {{Form::submit('Update transfer request', ['class'=>'btn btn-primary'])}}
+</div>
                     {!! Form::close() !!}
-    <div>
-        <button class="btn btn-danger" name="thing" value="reject">Reject</button>
-        <button class="btn btn-success btn-accept" name="thing" value="accept">Accept</button>
+                </div>
+            </div>
+        </div>
     </div>
-</div> -->
+</div>
 
-<!-- <style>
+<style>
     .transferRequestNav {
         background-color: #f5f8fa !important;
-        color: #566B30 !important;
+        color: #000000 !important;
         pointer-events: none;
         cursor: default;
     }
-</style> -->
+</style>
