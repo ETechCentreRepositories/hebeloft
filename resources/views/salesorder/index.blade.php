@@ -68,14 +68,14 @@
                         <td></td>
                         <td></td>
                         <td>
-                            <div class="d-flex flex-column">
-                                <div class="d-flex flex-row transfer-buttons">
-                                <a href="">
-                                    <button type="button" class="btn btn-primary action-buttons btn-view-more">View Order</button>
-                                </a>
+                        <div class="d-flex flex-column">
+                            <div class="d-flex flex-row transfer-buttons">
+                            <div class="p-2">
+                                <a href="/salesorder/{{$salesOrder->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
                             </div>
-                        </td>
+                        </div>
+                    </td>
                     </tr>
                     @endforeach
             </tbody>
