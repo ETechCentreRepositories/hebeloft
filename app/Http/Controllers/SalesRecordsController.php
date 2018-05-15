@@ -83,7 +83,7 @@ class SalesRecordsController extends Controller
             }
         }
 
-        return redirect('/salesrecord/create')->with('success', 'Sales Request Created');
+        return redirect('/salesrecord')->with('success', 'Sales Record Created');
     }
     
 

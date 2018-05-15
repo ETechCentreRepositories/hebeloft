@@ -87,7 +87,7 @@ class TransferRequestController extends Controller
 
         }
 
-        return redirect('/transferrequest/create')->with('success', 'Transfer Request Created');
+        return redirect('/transferrequest')->with('success', 'Transfer Request Created');
     }
 
     /**

@@ -88,7 +88,7 @@ class SalesOrdersController extends Controller
             }
         }
 
-        return redirect('/salesorder/create')->with('success', 'Sales Order Created');
+        return redirect('/salesorder')->with('success', 'Sales Order Created');
     }
     
 
