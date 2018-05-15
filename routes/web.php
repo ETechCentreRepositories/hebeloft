@@ -59,15 +59,14 @@ Route::get('/salesrecord/addtocart/{id}', 'SalesRecordsController@getSalesRecord
 Route::get('/testing/{id}', 'UsersController@show');
 
 //SalesOrder
-Route::get('/salesOrder/create', 'SalesOrdersController@getSalesOrderCart');
-Route::get('/salesOrder/addtocart/{id}', 'SalesOrdersController@getSalesOrderAddToCart');
+Route::get('/salesorder/create', 'SalesOrdersController@getSalesOrderCart');
+Route::get('/salesorder/addtocart/{id}', 'SalesOrdersController@getSalesOrderAddToCart');
 Route::get('/testing/{id}', 'UsersController@show');
 
 //TransferRequest
 Route::get('/transferrequest/create', 'TransferRequestController@getTransferRequestCart');
 Route::get('/transferrequest/addtocart/{id}', 'TransferRequestController@getTransferRequestAddToCart');
 Route::get('/testing/{id}', 'UsersController@show');
-
 
 //Forget Password
 Route::get('/mailto/{to, from, subject, message}', 'ForgetPasswordController@mailto');

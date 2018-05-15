@@ -10,7 +10,7 @@ class Wholesaler extends Model
     protected $table = 'wholesalers';
 
     protected $fillable = [
-        'users_id','billing_address','shipping_address', 'company_name',
+        'users_id','billing_address','shipping_address',
     ];
 
     //Primary Key
