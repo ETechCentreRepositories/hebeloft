@@ -73,16 +73,16 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($transfers as $transfer)
+                @foreach($transferRequests as $transferRequest)
                 <tr>
-                    <td>{{$transfer->id}}</td>
-                    <td>{{$transfer->from_location}}</td>
-                    <td>{{$transfer->recipient}}</td>
-                    <td>{{$transfer->statuses['status_name']}}</td>
+                    <td>{{$transferRequest->id}}</td>
+                    <td>{{$transferRequest->from_location}}</td>
+                    <td>{{$transferRequest->recipient}}</td>
+                    <td>{{$transferRequest->statuses['status_name']}}</td>
                     <td>
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row transfer-buttons">
-                             <a href="/transferrequest/{{$transfer->id}}">
+                             <a href="/transferrequest/{{$transferRequest->id}}">
                                 <button type="button" class="btn btn-primary action-buttons btn-view-more">View Order</button>
                             </a>
                             </div>

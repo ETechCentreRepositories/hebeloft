@@ -17,7 +17,7 @@
 
 <div>
     <h3 class="card-title">Transfer Request</h3>
-    <button class="btn btn-warning btn-add-item" onclick="openAddItemModal()">Add item</button>
+    <!-- <button class="btn btn-warning btn-add-item" onclick="openAddItemModal()">Add item</button> -->
     <br><br>
     <table class="table table-striped" id="inventoryTable" >
         <thead>

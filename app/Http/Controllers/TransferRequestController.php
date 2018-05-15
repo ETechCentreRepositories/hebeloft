@@ -26,9 +26,9 @@ class TransferRequestController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-        $transfers = TransferRequest::orderBy('id','asc')->paginate(10);
+        $transferRequests = TransferRequest::orderBy('id','asc')->paginate(10);
 
-        return view('transfer_request.index')->with('transfers', $transfers)->with('users_id',$users_id);
+        return view('transfer_request.index')->with('transferRequests', $transferRequests)->with('users_id',$users_id);
     }
 
     /**
