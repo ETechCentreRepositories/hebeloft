@@ -4,8 +4,10 @@
 
 @if ($users_id->roles_id == '1')
 @include('inc.navbar_superadmin')
+@include('inc.unauthorized')
 @elseif ($users_id->roles_id == '2')
 @include('inc.navbar_admin')
+@include('inc.unauthorized')
 @elseif ($users_id->roles_id == '3')
 @include('inc.navbar_outletstaff')
 @include('inc.unauthorized')
@@ -79,8 +81,8 @@
 
         <div class="form-group">
             <div>
-            <button type="button" class="btn btn-primary" onClick="saveOrderProduct()">Save as Draft</button>
-            {{Form::submit('Create Sales Draft', ['class'=>'btn btn-primary btn-lg'])}}
+                <button type="button" class="btn btn-primary" onClick="saveOrderProduct()">Save as Draft</button>
+                {{Form::submit('Create Sales Draft', ['class'=>'btn btn-primary'])}}
             </div>
         </div>
         {!! Form::close() !!}

@@ -70,3 +70,8 @@ Route::get('/testing/{id}', 'UsersController@show');
 
 //Forget Password
 Route::get('/mailto/{to, from, subject, message}', 'ForgetPasswordController@mailto');
+
+//Accept/Reject Transfer Request
+Route::post('/', function () {
+    DB::table('things')->insert(request()->only('thing'));
+});

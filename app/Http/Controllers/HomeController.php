@@ -19,14 +19,14 @@ class HomeController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-        $salesPacks = DB::table('sales_order')->where('status_id', 1)->count();
-        $salesShips = DB::table('sales_order')->where('status_id', 2)->count();
-        $salesDelivers = DB::table('sales_order')->where('status_id', 3)->count();
-        $salesInvoices = DB::table('sales_order')->where('status_id', 4)->count();
-        $transferPacks = DB::table('transfer_requests')->where('status_id', 1)->count();
-        $transferShips = DB::table('transfer_requests')->where('status_id', 2)->count();
-        $transferDelivers = DB::table('transfer_requests')->where('status_id', 3)->count();
-        $transferInvoices = DB::table('transfer_requests')->where('status_id', 4)->count();
+        $salesPacks = DB::table('sales_order')->where('statuses_id', 1)->count();
+        $salesShips = DB::table('sales_order')->where('statuses_id', 2)->count();
+        $salesDelivers = DB::table('sales_order')->where('statuses_id', 3)->count();
+        $salesInvoices = DB::table('sales_order')->where('statuses_id', 4)->count();
+        $transferPacks = DB::table('transfer_requests')->where('statuses_id', 1)->count();
+        $transferShips = DB::table('transfer_requests')->where('statuses_id', 2)->count();
+        $transferDelivers = DB::table('transfer_requests')->where('statuses_id', 3)->count();
+        $transferInvoices = DB::table('transfer_requests')->where('statuses_id', 4)->count();
         $auditTrails = AuditTrail::orderBy('created_at','desc')->paginate(4);
         
         return view('home')->with('users_id',$users_id)->with('salesPacks', $salesPacks)->with('salesShips', $salesShips)->with('salesDelivers', $salesDelivers)->with('salesInvoices', $salesInvoices)->with('transferPacks', $transferPacks)->with('transferShips', $transferShips)->with('transferDelivers', $transferDelivers)->with('transferInvoices', $transferInvoices)->with('auditTrails', $auditTrails);
