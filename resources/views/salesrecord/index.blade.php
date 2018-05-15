@@ -59,6 +59,15 @@
                 </tr>
             </thead>
             <tbody>
+                    @foreach($salesRecord as $salesRecord)
+                    <tr>
+                        <td>{{$salesRecord->id}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        
+                    </tr>
+                    @endforeach
             </tbody>
         </table>
     </div>

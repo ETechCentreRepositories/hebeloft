@@ -9,6 +9,8 @@ use App\Models\Products;
 use Session;
 use App\User;
 use App\CartSalesRecord;
+use App\Models\AuditTrail;
+
 
 class SalesRecordsController extends Controller
 {
@@ -19,10 +21,12 @@ class SalesRecordsController extends Controller
      */
     public function index()
     {
+
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
+        $salesRecord = SalesRecord::orderBy('id','asc')->paginate(10);
 
-        return view('salesrecord.index')->with('users_id',$users_id);
+        return view('salesrecord.index')->with('salesRecord', $salesRecord)->with('users_id',$users_id);
     }
 
     /**
@@ -42,18 +46,40 @@ class SalesRecordsController extends Controller
      */
     public function store(Request $request)
     {
+
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
 
+        //Audit Trail
+        $auditTrail = AuditTrail::create([
+            'action' => 'Created Sales Record',
+            'action_by' => $users_id->name,
+        ]);
+        
+
         if(!Session::has('cartSalesRecord')) {
-            return view('salesRecord.create')->with('users_id',$users_id);
+            return view('salesrecord.create')->with('users_id',$users_id);
         } else {
+
             $oldSalesRecordCart = Session::get('cartSalesRecord');
             $salesrecordCart = new CartSalesRecord($oldSalesRecordCart);
+            $products = $salesrecordCart->items;
+            
+            foreach($products as $product) {
+                $salesRecord = new SalesRecord;
+                $salesRecord->audit_trails_id = $auditTrail->id;
+                $salesRecord->outlets_id = 1;
+                $salesRecord->total_price = 1;
+                $salesRecord->remarks = "";
+                $salesRecord->save();
 
+                
+                // {{$product['item']['id']}}
+                // {{$product['qty']}}
+            }
         }
 
-        return redirect('/salesrecord/create')->with('success', 'Sales Record Created');
+        return redirect('/salesrecord/create')->with('success', 'Sales Request Created');
     }
     
 
