@@ -99,17 +99,17 @@ class TransferRequestController extends Controller
                 $transfers = new TransferRequest;
                 $transfers->audit_trails_id = $auditTrail->id;
                 $transfers->status_id = 1;
-                $transfers->from_location = $product['location'];
-                $transfers->remarks = $product['date'];
+                $transfers->from_location = "";
+                $transfers->remarks = "";
                 $transfers->save();
                 // {{$product['item']['id']}}
                 // {{$product['qty']}}
             }
 
-            $transferRequestList = TransferRequestList::create([
-                'transfer_requests_id' => 'Created Transfer Request',
-                'products_id' => $login_user->name,
-            ]);
+            // $transferRequestList = TransferRequestList::create([
+            //     'transfer_requests_id' => 'Created Transfer Request',
+            //     'products_id' => $login_user->name,
+            // ]);
 
         }
 
@@ -196,12 +196,12 @@ class TransferRequestController extends Controller
         return redirect('/transferrequest')->with('success', 'Request Removed');
     }
 
-    public function getTransferRequestAddToCart(Request $request, $id, $location, $date) {
+    public function getTransferRequestAddToCart(Request $request, $id) {
         $product = Products::find($id);
         $oldTransferRequestCart = Session::has('cartTransferRequest') ? Session::get('cartTransferRequest') : null;
 
         $transferRequestCart = new CartTransferRequest($oldTransferRequestCart);
-        $transferRequestCart->add($product, $product->id, $location, $date);
+        $transferRequestCart->add($product, $product->id);
 
         $request->session()->put('cartTransferRequest', $transferRequestCart);
         

@@ -9,6 +9,8 @@ use App\Models\Products;
 use Session;
 use App\User;
 use App\CartSalesOrder;
+use App\Models\AuditTrail;
+use App\Wholesaler;
 
 class SalesOrdersController extends Controller
 {
@@ -21,8 +23,9 @@ class SalesOrdersController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
+        $salesOrder = SalesOrder::orderBy('id','asc')->paginate(10);
 
-        return view('salesorder.index')->with('users_id',$users_id);
+        return view('salesorder.index')->with('salesOrder', $salesOrder)->with('users_id',$users_id);
     }
 
     /**
@@ -42,18 +45,46 @@ class SalesOrdersController extends Controller
      */
     public function store(Request $request)
     {
+
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
+
+        //Audit Trail
+        $auditTrail = AuditTrail::create([
+            'action' => 'Created Sales Order',
+            'action_by' => $users_id->name,
+        ]);
+        
 
         if(!Session::has('cartSalesOrder')) {
             return view('salesorder.create')->with('users_id',$users_id);
         } else {
+
             $oldSalesOrderCart = Session::get('cartSalesOrder');
             $salesOrderCart = new CartSalesOrder($oldSalesOrderCart);
-
+            $products = $salesOrderCart->items;
+            
+            foreach($products as $product) {
+                $salesOrder = new SalesOrder;
+                $salesOrder->status_id = 1;
+                $salesOrder->status = "pending";
+                $salesOrder->remarks = "";
+                $salesOrder->audit_trails_id = $auditTrail->id;
+                $salesOrder->name = "";
+                $salesOrder->email = "";
+                $salesOrder->phone_number =  "";
+                $salesOrder->shipping_address = "";
+                $salesOrder->billing_address = "";
+                $salesOrder->sales_order_number = "";
+                
+                $salesOrder->save();
+                
+                // {{$product['item']['id']}}
+                // {{$product['qty']}}
+            }
         }
 
-        return redirect('/salesOrder/create')->with('success', 'Sales Order Created');
+        return redirect('/salesorder/create')->with('success', 'Sales Order Created');
     }
     
 
@@ -111,7 +142,7 @@ class SalesOrdersController extends Controller
 
         $request->session()->put('cartSalesOrder', $salesOrderCart);
         
-        return redirect()->route('/salesOrder/create/');
+        return redirect()->route('/salesorder/create/');
     }
 
     public function getSalesOrderCart() {
@@ -119,14 +150,12 @@ class SalesOrdersController extends Controller
         $users_id = User::find($user_id);
 
         if(!Session::has('cartSalesOrder')) {
-            return view('salesOrder.create')->with('users_id',$users_id);
+            return view('salesorder.create')->with('users_id',$users_id);
         } else {
             $oldSalesOrderCart = Session::get('cartSalesOrder');
             $salesOrderCart = new CartSalesOrder($oldSalesOrderCart);
 
-            dd($salesOrderCart);
-
-            return view('salesOrder.create', [
+            return view('salesorder.create', [
                 'products' => $salesOrderCart->items
             ])->with('users_id',$users_id);
         }

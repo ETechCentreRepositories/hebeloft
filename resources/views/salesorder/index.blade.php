@@ -18,7 +18,7 @@
     @if ($users_id->roles_id == '4')
     <div class="row justify-content-end">
         <div>
-            <a href="/salesOrder/create"><button type="button" class="btn btn-warning">Create New Sales Order</button>
+            <a href="/salesorder/create"><button type="button" class="btn btn-warning">Create New Sales Order</button>
         </div>
     </div>
     @endif
@@ -61,16 +61,23 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- @if(count($salesorders) > 0)
-                @foreach($salesorders as $salesorder)
-                <tr>
-                    <td>{{$salesorder->id}}</td>
-                    <td>{{$salesorder->order_time}}</td>
-                    <td>{{$salesorder->statuses['status_name']}}</td>
-                    <td><button type="button" class="btn btn-primary action-buttons">View Order</button></td>
-                </tr>
-                @endforeach
-                @endif --}}
+                    @foreach($salesOrder as $salesOrder)
+                    <tr>
+                        <td>{{$salesOrder->id}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <div class="d-flex flex-column">
+                                <div class="d-flex flex-row transfer-buttons">
+                                <a href="">
+                                    <button type="button" class="btn btn-primary action-buttons btn-view-more">View Order</button>
+                                </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
             </tbody>
         </table>
     </div>
