@@ -273,12 +273,8 @@ function saveTRProduct(){
         console.log(productID);
         $.ajax({
             type: "GET",
-            url: "{{URL::TO('/transferrequest/addtocart/')}}/",
-            data:{
-                id: productID,
-                location: location,
-                date: date
-            },
+            url: "{{URL::TO('/transferrequest/addtocart/')}}/" + productID,
+            // data: "",
             cache:false,
             datatype: "JSON",
             success: function (response) {
