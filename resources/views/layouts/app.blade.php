@@ -244,7 +244,7 @@ function saveOrderProduct(){
         console.log(productID);
         $.ajax({
             type: "GET",
-            url: "{{URL::TO('/salesOrder/addtocart/')}}/" + productID,
+            url: "{{URL::TO('/salesorder/addtocart/')}}/" + productID,
             // data: "",
             cache:false,
             datatype: "JSON",
@@ -290,6 +290,25 @@ function saveTRProduct(){
         console.log("null");
     }
 }
+
+function removeTRProduct($pID){
+    console.log($pID);
+    $.ajax({
+        type: "GET",
+        url: "{{URL::TO('/transferrequest/removefromcart/')}}/" + $pID,
+        // data: "",
+        cache:false,
+        datatype: "JSON",
+        success: function (response) {
+            console.log("successful");
+        },
+
+        error: function (obj, testStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+}
+
 </script>
    
 </head>

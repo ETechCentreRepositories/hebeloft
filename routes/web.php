@@ -66,6 +66,7 @@ Route::get('/testing/{id}', 'UsersController@show');
 //TransferRequest
 Route::get('/transferrequest/create', 'TransferRequestController@getTransferRequestCart');
 Route::get('/transferrequest/addtocart/{id}', 'TransferRequestController@getTransferRequestAddToCart');
+Route::get('/transferrequest/removefromcart/{id}', 'TransferRequestController@removeProductfromCart');
 Route::get('/testing/{id}', 'UsersController@show');
 
 //Forget Password

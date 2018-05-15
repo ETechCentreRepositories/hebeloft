@@ -189,9 +189,22 @@ class TransferRequestController extends Controller
             $oldTransferRequestCart = Session::get('cartTransferRequest');
             $transferRequestCart = new CartTransferRequest($oldTransferRequestCart);
 
+            // dd($transferRequestCart);
+
             return view('transfer_request.create', [
                 'products' => $transferRequestCart->items
             ])->with('users_id',$users_id);
+        }
+    }
+
+    public function removeProductfromCart(Request $request, $id) {
+        if(!Session::has('cartTransferRequest')) {
+            return redirect('/transferrequest/create/')->with('success', 'Failed to remove');
+        } else {
+            $oldTransferRequestCart = Session::get('cartTransferRequest');
+            $transferRequestCart = new CartTransferRequest($oldTransferRequestCart);
+            $request->session()->flush();
+            return redirect('/transferrequest/create/')->with('success', 'Request Removed');
         }
     }
 }
