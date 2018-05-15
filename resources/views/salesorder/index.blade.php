@@ -57,7 +57,9 @@
                     <th>Order Id</th>
                     <th>Order Date</th>
                     <th>Status</th>
+                    @if ($users_id->roles_id == '1')
                     <th>More details</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -67,6 +69,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
+                        @if ($users_id->roles_id == '1')
                         <td>
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row transfer-buttons">
@@ -76,6 +79,7 @@
                             </div>
                         </div>
                     </td>
+                    @endif
                     </tr>
                     @endforeach
             </tbody>

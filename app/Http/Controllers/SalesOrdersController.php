@@ -12,7 +12,6 @@ use App\CartSalesOrder;
 use App\Models\AuditTrail;
 use App\Models\SalesOrderList;
 use App\Wholesaler;
-use App\Models\SalesOrderList;
 
 class SalesOrdersController extends Controller
 {

@@ -69,7 +69,9 @@
                     <th>Sender</th>
                     <th>Recipient</th>
                     <th>Status</th>
+                    @if ($users_id->roles_id == '1')
                     <th>More Details</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -79,6 +81,7 @@
                     <td>{{$transfer->from_location}}</td>
                     <td>{{$transfer->recipient}}</td>
                     <td>{{$transfer->statuses['status_name']}}</td>
+                    @if ($users_id->roles_id == '1')
                     <td>
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row transfer-buttons">
@@ -88,6 +91,7 @@
                             </div>
                         </div>
                     </td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>
