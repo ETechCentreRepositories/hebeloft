@@ -22,7 +22,7 @@ class SalesOrdersController extends Controller
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
 
-        return view('salesOrder.index')->with('users_id',$users_id);
+        return view('salesorder.index')->with('users_id',$users_id);
     }
 
     /**
@@ -46,7 +46,7 @@ class SalesOrdersController extends Controller
         $users_id = User::find($user_id);
 
         if(!Session::has('cartSalesOrder')) {
-            return view('salesOrder.create')->with('users_id',$users_id);
+            return view('salesorder.create')->with('users_id',$users_id);
         } else {
             $oldSalesOrderCart = Session::get('cartSalesOrder');
             $salesOrderCart = new CartSalesOrder($oldSalesOrderCart);

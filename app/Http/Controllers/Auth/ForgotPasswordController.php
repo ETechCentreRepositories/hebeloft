@@ -30,16 +30,16 @@ class ForgotPasswordController extends Controller
         $this->middleware('guest');
     }
     //this one is the mail function alr
-    public function mailto($to, $from, $subject, $message){
-        //this one is for the email server to detect if its text or tml and the php version to adjust accordingly.
-        $headers = "MIME-Version:1.0" . "\r\n";
-        $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
-        $headers .= "From" . $from . "\r\n" . "Reply-To" . $from . "\r\n" . "X-Mailer: PHP/" . phpversion();
-        if(mail($to, $subject, $message, $headers){ 
+    // public function mailto($to, $from, $subject, $message){
+    //     //this one is for the email server to detect if its text or tml and the php version to adjust accordingly.
+    //     $headers = "MIME-Version:1.0" . "\r\n";
+    //     $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
+    //     $headers .= "From" . $from . "\r\n" . "Reply-To" . $from . "\r\n" . "X-Mailer: PHP/" . phpversion();
+    //     if(mail($to, $subject, $message, $headers){ 
             
-        }
-        else{
-            //but then we dont have any "alternate flow" so this one i think fuc it lol
-        }
-    }
+    //     }
+    //     else{
+    //         //but then we dont have any "alternate flow" so this one i think fuc it lol
+    //     }
+    // }
 }
