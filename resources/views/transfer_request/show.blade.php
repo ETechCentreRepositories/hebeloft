@@ -27,10 +27,14 @@
             </tr>
         </thead>
         <tbody id="inventoryContent">
+        @if(count($transferRequests) > 0)
+                @foreach($transferRequests as $transferRequest)
             <tr>
-                <td></td>
-                <td>{{$transferRequest->transfer_requests_list['quantity']}}</td>
+                <td>{{$transferRequest->products['Name']}}</td>
+                <td>{{$transferRequest->quantity}}</td>
             </tr>
+            @endforeach
+            @endif
         </tbody>
     </table>
 </div>

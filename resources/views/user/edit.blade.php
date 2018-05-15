@@ -100,6 +100,7 @@
                         </div>
                     </div> --}}
 
+                    @if($users->roles_id == 3)
                     <br><hr><br>
 
                     <label >Outlet:</label>
@@ -110,6 +111,7 @@
                         </div>
                         @endforeach
                     </div>
+                    @endif
 
                     {{Form::hidden('_method','PUT')}}
                     <div class="form-group">

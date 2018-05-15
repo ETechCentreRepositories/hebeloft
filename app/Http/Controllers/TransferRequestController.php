@@ -12,6 +12,8 @@ use App\Models\Products;
 use Session;
 use App\CartTransferRequest;
 
+use DB;
+
 class TransferRequestController extends Controller
 {
     protected $transferRequest;
@@ -97,10 +99,10 @@ class TransferRequestController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-        $transferRequestId = TransferRequest::find($id);
-        $transferQuantity = DB::table('transfer_requests')->where('status_id', 3);
+        $transferRequestId = TransferRequest::find($id)->id;
+        $transferRequests = TransferRequestList::where('transfer_requests_id', $transferRequestId)->get();
 
-        return view('transfer_request.show')->with('transferRequest', $transferRequest)->with('users_id',$users_id);
+        return view('transfer_request.show')->with('transferRequests',$transferRequests)->with('users_id',$users_id);
     }
 
     /**

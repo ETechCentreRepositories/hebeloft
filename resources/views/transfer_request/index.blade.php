@@ -82,9 +82,9 @@
                     <td>
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row transfer-buttons">
-                            {{-- <a href="/transferrequest/{{$transfer->id}}">
+                             <a href="/transferrequest/{{$transfer->id}}">
                                 <button type="button" class="btn btn-primary action-buttons btn-view-more">View Order</button>
-                            </a> --}}
+                            </a>
                             </div>
                         </div>
                     </td>
