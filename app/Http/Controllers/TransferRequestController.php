@@ -49,35 +49,6 @@ class TransferRequestController extends Controller
      */
     public function store(Request $request)
     {
-        // $login_user_id = auth()->user()->id;
-        // $login_user = User::find($login_user_id);
-
-        // Audit Trail
-        // $auditTrail = AuditTrail::create([
-        //     'action' => 'Created Transfer Request',
-        //     'action_by' => $login_user->name,
-        // ]);
-
-        // $this->validate($request, [
-        //     'outlet_name' => 'required',
-        //     'address' => 'required',
-        //     'email' => 'required',
-        //     'telephone_number' => 'required',
-        //     'fax' => 'required',
-        // ]);
-
-        // // Create Request
-        // // $transfers = new Outlet;
-        // // $transfers->outlet_name = $request->input('outlet_name');
-        // // $transfers->address = $request->input('address');
-        // // $transfers->email = $request->input('email');
-        // // $transfers->telephone_number = $request->input('telephone_number');
-        // // $transfers->fax = $request->input('fax');
-        // // $transfers->save();
-
-        // $product_name = $request->input('product_name');
-
-        // return redirect('/outlet')->with('success', 'Outlet Created');
 
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
@@ -96,22 +67,22 @@ class TransferRequestController extends Controller
             $oldTransferRequestCart = Session::get('cartTransferRequest');
             $transferRequestCart = new CartTransferRequest($oldTransferRequestCart);
             $products = $transferRequestCart->items;
-            
-            foreach($products as $product) {
-                $transfers = new TransferRequest;
-                $transfers->audit_trails_id = $auditTrail->id;
-                $transfers->status_id = 1;
-                $transfers->from_location = "";
-                $transfers->remarks = "";
-                $transfers->save();
-                // {{$product['item']['id']}}
-                // {{$product['qty']}}
-            }
 
-            // $transferRequestList = TransferRequestList::create([
-            //     'transfer_requests_id' => 'Created Transfer Request',
-            //     'products_id' => $login_user->name,
-            // ]);
+            $transfers = new TransferRequest;
+            $transfers->audit_trails_id = $auditTrail->id;
+            $transfers->status_id = 1;
+            $transfers->status="pending";
+            $transfers->from_location = "";
+            $transfers->remarks = "";
+            $transfers->save();
+
+            foreach($products as $product) {
+                $transferRequestList = new TransferRequestList;
+                $transferRequestList->transfer_requests_id =$transfers['id'];
+                $transferRequestList->products_id = $product['item']['id'];
+                $transferRequestList->quantity=$product['qty'];
+                $transferRequestList->save();
+            }
 
         }
 
@@ -219,6 +190,7 @@ class TransferRequestController extends Controller
         } else {
             $oldTransferRequestCart = Session::get('cartTransferRequest');
             $transferRequestCart = new CartTransferRequest($oldTransferRequestCart);
+
             return view('transfer_request.create', [
                 'products' => $transferRequestCart->items
             ])->with('users_id',$users_id);

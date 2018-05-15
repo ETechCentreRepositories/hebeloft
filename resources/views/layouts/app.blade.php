@@ -171,6 +171,7 @@ function getSalesOrderProduct() {
 var trProducts = [];
 function getTransferRequestProduct() {
     var productName = $("#transferRequestSearchField").val();
+    console.log(productName);
     $.ajax({
         type: "GET",
         url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
