@@ -68,7 +68,7 @@
                         <td>{{$salesOrder->id}}</td>
                         <td></td>
                         <td></td>
-                        <td></td>
+                        <td>{{$salesOrder->statuses['status_name']}}</td>
                         @if ($users_id->roles_id == '1')
                         <td>
                         <div class="d-flex flex-column">
