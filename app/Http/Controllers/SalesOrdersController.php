@@ -12,6 +12,7 @@ use App\CartSalesOrder;
 use App\Models\AuditTrail;
 use App\Models\SalesOrderList;
 use App\Wholesaler;
+use App\Models\SalesOrderList;
 
 class SalesOrdersController extends Controller
 {
@@ -65,23 +66,26 @@ class SalesOrdersController extends Controller
             $salesOrderCart = new CartSalesOrder($oldSalesOrderCart);
             $products = $salesOrderCart->items;
             
+            $salesOrder = new SalesOrder;
+            $salesOrder->status_id = 1;
+            $salesOrder->status = "pending";
+            $salesOrder->remarks = "";
+            $salesOrder->audit_trails_id = $auditTrail->id;
+            $salesOrder->name = "";
+            $salesOrder->email = "";
+            $salesOrder->phone_number =  "";
+            $salesOrder->shipping_address = "";
+            $salesOrder->billing_address = "";
+            $salesOrder->sales_order_number = "";
+                
+            $salesOrder->save();
+
             foreach($products as $product) {
-                $salesOrder = new SalesOrder;
-                $salesOrder->status_id = 1;
-                $salesOrder->status = "pending";
-                $salesOrder->remarks = "";
-                $salesOrder->audit_trails_id = $auditTrail->id;
-                $salesOrder->name = "";
-                $salesOrder->email = "";
-                $salesOrder->phone_number =  "";
-                $salesOrder->shipping_address = "";
-                $salesOrder->billing_address = "";
-                $salesOrder->sales_order_number = "";
-                
-                $salesOrder->save();
-                
-                // {{$product['item']['id']}}
-                // {{$product['qty']}}
+                $salesOrderList = new SalesOrderList;
+                $salesOrderList->sales_order_id =$salesOrder['id'];
+                $salesOrderList->products_id = $product['item']['id'];
+                $salesOrderList->quantity=$product['qty'];
+                $salesOrderList->save();
             }
         }
 

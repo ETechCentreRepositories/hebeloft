@@ -54,7 +54,7 @@
                     <th>Brand</th>
                     <th>Name</th>
                     <th>Quantity</th>
-                    <th></th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody id="addTransferRequestContent">
@@ -64,7 +64,13 @@
                         <td>{{$product['item']['Brand']}}</td>
                         <td>{{$product['item']['Name']}}</td>
                         <td><input name="quantity" type="number" id="quantity" onChange="getPrice()" type="text" style="width:60px;" value="{{$product['qty']}}"/></td>
-                        <td></td></tr>
+                        <td>
+                                <div class="d-flex flex-column">
+                                        <div class="d-flex flex-row transfer-buttons">
+                                            <button type="button" class="btn btn-danger action-buttons btn-remove" onclick="removeTRProduct({{$product['item']['id']}})">Remove</button>
+                                        </div>
+                                    </div>
+                                </td></tr>
                     @endforeach
                 @endif
             </tbody>

@@ -10,6 +10,7 @@ use Session;
 use App\User;
 use App\CartSalesRecord;
 use App\Models\AuditTrail;
+use App\Models\SalesRecordList;
 
 
 class SalesRecordsController extends Controller
@@ -65,17 +66,20 @@ class SalesRecordsController extends Controller
             $salesrecordCart = new CartSalesRecord($oldSalesRecordCart);
             $products = $salesrecordCart->items;
             
-            foreach($products as $product) {
-                $salesRecord = new SalesRecord;
-                $salesRecord->audit_trails_id = $auditTrail->id;
-                $salesRecord->outlets_id = 1;
-                $salesRecord->total_price = 1;
-                $salesRecord->remarks = "";
-                $salesRecord->save();
+            $salesRecord = new SalesRecord;
+            $salesRecord->audit_trails_id = $auditTrail->id;
+            $salesRecord->outlets_id = 1;
+            $salesRecord->total_price = 1;
+            $salesRecord->remarks = "";
+            $salesRecord->save();
 
-                
-                // {{$product['item']['id']}}
-                // {{$product['qty']}}
+            foreach($products as $product) {
+                $salesRecordList = new SalesRecordList;
+                $salesRecordList->sales_record_id =$salesRecord['id'];
+                $salesRecordList->products_id = $product['item']['id'];
+                $salesRecordList->discount = 0.00;
+                $salesRecordList->quantity=$product['qty'];
+                $salesRecordList->save();
             }
         }
 
