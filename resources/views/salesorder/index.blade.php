@@ -14,15 +14,8 @@
 @endif
 
 <br>
+@if ($users_id->roles_id == '1')
 <div class="topMargin container">
-    @if ($users_id->roles_id == '4')
-    <div class="row justify-content-end">
-        <div>
-            <a href="/salesorder/create"><button type="button" class="btn btn-warning">Create New Sales Order</button>
-        </div>
-    </div>
-    @endif
-    <br>
     <div class="drop-down_brand row">
         <div class="col-md-3">
             <p>From Date:</p>
@@ -64,7 +57,7 @@
                 </tr>
             </thead>
             <tbody>
-                    @foreach($salesOrder as $salesOrder)
+                    @foreach($salesOrders as $salesOrder)
                     <tr>
                         <td>{{$salesOrder->id}}</td>
                         <td></td>
@@ -87,6 +80,69 @@
         </table>
     </div>
 </div>
+@endif
+
+@if ($users_id->roles_id == '4')
+<div class="topMargin container">
+    <div class="row justify-content-end">
+        <div>
+            <a href="/salesorder/create"><button type="button" class="btn btn-warning">Create New Sales Order</button></a>
+        </div>
+    </div>
+    <br>
+    <div class="drop-down_brand row">
+        <div class="col-md-3">
+            <p>From Date:</p>
+        </div>
+        <div class="col-md-9">
+            <input type="date" name="from" class="form-control">
+        </div>
+    </div>
+    <br>
+    <div class="drop-down_location row">
+        <div class="col-md-3">
+            <p>To Date:</p>
+        </div>
+        <div class="col-md-9">
+            <input type="date" name="to" class="form-control">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-10">
+            <input type="text" class="form-control" style="background:transparent;">
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
+        </div>
+    </div>
+    <br>
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Order Id</th>
+                    <th>Order Date</th>
+                    <th>Process</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                    @foreach($wholesalerSalesOrders as $wholesalerSalesOrder)
+                    <tr>
+                        <td>{{$wholesalerSalesOrder->id}}</td>
+                        <td></td>
+                        <td>{{$wholesalerSalesOrder->status}}</td>
+                        <td>{{$wholesalerSalesOrder->statuses['status_name']}}</td>
+                    </tr>
+                    @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
+@endif
+
+
 @endsection
 
 <style>

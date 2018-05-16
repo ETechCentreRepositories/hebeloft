@@ -10,6 +10,7 @@ use App\Models\Status;
 use App\Models\AuditTrail;
 use App\Models\Products;
 use App\Models\Outlet;
+use App\Models\UserOutlet;
 use Session;
 use App\CartTransferRequest;
 
@@ -73,7 +74,7 @@ class TransferRequestController extends Controller
             $transfers->audit_trails_id = $auditTrail->id;
             $transfers->statuses_id = 1;
             $transfers->status="pending";
-            $transfers->from_location =  $request->input('outlet');
+            $transfers->outlets_id =  $request->input('outlet');
             $transfers->date =  $request->input('transferRequestDate');
             $transfers->remarks = $request->input('remarks');
             $transfers->save();

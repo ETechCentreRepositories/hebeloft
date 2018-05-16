@@ -52,4 +52,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function auditTrails(){
         return hasMany('\App\Models\AuditTrail');
     }
+
+    public function userOutlet(){
+        return belongsTo('\App\Models\UserOutlet');
+    }
 }

@@ -24,9 +24,11 @@ class SalesOrdersController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-        $salesOrder = SalesOrder::orderBy('id','asc')->paginate(10);
+        $salesOrders = SalesOrder::orderBy('id','asc')->paginate(10);
+        
+        $wholesalerSalesOrders = SalesOrder::where('users_id', '=', $user_id)->get();
 
-        return view('salesorder.index')->with('salesOrder', $salesOrder)->with('users_id',$users_id);
+        return view('salesorder.index')->with('salesOrders', $salesOrders)->with('users_id',$users_id)->with('wholesalerSalesOrders',$wholesalerSalesOrders);
     }
 
     /**
