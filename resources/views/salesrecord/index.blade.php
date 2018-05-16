@@ -41,7 +41,6 @@
     <div class="row">
         <div class="col-md-10">
             <input type="text" class="form-control" style="background:transparent;">
-            {{-- height:0.8cm; --}}
         </div>
         <div class="col-md-2">
             <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
@@ -53,22 +52,27 @@
             <thead>
                 <tr>
                     <th>Date</th>
+                    <th>Receipt Number</th>
                     <th>Outlet</th>
-                    <th>Revenue</th>
-                    <th>Details</th>
+                    <th>Total Price</th>
+                    <th>Remarks</th>
                 </tr>
             </thead>
             <tbody>
-                    @foreach($salesRecord as $salesRecord)
+                    @foreach($salesRecords as $salesRecord)
                     <tr>
-                        <td>{{$salesRecord->id}}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{$salesRecord->date}}</td>
+                        <td>{{$salesRecord->recieptNumber}}</td>
+                        <td>{{$salesRecord->outlets_id}}</td>
+                        <td>{{$salesRecord->total_price}}</td>
+                        <td>{{$salesRecord->remarks}}</td>
                     </tr>
                     @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="pagination">
+        {{$salesRecords->links()}}
     </div>
 </div>
 

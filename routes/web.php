@@ -15,7 +15,6 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-// Route::get('/', 'PagesController@home');
 Route::get('/home', 'PagesController@home');
 Route::get('/', 'PagesController@inventory');
 Route::get('/salesorder', 'PagesController@salesorder');
@@ -50,12 +49,9 @@ Route::get('export-inventory/{type}', 'InventoryController@exportFile')->name('e
 Route::get('/ajax/outlet', 'InventoryController@getOutlet');
 Route::get('/ajax/inventory-outlet', 'InventoryController@getOutletByInventory');
 
-//Import outlets
-// Route::get('import-export-view', 'ExcelController@importExportView')->name('import.export.view');
-
 //SalesRecord 
 Route::get('/salesrecord/create', 'SalesRecordsController@getSalesRecordCart');
-Route::get('/salesrecord/addtocart/{id}/{price}/{quantity}/{outlet}/{date}', 'SalesRecordsController@getSalesRecordAddToCart');
+Route::get('/salesrecord/addtocart/{id}/{price}/{quantity}/{outlet}/{date}/{remarks}/{receiptNumber}', 'SalesRecordsController@getSalesRecordAddToCart');
 Route::get('/testing/{id}', 'UsersController@show');
 
 //SalesOrder
@@ -65,12 +61,8 @@ Route::get('/testing/{id}', 'UsersController@show');
 
 //TransferRequest
 Route::get('/transferrequest/create', 'TransferRequestController@getTransferRequestCart');
-Route::get('/transferrequest/addtocart/{id}', 'TransferRequestController@getTransferRequestAddToCart');
-Route::get('/transferrequest/removefromcart/{id}', 'TransferRequestController@removeProductfromCart');
+Route::get('/transferrequest/addtocart/{id}/{quantity}/{outlet}/{date}', 'TransferRequestController@getTransferRequestAddToCart');
 Route::get('/testing/{id}', 'UsersController@show');
-
-//Forget Password
-Route::get('/mailto/{to, from, subject, message}', 'ForgetPasswordController@mailto');
 
 //Accept/Reject Transfer Request
 Route::post('/', function () {

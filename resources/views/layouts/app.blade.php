@@ -163,12 +163,12 @@ function getTransferRequestProduct() {
                     console.log(trProducts);
                     
                     $("#addTransferRequestContent").append(
-                        "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
+                        "<tr id='"+productId+"'>"
+                        + "<td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
                         + "<td>" + response[i].Brand + "</td>"
                         + "<td>" + response[i].Name + "</td>"
-                        + "<td><input name='quantity' type='number' id='quantity' onChange='getPrice()' type='text' style='width:60px;' value='1'/></td>"
-                        + "<td id='price'></td>"
-                        + "<td></td></tr>"
+                        + "<td><input name='quantity' type='number' id='quantity' type='text' style='width:60px;' value='1'/></td>"
+                        + "</tr>"
                     );
                 }
             }
@@ -187,13 +187,17 @@ function saveProduct(){
         var quantity =  $('#createSalesRecordTable tr:last-child td:eq(3) #quantity').val();
         var outlet = $('#outlet').val();
         var date = $("#salesRecordDate").val();
+        var remarks = $("#remarks").val();
+        var receiptNumber = $("#receiptNumber").val();
         console.log(price);
         console.log(quantity);
         console.log(outlet);
         console.log(date);
+        console.log(remarks);
+        console.log(receiptNumber);
         $.ajax({
             type: "GET",
-            url: "{{URL::TO('/salesrecord/addtocart/')}}/" + productID + "/" + price + "/" + quantity + "/" + outlet + "/" + date,
+            url: "{{URL::TO('/salesrecord/addtocart/')}}/" + productID + "/" + price + "/" + quantity + "/" + outlet + "/" + date + "/" + remarks + "/" + receiptNumber,
             // data: "",
             cache:false,
             datatype: "JSON",
@@ -238,19 +242,18 @@ function saveOrderProduct(){
 }
 
 function saveTRProduct(){
-    console.log("testing");
-    console.log(trProducts);
-
+    var outlet = $('#outlet').val();
     var date = $("#transferRequestDate").val();
-    var location = $("#outlet").val();
+    var quantity =  $('#createTransferRequestTable tr:last-child td:eq(3) #quantity').val();
+
     if(trProducts !== null) {
-        console.log("product not null");
-        console.log(trProducts[0]);
+        console.log(quantity);
+        console.log(outlet);
+        console.log(date);
         var productID = trProducts[0];
-        console.log(productID);
         $.ajax({
             type: "GET",
-            url: "{{URL::TO('/transferrequest/addtocart/')}}/" + productID,
+            url: "{{URL::TO('/transferrequest/addtocart/')}}/" + productID + "/" + quantity + "/" + outlet + "/" + date,
             // data: "",
             cache:false,
             datatype: "JSON",
@@ -266,25 +269,6 @@ function saveTRProduct(){
         console.log("null");
     }
 }
-
-function removeTRProduct($pID){
-    console.log($pID);
-    $.ajax({
-        type: "GET",
-        url: "{{URL::TO('/transferrequest/removefromcart/')}}/" + $pID,
-        // data: "",
-        cache:false,
-        datatype: "JSON",
-        success: function (response) {
-            console.log("successful");
-        },
-
-        error: function (obj, testStatus, errorThrown) {
-            console.log(errorThrown);
-        }
-    });
-}
-
 </script>
    
 </head>

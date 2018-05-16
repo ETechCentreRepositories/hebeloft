@@ -44,6 +44,15 @@
         </div>
         <br>
         <div class="row">
+            <div class="col-md-3">
+                <p>Reciept number: </p>
+            </div>
+            <div class="col-md-9">
+                <input type="text" id="receiptNumber" name ="receiptNumber" class="form-control">
+            </div>
+        </div>
+        <br>
+        <div class="row">
             <div class="col-md-10">
                 <input type="text" id="salesRecordSearchField" class="form-control" style="background:transparent">
             </div>
@@ -74,7 +83,10 @@
                 @endif
             </tbody>
         </table>
-
+        <div class="row">
+            {{Form::textarea('remarks', "", ['id' => 'remarks', 'class' => 'form-control', 'placeholder' => 'Remarks'])}}
+        </div>
+        <br></br>
         <div class="form-group">
             <div>
             <button type="button" class="btn btn-primary" onClick="saveProduct()">Save as Draft</button>

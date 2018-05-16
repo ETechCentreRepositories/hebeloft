@@ -73,7 +73,8 @@ class TransferRequestController extends Controller
             $transfers->audit_trails_id = $auditTrail->id;
             $transfers->status_id = 1;
             $transfers->status="pending";
-            $transfers->from_location = "";
+            $transfers->from_location =  $request->input('outlet');
+            $transfers->date =  $request->input('transferRequestDate');
             $transfers->remarks = "";
             $transfers->save();
 
@@ -178,12 +179,12 @@ class TransferRequestController extends Controller
         return redirect('/transferrequest')->with('success', 'Request Removed');
     }
 
-    public function getTransferRequestAddToCart(Request $request, $id) {
+    public function getTransferRequestAddToCart(Request $request, $id, $quantity, $outlet, $date) {
         $product = Products::find($id);
         $oldTransferRequestCart = Session::has('cartTransferRequest') ? Session::get('cartTransferRequest') : null;
 
         $transferRequestCart = new CartTransferRequest($oldTransferRequestCart);
-        $transferRequestCart->add($product, $product->id);
+        $transferRequestCart->add($product, $product->id, $quantity, $outlet, $date);
 
         $request->session()->put('cartTransferRequest', $transferRequestCart);
         
@@ -200,22 +201,10 @@ class TransferRequestController extends Controller
             $oldTransferRequestCart = Session::get('cartTransferRequest');
             $transferRequestCart = new CartTransferRequest($oldTransferRequestCart);
 
-            // dd($transferRequestCart);
 
             return view('transfer_request.create', [
                 'products' => $transferRequestCart->items
             ])->with('users_id',$users_id);
-        }
-    }
-
-    public function removeProductfromCart(Request $request, $id) {
-        if(!Session::has('cartTransferRequest')) {
-            return redirect('/transferrequest/create/')->with('success', 'Failed to remove');
-        } else {
-            $oldTransferRequestCart = Session::get('cartTransferRequest');
-            $transferRequestCart = new CartTransferRequest($oldTransferRequestCart);
-            $request->session()->flush();
-            return redirect('/transferrequest/create/')->with('success', 'Request Removed');
         }
     }
 }

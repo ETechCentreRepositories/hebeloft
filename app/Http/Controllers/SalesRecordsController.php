@@ -25,9 +25,9 @@ class SalesRecordsController extends Controller
 
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-        $salesRecord = SalesRecord::orderBy('id','asc')->paginate(10);
+        $salesRecords = SalesRecord::orderBy('id','asc')->paginate(10);
 
-        return view('salesrecord.index')->with('salesRecord', $salesRecord)->with('users_id',$users_id);
+        return view('salesrecord.index')->with('salesRecords', $salesRecords)->with('users_id',$users_id);
     }
 
     /**
@@ -69,7 +69,9 @@ class SalesRecordsController extends Controller
             $salesRecord->audit_trails_id = $auditTrail->id;
             $salesRecord->outlets_id = 1;
             $salesRecord->total_price = 1;
-            $salesRecord->remarks = "";
+            $salesRecord->remarks = $request->input('remarks');
+            $salesRecord->date = $request->input('salesRecordDate');
+            $salesRecord->recieptNumber = $request->input('receiptNumber');
             $salesRecord->save();
 
             foreach($products as $product) {
@@ -131,12 +133,12 @@ class SalesRecordsController extends Controller
         //
     }
 
-    public function getSalesRecordAddToCart(Request $request, $id, $price, $quantity, $outlet, $date) {
+    public function getSalesRecordAddToCart(Request $request, $id, $price, $quantity, $outlet, $date, $remarks, $receiptNumber) {
         $product = Products::find($id);
         $oldSalesRecordCart = Session::has('cartSalesRecord') ? Session::get('cartSalesRecord') : null;
 
         $salesrecordCart = new CartSalesRecord($oldSalesRecordCart);
-        $salesrecordCart->add($product, $product->id, $price, $quantity, $outlet, $date);
+        $salesrecordCart->add($product, $product->id, $price, $quantity, $outlet, $date, $remarks, $receiptNumber);
 
         $request->session()->put('cartSalesRecord', $salesrecordCart);
         
@@ -152,8 +154,6 @@ class SalesRecordsController extends Controller
         } else {
             $oldSalesRecordCart = Session::get('cartSalesRecord');
             $salesrecordCart = new CartSalesRecord($oldSalesRecordCart);
-
-            dd($salesrecordCart);
 
             return view('salesRecord.create', [
                 'products' => $salesrecordCart->items

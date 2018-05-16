@@ -9,6 +9,8 @@ class CartSalesRecord {
     public $totalPrice = 0;
     public $outlet = "";
     public $date = "";
+    public $remarks = "";
+    public $receiptNumber = "";
 
     public function __construct($oldSalesRecordCart) {
         if($oldSalesRecordCart) {
@@ -17,10 +19,12 @@ class CartSalesRecord {
             $this->totalPrice = $oldSalesRecordCart->totalPrice;
             $this->outlet = $oldSalesRecordCart->outlet;
             $this->date = $oldSalesRecordCart->date;
+            $this->remarks = $oldSalesRecordCart->remarks;
+            $this->receiptNumber = $oldSalesRecordCart->receiptNumber;
         }
     }
 
-    public function add($item, $id, $price, $quantity, $outlet, $date) {
+    public function add($item, $id, $price, $quantity, $outlet, $date, $remarks, $receiptNumber) {
         $storedItem = ['qty' => 0, 'price' => $price, 'item' => $item];
             if($this->items) {
                 if(array_key_exists($id, $this->items)) {
@@ -34,5 +38,7 @@ class CartSalesRecord {
             $this->totalPrice += $price;
             $this->outlet = $outlet;
             $this->date = $date;
+            $this->remarks = $remarks;
+            $this->receiptNumber = $receiptNumber;
     }
 }

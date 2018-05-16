@@ -18,7 +18,7 @@
 <h2>Transfer Request</h2>
 <br>
 <div class="container">
-    <!-- <form id="formCreateSalesRecord" action="SalesRecordsController@store" method="POST"> -->
+    
     {!! Form::open(['action' => 'TransferRequestController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'style' => 'margin-bottom: 0']) !!}
         <div class="row">
             <div class="col-md-3">
@@ -54,23 +54,16 @@
                     <th>Brand</th>
                     <th>Name</th>
                     <th>Quantity</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody id="addTransferRequestContent">
             @if(Session::has('cartTransferRequest'))
                 @foreach($products as $product)
-                        <tr><td><img style="width:60px; height:60px" src="/storage/product_images/{{$product['item']['image']}}"/></td>
+                        <tr id="{{$product['item']['id']}}"><td><img style="width:60px; height:60px" src="/storage/product_images/{{$product['item']['image']}}"/></td>
                         <td>{{$product['item']['Brand']}}</td>
                         <td>{{$product['item']['Name']}}</td>
-                        <td><input name="quantity" type="number" id="quantity" onChange="getPrice()" type="text" style="width:60px;" value="{{$product['qty']}}"/></td>
-                        <td>
-                                <div class="d-flex flex-column">
-                                        <div class="d-flex flex-row transfer-buttons">
-                                            <button type="button" class="btn btn-danger action-buttons btn-remove" onclick="removeTRProduct({{$product['item']['id']}})">Remove</button>
-                                        </div>
-                                    </div>
-                                </td></tr>
+                        <td><input name="quantity" type="number" id="quantity" type="text" style="width:60px;" value="{{$product['qty']}}"/></td>
+                        </tr>
                     @endforeach
                 @endif
             </tbody>
