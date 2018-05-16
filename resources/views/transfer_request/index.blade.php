@@ -68,6 +68,7 @@
                     <th>Order Id#</th>
                     <th>Sender</th>
                     <th>Recipient</th>
+                    <th>Process</th>
                     <th>Status</th>
                     @if ($users_id->roles_id == '1')
                     <th>More Details</th>
@@ -80,6 +81,7 @@
                     <td>{{$transfer->id}}</td>
                     <td>{{$transfer->from_location}}</td>
                     <td>{{$transfer->recipient}}</td>
+                    <td>{{$transfer->status}}</td>
                     <td>{{$transfer->statuses['status_name']}}</td>
                     @if ($users_id->roles_id == '1')
                     <td>
