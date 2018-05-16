@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AuditTrail;
+use App\Models\SalesRecord;
 use App\User;
 use Auth;
 use DB;
@@ -28,8 +29,14 @@ class HomeController extends Controller
         $transferDelivers = DB::table('transfer_requests')->where('statuses_id', 3)->count();
         $transferInvoices = DB::table('transfer_requests')->where('statuses_id', 4)->count();
         $auditTrails = AuditTrail::orderBy('created_at','desc')->paginate(4);
+        $salesRecord = SalesRecord::orderBy('id','asc')->paginate(10);
         
-        return view('home')->with('users_id',$users_id)->with('salesPacks', $salesPacks)->with('salesShips', $salesShips)->with('salesDelivers', $salesDelivers)->with('salesInvoices', $salesInvoices)->with('transferPacks', $transferPacks)->with('transferShips', $transferShips)->with('transferDelivers', $transferDelivers)->with('transferInvoices', $transferInvoices)->with('auditTrails', $auditTrails);
+        return view('home')->with('users_id',$users_id)->with('salesPacks', $salesPacks)->
+        with('salesShips', $salesShips)->with('salesDelivers', $salesDelivers)->
+        with('salesInvoices', $salesInvoices)->with('transferPacks', $transferPacks)->
+        with('transferShips', $transferShips)->with('transferDelivers', $transferDelivers)->
+        with('transferInvoices', $transferInvoices)->with('auditTrails', $auditTrails)->
+        with('salesRecord', $salesRecord);
     }
 
     /**

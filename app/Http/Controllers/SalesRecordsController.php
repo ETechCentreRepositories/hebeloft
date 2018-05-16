@@ -57,7 +57,6 @@ class SalesRecordsController extends Controller
             'action_by' => $users_id->name,
         ]);
         
-
         if(!Session::has('cartSalesRecord')) {
             return view('salesrecord.create')->with('users_id',$users_id);
         } else {
@@ -132,12 +131,12 @@ class SalesRecordsController extends Controller
         //
     }
 
-    public function getSalesRecordAddToCart(Request $request, $id) {
+    public function getSalesRecordAddToCart(Request $request, $id, $price, $quantity, $outlet, $date) {
         $product = Products::find($id);
         $oldSalesRecordCart = Session::has('cartSalesRecord') ? Session::get('cartSalesRecord') : null;
 
         $salesrecordCart = new CartSalesRecord($oldSalesRecordCart);
-        $salesrecordCart->add($product, $product->id);
+        $salesrecordCart->add($product, $product->id, $price, $quantity, $outlet, $date);
 
         $request->session()->put('cartSalesRecord', $salesrecordCart);
         
@@ -153,6 +152,8 @@ class SalesRecordsController extends Controller
         } else {
             $oldSalesRecordCart = Session::get('cartSalesRecord');
             $salesrecordCart = new CartSalesRecord($oldSalesRecordCart);
+
+            dd($salesrecordCart);
 
             return view('salesRecord.create', [
                 'products' => $salesrecordCart->items

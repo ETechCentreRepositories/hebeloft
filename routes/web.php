@@ -55,7 +55,7 @@ Route::get('/ajax/inventory-outlet', 'InventoryController@getOutletByInventory')
 
 //SalesRecord 
 Route::get('/salesrecord/create', 'SalesRecordsController@getSalesRecordCart');
-Route::get('/salesrecord/addtocart/{id}', 'SalesRecordsController@getSalesRecordAddToCart');
+Route::get('/salesrecord/addtocart/{id}/{price}/{quantity}/{outlet}/{date}', 'SalesRecordsController@getSalesRecordAddToCart');
 Route::get('/testing/{id}', 'UsersController@show');
 
 //SalesOrder
