@@ -16,7 +16,7 @@
 
 @endif
 
-<br><br><br>
+<br><br>
 
 <br>
 <div class="container">
@@ -71,8 +71,8 @@
         <br>
         <div class="form-group">
             <div>
-                <button type="button" class="btn btn-primary" onClick="saveOrderProduct()">Save as Draft</button>
-                {{Form::submit('Create Sales Draft', ['class'=>'btn btn-primary'])}}
+                <button type="button" class="btn btn-primary" onClick="saveOrderProduct();enableCreateButton()">Save as Draft</button>
+                {{Form::submit('Create Sales Draft', ['class'=>'btn btn-primary', 'id'=>'createButton',  'disabled'])}}
             </div>
         </div>
         {!! Form::close() !!}
@@ -88,3 +88,9 @@
         cursor: default;
     }
 </style>
+
+<script>
+    function enableCreateButton() {
+        document.getElementById("createButton").disabled = false;
+    }
+</script>

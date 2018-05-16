@@ -89,8 +89,8 @@
         <br></br>
         <div class="form-group">
             <div>
-            <button type="button" class="btn btn-primary" onClick="saveProduct()">Save as Draft</button>
-            {{Form::submit('Create Sales Record', ['class'=>'btn btn-primary'])}}
+            <button type="button" class="btn btn-primary" onClick="saveProduct();enableCreateButton()">Save as Draft</button>
+            {{Form::submit('Create Sales Record', ['class'=>'btn btn-primary', 'id'=>'createButton',  'disabled'])}}
             </div>
         </div>
         {!! Form::close() !!}
@@ -106,3 +106,9 @@
         cursor: default;
     }
 </style>
+
+<script>
+    function enableCreateButton() {
+        document.getElementById("createButton").disabled = false;
+    }
+</script>
