@@ -15,7 +15,7 @@
 
                         <div class="form-group row">
                             
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" placeholder="Username" required autofocus>
 
                                 @if ($errors->has('name'))
@@ -24,8 +24,9 @@
                                     </span>
                                 @endif
                             </div>
-
-                            <div class="col-md-6">
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12">
                                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email" required>
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback">
@@ -38,7 +39,7 @@
                         <div class="form-group row">
                            
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <input id="phone_number" type="number" class="form-control{{ $errors->has('phone_number') ? ' is-invalid' : '' }}" name="phone_number" value="{{ old('phone_number') }}" placeholder="Phone Number" required>
 
                                 @if ($errors->has('phone_number'))
