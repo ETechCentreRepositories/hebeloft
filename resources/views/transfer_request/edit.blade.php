@@ -44,8 +44,8 @@
         </tbody>
     </table>
     <select name="status" class="form-control">
-                        <option value="reject">Rejected</option>
-                        <option value="accept">Accepted</option>
+                        <option value="rejected">Rejected</option>
+                        <option value="accepted">Accepted</option>
                     </select>
                 <br>
                     {{Form::hidden('_method','PUT')}}
