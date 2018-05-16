@@ -207,7 +207,7 @@
     tbody {
         width: 100%;
         overflow-y: auto;
-        height: 256px;
+        height: 170px;
         background-color: #f5f5f5;
     }
 
