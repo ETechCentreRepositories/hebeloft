@@ -63,7 +63,7 @@
                     <tr>
                         <td>{{$salesRecord->date}}</td>
                         <td>{{$salesRecord->receiptNumber}}</td>
-                        <td>{{$salesRecord->outlets_id}}</td>
+                        <td>{{$salesRecord->outlets['outlet_name']}}</td>
                         <td>{{$salesRecord->total_price}}</td>
                         <td>{{$salesRecord->remarks}}</td>
                     </tr>

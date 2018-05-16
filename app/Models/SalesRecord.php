@@ -13,6 +13,10 @@ class SalesRecord extends Model
     public $timestamps = false;
 
     public function salesRecordLists(){
-        return hasMany('\App\Models\SalesRecordList');
+        return $this->hasMany('\App\Models\SalesRecordList');
+    }
+
+    public function outlets(){
+        return $this->belongsTo('\App\Models\Outlet');
     }
 }
