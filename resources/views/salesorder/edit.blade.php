@@ -60,7 +60,7 @@
 </div>
 
 <style>
-    .transferRequestNav {
+    .salesOrderNav {
         background-color: #f5f8fa !important;
         color: #000000 !important;
         pointer-events: none;
