@@ -18,7 +18,7 @@
     @if ($users_id->roles_id == '4')
     <div class="row justify-content-end">
         <div>
-            <a href="/salesorder/create"><button type="button" class="btn btn-warning">Create New Sales Order</button>
+            <a href="/salesorder/create"><button type="button" class="btn btn-warning">Create New Sales Order</button></a>
         </div>
     </div>
     @endif
@@ -64,7 +64,7 @@
                 </tr>
             </thead>
             <tbody>
-                    @foreach($salesOrder as $salesOrder)
+                    @foreach($salesOrders as $salesOrder)
                     <tr>
                         <td>{{$salesOrder->id}}</td>
                         <td></td>
@@ -85,6 +85,9 @@
                     @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="pagination">
+        {{$salesOrders->links()}}
     </div>
 </div>
 @endsection

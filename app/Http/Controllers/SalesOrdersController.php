@@ -26,7 +26,7 @@ class SalesOrdersController extends Controller
         $users_id = User::find($user_id);
         $salesOrder = SalesOrder::orderBy('id','asc')->paginate(10);
 
-        return view('salesorder.index')->with('salesOrder', $salesOrder)->with('users_id',$users_id);
+        return view('salesorder.index')->with('salesOrders', $salesOrder)->with('users_id',$users_id);
     }
 
     /**
@@ -66,16 +66,12 @@ class SalesOrdersController extends Controller
             $products = $salesOrderCart->items;
             
             $salesOrder = new SalesOrder;
-            $salesOrder->status_id = 1;
+            $salesOrder->statuses_id = 1;
             $salesOrder->status = "pending";
-            $salesOrder->remarks = "";
+            $salesOrder->remarks = $request->input('remarks');
             $salesOrder->audit_trails_id = $auditTrail->id;
-            $salesOrder->name = "";
-            $salesOrder->email = "";
-            $salesOrder->phone_number =  "";
-            $salesOrder->shipping_address = "";
-            $salesOrder->billing_address = "";
             $salesOrder->sales_order_number = "";
+            $salesOrder->users_id=$user_id;
                 
             $salesOrder->save();
 
@@ -163,12 +159,12 @@ class SalesOrdersController extends Controller
         //
     }
 
-    public function getSalesOrderAddToCart(Request $request, $id) {
+    public function getSalesOrderAddToCart(Request $request, $id, $quantity, $outlet, $date, $remarks) {
         $product = Products::find($id);
         $oldSalesOrderCart = Session::has('cartSalesOrder') ? Session::get('cartSalesOrder') : null;
 
         $salesOrderCart = new CartSalesOrder($oldSalesOrderCart);
-        $salesOrderCart->add($product, $product->id);
+        $salesOrderCart->add($product, $product->id, $quantity, $outlet, $date, $remarks);
 
         $request->session()->put('cartSalesOrder', $salesOrderCart);
         

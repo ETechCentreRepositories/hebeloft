@@ -123,13 +123,9 @@ function getSalesOrderProduct() {
                     
                     $("#addSalesOrderContent").append(
                         "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
-                        + "<td>" + response[i].Brand + "</td>"
                         + "<td>" + response[i].Name + "</td>"
                         + "<td>" + response[i].UnitPrice + "</td>"
-                        + "<td><input name='quantity' type='number' id='quantity' onChange='getPrice()' type='text' style='width:60px;' value='1'/></td>"
-                        + "<td><input name='discount' id='discount' type='text' style='width:60px;' value='0'/></td>" 
-                        + "<td id='price'></td>"
-                        + "<td></td></tr>"
+                        + "<td><input name='quantity' type='number' id='quantity' type='text' style='width:60px;' value='1'</tr>"
                     );
                 }
             }
@@ -214,16 +210,20 @@ function saveProduct(){
 }
 
 function saveOrderProduct(){
-    console.log("testing");
-    console.log(orderProducts);
     if(orderProducts !== null) {
-        console.log("product not null");
-        console.log(orderProducts[0]);
         var productID = orderProducts[0];
+        var remarks = $("#remarks").val();
+        var date = $("#salesOrderDate").val();
+        var outlet = $('#outlet').val();
+        var quantity =  $('#createSalesOrderTable tr:last-child td:eq(3) #quantity').val();
         console.log(productID);
+        console.log(remarks);
+        console.log(date);
+        console.log(outlet);
+        console.log(quantity);
         $.ajax({
             type: "GET",
-            url: "{{URL::TO('/salesorder/addtocart/')}}/" + productID,
+            url: "{{URL::TO('/salesorder/addtocart/')}}/" + productID + "/" + quantity + "/" + outlet + "/" + date + "/" + remarks,
             // data: "",
             cache:false,
             datatype: "JSON",

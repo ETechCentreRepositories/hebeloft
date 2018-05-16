@@ -101,6 +101,9 @@
             </tbody>
         </table>
     </div>
+    <div class="pagination">
+        {{$transfers->links()}}
+    </div>
 </div>
 
 <script>

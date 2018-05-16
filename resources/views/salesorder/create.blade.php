@@ -18,11 +18,15 @@
 
 <br><br><br>
 
-<h2>Sales Order</h2>
 <br>
 <div class="container">
-    <!-- <form id="formCreateSalesRecord" action="SalesRecordsController@store" method="POST"> -->
     {!! Form::open(['action' => 'SalesOrdersController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'style' => 'margin-bottom: 0']) !!}
+        <div class="row">
+            <div class="col-md-3">
+                <h2>Sales Order</h2>
+            </div>
+        </div>
+        <br>
         <div class="row">
             <div class="col-md-3">
                 <p>Outlet: </p>
@@ -54,31 +58,26 @@
             <thead>
                 <tr>
                     <th>Picture</th>
-                    <th>Brand</th>
                     <th>Name</th>
                     <th>Price</th>
                     <th>Quantity</th>
-                    <th>Discount</th>
-                    <th>Total Price</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody id="addSalesOrderContent">
             @if(Session::has('cartSalesOrder'))
                 @foreach($products as $product)
                         <tr><td><img style="width:60px; height:60px" src="/storage/product_images/{{$product['item']['image']}}"/></td>
-                        <td>{{$product['item']['Brand']}}</td>
                         <td>{{$product['item']['Name']}}</td>
                         <td>{{$product['item']['UnitPrice']}}</td>
-                        <td><input name="quantity" type="number" id="quantity" onChange="getPrice()" type="text" style="width:60px;" value="{{$product['qty']}}"/></td>
-                        <td><input name="discount" id="discount" type="text" style="width:60px;" value="0"/></td>
-                        <td id="price"></td>
-                        <td></td></tr>
+                        <td><input name="quantity" type="number" id="quantity" type="text" style="width:60px;" value="{{$product['qty']}}"/></td></tr>
                     @endforeach
                 @endif
             </tbody>
         </table>
-
+        <div class="row">
+            {{Form::textarea('remarks', "", ['id' => 'remarks', 'class' => 'form-control', 'placeholder' => 'Remarks'])}}
+        </div>
+        <br>
         <div class="form-group">
             <div>
                 <button type="button" class="btn btn-primary" onClick="saveOrderProduct()">Save as Draft</button>
