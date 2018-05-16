@@ -148,14 +148,14 @@ class SalesRecordsController extends Controller
         $users_id = User::find($user_id);
 
         if(!Session::has('cartSalesRecord')) {
-            return view('salesRecord.create')->with('users_id',$users_id);
+            return view('salesrecord.create')->with('users_id',$users_id);
         } else {
             $oldSalesRecordCart = Session::get('cartSalesRecord');
             $salesrecordCart = new CartSalesRecord($oldSalesRecordCart);
 
             dd($salesrecordCart);
 
-            return view('salesRecord.create', [
+            return view('salesrecord.create', [
                 'products' => $salesrecordCart->items
             ])->with('users_id',$users_id);
         }
