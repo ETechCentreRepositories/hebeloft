@@ -68,7 +68,6 @@
                     <tr>
                         <td>{{$salesOrder->id}}</td>
                         <td></td>
-                        <td></td>
                         <td>{{$salesOrder->status}}</td>
                         <td>{{$salesOrder->statuses['status_name']}}</td>
                         @if ($users_id->roles_id == '1')
