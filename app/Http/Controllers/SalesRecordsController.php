@@ -71,7 +71,7 @@ class SalesRecordsController extends Controller
             $salesRecord->total_price = 1;
             $salesRecord->remarks = $request->input('remarks');
             $salesRecord->date = $request->input('salesRecordDate');
-            $salesRecord->recieptNumber = $request->input('receiptNumber');
+            $salesRecord->receiptNumber = $request->input('receiptNumber');
             $salesRecord->save();
 
             foreach($products as $product) {

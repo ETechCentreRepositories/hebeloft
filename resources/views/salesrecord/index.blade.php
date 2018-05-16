@@ -62,7 +62,7 @@
                     @foreach($salesRecords as $salesRecord)
                     <tr>
                         <td>{{$salesRecord->date}}</td>
-                        <td>{{$salesRecord->recieptNumber}}</td>
+                        <td>{{$salesRecord->receiptNumber}}</td>
                         <td>{{$salesRecord->outlets_id}}</td>
                         <td>{{$salesRecord->total_price}}</td>
                         <td>{{$salesRecord->remarks}}</td>
