@@ -74,7 +74,9 @@
 
 <style>
     .loginNav {
-        background-color: #e3b417 !important;
-        color: #566B30 !important;
+        background-color: #f5f8fa !important;
+        color: #000000 !important;
+        pointer-events: none;
+        cursor: default;
     }
 </style>
