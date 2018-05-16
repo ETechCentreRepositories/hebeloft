@@ -47,7 +47,6 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Order Id</th>
                     <th>Order Date</th>
                     <th>Process</th>
                     <th>Status</th>
@@ -59,8 +58,7 @@
             <tbody>
                     @foreach($salesOrders as $salesOrder)
                     <tr>
-                        <td>{{$salesOrder->id}}</td>
-                        <td></td>
+                        <td>{{$salesOrder->date}}</td>
                         <td>{{$salesOrder->status}}</td>
                         <td>{{$salesOrder->statuses['status_name']}}</td>
                         @if ($users_id->roles_id == '1')

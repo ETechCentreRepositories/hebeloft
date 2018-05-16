@@ -29,15 +29,6 @@
         <br>
         <div class="row">
             <div class="col-md-3">
-                <p>Outlet: </p>
-            </div>
-            <div class="col-md-9">
-                <select name="outlet" id="outlet" class="form-control"></select>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-md-3">
                 <p>Date:</p>
             </div>
             <div class="col-md-9">

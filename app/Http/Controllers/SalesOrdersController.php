@@ -70,6 +70,7 @@ class SalesOrdersController extends Controller
             $salesOrder = new SalesOrder;
             $salesOrder->statuses_id = 1;
             $salesOrder->status = "pending";
+            $salesOrder->date =  $request->input('salesOrderDate');
             $salesOrder->remarks = $request->input('remarks');
             $salesOrder->audit_trails_id = $auditTrail->id;
             $salesOrder->sales_order_number = "";
@@ -161,12 +162,12 @@ class SalesOrdersController extends Controller
         //
     }
 
-    public function getSalesOrderAddToCart(Request $request, $id, $quantity, $outlet, $date, $remarks) {
+    public function getSalesOrderAddToCart(Request $request, $id, $quantity, $date, $remarks) {
         $product = Products::find($id);
         $oldSalesOrderCart = Session::has('cartSalesOrder') ? Session::get('cartSalesOrder') : null;
 
         $salesOrderCart = new CartSalesOrder($oldSalesOrderCart);
-        $salesOrderCart->add($product, $product->id, $quantity, $outlet, $date, $remarks);
+        $salesOrderCart->add($product, $product->id, $quantity, $date, $remarks);
 
         $request->session()->put('cartSalesOrder', $salesOrderCart);
         

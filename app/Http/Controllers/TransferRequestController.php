@@ -202,7 +202,7 @@ class TransferRequestController extends Controller
             $oldTransferRequestCart = Session::get('cartTransferRequest');
             $transferRequestCart = new CartTransferRequest($oldTransferRequestCart);
 
-            dd($transferRequestCart);
+            // dd($transferRequestCart);
             
             return view('transfer_request.create', [
                 'products' => $transferRequestCart->items

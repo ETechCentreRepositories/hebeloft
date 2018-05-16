@@ -214,16 +214,14 @@ function saveOrderProduct(){
         var productID = orderProducts[0];
         var remarks = $("#remarks").val();
         var date = $("#salesOrderDate").val();
-        var outlet = $('#outlet').val();
         var quantity =  $('#createSalesOrderTable tr:last-child td:eq(3) #quantity').val();
         console.log(productID);
         console.log(remarks);
         console.log(date);
-        console.log(outlet);
         console.log(quantity);
         $.ajax({
             type: "GET",
-            url: "{{URL::TO('/salesorder/addtocart/')}}/" + productID + "/" + quantity + "/" + outlet + "/" + date + "/" + remarks,
+            url: "{{URL::TO('/salesorder/addtocart/')}}/" + productID + "/" + quantity + "/" + date + "/" + remarks,
             // data: "",
             cache:false,
             datatype: "JSON",
