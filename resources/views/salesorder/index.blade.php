@@ -79,6 +79,9 @@
             </tbody>
         </table>
     </div>
+    <div class="pagination">
+        {{$salesOrders->links()}}
+    </div>
 </div>
 @endif
 
