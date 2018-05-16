@@ -21,8 +21,8 @@
                 <!-- Authentication Links -->
                 @guest
                 <li><a class="termsAndConditionsNav Nav nav-link" style="color:#e3b417;" onclick="openTermsAndConditions()">Terms and Conditions</a></li>
-                <li class="navList"><a class="nav-link" style="color:#e3b417;" href="{{ route('login') }}"><div class="navLabels">{{ __('Login') }}</div></a></li>
-                <li class="navList"><a class="nav-link" style="color:#e3b417;" href="{{ route('register') }}"><div class="navLabels">{{ __('Register') }}</div></a></li>
+                <li class="navList"><a class="nav-link loginNav" style="color:#e3b417;" href="{{ route('login') }}"><div class="navLabels">{{ __('Login') }}</div></a></li>
+                <li class="navList"><a class="nav-link registerNav" style="color:#e3b417;" href="{{ route('register') }}"><div class="navLabels">{{ __('Register') }}</div></a></li>
                 @else
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle username" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -55,15 +55,54 @@
             <br>
             <div class="termsAndConditionsContent">
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus facilisis, lectus ac consequat vehicula, nisl erat interdum nunc, eget pulvinar tortor lectus quis orci. Aenean eros leo, fermentum nec urna vitae, scelerisque consequat nibh. Phasellus sit amet iaculis nibh. Vestibulum blandit facilisis vulputate. Praesent quis eros ex. Cras ornare auctor lectus in feugiat. Praesent lacinia dolor et purus imperdiet, id laoreet est efficitur. In sodales ac nunc a tincidunt. Integer tempus neque ligula, id convallis turpis scelerisque at.
-
-                    Sed ultrices dapibus volutpat. Proin accumsan, enim vel accumsan congue, purus odio porttitor urna, et feugiat diam eros vel dolor. Vivamus interdum id tortor sit amet vehicula. Ut vel enim porttitor, scelerisque nulla sit amet, sagittis tellus. Proin consequat at dui vitae suscipit. Pellentesque vel lacinia mauris. Donec at nulla et lorem elementum sodales. Proin eleifend molestie augue a tincidunt.
-                    
-                    Vivamus imperdiet ante quis justo ultricies, vitae rhoncus nibh euismod. Nunc id felis condimentum, ornare elit quis, scelerisque dui. Morbi fermentum nulla efficitur iaculis pulvinar. Nunc convallis purus sed elit ultrices mollis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In in sodales tellus. Donec egestas rutrum consequat. In consectetur ex sapien, a sodales ante dictum vel. Aliquam eget enim quis arcu sollicitudin ornare. Mauris sit amet gravida velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed eu consequat erat. Phasellus quis gravida turpis, eget tempus ex. Aenean eget dapibus nisl.
-                    
-                    Fusce tristique dignissim tempus. Sed ullamcorper et turpis vel tristique. Sed lacinia tempor justo, quis iaculis massa hendrerit id. Nulla in ipsum consequat, pharetra ante vitae, ultrices nibh. Morbi nec dolor et ligula sollicitudin finibus. Vivamus molestie ullamcorper arcu, eu tincidunt purus lacinia nec. Duis mollis mauris vitae nibh pulvinar, at tempus quam gravida. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus egestas nisi ut orci porttitor facilisis. Sed aliquet, tortor quis dictum iaculis, ipsum felis maximus enim, et porta tellus enim faucibus tellus. Donec nec erat lacus. Cras sodales feugiat lacus, sed euismod turpis congue et. Donec vel suscipit sem. Vestibulum vestibulum, dui quis ornare porttitor, lacus sem auctor felis, vel scelerisque dolor orci quis nunc. Nam faucibus lorem ac lacus sollicitudin finibus. Suspendisse neque sem, sollicitudin id sodales consectetur, scelerisque eu odio.
-                    
-                    Sed ac congue massa. Suspendisse sit amet enim suscipit, interdum ex eu, tincidunt purus. Quisque sit amet sodales tellus. Etiam pellentesque enim sit amet ipsum fermentum, sed aliquet libero aliquet. Vivamus sed nunc non augue egestas ullamcorper. Nullam auctor, quam sit amet consequat semper, quam ipsum semper turpis, sed lobortis justo magna non nulla. Etiam suscipit sed urna id tristique. Integer quis dui quis diam maximus facilisis.
+                    Hi! We love our stockists and are always happy to share our products with new shops!
+                </p>
+                <p>
+                    <b>HOW TO ORDER:</b>
+                    You can order through this hebeloft wholesale system and we will get back to you by next working day.  Upon receiving your order, we will send you a digital invoice for the total charges with shipping.
+                </p>
+                <p>
+                    <b>STOCK:</b>
+                    If there is anything in the shop that has a lower stock than what you had hoped to order, we will call or email you for confirmation and we will adjust your invoice based on stock.
+                </p>
+                <p>
+                    <b>WHOLESALE PRICING:</b>
+                    All prices are listed in Singapore dollars. All authorized retailers and trade clients will receive bulk order discount based on the agreement, plus complimentary domestic delivery. Prices are subject to change without notice. 
+                </p>
+                <p>
+                    <b>OPENING ORDERS:</b>
+                    A minimum order of $300 is required on opening orders.  All orders must be paid for before items are shipped out. We will contact you with your order total and a digital invoice.
+                </p>
+                <p>
+                    <b>RE-ORDERS:</b>
+                    $100 minimum order is required for re-orders. If you are one of our returning vendors and wish to pay within 14 days of your order, let us know and we will update your invoice. Late payments are subject to a 5% late fee for every 14 days past due.
+                </p>
+                <p>
+                    <b>CHANGES TO ORDERS:</b>
+                    Any changes or cancellation to orders must be emailed to customerservices@hebeloft.com within 48 hours.
+                </p>
+                <p>
+                    <b>METHOD OF PAYMENT:</b>
+                    Payments through Bank Transfer and cheques are accepted. Please refer to invoice for payment details.
+                </p>
+                <p>
+                    <b>DELIVERY & SHIPPING:</b>
+                    Though your shipment will likely go out sooner, please allow up to 1-2 weeks for your order to ship. Shipping/handling charges will be calculated and added to your order total when the order is ready to ship. We reserve the right to use our discretion as to the carrier to be used on any shipment. Your preferred carrier may be used if you agree to assume any additional transportation charges.
+                </p>
+                <p>
+                    <b>DAMAGES / DEFECTS:</b>
+                    Please inspect all shipments immediately upon arrival. Please contact us at customerservices@hebeloft.com within 5 days of receipt of damaged or defective shipments. Returned merchandise will be replaced with new merchandise. Returned merchandise will not be accepted if it is held for more than 15 days after receipt.
+                </p>
+                <p>
+                    <b>RETURNS / EXCHANGES:</b>
+                    Wholesale merchandise may not be returned or exchanged. We only accept returns in the case of defective merchandise as noted above.
+                </p>
+                <p>
+                    <b>CONSIGNMENT:</b>
+                    At this time, we are not able to do consignment. 
+                </p>
+                <p>
+                    Thank you!
                 </p>
             </div>
         </div>
