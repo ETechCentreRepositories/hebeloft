@@ -122,7 +122,6 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Order Id</th>
                     <th>Order Date</th>
                     <th>Process</th>
                     <th>Status</th>
@@ -131,8 +130,7 @@
             <tbody>
                     @foreach($wholesalerSalesOrders as $wholesalerSalesOrder)
                     <tr>
-                        <td>{{$wholesalerSalesOrder->id}}</td>
-                        <td></td>
+                        <td>{{$wholesalerSalesOrder->date}}</td>
                         <td>{{$wholesalerSalesOrder->status}}</td>
                         <td>{{$wholesalerSalesOrder->statuses['status_name']}}</td>
                     </tr>
