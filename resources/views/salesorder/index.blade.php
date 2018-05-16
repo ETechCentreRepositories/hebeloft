@@ -56,6 +56,7 @@
                 <tr>
                     <th>Order Id</th>
                     <th>Order Date</th>
+                    <th>Process</th>
                     <th>Status</th>
                     @if ($users_id->roles_id == '1')
                     <th>More details</th>
@@ -68,6 +69,7 @@
                         <td>{{$salesOrder->id}}</td>
                         <td></td>
                         <td></td>
+                        <td>{{$salesOrder->status}}</td>
                         <td>{{$salesOrder->statuses['status_name']}}</td>
                         @if ($users_id->roles_id == '1')
                         <td>
