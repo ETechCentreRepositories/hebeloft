@@ -15,12 +15,16 @@
 
 <br><br><br>
 
-<h2>Transfer Request</h2>
 <br>
 <div class="container">
-    
     {!! Form::open(['action' => 'TransferRequestController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'style' => 'margin-bottom: 0']) !!}
-        <div class="row">
+    <div class="row">
+        <div class="col-md-3">
+            <h2>Transfer Request</h2>
+        </div>
+    </div>
+    <br>
+    <div class="row">
             <div class="col-md-3">
                 <p>Outlet: </p>
             </div>
@@ -51,7 +55,6 @@
             <thead>
                 <tr>
                     <th>Picture</th>
-                    <th>Brand</th>
                     <th>Name</th>
                     <th>Quantity</th>
                 </tr>
@@ -60,7 +63,6 @@
             @if(Session::has('cartTransferRequest'))
                 @foreach($products as $product)
                         <tr id="{{$product['item']['id']}}"><td><img style="width:60px; height:60px" src="/storage/product_images/{{$product['item']['image']}}"/></td>
-                        <td>{{$product['item']['Brand']}}</td>
                         <td>{{$product['item']['Name']}}</td>
                         <td><input name="quantity" type="number" id="quantity" type="text" style="width:60px;" value="{{$product['qty']}}"/></td>
                         </tr>
@@ -68,7 +70,10 @@
                 @endif
             </tbody>
         </table>
-
+        <div class="row">
+            {{Form::textarea('remarks', "", ['id' => 'remarks', 'class' => 'form-control', 'placeholder' => 'Remarks'])}}
+        </div>
+        <br></br>
         <div class="form-group">
             <div>
             <button type="button" class="btn btn-primary" onClick="saveTRProduct()">Save as Draft</button>

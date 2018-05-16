@@ -71,11 +71,11 @@ class TransferRequestController extends Controller
 
             $transfers = new TransferRequest;
             $transfers->audit_trails_id = $auditTrail->id;
-            $transfers->status_id = 1;
+            $transfers->statuses_id = 1;
             $transfers->status="pending";
             $transfers->from_location =  $request->input('outlet');
             $transfers->date =  $request->input('transferRequestDate');
-            $transfers->remarks = "";
+            $transfers->remarks = $request->input('remarks');
             $transfers->save();
 
             foreach($products as $product) {
@@ -179,12 +179,12 @@ class TransferRequestController extends Controller
         return redirect('/transferrequest')->with('success', 'Request Removed');
     }
 
-    public function getTransferRequestAddToCart(Request $request, $id, $quantity, $outlet, $date) {
+    public function getTransferRequestAddToCart(Request $request, $id, $quantity, $outlet, $date, $remarks) {
         $product = Products::find($id);
         $oldTransferRequestCart = Session::has('cartTransferRequest') ? Session::get('cartTransferRequest') : null;
 
         $transferRequestCart = new CartTransferRequest($oldTransferRequestCart);
-        $transferRequestCart->add($product, $product->id, $quantity, $outlet, $date);
+        $transferRequestCart->add($product, $product->id, $quantity, $outlet, $date, $remarks);
 
         $request->session()->put('cartTransferRequest', $transferRequestCart);
         
@@ -201,7 +201,8 @@ class TransferRequestController extends Controller
             $oldTransferRequestCart = Session::get('cartTransferRequest');
             $transferRequestCart = new CartTransferRequest($oldTransferRequestCart);
 
-
+            dd($transferRequestCart);
+            
             return view('transfer_request.create', [
                 'products' => $transferRequestCart->items
             ])->with('users_id',$users_id);

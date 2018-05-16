@@ -61,7 +61,7 @@ Route::get('/testing/{id}', 'UsersController@show');
 
 //TransferRequest
 Route::get('/transferrequest/create', 'TransferRequestController@getTransferRequestCart');
-Route::get('/transferrequest/addtocart/{id}/{quantity}/{outlet}/{date}', 'TransferRequestController@getTransferRequestAddToCart');
+Route::get('/transferrequest/addtocart/{id}/{quantity}/{outlet}/{date}/{remarks}', 'TransferRequestController@getTransferRequestAddToCart');
 Route::get('/testing/{id}', 'UsersController@show');
 
 //Accept/Reject Transfer Request

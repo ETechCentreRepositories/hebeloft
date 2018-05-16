@@ -165,7 +165,6 @@ function getTransferRequestProduct() {
                     $("#addTransferRequestContent").append(
                         "<tr id='"+productId+"'>"
                         + "<td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
-                        + "<td>" + response[i].Brand + "</td>"
                         + "<td>" + response[i].Name + "</td>"
                         + "<td><input name='quantity' type='number' id='quantity' type='text' style='width:60px;' value='1'/></td>"
                         + "</tr>"
@@ -244,16 +243,17 @@ function saveOrderProduct(){
 function saveTRProduct(){
     var outlet = $('#outlet').val();
     var date = $("#transferRequestDate").val();
-    var quantity =  $('#createTransferRequestTable tr:last-child td:eq(3) #quantity').val();
-
+    var quantity =  $('#createTransferRequestTable tr:last-child td:eq(2) #quantity').val();
+    var remarks = $("#remarks").val();
     if(trProducts !== null) {
         console.log(quantity);
         console.log(outlet);
         console.log(date);
+        console.log(remarks);
         var productID = trProducts[0];
         $.ajax({
             type: "GET",
-            url: "{{URL::TO('/transferrequest/addtocart/')}}/" + productID + "/" + quantity + "/" + outlet + "/" + date,
+            url: "{{URL::TO('/transferrequest/addtocart/')}}/" + productID + "/" + quantity + "/" + outlet + "/" + date + "/" + remarks,
             // data: "",
             cache:false,
             datatype: "JSON",

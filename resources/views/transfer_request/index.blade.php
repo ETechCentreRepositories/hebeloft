@@ -65,9 +65,10 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Order Id#</th>
-                    <th>Sender</th>
-                    <th>Recipient</th>
+                    <th>Date</th>
+                    <th></th>
+                    {{-- <th>Order Id#</th> --}}
+                    {{-- <th>Outlet</th> --}}
                     <th>Process</th>
                     <th>Status</th>
                     @if ($users_id->roles_id == '1')
@@ -78,8 +79,9 @@
             <tbody>
                 @foreach($transfers as $transfer)
                 <tr>
-                    <td>{{$transfer->id}}</td>
-                    <td>{{$transfer->from_location}}</td>
+                    <td>{{$transfer->date}}</td>
+                    {{-- <td>{{$transfer->orderId}}</td> --}}
+                    {{-- <td>{{$transfer->from_location}}</td> --}}
                     <td>{{$transfer->recipient}}</td>
                     <td>{{$transfer->status}}</td>
                     <td>{{$transfer->statuses['status_name']}}</td>
