@@ -170,7 +170,7 @@
                 </table>
             </div>
             <div class="pagination">
-                {{$auditTrails->links()}}
+                {{$salesRecord->links()}}
             </div>
         </div>
     </div>

@@ -15,31 +15,15 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-     <!-- Styles -->
-     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-     
-     <script src="{{asset('js/jquery-ui.min.js')}}" type="text/javascript"></script>
-     <link href="{{asset('css/jquery-ui.min.css')}}" rel="stylesheet" type="text/css"/> 
-     {{-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" /> --}}
-{{-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> --}}
-    <!-- Fonts -->
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="{{asset('js/jquery-ui.min.js')}}" type="text/javascript"></script>
+    <link href="{{asset('css/jquery-ui.min.css')}}" rel="stylesheet" type="text/css"/> 
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-    {{-- <script type="text/javascript" rel="stylesheet" src="js/app.js" ></script> --}}
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> --}}
+    
     @yield('script')
-    {{-- <script>
-        $(document).ready(function(){
-            if($outlet->id == $userOutlet->outlets_id){
-                $("#cbChecked").attr("checked","checked");
-            // $(".idtext").css("color","lightgreen");
-            }
-            
-        })
-    </script> --}}
-
+    
     <script>
     $(document).ready(function(){
         $.get("{{ URL::to('ajax/outlet')}}",function(data){
@@ -79,14 +63,8 @@
                 console.log(value);
             }
         });
-
     });
 
-function getPrice(){
-    var value  = $("#quantity").val();
-    console.log(value);
-    $("#price").html(value);
-}
 
 var products = [];
 function getSalesRecordProduct() {
@@ -106,17 +84,12 @@ function getSalesRecordProduct() {
                     var productId = parseInt(response[i].products_id);
 
                     products.push(productId);
-                    console.log(products);
-                    
                     $("#addSalesRecordContent").append(
-                        "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
-                        + "<td>" + response[i].Brand + "</td>"
+                        "<tr id='"+productId+"'><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
                         + "<td>" + response[i].Name + "</td>"
-                        + "<td>" + response[i].UnitPrice + "</td>"
-                        + "<td><input name='quantity' type='number' id='quantity' onChange='getPrice()' type='text' style='width:60px;' value='1'/></td>"
-                        + "<td><input name='discount' id='discount' type='text' style='width:60px;' value='0'/></td>" 
-                        + "<td id='price'></td>"
-                        + "<td></td></tr>"
+                        + "<td><input name='unitPrice' type='number' id='unitPrice' type='text' style='width:60px;' value='"+response[i].UnitPrice+"'/></td>"
+                        + "<td><input name='quantity' type='number' id='quantity' type='text' style='width:60px;' value='1'/></td>"
+                        + "<td><input name='price' type='number' id='price' type='text' style='width:60px;' value='"+response[i].UnitPrice+"'/></td></tr>"
                     );
                 }
             }
@@ -208,16 +181,19 @@ function getTransferRequestProduct() {
 }
 
 function saveProduct(){
-    console.log("testing");
-    console.log(products);
     if(products !== null) {
-        console.log("product not null");
-        console.log(products[0]);
         var productID = products[0];
-        console.log(productID);
+        var price =  $('#createSalesRecordTable tr:last-child td:last-child #price').val();
+        var quantity =  $('#createSalesRecordTable tr:last-child td:eq(3) #quantity').val();
+        var outlet = $('#outlet').val();
+        var date = $("#salesRecordDate").val();
+        console.log(price);
+        console.log(quantity);
+        console.log(outlet);
+        console.log(date);
         $.ajax({
             type: "GET",
-            url: "{{URL::TO('/salesrecord/addtocart/')}}/" + productID,
+            url: "{{URL::TO('/salesrecord/addtocart/')}}/" + productID + "/" + price + "/" + quantity + "/" + outlet + "/" + date,
             // data: "",
             cache:false,
             datatype: "JSON",
