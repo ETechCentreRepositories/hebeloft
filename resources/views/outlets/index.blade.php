@@ -94,7 +94,8 @@
             <div class="form-group modal-fields">
                 {{Form::text('fax', '', ['class' => 'form-control', 'placeholder' => 'Fax'])}}
             </div>
-            <br>
+            <br> 
+            
             <div class="form-group modal-button">
                 {{Form::submit('Create outlet', ['class'=>'btn btn-primary btn-lg'])}}
             </div>
