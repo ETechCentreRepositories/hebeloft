@@ -93,10 +93,10 @@
                         console.log(response[i]);
                         $("#salesRecordContent").append(
                             "<tr><td>"+ response[i].date+"</td>"
-                            + "<td> </td>"
+                            + "<td>"+ response[i].receiptNumber +"</td>"
                             + "<td>" + response[i].outlet_name + "</td>"
                             + "<td>" + response[i].total_price + "</td>"
-                            + "<td></td></tr>"
+                            + "<td>"+ response[i].remarks+"</td></tr>"
                         );
                     }
                 },
