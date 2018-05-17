@@ -99,7 +99,12 @@ class SalesOrdersController extends Controller
      */
     public function show($id)
     {
-        //
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id);
+
+        $salesOrder = SalesOrder::find($id);
+
+        return view('salesorder.show')->with('users_id',$users_id)->with('salesOrder',$salesOrder);
     }
 
     /**

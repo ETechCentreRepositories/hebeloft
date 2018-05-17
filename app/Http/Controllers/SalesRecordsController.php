@@ -96,7 +96,12 @@ class SalesRecordsController extends Controller
      */
     public function show($id)
     {
-        //
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id);
+
+        $salesRecord = SalesRecord::find($id);
+
+        return view('salesrecord.show')->with('users_id',$users_id)->with('salesRecord',$salesRecord);
     }
 
     /**

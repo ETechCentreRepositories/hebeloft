@@ -220,6 +220,7 @@ th:hover{
 .emptyHeader {
   cursor: default !important;
   background-color: transparent !important;
+  pointer-events: none;
 }
 
 .table td {

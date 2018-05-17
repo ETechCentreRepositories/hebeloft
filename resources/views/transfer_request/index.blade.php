@@ -87,8 +87,11 @@
                     <td>
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row transfer-buttons">
-                            <div class="p-2">
-                                <a href="/transferrequest/{{$transfer->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
+                                <div class="p-2">
+                                    <a href="/transferrequest/{{$transfer->id}}"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
+                                </div>
+                                <div class="p-2">
+                                    <a href="/transferrequest/{{$transfer->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
                             </div>
                         </div>

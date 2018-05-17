@@ -19,4 +19,8 @@ class SalesOrder extends Model
     public function products() {
         return $this->belongsTo('App\Models\Products');
     }
+
+    public function users(){
+        return $this -> belongsTo('\App\User');
+    }
 }
