@@ -41,7 +41,7 @@
                 <input type="text" id="salesOrderSearchField" class="form-control" style="background:transparent">
             </div>
             <div class="col-md-2">
-                <button type="button" class="btn btn-default btn-search" id="addSalesOrder" onClick="getSalesOrderProduct()">Add</button>
+                <button type="button" class="btn btn-default btn-search" id="addSalesOrder">Add</button>
             </div>
         </div>
         <br>
@@ -71,7 +71,7 @@
         <br>
         <div class="form-group">
             <div>
-                <button type="button" class="btn btn-primary" onClick="saveOrderProduct();enableCreateButton()">Save as Draft</button>
+                <button type="button" class="btn btn-primary" id="saveSalesOrder" onClick="enableCreateButton()">Save as Draft</button>
                 {{Form::submit('Create Sales Draft', ['class'=>'btn btn-primary', 'id'=>'createButton',  'disabled'])}}
             </div>
         </div>

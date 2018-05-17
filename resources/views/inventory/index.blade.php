@@ -44,7 +44,7 @@
         </div>
     </div>
     <br>
-    <table class="table table-striped" id="inventoryTable" >
+    <table class="table table-striped sortable" id="inventoryTable" >
         <thead>
             <tr>
                 <th>Image</th>

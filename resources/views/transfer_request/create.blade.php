@@ -47,7 +47,7 @@
                 <input type="text" id="transferRequestSearchField" class="form-control" style="background:transparent">
             </div>
             <div class="col-md-2">
-                <button type="button" class="btn btn-default btn-search" id="addTransferRequest" onClick="getTransferRequestProduct()">Add</button>
+                <button type="button" class="btn btn-default btn-search" id="addTransferRequest">Add</button>
             </div>
         </div>
         <br>
@@ -76,7 +76,7 @@
         <br></br>
         <div class="form-group">
             <div>
-            <button type="button" class="btn btn-primary" onClick="saveTRProduct();enableCreateButton()">Save as Draft</button>
+            <button type="button" class="btn btn-primary" id="saveTransferRequest" onClick="enableCreateButton()">Save as Draft</button>
             {{Form::submit('Create Transfer Request', ['class'=>'btn btn-primary', 'id'=>'createButton',  'disabled'])}}
             </div>
         </div>
