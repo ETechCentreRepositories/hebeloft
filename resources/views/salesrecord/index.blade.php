@@ -48,7 +48,7 @@
     </div>
     <br>
     <div>
-        <table class="table table-striped">
+        <table class="table table-striped sortable">
             <thead>
                 <tr>
                     <th>Date (YYYY-MM-DD)</th>

@@ -24,7 +24,7 @@
     <br>
     @if(count($outlets) > 0)
     <div>
-        <table class="table table-striped">
+        <table class="table table-striped sortable">
             <thead>
                 <tr>
                     <th>#</th>
