@@ -51,7 +51,7 @@
                     <th>Process</th>
                     <th>Status</th>
                     @if ($users_id->roles_id == '1')
-                    <th>More details</th>
+                    <th></th>
                     @endif
                 </tr>
             </thead>
