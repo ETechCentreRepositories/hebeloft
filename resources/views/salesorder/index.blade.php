@@ -47,7 +47,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Order Date</th>
+                    <th>Date (YYYY-MM-DD)</th>
                     <th>Process</th>
                     <th>Status</th>
                     @if ($users_id->roles_id == '1')

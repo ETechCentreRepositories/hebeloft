@@ -67,7 +67,7 @@
                 </td>
                 <td>{{$inventoryOutlet->products['Brand']}}</td>
                 <td>{{$inventoryOutlet->products['Name']}}</td>
-                <td>{{$inventoryOutlet->products['UnitPrice']}}</td>
+                <td>S${{$inventoryOutlet->products['UnitPrice']}}</td>
                 {{-- <td></td>
                 <td></td>
                 <td></td> --}}

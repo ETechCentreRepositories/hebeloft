@@ -65,8 +65,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th></th>
+                    <th>Date (YYYY-MM-DD)</th>
                     {{-- <th>Order Id#</th> --}}
                     {{-- <th>Outlet</th> --}}
                     <th>Process</th>
@@ -82,7 +81,6 @@
                     <td>{{$transfer->date}}</td>
                     {{-- <td>{{$transfer->orderId}}</td> --}}
                     {{-- <td>{{$transfer->from_location}}</td> --}}
-                    <td>{{$transfer->recipient}}</td>
                     <td>{{$transfer->status}}</td>
                     <td>{{$transfer->statuses['status_name']}}</td>
                     @if ($users_id->roles_id == '1')

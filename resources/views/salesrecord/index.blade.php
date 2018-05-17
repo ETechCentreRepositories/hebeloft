@@ -51,7 +51,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Date</th>
+                    <th>Date (YYYY-MM-DD)</th>
                     <th>Receipt Number</th>
                     <th>Outlet</th>
                     <th>Total Price</th>
