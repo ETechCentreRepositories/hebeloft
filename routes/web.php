@@ -64,6 +64,7 @@ Route::get('/testing/{id}', 'UsersController@show');
 Route::get('/transferrequest/create', 'TransferRequestController@getTransferRequestCart');
 Route::get('/transferrequest/addtocart/{id}/{quantity}/{outlet}/{date}/{remarks}', 'TransferRequestController@getTransferRequestAddToCart');
 Route::get('/testing/{id}', 'UsersController@show');
+Route::get('/ajax/transferrequest/date/{startDate}/{endDate}', 'TransferRequestController@sortDate');
 
 //Accept/Reject Transfer Request
 Route::post('/', function () {
