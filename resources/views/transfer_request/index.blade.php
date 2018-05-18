@@ -24,7 +24,7 @@
                     <p>From Date:</p>
                 </div>
                 <div class="col-md-8">
-                    <input type="date" name="from" class="form-control">
+                    <input id="startDate" type="date" name="from" class="form-control">
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
                     <p>To Date:</p>
                 </div>
                 <div class="col-md-8">
-                    <input type="date" name="to" class="form-control">
+                    <input id="endDate" type="date" name="to" class="form-control">
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
             </div>
             <div class="d-flex flex-row transfer-buttons">
                 <div class="p-2">
-                    <button type="button" class="btn btn-sucess transferRequestButtons">Search</button>
+                    <button id="search" type="button" class="btn btn-sucess transferRequestButtons">Search</button>
                 </div>
                 <div class="p-2">
                     <button type="button" class="btn btn-primary transferRequestButtons">Refresh</button>
@@ -75,7 +75,7 @@
                     @endif
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="transferRequestContent">
                 @foreach($transfers as $transfer)
                 <tr>
                     <td>{{$transfer->date}}</td>
@@ -115,6 +115,39 @@
     function closeViewTransferModal() {
         document.getElementById('viewTransferModal').style.display = "none";
     }
+    $(document).ready(function(){
+            $('#search').click(function(){
+                var startDate = $('#startDate').val();
+                var endDate = $('#endDate').val();
+                console.log(startDate + endDate);
+                $("#transferRequestContent").empty();
+            $.ajax({
+                type: "GET",
+                url: "{{URL::TO('/ajax/transferrequest/date')}}/" + startDate + "/" + endDate,
+                // data: "products.Name=" + productName,
+                cache: false,
+                dataType: "JSON",
+                success: function (response) {
+                    // console.log(response);
+                    for (i = 0; i < response.length; i++) {
+                        console.log(response[i]);
+                        $("#transferRequestContent").append(
+                            "<tr><td>"+ response[i].date+"</td>"
+                            + "<td>"+ response[i].status +"</td>"
+                            + "<td>"+ response[i].status_name+"</td>"
+                            @if ($users_id->roles_id == '1')
+                            +"<td><a href='/transferrequest/"+response[i].id+"/edit'><button type='button' class='btn btn-primary action-buttons'>Edit</button></a></td></tr>"
+                            @endif
+                        );
+                    }
+                },
+
+                error: function (obj, textStatus, errorThrown) {
+                    console.log("Error " + textStatus + ": " + errorThrown);
+                }
+            });
+            });
+        });
 </script>
 @endsection
 

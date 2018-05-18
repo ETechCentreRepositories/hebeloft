@@ -165,5 +165,13 @@ class SalesRecordsController extends Controller
             ])->with('users_id',$users_id);
         }
     }
+    
+    public function sortDate($startDate,$endDate){
+        $salesRecord = SalesRecord::leftJoin('outlets','sales_record.outlets_id','=','outlets.id')
+                     ->whereBetween('date',array($startDate,$endDate))
+                     ->get()->toArray();
+
+        return response($salesRecord);
+    }
 
 }

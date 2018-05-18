@@ -53,16 +53,19 @@ Route::get('/ajax/inventory-outlet', 'InventoryController@getOutletByInventory')
 Route::get('/salesrecord/create', 'SalesRecordsController@getSalesRecordCart');
 Route::get('/salesrecord/addtocart/{id}/{price}/{quantity}/{outlet}/{date}/{remarks}/{receiptNumber}', 'SalesRecordsController@getSalesRecordAddToCart');
 Route::get('/testing/{id}', 'UsersController@show');
+Route::get('/ajax/salesrecord/date/{startDate}/{endDate}', 'SalesRecordsController@sortDate');
 
 //SalesOrder
 Route::get('/salesorder/create', 'SalesOrdersController@getSalesOrderCart');
 Route::get('/salesorder/addtocart/{id}/{quantity}/{date}/{remarks}', 'SalesOrdersController@getSalesOrderAddToCart');
 Route::get('/testing/{id}', 'UsersController@show');
+Route::get('/ajax/salesorder/date/{startDate}/{endDate}', 'SalesOrdersController@sortDate');
 
 //TransferRequest
 Route::get('/transferrequest/create', 'TransferRequestController@getTransferRequestCart');
 Route::get('/transferrequest/addtocart/{id}/{quantity}/{outlet}/{date}/{remarks}', 'TransferRequestController@getTransferRequestAddToCart');
 Route::get('/testing/{id}', 'UsersController@show');
+Route::get('/ajax/transferrequest/date/{startDate}/{endDate}', 'TransferRequestController@sortDate');
 
 //Accept/Reject Transfer Request
 Route::post('/', function () {
