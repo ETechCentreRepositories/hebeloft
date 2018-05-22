@@ -197,4 +197,13 @@ class SalesOrdersController extends Controller
         }
     }
 
+    public function sortDate($startDate,$endDate){
+        $salesOrder = SalesOrder::select('sales_order.id','statuses_id','status','date','sales_order_number','status_name')
+                     ->leftJoin('statuses','sales_order.statuses_id','=','statuses.id')
+                     ->whereBetween('date',array($startDate,$endDate))
+                     ->get()->toArray();
+
+        return response($salesOrder);
+    }
+
 }

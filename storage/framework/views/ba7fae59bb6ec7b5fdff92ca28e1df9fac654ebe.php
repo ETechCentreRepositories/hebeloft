@@ -1,20 +1,18 @@
-@extends('layouts.app')
+<?php $__env->startSection('content'); ?>
 
-@section('content')
-
-@if ($users_id->roles_id == '1')
-@include('inc.navbar_superadmin')
-@elseif ($users_id->roles_id == '2')
-@include('inc.navbar_admin')
-@elseif ($users_id->roles_id == '3')
-@include('inc.navbar_outletstaff')
-@include('inc.unauthorized')
-@elseif ($users_id->roles_id == '4')
-@include('inc.navbar_wholesaler')
-@endif
+<?php if($users_id->roles_id == '1'): ?>
+<?php echo $__env->make('inc.navbar_superadmin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php elseif($users_id->roles_id == '2'): ?>
+<?php echo $__env->make('inc.navbar_admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php elseif($users_id->roles_id == '3'): ?>
+<?php echo $__env->make('inc.navbar_outletstaff', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('inc.unauthorized', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php elseif($users_id->roles_id == '4'): ?>
+<?php echo $__env->make('inc.navbar_wholesaler', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php endif; ?>
 
 <br>
-@if ($users_id->roles_id == '1')
+<?php if($users_id->roles_id == '1'): ?>
 <div class="topMargin container">
     <div class="drop-down_brand row">
         <div class="col-md-3">
@@ -50,41 +48,42 @@
                     <th>Date (YYYY-MM-DD)</th>
                     <th>Process</th>
                     <th>Status</th>
-                    @if ($users_id->roles_id == '1')
+                    <?php if($users_id->roles_id == '1'): ?>
                     <th class="emptyHeader"></th>
-                    @endif
+                    <?php endif; ?>
                 </tr>
             </thead>
             <tbody id="salesOrderContent">
-                    @foreach($salesOrders as $salesOrder)
+                    <?php $__currentLoopData = $salesOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $salesOrder): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
-                        <td>{{$salesOrder->date}}</td>
-                        <td>{{$salesOrder->status}}</td>
-                        <td>{{$salesOrder->statuses['status_name']}}</td>
+                        <td><?php echo e($salesOrder->date); ?></td>
+                        <td><?php echo e($salesOrder->status); ?></td>
+                        <td><?php echo e($salesOrder->statuses['status_name']); ?></td>
                         <td>
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row transfer-buttons">
                                 <div class="p-2">
-                                    <a href="/salesorder/{{$salesOrder->id}}"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
+                                    <a href="/hebeloft/salesorder/<?php echo e($salesOrder->id); ?>"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
                                 </div>
                                 <div class="p-2">
-                                    <a href="/salesorder/{{$salesOrder->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
+                                    <a href="/hebeloft/salesorder/<?php echo e($salesOrder->id); ?>/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
                             </div>
                         </div>
                     </td>
                     </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
         </table>
     </div>
     <div class="pagination">
-        {{$salesOrders->links()}}
+        <?php echo e($salesOrders->links()); ?>
+
     </div>
 </div>
-@endif
+<?php endif; ?>
 
-@if ($users_id->roles_id == '4')
+<?php if($users_id->roles_id == '4'): ?>
 <div class="topMargin container">
     <div class="row justify-content-end">
         <div>
@@ -130,27 +129,27 @@
                 </tr>
             </thead>
             <tbody>
-                    @foreach($wholesalerSalesOrders as $wholesalerSalesOrder)
+                    <?php $__currentLoopData = $wholesalerSalesOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $wholesalerSalesOrder): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
-                        {{-- <td>{{$wholesalerSalesOrder->date}}</td> --}}
-                        <td>{{$wholesalerSalesOrder->status}}</td>
-                        <td>{{$wholesalerSalesOrder->statuses['status_name']}}</td>
+                        <td><?php echo e($wholesalerSalesOrder->date); ?></td>
+                        <td><?php echo e($wholesalerSalesOrder->status); ?></td>
+                        <td><?php echo e($wholesalerSalesOrder->statuses['status_name']); ?></td>
                         <td>
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row transfer-buttons">
                                 <div class="p-2">
-                                    <a href="/salesorder/{{$wholesalerSalesOrder->id}}"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
+                                    <a href="/hebeloft/salesorder/<?php echo e($wholesalerSalesOrder->id); ?>"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
                                 </div>
                             </div>
                         </div>
                         </td>
                     </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
         </table>
     </div>
 </div>
-@endif
+<?php endif; ?>
 
 <script>
      $(document).ready(function(){
@@ -161,7 +160,7 @@
                 $("#salesOrderContent").empty();
             $.ajax({
                 type: "GET",
-                url: "{{URL::TO('/ajax/salesorder/date')}}/" + startDate + "/" + endDate,
+                url: "<?php echo e(URL::TO('/ajax/salesorder/date')); ?>/" + startDate + "/" + endDate,
                 // data: "products.Name=" + productName,
                 cache: false,
                 dataType: "JSON",
@@ -173,9 +172,9 @@
                             "<tr><td>"+ response[i].date+"</td>"
                             + "<td>"+ response[i].status +"</td>"
                             + "<td>"+ response[i].status_name+"</td>"
-                            @if ($users_id->roles_id == '1')
+                            <?php if($users_id->roles_id == '1'): ?>
                             +"<td><a href='/salesorder/"+response[i].id+"/edit'><button type='button' class='btn btn-primary action-buttons'>Edit</button></a></td></tr>"
-                            @endif
+                            <?php endif; ?>
                         );
                     }
                 },
@@ -188,7 +187,7 @@
         });
 </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 <style>
     .salesOrderNav {
@@ -202,3 +201,4 @@
     	pointer-events: none;
     }
 </style>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

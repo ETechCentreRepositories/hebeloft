@@ -209,4 +209,12 @@ class TransferRequestController extends Controller
             ])->with('users_id',$users_id);
         }
     }
+    public function sortDate($startDate,$endDate){
+        $transferRequest = TransferRequest::select('transfer_requests.id','statuses_id','status','date','transfer_requests_number','status_name')
+                     ->leftJoin('statuses','transfer_requests.statuses_id','=','statuses.id')
+                     ->whereBetween('date',array($startDate,$endDate))
+                     ->get()->toArray();
+
+        return response($transferRequest);
+    }
 }

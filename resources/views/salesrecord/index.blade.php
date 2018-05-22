@@ -25,7 +25,7 @@
             <p>From Date:</p>
         </div>
         <div class="col-md-9">
-            <input type="date" name="from" class="form-control">
+            <input id="startDate" type="date" name="from" class="form-control">
         </div>
     </div>
     <br>
@@ -34,7 +34,7 @@
             <p>To Date:</p>
         </div>
         <div class="col-md-9">
-            <input type="date" name="to" class="form-control">
+            <input id="endDate" type="date" name="to" class="form-control">
         </div>
     </div>
     <br>
@@ -59,7 +59,7 @@
                     <th class="emptyHeader"></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="salesRecordContent">
                     @foreach($salesRecords as $salesRecord)
                     <tr>
                         <td>{{$salesRecord->date}}</td>
@@ -84,6 +84,40 @@
     <div class="pagination">
         {{$salesRecords->links()}}
     </div>
+    <script>
+        $(document).ready(function(){
+            $('#refreshInventory').click(function(){
+                var startDate = $('#startDate').val();
+                var endDate = $('#endDate').val();
+                console.log(startDate + endDate);
+                $("#salesRecordContent").empty();
+            $.ajax({
+                type: "GET",
+                url: "{{URL::TO('/ajax/salesrecord/date')}}/" + startDate + "/" + endDate,
+                // data: "products.Name=" + productName,
+                cache: false,
+                dataType: "JSON",
+                success: function (response) {
+                    // console.log(response);
+                    for (i = 0; i < response.length; i++) {
+                        console.log(response[i]);
+                        $("#salesRecordContent").append(
+                            "<tr><td>"+ response[i].date+"</td>"
+                            + "<td>"+ response[i].receiptNumber +"</td>"
+                            + "<td>" + response[i].outlet_name + "</td>"
+                            + "<td>" + response[i].total_price + "</td>"
+                            + "<td>"+ response[i].remarks+"</td></tr>"
+                        );
+                    }
+                },
+
+                error: function (obj, textStatus, errorThrown) {
+                    console.log("Error " + textStatus + ": " + errorThrown);
+                }
+            });
+            });
+        });
+    </script>
 </div>
 
 @endsection

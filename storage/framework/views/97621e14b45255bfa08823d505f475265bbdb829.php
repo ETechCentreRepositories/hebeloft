@@ -1,35 +1,34 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="<?php echo e(app()->getLocale()); ?>">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> --}}
+    <script src="http://ehostingcentre.com/hebeloft/js/jquery.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <link rel="shortcut icon" href="http://localhost:8000/storage/logo/butterfly_logo.png">
-    <script src="http://localhost:8000/js/sorttable.js"></script>
-    <script src="http://localhost:8000/js/jquery.min.js"></script>
+    <link rel="shortcut icon" href="http://ehostingcentre.com/hebeloft/storage/logo/butterfly_logo.png">
+    <script src="http://ehostingcentre.com/hebeloft/js/sorttable.js"></script>
 
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title><?php echo e(config('app.name', 'Laravel')); ?></title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <script src="{{asset('js/jquery-ui.min.js')}}" type="text/javascript"></script>
-    <link href="{{asset('css/jquery-ui.min.css')}}" rel="stylesheet" type="text/css"/> 
+    <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
+    <script src="<?php echo e(asset('js/jquery-ui.min.js')); ?>" type="text/javascript"></script>
+    <link href="<?php echo e(asset('css/jquery-ui.min.css')); ?>" rel="stylesheet" type="text/css"/> 
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
     
-    @yield('script')
+    <?php echo $__env->yieldContent('script'); ?>
     
     <script>
     $(document).ready(function(){
     
-    $.get("{{ URL::to('ajax/inventory')}}",function(data){
+    $.get("<?php echo e(URL::to('ajax/inventory')); ?>",function(data){
             $("#product_brand").empty();
             $.each(data,function(i,value){
                 var brand = value.Brand;
@@ -40,7 +39,7 @@
                 // value.id + "'>" +outlet + "</option>");
             });
         });
-        $.get("{{ URL::to('ajax/inventory-outlet')}}",function(data){
+        $.get("<?php echo e(URL::to('ajax/inventory-outlet')); ?>",function(data){
             $("#outlet_location").empty();
             $.each(data,function(i,value){
                 var id = value.id;
@@ -52,7 +51,7 @@
         });
     
         $("#searchField").autocomplete({
-            source: "{{URL::to('autocomplete-search')}}",
+            source: "<?php echo e(URL::to('autocomplete-search')); ?>",
             minLength:1,
             select:function(key,value)
             {
@@ -65,7 +64,7 @@
             $("#inventoryContent").empty();
             $.ajax({
                 type: "GET",
-                url: "{{URL::TO('/retrieve-inventory-by-outlet')}}/" +outlet,
+                url: "<?php echo e(URL::TO('/retrieve-inventory-by-outlet')); ?>/" +outlet,
                 // data: "outlet=" + outlet,
                 cache: false,
                 dataType: "JSON",
@@ -94,7 +93,7 @@
             $("#inventoryContent").empty();
             $.ajax({
                 type: "GET",
-                url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
+                url: "<?php echo e(URL::TO('/retrieve-inventory-by-product-name')); ?>/" + productName,
                 // data: "products.Name=" + productName,
                 cache: false,
                 dataType: "JSON",
@@ -118,7 +117,7 @@
             });
         });
         
-        $.get("{{ URL::to('ajax/outlet')}}",function(data){
+        $.get("<?php echo e(URL::to('ajax/outlet')); ?>",function(data){
             $("#outlet").empty();
             $.each(data,function(i,value){
                 var id = value.id;
@@ -130,7 +129,7 @@
         });
 
         $("#salesRecordSearchField").autocomplete({
-            source: "{{URL::to('autocomplete-search')}}",
+            source: "<?php echo e(URL::to('autocomplete-search')); ?>",
             minLength:1,
             select:function(key,value)
             {
@@ -139,7 +138,7 @@
         });
 
         $("#salesOrderSearchField").autocomplete({
-            source: "{{URL::to('autocomplete-search')}}",
+            source: "<?php echo e(URL::to('autocomplete-search')); ?>",
             minLength:1,
             select:function(key,value)
             {
@@ -148,7 +147,7 @@
         });
 
         $("#transferRequestSearchField").autocomplete({
-            source: "{{URL::to('autocomplete-search')}}",
+            source: "<?php echo e(URL::to('autocomplete-search')); ?>",
             minLength:1,
             select:function(key,value)
             {
@@ -161,7 +160,7 @@
             var productName = $("#salesRecordSearchField").val();
             $.ajax({
                 type: "GET",
-                url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
+                url: "<?php echo e(URL::TO('/retrieve-inventory-by-product-name')); ?>/" + productName,
                 data: "",
                 cache:false,
                 datatype: "JSON",
@@ -193,7 +192,7 @@
             var productName = $("#salesOrderSearchField").val();
             $.ajax({
                 type: "GET",
-                url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
+                url: "<?php echo e(URL::TO('/retrieve-inventory-by-product-name')); ?>/" + productName,
                 data: "",
                 cache:false,
                 datatype: "JSON",
@@ -228,7 +227,7 @@
             console.log(productName);
             $.ajax({
                 type: "GET",
-                url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
+                url: "<?php echo e(URL::TO('/retrieve-inventory-by-product-name')); ?>/" + productName,
                 data: "",
                 cache:false,
                 datatype: "JSON",
@@ -276,7 +275,7 @@
                 console.log(receiptNumber);
                 $.ajax({
                     type: "GET",
-                    url: "{{URL::TO('/salesrecord/addtocart/')}}/" + productID + "/" + price + "/" + quantity + "/" + outlet + "/" + date + "/" + remarks + "/" + receiptNumber,
+                    url: "<?php echo e(URL::TO('/salesrecord/addtocart/')); ?>/" + productID + "/" + price + "/" + quantity + "/" + outlet + "/" + date + "/" + remarks + "/" + receiptNumber,
                     // data: "",
                     cache:false,
                     datatype: "JSON",
@@ -299,6 +298,7 @@
                 var remarks = $("#remarks").val();
                 var date = $("#salesOrderDate").val();
                 var quantity =  $('#createSalesOrderTable tr:last-child td:eq(3) #quantity').val();
+                
                 console.log(productID);
                 console.log(remarks);
                 console.log(date);
@@ -306,7 +306,7 @@
                 
                 $.ajax({
                     type: "GET",
-                    url: "{{URL::TO('/salesorder/addtocart/')}}/" + productID + "/" + quantity + "/" + date + "/" + remarks,
+                    url: "<?php echo e(URL::TO('/salesorder/addtocart/')); ?>/" + productID + "/" + quantity + "/" + date + "/" + remarks,
                     // data: "",
                     cache:false,
                     datatype: "JSON",
@@ -336,7 +336,7 @@
                 var productID = trProducts[0];
                 $.ajax({
                     type: "GET",
-                    url: "{{URL::TO('/transferrequest/addtocart/')}}/" + productID + "/" + quantity + "/" + outlet + "/" + date + "/" + remarks,
+                    url: "<?php echo e(URL::TO('/transferrequest/addtocart/')); ?>/" + productID + "/" + quantity + "/" + outlet + "/" + date + "/" + remarks,
                     // data: "",
                     cache:false,
                     datatype: "JSON",
@@ -359,8 +359,8 @@
 <body>
     <div id="app">
         <main class="pb-5">
-            @include('inc.messages')
-            @yield('content')
+            <?php echo $__env->make('inc.messages', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            <?php echo $__env->yieldContent('content'); ?>
         </main>
     </div>
 </body>

@@ -1,17 +1,15 @@
-@extends('layouts.app')
+<?php $__env->startSection('content'); ?>
 
-@section('content')
-
-@if ($users_id->roles_id == '1')
-@include('inc.navbar_superadmin')
-@elseif ($users_id->roles_id == '2')
-@include('inc.navbar_admin')
-@elseif ($users_id->roles_id == '3')
-@include('inc.navbar_outletstaff')
-@elseif ($users_id->roles_id == '4')
-@include('inc.navbar_wholesaler')
-@include('inc.unauthorized')
-@endif
+<?php if($users_id->roles_id == '1'): ?>
+<?php echo $__env->make('inc.navbar_superadmin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php elseif($users_id->roles_id == '2'): ?>
+<?php echo $__env->make('inc.navbar_admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php elseif($users_id->roles_id == '3'): ?>
+<?php echo $__env->make('inc.navbar_outletstaff', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php elseif($users_id->roles_id == '4'): ?>
+<?php echo $__env->make('inc.navbar_wholesaler', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('inc.unauthorized', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php endif; ?>
 
 <br>
 <div class="topMargin container">
@@ -55,10 +53,10 @@
         </div>
     </div>
     <div class="row">
-        {{-- <div class="input-group"> --}}
-            {{-- <span class="input-group-addon"><i class="fas fa-search"></i></span> --}}
+        
+            
         <input type="text" class="form-control searchField" style="background:transparent; height:0.8cm;">
-        {{-- </div> --}}
+        
     </div>
     <br>
     <div>
@@ -66,44 +64,45 @@
             <thead>
                 <tr>
                     <th>Date (YYYY-MM-DD)</th>
-                    {{-- <th>Order Id#</th> --}}
-                    {{-- <th>Outlet</th> --}}
+                    
+                    
                     <th>Process</th>
                     <th>Status</th>
-                    @if ($users_id->roles_id == '1')
+                    <?php if($users_id->roles_id == '1'): ?>
                     <th class="emptyHeader"></th>
-                    @endif
+                    <?php endif; ?>
                 </tr>
             </thead>
             <tbody id="transferRequestContent">
-                @foreach($transfers as $transfer)
+                <?php $__currentLoopData = $transfers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $transfer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
-                    <td>{{$transfer->date}}</td>
-                    {{-- <td>{{$transfer->orderId}}</td> --}}
-                    {{-- <td>{{$transfer->from_location}}</td> --}}
-                    <td>{{$transfer->status}}</td>
-                    <td>{{$transfer->statuses['status_name']}}</td>
-                    @if ($users_id->roles_id == '1')
+                    <td><?php echo e($transfer->date); ?></td>
+                    
+                    
+                    <td><?php echo e($transfer->status); ?></td>
+                    <td><?php echo e($transfer->statuses['status_name']); ?></td>
+                    <?php if($users_id->roles_id == '1'): ?>
                     <td>
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row transfer-buttons">
                                 <div class="p-2">
-                                    <a href="/transferrequest/{{$transfer->id}}"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
+                                    <a href="/transferrequest/<?php echo e($transfer->id); ?>"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
                                 </div>
                                 <div class="p-2">
-                                    <a href="/transferrequest/{{$transfer->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
+                                    <a href="/transferrequest/<?php echo e($transfer->id); ?>/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
                             </div>
                         </div>
                     </td>
-                    @endif
+                    <?php endif; ?>
                 </tr>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
         </table>
     </div>
     <div class="pagination">
-        {{$transfers->links()}}
+        <?php echo e($transfers->links()); ?>
+
     </div>
 </div>
 
@@ -123,7 +122,7 @@
                 $("#transferRequestContent").empty();
             $.ajax({
                 type: "GET",
-                url: "{{URL::TO('/ajax/transferrequest/date')}}/" + startDate + "/" + endDate,
+                url: "<?php echo e(URL::TO('/ajax/transferrequest/date')); ?>/" + startDate + "/" + endDate,
                 // data: "products.Name=" + productName,
                 cache: false,
                 dataType: "JSON",
@@ -135,9 +134,9 @@
                             "<tr><td>"+ response[i].date+"</td>"
                             + "<td>"+ response[i].status +"</td>"
                             + "<td>"+ response[i].status_name+"</td>"
-                            @if ($users_id->roles_id == '1')
+                            <?php if($users_id->roles_id == '1'): ?>
                             +"<td><a href='/transferrequest/"+response[i].id+"/edit'><button type='button' class='btn btn-primary action-buttons'>Edit</button></a></td></tr>"
-                            @endif
+                            <?php endif; ?>
                         );
                     }
                 },
@@ -149,7 +148,7 @@
             });
         });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
 
 <style>
     .transferRequestNav {
@@ -157,10 +156,6 @@
         color: #000000 !important;
         pointer-events: none;
         cursor: default;
-        
-    }
-    
-    .emptyHeader {
-    	pointer-events: none;
     }
 </style>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
