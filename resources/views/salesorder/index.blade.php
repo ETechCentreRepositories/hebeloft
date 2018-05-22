@@ -132,7 +132,7 @@
             <tbody>
                     @foreach($wholesalerSalesOrders as $wholesalerSalesOrder)
                     <tr>
-                        <td>{{$wholesalerSalesOrder->date}}</td>
+                        {{-- <td>{{$wholesalerSalesOrder->date}}</td> --}}
                         <td>{{$wholesalerSalesOrder->status}}</td>
                         <td>{{$wholesalerSalesOrder->statuses['status_name']}}</td>
                         <td>

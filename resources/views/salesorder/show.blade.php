@@ -41,5 +41,19 @@
                 </tr>
             </tbody>
         </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{$salesOrder->products['Name']}}</td>
+                    <td>{{$salesOrder->quantity}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
