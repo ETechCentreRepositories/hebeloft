@@ -48,14 +48,15 @@
     </div>
     <br>
     <div>
-        <table class="table table-striped">
+        <table class="table table-striped sortable">
             <thead>
                 <tr>
-                    <th>Date</th>
+                    <th>Date (YYYY-MM-DD)</th>
                     <th>Receipt Number</th>
                     <th>Outlet</th>
                     <th>Total Price</th>
                     <th>Remarks</th>
+                    <th class="emptyHeader"></th>
                 </tr>
             </thead>
             <tbody>
@@ -66,6 +67,15 @@
                         <td>{{$salesRecord->outlets['outlet_name']}}</td>
                         <td>{{$salesRecord->total_price}}</td>
                         <td>{{$salesRecord->remarks}}</td>
+                        <td>
+                            <div class="d-flex flex-column">
+                                <div class="d-flex flex-row transfer-buttons">
+                                    <div class="p-2">
+                                        <a href="/salesrecord/{{$salesRecord->id}}"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                     @endforeach
             </tbody>

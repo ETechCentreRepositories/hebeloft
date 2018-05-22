@@ -23,7 +23,6 @@
                 <div class="card-header">Update Transfer Request</div>
 
                 <div class="card-body">
-                {!!Form::open(['action' => ['TransferRequestController@update', $transferRequests->id], 'method' => 'POST']) !!}
                     {{ csrf_field() }}
                     <table class="table table-striped" id="inventoryTable" >
         <thead>
@@ -43,19 +42,22 @@
             @endif
         </tbody>
     </table>
-    <select name="status" class="form-control">
-                        <option value="rejected">Rejected</option>
-                        <option value="accepted">Accepted</option>
-                    </select>
                 <br>
-                    {{Form::hidden('_method','PUT')}}
-                    <div class="modal-button">
-                    {{Form::submit('Update transfer request', ['class'=>'btn btn-primary'])}}
 </div>
-                    {!! Form::close() !!}
                 </div>
             </div>
+            
         </div>
+        {!! Form::open(['action' => ['TransferRequestController@update', $transferRequests->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+        {{Form::hidden('status', 'rejected', ['class' => 'form-control'])}}
+        {{Form::hidden('_method', 'PUT')}}
+        {{Form::submit('Rejected', ['class'=>'btn btn-primary btn-lg btn-danger btn-rejected'])}}
+    {!! Form::close() !!}
+    {!! Form::open(['action' => ['TransferRequestController@update', $transferRequests->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+        {{Form::hidden('status', 'accepted', ['class' => 'form-control'])}}
+        {{Form::hidden('_method', 'PUT')}}
+        {{Form::submit('Accepted', ['class'=>'btn btn-primary btn-lg btn-success btn-accepted'])}}
+    {!! Form::close() !!}
     </div>
 </div>
 
@@ -66,4 +68,12 @@
         pointer-events: none;
         cursor: default;
     }
+    
+    .btn-rejected {
+  float: left;
+}
+
+.btn-accepted {
+  float: right;
+}
 </style>

@@ -47,7 +47,7 @@
                 <input type="text" id="transferRequestSearchField" class="form-control" style="background:transparent">
             </div>
             <div class="col-md-2">
-                <button type="button" class="btn btn-default btn-search" id="addTransferRequest" onClick="getTransferRequestProduct()">Add</button>
+                <button type="button" class="btn btn-default btn-search" id="addTransferRequest">Add</button>
             </div>
         </div>
         <br>
@@ -62,7 +62,7 @@
             <tbody id="addTransferRequestContent">
             @if(Session::has('cartTransferRequest'))
                 @foreach($products as $product)
-                        <tr id="{{$product['item']['id']}}"><td><img style="width:60px; height:60px" src="/storage/product_images/{{$product['item']['image']}}"/></td>
+                        <tr id="{{$product['item']['id']}}"><td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/{{$product['item']['image']}}"/></td>
                         <td>{{$product['item']['Name']}}</td>
                         <td><input name="quantity" type="number" id="quantity" type="text" style="width:60px;" value="{{$product['qty']}}"/></td>
                         </tr>
@@ -76,7 +76,7 @@
         <br></br>
         <div class="form-group">
             <div>
-            <button type="button" class="btn btn-primary" onClick="saveTRProduct();enableCreateButton()">Save as Draft</button>
+            <button type="button" class="btn btn-primary" id="saveTransferRequest" onClick="enableCreateButton()">Save as Draft</button>
             {{Form::submit('Create Transfer Request', ['class'=>'btn btn-primary', 'id'=>'createButton',  'disabled'])}}
             </div>
         </div>

@@ -44,7 +44,7 @@
         </div>
     </div>
     <br>
-    <table class="table table-striped" id="inventoryTable" >
+    <table class="table table-striped sortable" id="inventoryTable" >
         <thead>
             <tr>
                 <th>Image</th>
@@ -67,7 +67,7 @@
                 </td>
                 <td>{{$inventoryOutlet->products['Brand']}}</td>
                 <td>{{$inventoryOutlet->products['Name']}}</td>
-                <td>{{$inventoryOutlet->products['UnitPrice']}}</td>
+                <td>S${{$inventoryOutlet->products['UnitPrice']}}</td>
                 {{-- <td></td>
                 <td></td>
                 <td></td> --}}
@@ -82,99 +82,6 @@
         </tbody>
     </table>
 </div>
-
-<script>
-    $(document).ready(function(){
-        $.get("{{ URL::to('ajax/inventory')}}",function(data){
-            $("#product_brand").empty();
-            $.each(data,function(i,value){
-                var brand = value.Brand;
-                var outlet = value.outlet_name;
-                $("#product_brand").append("<option value='" +
-                value.id + "'>" +brand + "</option>");
-                // $("#outlet_location").append("<option value='" +
-                // value.id + "'>" +outlet + "</option>");
-            });
-        });
-        $.get("{{ URL::to('ajax/inventory-outlet')}}",function(data){
-            $("#outlet_location").empty();
-            $.each(data,function(i,value){
-                var id = value.id;
-                var outlet = value.outlet_name;
-                var outlet_id = value.outlets_id;
-                $("#outlet_location").append("<option value='" +
-                outlet_id + "'>" +outlet + "</option>");
-            });
-        });
-    
-        $("#searchField").autocomplete({
-            source: "{{URL::to('autocomplete-search')}}",
-            minLength:1,
-            select:function(key,value)
-            {
-                console.log(value);
-            }
-        });
-
-        $("#outlet_location").change(function(){
-            var outlet = $(this).val();
-            $("#inventoryContent").empty();
-            $.ajax({
-                type: "GET",
-                url: "{{URL::TO('/retrieve-inventory-by-outlet')}}/" +outlet,
-                // data: "outlet=" + outlet,
-                cache: false,
-                dataType: "JSON",
-                success: function (response) {
-                    for (i = 0; i < response.length; i++) {
-                        $("#inventoryContent").append(
-                            "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
-                            + "<td>" + response[i].Brand + "</td>"
-                            + "<td>" + response[i].Name + "</td>"
-                            + "<td>" + response[i].UnitPrice + "</td>"
-                            + "<td></td>" 
-                            + "<td>" + response[i].stock_level + "/" + response[i].threshold_level + "</td></tr>"
-                        );
-                    }
-                },
-                
-                error: function (obj, textStatus, errorThrown) {
-                    console.log("Error " + textStatus + ": " + errorThrown);
-                }
-            });
-        });
-
-        $("#searchInventory").click(function(){
-            var productName = $("#searchField").val();
-            console.log(productName);
-            $("#inventoryContent").empty();
-            $.ajax({
-                type: "GET",
-                url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
-                // data: "products.Name=" + productName,
-                cache: false,
-                dataType: "JSON",
-                success: function (response) {
-                    console.log(response);
-                    for (i = 0; i < response.length; i++) {
-                        $("#inventoryContent").append(
-                            "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
-                            + "<td>" + response[i].Brand + "</td>"
-                            + "<td>" + response[i].Name + "</td>"
-                            + "<td>" + response[i].UnitPrice + "</td>"
-                            + "<td></td>" 
-                            + "<td>" + response[i].stock_level + "/" + response[i].threshold_level + "</td></tr>"
-                        );
-                    }
-                },
-
-                error: function (obj, textStatus, errorThrown) {
-                    console.log("Error " + textStatus + ": " + errorThrown);
-                }
-            });
-        });
-    });
-</script>
 
 <div class="pagination">
     {{$inventoryOutlets->links()}}

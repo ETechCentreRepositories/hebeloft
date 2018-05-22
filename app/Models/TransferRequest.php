@@ -27,4 +27,8 @@ class TransferRequest extends Model
     public function transferRequestList(){
         return $this -> belongsTo('\App\Models\TransferRequestList');
     }
+    
+    public function outlets(){
+        return $this -> belongsTo('\App\Models\Outlet');
+    }
 }   

@@ -57,7 +57,7 @@
                 <input type="text" id="salesRecordSearchField" class="form-control" style="background:transparent">
             </div>
             <div class="col-md-2">
-                <button type="button" class="btn btn-default btn-search" id="addSalesRecord" onClick="getSalesRecordProduct()">Add</button>
+                <button type="button" class="btn btn-default btn-search" id="addSalesRecord">Add</button>
             </div>
         </div>
         <br>
@@ -74,7 +74,7 @@
             <tbody id="addSalesRecordContent">
                 @if(Session::has('cartSalesRecord'))
                     @foreach($products as $product)
-                        <tr id="{{$product['item']['id']}}"><td><img style="width:60px; height:60px" src="/storage/product_images/{{$product['item']['image']}}"/></td>
+                        <tr id="{{$product['item']['id']}}"><td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/{{$product['item']['image']}}"/></td>
                         <td>{{$product['item']['Name']}}</td>
                         <td><input name="unitPrice" type="number" id="unitPrice" type="text" style="width:60px;" value="{{$product['item']['UnitPrice']}}"/></td>
                         <td><input name="quantity" type="number" id="quantity" type="text" style="width:60px;" value="{{$product['qty']}}"/></td>
@@ -89,7 +89,7 @@
         <br></br>
         <div class="form-group">
             <div>
-            <button type="button" class="btn btn-primary" onClick="saveProduct();enableCreateButton()">Save as Draft</button>
+            <button type="button" class="btn btn-primary" id="saveSalesRecord" onClick="enableCreateButton()">Save as Draft</button>
             {{Form::submit('Create Sales Record', ['class'=>'btn btn-primary', 'id'=>'createButton',  'disabled'])}}
             </div>
         </div>
