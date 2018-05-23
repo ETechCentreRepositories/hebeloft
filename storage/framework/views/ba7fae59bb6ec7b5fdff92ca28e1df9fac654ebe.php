@@ -63,10 +63,10 @@
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row transfer-buttons">
                                 <div class="p-2">
-                                    <a href="/hebeloft/salesorder/<?php echo e($salesOrder->id); ?>"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
+                                    <a href="/salesorder/<?php echo e($salesOrder->id); ?>"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
                                 </div>
                                 <div class="p-2">
-                                    <a href="/hebeloft/salesorder/<?php echo e($salesOrder->id); ?>/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
+                                    <a href="/salesorder/<?php echo e($salesOrder->id); ?>/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
                             </div>
                         </div>
@@ -131,14 +131,14 @@
             <tbody>
                     <?php $__currentLoopData = $wholesalerSalesOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $wholesalerSalesOrder): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
-                        <td><?php echo e($wholesalerSalesOrder->date); ?></td>
+                        
                         <td><?php echo e($wholesalerSalesOrder->status); ?></td>
                         <td><?php echo e($wholesalerSalesOrder->statuses['status_name']); ?></td>
                         <td>
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row transfer-buttons">
                                 <div class="p-2">
-                                    <a href="/hebeloft/salesorder/<?php echo e($wholesalerSalesOrder->id); ?>"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
+                                    <a href="/salesorder/<?php echo e($wholesalerSalesOrder->id); ?>"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
                                 </div>
                             </div>
                         </div>

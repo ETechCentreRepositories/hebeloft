@@ -4,10 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="http://ehostingcentre.com/hebeloft/js/jquery.min.js"></script>
+    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <link rel="shortcut icon" href="http://ehostingcentre.com/hebeloft/storage/logo/butterfly_logo.png">
-    <script src="http://ehostingcentre.com/hebeloft/js/sorttable.js"></script>
+    <link rel="shortcut icon" href="http://localhost:8000/storage/logo/butterfly_logo.png">
+    <script src="http://localhost:8000/js/sorttable.js"></script>
+    <script src="http://localhost:8000/js/jquery.min.js"></script>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
@@ -298,7 +299,6 @@
                 var remarks = $("#remarks").val();
                 var date = $("#salesOrderDate").val();
                 var quantity =  $('#createSalesOrderTable tr:last-child td:eq(3) #quantity').val();
-                
                 console.log(productID);
                 console.log(remarks);
                 console.log(date);

@@ -56,7 +56,7 @@
                 <input type="text" id="salesRecordSearchField" class="form-control" style="background:transparent">
             </div>
             <div class="col-md-2">
-                <button type="button" class="btn btn-default btn-search" id="addSalesRecord" onClick="getSalesRecordProduct()">Add</button>
+                <button type="button" class="btn btn-default btn-search" id="addSalesRecord">Add</button>
             </div>
         </div>
         <br>
@@ -73,7 +73,7 @@
             <tbody id="addSalesRecordContent">
                 <?php if(Session::has('cartSalesRecord')): ?>
                     <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <tr id="<?php echo e($product['item']['id']); ?>"><td><img style="width:60px; height:60px" src="/storage/product_images/<?php echo e($product['item']['image']); ?>"/></td>
+                        <tr id="<?php echo e($product['item']['id']); ?>"><td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/<?php echo e($product['item']['image']); ?>"/></td>
                         <td><?php echo e($product['item']['Name']); ?></td>
                         <td><input name="unitPrice" type="number" id="unitPrice" type="text" style="width:60px;" value="<?php echo e($product['item']['UnitPrice']); ?>"/></td>
                         <td><input name="quantity" type="number" id="quantity" type="text" style="width:60px;" value="<?php echo e($product['qty']); ?>"/></td>
@@ -89,7 +89,7 @@
         <br></br>
         <div class="form-group">
             <div>
-            <button type="button" class="btn btn-primary" onClick="saveProduct();enableCreateButton()">Save as Draft</button>
+            <button type="button" class="btn btn-primary" id="saveSalesRecord" onClick="enableCreateButton()">Save as Draft</button>
             <?php echo e(Form::submit('Create Sales Record', ['class'=>'btn btn-primary', 'id'=>'createButton',  'disabled'])); ?>
 
             </div>
@@ -113,5 +113,16 @@
     function enableCreateButton() {
         document.getElementById("createButton").disabled = false;
     }
+
+    Date.prototype.toDateInputValue = (function() {
+    var local = new Date(this);
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0,10);
+});
+
+
+    $(document).ready( function() {
+    $('#salesRecordDate').val(new Date().toDateInputValue());
+});​
 </script>
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

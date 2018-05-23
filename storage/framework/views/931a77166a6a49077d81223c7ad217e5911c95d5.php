@@ -59,7 +59,7 @@
             <?php $__currentLoopData = $inventoryOutlets; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $inventoryOutlet): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <tr>
                 <td>
-                    <img style="width:60px; height:60px" src="/hebeloft/storage/product_images/<?php echo e($inventoryOutlet->products['image']); ?>">    
+                    <img style="width:60px; height:60px" src="/storage/product_images/<?php echo e($inventoryOutlet->products['image']); ?>">    
                 </td>
                 <td><?php echo e($inventoryOutlet->products['Brand']); ?></td>
                 <td><?php echo e($inventoryOutlet->products['Name']); ?></td>

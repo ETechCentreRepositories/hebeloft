@@ -156,6 +156,11 @@
         color: #000000 !important;
         pointer-events: none;
         cursor: default;
+        
+    }
+    
+    .emptyHeader {
+    	pointer-events: none;
     }
 </style>
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
