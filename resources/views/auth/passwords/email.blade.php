@@ -30,6 +30,7 @@
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
+                                <label><input id="outletStaff" type="checkbox" name="outletStaff[]" value=""> I am an outlet staff</label>
                             </div>
                         </div>
 
@@ -46,4 +47,18 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#outletStaff").click(function(){
+            $status = $(this).is(":checked");
+            if($status){
+	        $("#email").val("enquiry@hebeloft.com"); 
+            }else{
+                $("#email").val(""); 
+            }
+            
+        });
+    });
+</script>
 @endsection

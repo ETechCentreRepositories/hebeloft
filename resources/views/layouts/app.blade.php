@@ -28,6 +28,96 @@
     
     <script>
     $(document).ready(function(){
+    
+    $.get("{{ URL::to('ajax/inventory')}}",function(data){
+            $("#product_brand").empty();
+            $.each(data,function(i,value){
+                var brand = value.Brand;
+                var outlet = value.outlet_name;
+                $("#product_brand").append("<option value='" +
+                value.id + "'>" +brand + "</option>");
+                // $("#outlet_location").append("<option value='" +
+                // value.id + "'>" +outlet + "</option>");
+            });
+        });
+        $.get("{{ URL::to('ajax/inventory-outlet')}}",function(data){
+            $("#outlet_location").empty();
+            $.each(data,function(i,value){
+                var id = value.id;
+                var outlet = value.outlet_name;
+                var outlet_id = value.outlets_id;
+                $("#outlet_location").append("<option value='" +
+                outlet_id + "'>" +outlet + "</option>");
+            });
+        });
+    
+        $("#searchField").autocomplete({
+            source: "{{URL::to('autocomplete-search')}}",
+            minLength:1,
+            select:function(key,value)
+            {
+                console.log(value);
+            }
+        });
+
+        $("#outlet_location").change(function(){
+            var outlet = $(this).val();
+            $("#inventoryContent").empty();
+            $.ajax({
+                type: "GET",
+                url: "{{URL::TO('/retrieve-inventory-by-outlet')}}/" +outlet,
+                // data: "outlet=" + outlet,
+                cache: false,
+                dataType: "JSON",
+                success: function (response) {
+                    for (i = 0; i < response.length; i++) {
+                        $("#inventoryContent").append(
+                            "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
+                            + "<td>" + response[i].Brand + "</td>"
+                            + "<td>" + response[i].Name + "</td>"
+                            + "<td>" + response[i].UnitPrice + "</td>"
+                            + "<td></td>" 
+                            + "<td>" + response[i].stock_level + "/" + response[i].threshold_level + "</td></tr>"
+                        );
+                    }
+                },
+                
+                error: function (obj, textStatus, errorThrown) {
+                    console.log("Error " + textStatus + ": " + errorThrown);
+                }
+            });
+        });
+
+        $("#searchInventory").click(function(){
+            var productName = $("#searchField").val();
+            console.log(productName);
+            $("#inventoryContent").empty();
+            $.ajax({
+                type: "GET",
+                url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
+                // data: "products.Name=" + productName,
+                cache: false,
+                dataType: "JSON",
+                success: function (response) {
+                    console.log(response);
+                    for (i = 0; i < response.length; i++) {
+                        $("#inventoryContent").append(
+                            "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
+                            + "<td>" + response[i].Brand + "</td>"
+                            + "<td>" + response[i].Name + "</td>"
+                            + "<td>" + response[i].UnitPrice + "</td>"
+                            + "<td></td>" 
+                            + "<td>" + response[i].stock_level + "/" + response[i].threshold_level + "</td></tr>"
+                        );
+                    }
+                },
+
+                error: function (obj, textStatus, errorThrown) {
+                    console.log("Error " + textStatus + ": " + errorThrown);
+                }
+            });
+        });
+        
         $.get("{{ URL::to('ajax/outlet')}}",function(data){
             $("#outlet").empty();
             $.each(data,function(i,value){
@@ -87,26 +177,57 @@
             $.ajax({
                 type: "GET",
                 url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
-                // data: productName,
+                data: "",
                 cache:false,
                 datatype: "JSON",
                 success: function (response) {
+                console.log("testing");
 
                     for (i = 0; i < response.length; i++) {
 
-                        if (response[i].stock_level > response[i].threshold_level) {
-
                             var productId = parseInt(response[i].products_id);
-
                             products.push(productId);
                             $("#addSalesRecordContent").append(
-                                "<tr id='"+productId+"'><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
+                                "<tr id='"+productId+"'><td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
                                 + "<td>" + response[i].Name + "</td>"
                                 + "<td id='unitPrice'>"+response[i].UnitPrice+"</td>"
                                 + "<td><input name='quantity' type='number' id='quantity' type='text' style='width:60px;' value='1'/></td>"
                                 + "<td id='price'>"+response[i].UnitPrice+"</td></tr>"
                             );
-                        }
+                    }
+                },
+
+                error: function (obj, testStatus, errorThrown) {
+                    
+                }
+            });
+        });
+        
+        var orderProducts = [];
+        $("#addSalesOrder").click(function() {
+            var productName = $("#salesOrderSearchField").val();
+            $.ajax({
+                type: "GET",
+                url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
+                data: "",
+                cache:false,
+                datatype: "JSON",
+                success: function (response) {
+                console.log("testing");
+
+                    for (i = 0; i < response.length; i++) {
+
+                            var productId = parseInt(response[i].products_id);
+
+                            orderProducts.push(productId);
+                            console.log(orderProducts);
+                            
+                            $("#addSalesOrderContent").append(
+                                "<tr><td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
+                                + "<td>" + response[i].Name + "</td>"
+                                + "<td>" + response[i].UnitPrice + "</td>"
+                                + "<td><input name='quantity' type='number' id='quantity' type='text' style='width:60px;' value='1'</tr>"
+                            );
                     }
                 },
 
@@ -117,21 +238,20 @@
         });
         
         var trProducts = [];
-        $("#addTransferRequest").click(function(){
+        $(document).on("click","#addTransferRequest",function(){
             var productName = $("#transferRequestSearchField").val();
             console.log(productName);
             $.ajax({
                 type: "GET",
                 url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
-                // data: productName,
+                data: "",
                 cache:false,
                 datatype: "JSON",
                 success: function (response) {
+                console.log(response);
 
                     for (i = 0; i < response.length; i++) {
-
-                        if (response[i].stock_level > response[i].threshold_level) {
-
+                    
                             var productId = parseInt(response[i].products_id);
 
                             trProducts.push(productId);
@@ -139,54 +259,18 @@
                             
                             $("#addTransferRequestContent").append(
                                 "<tr id='"+productId+"'>"
-                                + "<td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
-                                + "<td>" + response[i].Name + "</td>"
-                                + "<td><input name='quantity' type='number' id='quantity' type='text' style='width:60px;' value='1'/></td>"
-                                + "</tr>"
-                            );
-                        }
-                    }
-                },
-
-                error: function (obj, testStatus, errorThrown) {
-                    
-                }
-            });
-        });
-
-        var orderProducts = [];
-        $("#addSalesOrder").click(function() {
-            var productName = $("#salesOrderSearchField").val();
-            $.ajax({
-                type: "GET",
-                url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
-                // data: productName,
-                cache:false,
-                datatype: "JSON",
-                success: function (response) {
-
-                    for (i = 0; i < response.length; i++) {
-
-                        if (response[i].stock_level > response[i].threshold_level) {
-
-                            var productId = parseInt(response[i].products_id);
-
-                            orderProducts.push(productId);
-                            console.log(orderProducts);
-                            
-                            $("#addSalesOrderContent").append(
-                                "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
+                                + "<td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
                                 + "<td>" + response[i].Name + "</td>"
                                 + "<td id='price'>" + response[i].UnitPrice + "</td>"
                                 + "<td><input name='quantity' type='number' id='quantity' type='text' style='width:60px;' value='1'/>"
                                 + "<td id='subtotal'>" + response[i].UnitPrice + "</td></tr>"
                             );
-                        }
+                      
                     }
                 },
 
                 error: function (obj, testStatus, errorThrown) {
-                    
+                    console.log("fail");
                 }
             });
         });

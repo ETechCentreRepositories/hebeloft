@@ -58,7 +58,7 @@
             <tbody id="addSalesOrderContent">
             @if(Session::has('cartSalesOrder'))
                 @foreach($products as $product)
-                        <tr><td><img style="width:60px; height:60px" src="/storage/product_images/{{$product['item']['image']}}"/></td>
+                        <tr><td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/{{$product['item']['image']}}"/></td>
                         <td>{{$product['item']['Name']}}</td>
                         <td>{{$product['item']['UnitPrice']}}</td>
                         <td>{{$product['qty']}}</td>

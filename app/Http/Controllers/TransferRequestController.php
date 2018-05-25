@@ -102,10 +102,10 @@ class TransferRequestController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-        $transferRequestId = TransferRequest::find($id)->id;
-        $transfers = TransferRequestList::where('transfer_requests_id', $transferRequestId)->get();
 
-        return view('transfer_request.show')->with('transfers',$transfers)->with('users_id',$users_id);
+        $transferRequest = TransferRequest::find($id);
+
+        return view('transfer_request.show')->with('users_id',$users_id)->with('transferRequest',$transferRequest);
     }
 
     /**
