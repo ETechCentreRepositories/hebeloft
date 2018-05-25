@@ -189,7 +189,7 @@ class TransferRequestController extends Controller
 
         $request->session()->put('cartTransferRequest', $transferRequestCart);
         
-        return redirect()->route('/transferrequest/create/');
+        return redirect('transfer_request.create')->with('success', 'Added to Cart');
     }
 
     public function getTransferRequestCart() {

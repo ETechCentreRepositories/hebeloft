@@ -76,9 +76,9 @@
                     @foreach($products as $product)
                         <tr id="{{$product['item']['id']}}"><td><img style="width:60px; height:60px" src="/storage/product_images/{{$product['item']['image']}}"/></td>
                         <td>{{$product['item']['Name']}}</td>
-                        <td><input name="unitPrice" type="number" id="unitPrice" type="text" style="width:60px;" value="{{$product['item']['UnitPrice']}}"/></td>
-                        <td><input name="quantity" type="number" id="quantity" type="text" style="width:60px;" value="{{$product['qty']}}"/></td>
-                        <td id="price"><input name="price" type="number" id="price" type="text" style="width:60px;" value="{{$product['price']}}"/></td></tr>
+                        <td>{{$product['item']['UnitPrice']}}</td>
+                        <td>{{$product['qty']}}</td>
+                        <td id="price">{{$product['price']}}</td></tr>
                     @endforeach
                 @endif
             </tbody>

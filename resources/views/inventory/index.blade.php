@@ -11,12 +11,11 @@
 @elseif ($users_id->roles_id == '4')
 @include('inc.navbar_wholesaler')
 @endif
-
 <br>
 <div class="topMargin container">
     <div class="drop-down_brand row">
         <div class="col-md-3">
-        <p>Search Item name/brand</p>
+        <p>Search item brand</p>
         </div>
         <div class="col-md-9">
             <select id="product_brand" class="form-control"></select>
@@ -33,14 +32,17 @@
     </div>
     <br>
     <div class="row">
-        <div class="col-md-8">
+    <div class="col-md-2">
+            <button type="button" class="btn btn-success btn-search" onclick="openImportCSVModal()">Import</button></a>
+        </div>
+        <div class="col-md-2">
+            <a href="{{ route('inventory.export.file',['type'=>'csv']) }}"><button type="button" class="btn btn-inflow">Export</button></a>
+        </div>
+        <div class="col-md-6">
             <input type="text" id="searchField" class="form-control" style="background:transparent">
         </div>
         <div class="col-md-2">
             <button type="button" class="btn btn-default btn-search" id="searchInventory">Search</button>
-        </div>
-        <div class="col-md-2">
-            <a href="{{ route('export.file',['type'=>'csv']) }}"><button type="button" class="btn btn-inflow">Export</button></a>
         </div>
     </div>
     <br>
@@ -51,10 +53,7 @@
                 <th>Brand</th>
                 <th>Item</th>
                 <th>Normal Price</th>
-                {{-- <th>BHG SKU</th>
-                <th>OG SKU</th>
-                <th>Metro SKU</th> --}}
-                <th>SKU</th>
+                <th>Category</th>
                 <th>Quantity/Thresold</th>
             </tr>
         </thead>
@@ -83,6 +82,38 @@
     </table>
 </div>
 
+<div id="importCSVModal" class="modal">
+    <span class="close cursor" onclick="closeImportCSVModal()">&times;</span>
+    <div class="card modalCard">
+        <div class="card-body">
+            <br>
+            <h3 class="card-title">Select your inventory file here </h3>
+            <br>
+            {!! Form::open(['action' => ['InventoryController@store'], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+                {{-- <f{!! Form::open(['action' => ['InventoryController@store'], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+                {{-- <form class="form-horizontal" role="form" method="POST" action="UsersController@create"> --}}
+                {{ csrf_field() }}
+
+                <div class="row">
+                <div style="text-align:center">{{Form::file('inventory_csv',array('id'=>'inventory_csv'))}}</div>
+                <h3 id="addCSVFile">testing</h3>
+                </div>
+
+                <br>
+
+                <div class="form-group">
+                    <div style="text-align:center">
+                        <button type="submit" class="btn btn-primary">
+                            Import
+                        </button>
+                    </div>
+                </div>
+            {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function(){
         $.get("{{ URL::to('ajax/inventory')}}",function(data){
@@ -105,6 +136,7 @@
                 $("#outlet_location").append("<option value='" +
                 outlet_id + "'>" +outlet + "</option>");
             });
+            $("#outlet_location").append("<option value='1'>All</option>");
         });
     
         $("#searchField").autocomplete({
@@ -174,6 +206,14 @@
             });
         });
     });
+
+    function openImportCSVModal() {
+        document.getElementById('importCSVModal').style.display = "block";
+    }
+
+    function closeImportCSVModal() {
+        document.getElementById('importCSVModal').style.display = "none";
+    }
 </script>
 
 <div class="pagination">

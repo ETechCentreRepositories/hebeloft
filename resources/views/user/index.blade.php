@@ -17,7 +17,12 @@
 <br>
 <div class="topMargin container">
     <div class="row justify-content-end">
+    <div class="col-md-2">
+        <a href="{{ route('users.export.file',['type'=>'csv']) }}"><button type="button" class="btn btn-inflow">Export</button></a>
+        </div>
+        <div class="col-md-2">
         <button type="button" class="btn btn-warning" onclick="openCreateUserModal()">Add new staff</button>
+        </div>
     </div>
     <br>
     <div>

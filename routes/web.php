@@ -43,21 +43,26 @@ Route::get('/autocomplete-search', 'InventoryController@search');
 Route::get('/retrieve-inventory-by-outlet/{outlet}', 'InventoryController@getInventoryByOutlet');
 Route::get('/retrieve-inventory-by-product-name/{productName}', 'InventoryController@getInventoryByProductName');
 Route::post('import-inventory', 'InventoryController@importFile')->name('import.file');
-Route::get('export-inventory/{type}', 'InventoryController@exportFile')->name('export.file');
+Route::get('export-inventory/{type}', 'InventoryController@exportFile')->name('inventory.export.file');
 
 //Retrieve Outlets
 Route::get('/ajax/outlet', 'InventoryController@getOutlet');
 Route::get('/ajax/inventory-outlet', 'InventoryController@getOutletByInventory');
+Route::get('export-outlets/{type}', 'OutletsController@exportFile')->name('outlets.export.file');
+
+//Export Users
+Route::get('export-users/{type}', 'UsersController@exportFile')->name('users.export.file');
 
 //SalesRecord 
 Route::get('/salesrecord/create', 'SalesRecordsController@getSalesRecordCart');
 Route::get('/salesrecord/addtocart/{id}/{price}/{quantity}/{outlet}/{date}/{remarks}/{receiptNumber}', 'SalesRecordsController@getSalesRecordAddToCart');
 Route::get('/testing/{id}', 'UsersController@show');
 Route::get('/ajax/salesrecord/date/{startDate}/{endDate}', 'SalesRecordsController@sortDate');
+Route::get('export-salesrecord/{type}', 'SalesRecordsController@exportFile')->name('salesrecord.export.file');
 
 //SalesOrder
 Route::get('/salesorder/create', 'SalesOrdersController@getSalesOrderCart');
-Route::get('/salesorder/addtocart/{id}/{quantity}/{date}/{remarks}', 'SalesOrdersController@getSalesOrderAddToCart');
+Route::get('/salesorder/addtocart/{id}/{quantity}/{unitPrice}/{date}/{remarks}', 'SalesOrdersController@getSalesOrderAddToCart');
 Route::get('/testing/{id}', 'UsersController@show');
 Route::get('/ajax/salesorder/date/{startDate}/{endDate}', 'SalesOrdersController@sortDate');
 

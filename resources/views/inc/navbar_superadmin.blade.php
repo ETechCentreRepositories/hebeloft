@@ -16,9 +16,9 @@
                 <li class="navList"><a class="inventoryNav nav-link" style="color:#e3b417;" href="/"><div class="navLabels">Inventory</div></a></li>
                 <li class="navList"><a class="transferRequestNav nav-link" style="color:#e3b417;" href="/transferrequest"><div class="navLabels">Transfer Request</div></a></li>
                 <li class="navList"><a class="salesOrderNav nav-link" style="color:#e3b417;" href="/salesorder"><div class="navLabels">Sales Order</div></a></li>
+                <li class="navList"><a class="salesRecordNav nav-link" style="color:#e3b417;" href="/salesrecord"><div class="navLabels">Sales Record</div></a></li>
                 <li class="navList"><a class="userNav nav-link" style="color:#e3b417;" href="/user"><div class="navLabels">User</div></a></li>
                 <li class="navList"><a class="outletNav nav-link" style="color:#e3b417;" href="/outlet"><div class="navLabels">Outlet</div></a></li>
-                <li class="navList"><a class="salesRecordNav nav-link" style="color:#e3b417;" href="/salesrecord"><div class="navLabels">Sales Record</div></a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->

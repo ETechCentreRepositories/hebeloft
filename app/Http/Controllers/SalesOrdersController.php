@@ -162,12 +162,12 @@ class SalesOrdersController extends Controller
         //
     }
 
-    public function getSalesOrderAddToCart(Request $request, $id, $quantity, $date, $remarks) {
+    public function getSalesOrderAddToCart(Request $request, $id, $quantity, $unitPrice, $date, $remarks) {
         $product = Products::find($id);
         $oldSalesOrderCart = Session::has('cartSalesOrder') ? Session::get('cartSalesOrder') : null;
 
         $salesOrderCart = new CartSalesOrder($oldSalesOrderCart);
-        $salesOrderCart->add($product, $product->id, $quantity, $date, $remarks);
+        $salesOrderCart->add($product, $product->id, $quantity, $unitPrice, $date, $remarks);
 
         $request->session()->put('cartSalesOrder', $salesOrderCart);
         
@@ -179,14 +179,16 @@ class SalesOrdersController extends Controller
         $users_id = User::find($user_id);
 
         if(!Session::has('cartSalesOrder')) {
-            return view('salesorder.create')->with('users_id',$users_id);
+            return view('salesorder.create')->with('users_id',$users_id)->with('user_id', $user_id);
         } else {
             $oldSalesOrderCart = Session::get('cartSalesOrder');
             $salesOrderCart = new CartSalesOrder($oldSalesOrderCart);
 
+            // dd($salesOrderCart);
+
             return view('salesorder.create', [
                 'products' => $salesOrderCart->items
-            ])->with('users_id',$users_id);
+            ])->with('users_id', $users_id) ->with('user_id', $user_id);
         }
     }
 

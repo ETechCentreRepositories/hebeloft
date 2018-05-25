@@ -34,6 +34,7 @@
                 var id = value.id;
                 var outlet = value.outlet_name;
                 var outlet_id = value.id;
+                
                 $("#outlet").append("<option value='" +
                 outlet_id + "'>" +outlet + "</option>");
             });
@@ -66,6 +67,20 @@
             }
         });
 
+        $("#salesOrderSearchField").autocomplete({
+            source: "{{URL::to('autocomplete-search')}}",
+            minLength:1,
+            select:function(key,value)
+            {
+                console.log(value);
+            }
+        });
+
+        $("#createSalesRecordTable tr td").change(function() {
+            console.log("try")
+            // $("subtotal").html($("#quantity").val()*$("#unitPrice").val())
+        });
+
         var products = [];
         $("#addSalesRecord").click(function() {
             var productName = $("#salesRecordSearchField").val();
@@ -87,9 +102,9 @@
                             $("#addSalesRecordContent").append(
                                 "<tr id='"+productId+"'><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
                                 + "<td>" + response[i].Name + "</td>"
-                                + "<td><input name='unitPrice' type='number' id='unitPrice' type='text' style='width:60px;' value='"+response[i].UnitPrice+"'/></td>"
+                                + "<td id='unitPrice'>"+response[i].UnitPrice+"</td>"
                                 + "<td><input name='quantity' type='number' id='quantity' type='text' style='width:60px;' value='1'/></td>"
-                                + "<td><input name='price' type='number' id='price' type='text' style='width:60px;' value='"+response[i].UnitPrice+"'/></td></tr>"
+                                + "<td id='price'>"+response[i].UnitPrice+"</td></tr>"
                             );
                         }
                     }
@@ -162,8 +177,9 @@
                             $("#addSalesOrderContent").append(
                                 "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
                                 + "<td>" + response[i].Name + "</td>"
-                                + "<td>" + response[i].UnitPrice + "</td>"
-                                + "<td><input name='quantity' type='number' id='quantity' type='text' style='width:60px;' value='1'</tr>"
+                                + "<td id='price'>" + response[i].UnitPrice + "</td>"
+                                + "<td><input name='quantity' type='number' id='quantity' type='text' style='width:60px;' value='1'/>"
+                                + "<td id='subtotal'>" + response[i].UnitPrice + "</td></tr>"
                             );
                         }
                     }
@@ -173,6 +189,34 @@
                     
                 }
             });
+        });
+
+        $("#saveSalesOrder").click(function() {
+            if(orderProducts !== null) {    
+                var productID = orderProducts[0];
+                var remarks = $("#remarks").val();
+                var date = $("#salesOrderDate").val();
+                var quantity =  $('#createSalesOrderTable tr:last-child td:eq(3) #quantity').val();
+                var unitPrice =  $('#createSalesOrderTable tr:last-child td:eq(2) #unitPrice').val();
+                console.log(productID);
+                console.log(remarks);
+                console.log(date);
+                console.log(quantity);
+                $.ajax({
+                    type: "GET",
+                    url: "{{URL::TO('/salesorder/addtocart/')}}/" + productID + "/" + quantity + "/" + unitPrice + "/" + date + "/" + remarks,
+                    // data: "",
+                    cache:false,
+                    datatype: "JSON",
+                    success: function (response) {
+                        console.log("successful");
+                    },
+
+                    error: function (obj, testStatus, errorThrown) {
+                        console.log("failure");
+                    }
+                });
+            }
         });
 
         $("#saveSalesRecord").click(function () {
@@ -193,35 +237,6 @@
                 $.ajax({
                     type: "GET",
                     url: "{{URL::TO('/salesrecord/addtocart/')}}/" + productID + "/" + price + "/" + quantity + "/" + outlet + "/" + date + "/" + remarks + "/" + receiptNumber,
-                    // data: "",
-                    cache:false,
-                    datatype: "JSON",
-                    success: function (response) {
-                        console.log("successful");
-                    },
-
-                    error: function (obj, testStatus, errorThrown) {
-                        console.log("failure");
-                    }
-                });
-            } else {
-                console.log("null");
-            }
-        });
-
-        $("#saveSalesOrder").click(function() {
-            if(orderProducts !== null) {
-                var productID = orderProducts[0];
-                var remarks = $("#remarks").val();
-                var date = $("#salesOrderDate").val();
-                var quantity =  $('#createSalesOrderTable tr:last-child td:eq(3) #quantity').val();
-                console.log(productID);
-                console.log(remarks);
-                console.log(date);
-                console.log(quantity);
-                $.ajax({
-                    type: "GET",
-                    url: "{{URL::TO('/salesorder/addtocart/')}}/" + productID + "/" + quantity + "/" + date + "/" + remarks,
                     // data: "",
                     cache:false,
                     datatype: "JSON",
@@ -268,6 +283,7 @@
             }
         });
     });
+
 </script>
    
 </head>

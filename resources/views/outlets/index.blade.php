@@ -17,7 +17,10 @@
 <br>
 <div class="topMargin container">
     <div class="row justify-content-end">
-        <div>
+        <div class="col-md-2">
+            <a href="{{ route('outlets.export.file',['type'=>'csv']) }}"><button type="button" class="btn btn-inflow">Export</button></a>
+        </div>
+        <div class="col-d-2">
             <button type="button" class="btn btn-warning" onclick="openCreateOutletModal()">Add new outlet</button>
         </div>
     </div>
@@ -30,9 +33,7 @@
                     <th>#</th>
                     <th>Branch name</th>
                     <th>Address</th>
-                    <th>Email</th>
                     <th>Telephone Number</th>
-                    <th>Fax</th>
                     <th class="emptyHeader"></th>
                 </tr>
             </thead>
@@ -42,9 +43,7 @@
                     <td>{{$outlet->id}}</td>
                     <td>{{$outlet->outlet_name}}</td>
                     <td>{{$outlet->address}}</td>
-                    <td>{{$outlet->email}}</td>
                     <td>{{$outlet->telephone_number}}</td>
-                    <td>{{$outlet->fax}}</td>
                     <td>
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row outlet-buttons">
@@ -86,16 +85,9 @@
                 {{Form::text('address', '', ['class' => 'form-control', 'placeholder' => 'Address'])}}
             </div>
             <div class="form-group modal-fields">
-                {{Form::text('email', '', ['class' => 'form-control', 'placeholder' => 'Email'])}}
-            </div>
-            <div class="form-group modal-fields">
                 {{Form::text('telephone_number', '', ['class' => 'form-control', 'placeholder' => 'Telephone number'])}}
             </div>
-            <div class="form-group modal-fields">
-                {{Form::text('fax', '', ['class' => 'form-control', 'placeholder' => 'Fax'])}}
-            </div>
-            <br> 
-            
+            <br>
             <div class="form-group modal-button">
                 {{Form::submit('Create outlet', ['class'=>'btn btn-primary btn-lg'])}}
             </div>

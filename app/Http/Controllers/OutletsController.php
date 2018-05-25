@@ -52,18 +52,16 @@ class OutletsController extends Controller
         $this->validate($request, [
             'outlet_name' => 'required',
             'address' => 'required',
-            'email' => 'required',
             'telephone_number' => 'required',
-            'fax' => 'required',
         ]);
 
         // Create Outlet
         $outlet = new Outlet;
         $outlet->outlet_name = $request->input('outlet_name');
         $outlet->address = $request->input('address');
-        $outlet->email = $request->input('email');
+        $outlet->email = "";
         $outlet->telephone_number = $request->input('telephone_number');
-        $outlet->fax = $request->input('fax');
+        $outlet->fax = "";
         $outlet->save();
 
         return redirect('/outlet')->with('success', 'Outlet Created');
@@ -152,5 +150,25 @@ class OutletsController extends Controller
 
         $outlet->delete();
         return redirect('/outlet')->with('success', 'Outlet Removed');
+    }
+
+    public function exportFile($type){
+
+        $inventoryexcel = InventoryOutlet::join('products', 'inventory_has_outlets.products_id', '=', 'products.id')
+                        ->select('inventory_has_outlets.id','products.Name', 'products.Category', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level')
+                        ->get()->toArray();
+
+        return \Excel::create('outlets', function($excel) use ($inventoryexcel) {
+
+            $excel->sheet('sheet name', function($sheet) use ($inventoryexcel)
+
+            {
+
+                $sheet->fromArray($inventoryexcel);
+
+            });
+
+        })->download($type);
+
     }
 }

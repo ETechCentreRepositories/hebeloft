@@ -39,11 +39,14 @@
     </div>
     <br>
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-8">
             <input type="text" class="form-control" style="background:transparent;">
         </div>
         <div class="col-md-2">
             <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
+        </div>
+        <div class="col-md-2">
+            <a href="{{ route('salesrecord.export.file',['type'=>'csv']) }}"><button type="button" class="btn btn-inflow">Export</button></a>
         </div>
     </div>
     <br>

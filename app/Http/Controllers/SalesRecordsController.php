@@ -169,4 +169,24 @@ class SalesRecordsController extends Controller
         return response($salesRecord);
     }
 
+    public function exportFile($type){
+
+        $inventoryexcel = InventoryOutlet::join('products', 'inventory_has_outlets.products_id', '=', 'products.id')
+                        ->select('inventory_has_outlets.id','products.Name', 'products.Category', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level')
+                        ->get()->toArray();
+
+        return \Excel::create('sales_records', function($excel) use ($inventoryexcel) {
+
+            $excel->sheet('sheet name', function($sheet) use ($inventoryexcel)
+
+            {
+
+                $sheet->fromArray($inventoryexcel);
+
+            });
+
+        })->download($type);
+
+    }
+
 }

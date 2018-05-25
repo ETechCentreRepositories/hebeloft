@@ -52,17 +52,43 @@
                     <th>Name</th>
                     <th>Price</th>
                     <th>Quantity</th>
+                    <th>Subtotal</th>
                 </tr>
-            </thead>
+            </thead>    
             <tbody id="addSalesOrderContent">
             @if(Session::has('cartSalesOrder'))
                 @foreach($products as $product)
                         <tr><td><img style="width:60px; height:60px" src="/storage/product_images/{{$product['item']['image']}}"/></td>
                         <td>{{$product['item']['Name']}}</td>
                         <td>{{$product['item']['UnitPrice']}}</td>
-                        <td><input name="quantity" type="number" id="quantity" type="text" style="width:60px;" value="{{$product['qty']}}"/></td></tr>
+                        <td>{{$product['qty']}}</td>
+                        <td>{{$product['subtotal']}}</td></tr>
                     @endforeach
                 @endif
+            </tbody>
+            <tbody id="total">
+            @if(Session::has('cartSalesOrder'))
+                <tr><td></td>
+                <td></td>
+                <td></td>
+                <td>Total Quantity</td>
+                <td>{{Session::has('cartSalesOrder') ? Session::get('cartSalesOrder')-> totalQty : ''}}</td></tr>
+                <tr><td></td>
+                <td></td>
+                <td></td>
+                <td>Sub total</td>
+                <td>{{Session::has('cartSalesOrder') ? Session::get('cartSalesOrder')-> subTotal : ''}}</td></tr>
+                <!-- <tr><td></td>
+                <td></td>
+                <td></td>
+                <td>Total discount</td>
+                <td><input name="quantity" type="number" id="quantity" type="text" style="width:60px;" value="{{Session::has('cartSalesOrder') ? Session::get('cartSalesOrder')-> discount : ''}}"/></td></tr>
+                <tr><td></td>
+                <td></td>
+                <td></td>
+                <td>Final Price</td>
+                <td>{{Session::has('cartSalesOrder') ? Session::get('cartSalesOrder')-> totalPrice : ''}}</td></tr> -->
+            @endif
             </tbody>
         </table>
         <div class="row">
@@ -88,8 +114,11 @@
         cursor: default;
     }
 </style>
-
+<script src="http://localhost:8000/js/jquery.min.js"></script>
 <script>
+    $(document).ready(function(){
+        
+    });
     function enableCreateButton() {
         document.getElementById("createButton").disabled = false;
     }
