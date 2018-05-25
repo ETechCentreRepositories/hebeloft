@@ -57,6 +57,7 @@
                     <th>Outlet</th>
                     <th>Total Price</th>
                     <th>Remarks</th>
+                    <th class="emptyHeader"></th>
                 </tr>
             </thead>
             <tbody id="salesRecordContent">
@@ -67,6 +68,15 @@
                         <td><?php echo e($salesRecord->outlets['outlet_name']); ?></td>
                         <td><?php echo e($salesRecord->total_price); ?></td>
                         <td><?php echo e($salesRecord->remarks); ?></td>
+                        <td>
+                            <div class="d-flex flex-column">
+                                <div class="d-flex flex-row transfer-buttons">
+                                    <div class="p-2">
+                                        <a href="/salesrecord/<?php echo e($salesRecord->id); ?>"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>

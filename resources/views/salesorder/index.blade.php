@@ -88,7 +88,7 @@
 <div class="topMargin container">
     <div class="row justify-content-end">
         <div>
-            <a href="/hebeloft/salesorder/create"><button type="button" class="btn btn-warning">Create New Sales Order</button></a>
+            <a href="salesorder/create"><button type="button" class="btn btn-warning">Create New Sales Order</button></a>
         </div>
     </div>
     <br>

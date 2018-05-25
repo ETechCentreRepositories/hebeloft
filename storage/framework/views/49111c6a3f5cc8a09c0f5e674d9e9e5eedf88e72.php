@@ -59,17 +59,18 @@
                         <td><?php echo e($salesOrder->date); ?></td>
                         <td><?php echo e($salesOrder->status); ?></td>
                         <td><?php echo e($salesOrder->statuses['status_name']); ?></td>
-                        <?php if($users_id->roles_id == '1'): ?>
                         <td>
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row transfer-buttons">
-                            <div class="p-2">
-                                <a href="/salesorder/<?php echo e($salesOrder->id); ?>/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
+                                <div class="p-2">
+                                    <a href="/salesorder/<?php echo e($salesOrder->id); ?>"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
+                                </div>
+                                <div class="p-2">
+                                    <a href="/salesorder/<?php echo e($salesOrder->id); ?>/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
                             </div>
                         </div>
                     </td>
-                    <?php endif; ?>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
@@ -86,7 +87,7 @@
 <div class="topMargin container">
     <div class="row justify-content-end">
         <div>
-            <a href="/salesorder/create"><button type="button" class="btn btn-warning">Create New Sales Order</button></a>
+            <a href="salesorder/create"><button type="button" class="btn btn-warning">Create New Sales Order</button></a>
         </div>
     </div>
     <br>
@@ -124,14 +125,24 @@
                     <th>Order Date</th>
                     <th>Process</th>
                     <th>Status</th>
+                    <th>View more</th>
                 </tr>
             </thead>
             <tbody>
                     <?php $__currentLoopData = $wholesalerSalesOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $wholesalerSalesOrder): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
-                        <td><?php echo e($wholesalerSalesOrder->date); ?></td>
+                        
                         <td><?php echo e($wholesalerSalesOrder->status); ?></td>
                         <td><?php echo e($wholesalerSalesOrder->statuses['status_name']); ?></td>
+                        <td>
+                        <div class="d-flex flex-column">
+                            <div class="d-flex flex-row transfer-buttons">
+                                <div class="p-2">
+                                    <a href="/salesorder/<?php echo e($wholesalerSalesOrder->id); ?>"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
+                                </div>
+                            </div>
+                        </div>
+                        </td>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
@@ -184,6 +195,10 @@
         color: #000000 !important;
         pointer-events: none;
         cursor: default;
+    }
+    
+    .emptyHeader {
+    	pointer-events: none;
     }
 </style>
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

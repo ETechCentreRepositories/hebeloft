@@ -12,9 +12,11 @@ use App\CartSalesOrder;
 use App\Models\AuditTrail;
 use App\Models\SalesOrderList;
 use App\Wholesaler;
+use DB;
 
 class SalesOrdersController extends Controller
 {
+    var $counter = 000;
     /**
      * Display a listing of the resource.
      *
@@ -48,7 +50,6 @@ class SalesOrdersController extends Controller
      */
     public function store(Request $request)
     {
-
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
 
@@ -67,15 +68,29 @@ class SalesOrdersController extends Controller
             $salesOrderCart = new CartSalesOrder($oldSalesOrderCart);
             $products = $salesOrderCart->items;
             
+            $sales_order_number = "";
+            $counter = DB::select('SELECT sales_order_number FROM sales_order ORDER BY id DESC');
+            $counter++;
+            $sales_order_number = "#SO" . $salesOrderCart->date . "_" . $counter;
+
+            $totalPrice = 0;
+
+            foreach($products as $product) {
+                $totalPrice += $product['qty']*$product['unitPrice'];
+            }
+            
+
             $salesOrder = new SalesOrder;
             $salesOrder->statuses_id = 1;
             $salesOrder->status = "pending";
-            $salesOrder->date =  $request->input('salesOrderDate');
-            $salesOrder->remarks = $request->input('remarks');
+            $salesOrder->date =  $salesOrderCart->date;
+            $salesOrder->remarks = $salesOrderCart->remarks;
             $salesOrder->audit_trails_id = $auditTrail->id;
             $salesOrder->sales_order_number = "";
             $salesOrder->users_id=$user_id;
-                
+            $salesOrder->totalQuantity=$salesOrderCart->totalQty;
+            $salesOrder->totalPrice=$totalPrice;
+            $salesOrder->sales_order_number=$sales_order_number;
             $salesOrder->save();
 
             foreach($products as $product) {
@@ -83,8 +98,10 @@ class SalesOrdersController extends Controller
                 $salesOrderList->sales_order_id =$salesOrder['id'];
                 $salesOrderList->products_id = $product['item']['id'];
                 $salesOrderList->quantity=$product['qty'];
+                $salesOrderList->subtotal=$product['qty']*$product['unitPrice'];
                 $salesOrderList->save();
             }
+            
         }
 
         return redirect('/salesorder')->with('success', 'Sales Order Created');
@@ -170,11 +187,12 @@ class SalesOrdersController extends Controller
     }
 
     public function getSalesOrderAddToCart(Request $request, $id, $quantity, $unitPrice, $date, $remarks) {
+        $user_id = auth()->user()->id;
         $product = Products::find($id);
         $oldSalesOrderCart = Session::has('cartSalesOrder') ? Session::get('cartSalesOrder') : null;
 
         $salesOrderCart = new CartSalesOrder($oldSalesOrderCart);
-        $salesOrderCart->add($product, $product->id, $quantity, $unitPrice, $date, $remarks);
+        $salesOrderCart->add($product, $product->id, $quantity, $unitPrice, $date, $remarks, $user_id);
 
         $request->session()->put('cartSalesOrder', $salesOrderCart);
         
@@ -186,16 +204,16 @@ class SalesOrdersController extends Controller
         $users_id = User::find($user_id);
 
         if(!Session::has('cartSalesOrder')) {
-            return view('salesorder.create')->with('users_id',$users_id)->with('user_id', $user_id);
+            return view('salesorder.create')->with('users_id',$users_id);
         } else {
             $oldSalesOrderCart = Session::get('cartSalesOrder');
             $salesOrderCart = new CartSalesOrder($oldSalesOrderCart);
 
-            // dd($salesOrderCart);
+            // dd($oldSalesOrderCart);
 
             return view('salesorder.create', [
                 'products' => $salesOrderCart->items
-            ])->with('users_id', $users_id) ->with('user_id', $user_id);
+            ])->with('users_id', $users_id) ;
         }
     }
 

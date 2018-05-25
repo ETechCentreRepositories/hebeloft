@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="leftNavbar navbar-nav mr-auto">
-                <a href="/"><img src="http://localhost:8000/storage/logo/hebeloft_logo.png" class="logo" style="padding: 7px 0;"/></a>
+                <a href="/login"><img src="/storage/logo/hebeloft_logo.png" class="logo" style="padding: 7px 0;"/></a>
                 
             </ul>
 

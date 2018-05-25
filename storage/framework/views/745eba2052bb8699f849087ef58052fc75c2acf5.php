@@ -61,7 +61,7 @@
             <tbody id="addTransferRequestContent">
             <?php if(Session::has('cartTransferRequest')): ?>
                 <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <tr id="<?php echo e($product['item']['id']); ?>"><td><img style="width:60px; height:60px" src="/storage/product_images/<?php echo e($product['item']['image']); ?>"/></td>
+                        <tr id="<?php echo e($product['item']['id']); ?>"><td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/<?php echo e($product['item']['image']); ?>"/></td>
                         <td><?php echo e($product['item']['Name']); ?></td>
                         <td><?php echo e($product['qty']); ?></td>
                         </tr>

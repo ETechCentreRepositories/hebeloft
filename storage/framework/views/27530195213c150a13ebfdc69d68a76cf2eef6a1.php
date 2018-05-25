@@ -16,7 +16,7 @@
 <div class="topMargin container">
     <div class="row justify-content-end">
         <div class="col-md-2">
-            <a href="<?php echo e(route('users.export.file',['type'=>'csv'])); ?>"><button type="button" class="btn btn-inflow">Export</button></a>
+            <a href="<?php echo e(route('outlets.export.file',['type'=>'csv'])); ?>"><button type="button" class="btn btn-inflow">Export</button></a>
         </div>
         <div class="col-d-2">
             <button type="button" class="btn btn-warning" onclick="openCreateOutletModal()">Add new outlet</button>

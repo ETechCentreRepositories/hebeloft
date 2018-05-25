@@ -62,7 +62,7 @@
                         <td>{{$product['item']['Name']}}</td>
                         <td>{{$product['item']['UnitPrice']}}</td>
                         <td>{{$product['qty']}}</td>
-                        <td>{{$product['subtotal']}}</td></tr>
+                        <td>{{$product['item']['UnitPrice']}}</td></tr>
                     @endforeach
                 @endif
             </tbody>
@@ -77,17 +77,7 @@
                 <td></td>
                 <td></td>
                 <td>Sub total</td>
-                <td>{{Session::has('cartSalesOrder') ? Session::get('cartSalesOrder')-> subTotal : ''}}</td></tr>
-                <!-- <tr><td></td>
-                <td></td>
-                <td></td>
-                <td>Total discount</td>
-                <td><input name="quantity" type="number" id="quantity" type="text" style="width:60px;" value="{{Session::has('cartSalesOrder') ? Session::get('cartSalesOrder')-> discount : ''}}"/></td></tr>
-                <tr><td></td>
-                <td></td>
-                <td></td>
-                <td>Final Price</td>
-                <td>{{Session::has('cartSalesOrder') ? Session::get('cartSalesOrder')-> totalPrice : ''}}</td></tr> -->
+                <td></td></tr>
             @endif
             </tbody>
         </table>
@@ -114,11 +104,7 @@
         cursor: default;
     }
 </style>
-<script src="http://localhost:8000/js/jquery.min.js"></script>
 <script>
-    $(document).ready(function(){
-        
-    });
     function enableCreateButton() {
         document.getElementById("createButton").disabled = false;
     }

@@ -235,8 +235,6 @@ class InventoryController extends Controller
 
     public function getInventoryByProductName($productName){
 
-        Log::info($productName);
-
         $inventoryByProductName = InventoryOutlet::leftJoin('products', 'inventory_has_outlets.products_id', '=', 'products.id')
                     ->leftJoin('outlets', 'inventory_has_outlets.outlets_id', '=', 'outlets.id')
                     ->select('inventory_has_outlets.id','inventory_has_outlets.outlets_id','inventory_has_outlets.products_id','products.Name', 'products.Category','products.Brand', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level', 'outlets.outlet_name', 'products.UnitPrice', 'products.image')

@@ -13,7 +13,8 @@
             <ul class="leftNavbar navbar-nav mr-auto">
                 <a href="/"><img src="/storage/logo/hebeloft_logo.png" class="logo"/></a>
                 <li class="navList"><a class="inventoryNav nav-link" style="color:#e3b417;" href="/"><div class="navLabels">Inventory</div></a></li>
-                <li class="navList"><a class="salesOrderNav nav-link" style="color:#e3b417;" href="/salesorder"><div class="navLabels">Sales Order</div></a></li>
+                <li class="navList"><a class="transferRequestNav nav-link" style="color:#e3b417;" href="/transferrequest"><div class="navLabels">Transfer Request</div></a></li>
+                <li class="navList"><a class="salesRecordNav nav-link" style="color:#e3b417;" href="/salesrecord"><div class="navLabels">Sales Record</div></a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -28,7 +29,7 @@
                         <?php echo e(Auth::user()->name); ?> <span class="caret"></span>
                     </a>
 
-                    <div class="dropdown-menu logoutDropdown" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
                             onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">

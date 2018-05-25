@@ -85,8 +85,11 @@
                     <td>
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row transfer-buttons">
-                            <div class="p-2">
-                                <a href="/transferrequest/<?php echo e($transfer->id); ?>/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
+                                <div class="p-2">
+                                    <a href="/transferrequest/<?php echo e($transfer->id); ?>"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
+                                </div>
+                                <div class="p-2">
+                                    <a href="/transferrequest/<?php echo e($transfer->id); ?>/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
                             </div>
                         </div>
@@ -153,6 +156,11 @@
         color: #000000 !important;
         pointer-events: none;
         cursor: default;
+        
+    }
+    
+    .emptyHeader {
+    	pointer-events: none;
     }
 </style>
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -6,30 +6,29 @@ class CartSalesOrder {
 
     public $items = null;
     public $totalQty = 0;
-    public $subTotal = 0;
     public $date = "";
     public $remarks = "";
+    public $counter = 000;
 
     public function __construct($oldSalesOrderCart) {
         if($oldSalesOrderCart) {
             $this->items = $oldSalesOrderCart->items;
             $this->totalQty = $oldSalesOrderCart->totalQty;
-            $this->subTotal = $oldSalesOrderCart->subTotal;
             $this->date = $oldSalesOrderCart->date;
             $this->remarks = $oldSalesOrderCart->remarks;
         }
     }
 
     public function add($item, $id, $quantity, $unitPrice, $date, $remarks) {
-        $storedItem = ['qty' => 0, 'item' => $item, 'subtotal' => 0];
+        $storedItems = ['qty' => 0, 'item' => $item, 'unitPrice' => $unitPrice];
             if($this->items) {
                 if(array_key_exists($id, $this->items)) {
-                    $storedItem = $this->items[$id];
+                    $storedItems = $this->items[$id];
                 }
             }
-            $storedItem['qty'] += $quantity;
-            $storedItem['subtotal'] = $quantity*$unitPrice;
-            $this->items[$id] = $storedItem;
+
+            $storedItems['qty'] += $quantity;
+            $this->items[$id] = $storedItems;
             $this->totalQty += $quantity;
             $this->date = $date;
             $this->remarks = $remarks;
