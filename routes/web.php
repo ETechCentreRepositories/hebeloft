@@ -37,7 +37,7 @@ Auth::routes();
 Route::get('/', 'InventoryController@index')->name('inventory');
 
 //Inventory
-Route::get('/ajax/inventory', 'InventoryController@getInventory');
+Route::get('/ajax/inventory/', 'InventoryController@getInventory');
 Route::get('/ajax/inventory/{id}', 'InventoryController@getInventoryById');
 Route::get('/autocomplete-search', 'InventoryController@search');
 Route::get('/retrieve-inventory-by-outlet/{outlet}', 'InventoryController@getInventoryByOutlet');

@@ -54,7 +54,7 @@
                 <th>Item</th>
                 <th>Normal Price</th>
                 <th>Category</th>
-                <th>Quantity/Thresold</th>
+                <th>Quantity</th>
             </tr>
         </thead>
         <tbody id="inventoryContent">
@@ -166,6 +166,35 @@
                             + "<td>" + response[i].UnitPrice + "</td>"
                             + "<td></td>" 
                             + "<td>" + response[i].stock_level + "/" + response[i].threshold_level + "</td></tr>"
+                        );
+                    }
+                },
+                
+                error: function (obj, textStatus, errorThrown) {
+                    console.log("Error " + textStatus + ": " + errorThrown);
+                }
+            });
+        });
+
+        $("#product_brand").change(function(){
+            var product_brand = $(this).val();
+            console.log(product_brand);
+            $("#inventoryContent").empty();
+            $.ajax({
+                type: "GET",
+                url: "{{URL::TO('/retrieve-inventory-by-product-brand')}}/" +product_brand,
+                // data: "outlet=" + outlet,
+                cache: false,
+                dataType: "JSON",
+                success: function (response) {
+                    for (i = 0; i < response.length; i++) {
+                        $("#inventoryContent").append(
+                            "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
+                            + "<td>" + response[i].Brand + "</td>"
+                            + "<td>" + response[i].Name + "</td>"
+                            + "<td>" + response[i].UnitPrice + "</td>"
+                            + "<td></td>" 
+                            + "<td>" + response[i].stock_level + "</td></tr>"
                         );
                     }
                 },

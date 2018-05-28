@@ -29,123 +29,6 @@
     <script>
     $(document).ready(function(){
     
-    $.get("<?php echo e(URL::to('ajax/inventory')); ?>",function(data){
-            $("#product_brand").empty();
-            $.each(data,function(i,value){
-                var brand = value.Brand;
-                var outlet = value.outlet_name;
-                $("#product_brand").append("<option value='" +
-                value.id + "'>" +brand + "</option>");
-                // $("#outlet_location").append("<option value='" +
-                // value.id + "'>" +outlet + "</option>");
-            });
-        });
-        $.get("<?php echo e(URL::to('ajax/inventory-outlet')); ?>",function(data){
-            $("#outlet_location").empty();
-            $.each(data,function(i,value){
-                var id = value.id;
-                var outlet = value.outlet_name;
-                var outlet_id = value.outlets_id;
-                $("#outlet_location").append("<option value='" +
-                outlet_id + "'>" +outlet + "</option>");
-            });
-        });
-    
-        $("#searchField").autocomplete({
-            source: "<?php echo e(URL::to('autocomplete-search')); ?>",
-            minLength:1,
-            select:function(key,value)
-            {
-                console.log(value);
-            }
-        });
-
-        $("#outlet_location").change(function(){
-            var outlet = $(this).val();
-            $("#inventoryContent").empty();
-            $.ajax({
-                type: "GET",
-                url: "<?php echo e(URL::TO('/retrieve-inventory-by-outlet')); ?>/" +outlet,
-                // data: "outlet=" + outlet,
-                cache: false,
-                dataType: "JSON",
-                success: function (response) {
-                    for (i = 0; i < response.length; i++) {
-                        $("#inventoryContent").append(
-                            "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
-                            + "<td>" + response[i].Brand + "</td>"
-                            + "<td>" + response[i].Name + "</td>"
-                            + "<td>" + response[i].UnitPrice + "</td>"
-                            + "<td></td>" 
-                            + "<td>" + response[i].stock_level + "/" + response[i].threshold_level + "</td></tr>"
-                        );
-                    }
-                },
-                
-                error: function (obj, textStatus, errorThrown) {
-                    console.log("Error " + textStatus + ": " + errorThrown);
-                }
-            });
-        });
-
-        $("#product_brand").change(function(){
-            var product_brand = $(this).val();
-            $("#inventoryContent").empty();
-            $.ajax({
-                type: "GET",
-                url: "<?php echo e(URL::TO('/retrieve-inventory-by-product-brand')); ?>/" +product_brand,
-                // data: "outlet=" + outlet,
-                cache: false,
-                dataType: "JSON",
-                success: function (response) {
-                    for (i = 0; i < response.length; i++) {
-                        $("#inventoryContent").append(
-                            "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
-                            + "<td>" + response[i].Brand + "</td>"
-                            + "<td>" + response[i].Name + "</td>"
-                            + "<td>" + response[i].UnitPrice + "</td>"
-                            + "<td></td>" 
-                            + "<td>" + response[i].stock_level + "/" + response[i].threshold_level + "</td></tr>"
-                        );
-                    }
-                },
-                
-                error: function (obj, textStatus, errorThrown) {
-                    console.log("Error " + textStatus + ": " + errorThrown);
-                }
-            });
-        });
-
-        $("#searchInventory").click(function(){
-            var productName = $("#searchField").val();
-            console.log(productName);
-            $("#inventoryContent").empty();
-            $.ajax({
-                type: "GET",
-                url: "<?php echo e(URL::TO('/retrieve-inventory-by-product-name')); ?>/" + productName,
-                // data: "products.Name=" + productName,
-                cache: false,
-                dataType: "JSON",
-                success: function (response) {
-                    console.log(response);
-                    for (i = 0; i < response.length; i++) {
-                        $("#inventoryContent").append(
-                            "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
-                            + "<td>" + response[i].Brand + "</td>"
-                            + "<td>" + response[i].Name + "</td>"
-                            + "<td>" + response[i].UnitPrice + "</td>"
-                            + "<td></td>" 
-                            + "<td>" + response[i].stock_level + "/" + response[i].threshold_level + "</td></tr>"
-                        );
-                    }
-                },
-
-                error: function (obj, textStatus, errorThrown) {
-                    console.log("Error " + textStatus + ": " + errorThrown);
-                }
-            });
-        });
-        
         $.get("<?php echo e(URL::to('ajax/outlet')); ?>",function(data){
             $("#outlet").empty();
             $.each(data,function(i,value){
@@ -384,7 +267,6 @@
             }
         });
     });
-
 </script>
    
 </head>
