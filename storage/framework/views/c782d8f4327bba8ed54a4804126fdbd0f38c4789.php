@@ -73,11 +73,11 @@
             <tbody id="addSalesRecordContent">
                 <?php if(Session::has('cartSalesRecord')): ?>
                     <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <tr id="<?php echo e($product['item']['id']); ?>"><td><img style="width:60px; height:60px" src="/storage/product_images/<?php echo e($product['item']['image']); ?>"/></td>
+                        <tr id="<?php echo e($product['item']['id']); ?>"><td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/<?php echo e($product['item']['image']); ?>"/></td>
                         <td><?php echo e($product['item']['Name']); ?></td>
                         <td><?php echo e($product['item']['UnitPrice']); ?></td>
                         <td><?php echo e($product['qty']); ?></td>
-                        <td id="price"><input name="price" type="number" id="price" type="text" style="width:60px;" value="<?php echo e($product['price']); ?>"/></td></tr>
+                        <td id="price"><?php echo e($product['price']*$product['qty']); ?></td></tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <?php endif; ?>
             </tbody>

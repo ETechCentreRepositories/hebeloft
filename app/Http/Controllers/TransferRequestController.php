@@ -86,7 +86,7 @@ class TransferRequestController extends Controller
                 $transferRequestList->quantity=$product['qty'];
                 $transferRequestList->save();
             }
-
+            Session::forget("cartTransferRequest");
         }
 
         return redirect('/transferrequest')->with('success', 'Transfer Request Created');

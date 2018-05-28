@@ -227,7 +227,7 @@
         float: left;
         border-bottom-width: 0;
     }
-
+    
     th:hover{
         background-color: #f5f8fa !important;
         text-decoration: none !important;

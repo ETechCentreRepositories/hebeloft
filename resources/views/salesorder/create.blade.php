@@ -62,7 +62,7 @@
                         <td>{{$product['item']['Name']}}</td>
                         <td>{{$product['item']['UnitPrice']}}</td>
                         <td>{{$product['qty']}}</td>
-                        <td>{{$product['item']['UnitPrice']}}</td></tr>
+                        <td>{{$product['item']['UnitPrice']*$product['qty']}}</td></tr>
                     @endforeach
                 @endif
             </tbody>

@@ -61,7 +61,7 @@
                         <td><?php echo e($product['item']['Name']); ?></td>
                         <td><?php echo e($product['item']['UnitPrice']); ?></td>
                         <td><?php echo e($product['qty']); ?></td>
-                        <td><?php echo e($product['item']['UnitPrice']); ?></td></tr>
+                        <td><?php echo e($product['item']['UnitPrice']*$product['qty']); ?></td></tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <?php endif; ?>
             </tbody>

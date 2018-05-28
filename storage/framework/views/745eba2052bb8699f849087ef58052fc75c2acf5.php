@@ -55,7 +55,9 @@
                 <tr>
                     <th>Picture</th>
                     <th>Name</th>
+                    <th>Price</th>
                     <th>Quantity</th>
+                    <th>Subtotal</th>
                 </tr>
             </thead>
             <tbody id="addTransferRequestContent">

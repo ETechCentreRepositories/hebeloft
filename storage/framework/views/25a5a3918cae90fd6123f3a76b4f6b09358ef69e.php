@@ -88,6 +88,34 @@
             });
         });
 
+        $("#product_brand").change(function(){
+            var product_brand = $(this).val();
+            $("#inventoryContent").empty();
+            $.ajax({
+                type: "GET",
+                url: "<?php echo e(URL::TO('/retrieve-inventory-by-product-brand')); ?>/" +product_brand,
+                // data: "outlet=" + outlet,
+                cache: false,
+                dataType: "JSON",
+                success: function (response) {
+                    for (i = 0; i < response.length; i++) {
+                        $("#inventoryContent").append(
+                            "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
+                            + "<td>" + response[i].Brand + "</td>"
+                            + "<td>" + response[i].Name + "</td>"
+                            + "<td>" + response[i].UnitPrice + "</td>"
+                            + "<td></td>" 
+                            + "<td>" + response[i].stock_level + "/" + response[i].threshold_level + "</td></tr>"
+                        );
+                    }
+                },
+                
+                error: function (obj, textStatus, errorThrown) {
+                    console.log("Error " + textStatus + ": " + errorThrown);
+                }
+            });
+        });
+
         $("#searchInventory").click(function(){
             var productName = $("#searchField").val();
             console.log(productName);
@@ -178,7 +206,7 @@
                         $("#addSalesRecordContent").append(
                             "<tr id='"+productId+"'><td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
                             + "<td>" + response[i].Name + "</td>"
-                            + "<td id='unitPrice'>"+response[i].UnitPrice+"</td>"
+                            + "<td><input name='unitPrice' type='number' id='unitPrice' type='text' style='width:60px;' value='"+ response[i].UnitPrice +"'/></td>"
                             + "<td><input name='quantity' type='number' id='quantity' type='text' style='width:60px;' value='1'/></td>"
                             + "<td id='price'>"+response[i].UnitPrice+"</td></tr>"
                         );
@@ -193,6 +221,7 @@
         
         var orderProducts = [];
         $("#addSalesOrder").click(function() {
+            console.log("distinct");
             var productName = $("#salesOrderSearchField").val();
             $.ajax({
                 type: "GET",
@@ -205,7 +234,6 @@
                     for (i = 0; i < response.length; i++) {
                         var productId = parseInt(response[i].products_id);
                         orderProducts.push(productId);
-                        console.log(orderProducts);  
                         $("#addSalesOrderContent").append(
                             "<tr><td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
                             + "<td>" + response[i].Name + "</td>"
@@ -263,8 +291,8 @@
         $("#saveSalesRecord").click(function () {
             if(products !== null) {
                 var productID = products[0];
-                var price =  $('#createSalesRecordTable tr:last-child td:last-child #price').val();
-                var quantity =  $('#createSalesRecordTable tr:last-child td:eq(3) #quantity').val();
+                var price = $('#createSalesRecordTable tr:last-child td:eq(2) #unitPrice').val();
+                var quantity = $('#createSalesRecordTable tr:last-child td:eq(3) #quantity').val();
                 var outlet = $('#outlet').val();
                 var date = $("#salesRecordDate").val();
                 var remarks = $("#remarks").val();
@@ -329,7 +357,7 @@
         $("#saveTransferRequest").click(function () {
             var outlet = $('#outlet').val();
             var date = $("#transferRequestDate").val();
-            var quantity =  $('#createTransferRequestTable tr:last-child td:eq(2) #quantity').val();
+            var quantity =  $('#createTransferRequestTable tr:last-child td:eq(3) #quantity').val();
             var remarks = $("#remarks").val();
             if(trProducts !== null) {
                 console.log(quantity);
@@ -356,6 +384,7 @@
             }
         });
     });
+
 </script>
    
 </head>

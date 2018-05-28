@@ -41,6 +41,7 @@ Route::get('/ajax/inventory', 'InventoryController@getInventory');
 Route::get('/ajax/inventory/{id}', 'InventoryController@getInventoryById');
 Route::get('/autocomplete-search', 'InventoryController@search');
 Route::get('/retrieve-inventory-by-outlet/{outlet}', 'InventoryController@getInventoryByOutlet');
+Route::get('/retrieve-inventory-by-product-brand/{product_brand}', 'InventoryController@getInventoryByProductBrand');
 Route::get('/retrieve-inventory-by-product-name/{productName}', 'InventoryController@getInventoryByProductName');
 Route::post('import-inventory', 'InventoryController@importFile')->name('import.file');
 Route::get('export-inventory/{type}', 'InventoryController@exportFile')->name('inventory.export.file');

@@ -8,7 +8,6 @@ class CartSalesOrder {
     public $totalQty = 0;
     public $date = "";
     public $remarks = "";
-    public $counter = 000;
 
     public function __construct($oldSalesOrderCart) {
         if($oldSalesOrderCart) {

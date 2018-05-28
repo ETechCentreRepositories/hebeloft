@@ -64,11 +64,17 @@ class SalesRecordsController extends Controller
             $oldSalesRecordCart = Session::get('cartSalesRecord');
             $salesrecordCart = new CartSalesRecord($oldSalesRecordCart);
             $products = $salesrecordCart->items;
+
+            $totalPrice = 0;
+
+            foreach($products as $product) {
+                $totalPrice += $product['qty']*$product['price'];
+            }
             
             $salesRecord = new SalesRecord;
             $salesRecord->audit_trails_id = $auditTrail->id;
-            $salesRecord->outlets_id = 1;
-            $salesRecord->total_price = 1;
+            $salesRecord->outlets_id = $request->input('outlet');;
+            $salesRecord->total_price = $totalPrice;
             $salesRecord->remarks = $request->input('remarks');
             $salesRecord->date = $request->input('salesRecordDate');
             $salesRecord->receiptNumber = $request->input('receiptNumber');
@@ -78,10 +84,11 @@ class SalesRecordsController extends Controller
                 $salesRecordList = new SalesRecordList;
                 $salesRecordList->sales_record_id =$salesRecord['id'];
                 $salesRecordList->products_id = $product['item']['id'];
-                $salesRecordList->discount = 0.00;
                 $salesRecordList->quantity=$product['qty'];
+                $salesRecordList->subtotal=$totalPrice;
                 $salesRecordList->save();
             }
+            Session::forget("cartSalesRecord");
         }
 
         return redirect('/salesrecord')->with('success', 'Sales Record Created');

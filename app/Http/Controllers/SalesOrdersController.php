@@ -67,11 +67,6 @@ class SalesOrdersController extends Controller
             $oldSalesOrderCart = Session::get('cartSalesOrder');
             $salesOrderCart = new CartSalesOrder($oldSalesOrderCart);
             $products = $salesOrderCart->items;
-            
-            $sales_order_number = "";
-            $counter = DB::select('SELECT sales_order_number FROM sales_order ORDER BY id DESC');
-            $counter++;
-            $sales_order_number = "#SO" . $salesOrderCart->date . "_" . $counter;
 
             $totalPrice = 0;
 
@@ -86,11 +81,9 @@ class SalesOrdersController extends Controller
             $salesOrder->date =  $salesOrderCart->date;
             $salesOrder->remarks = $salesOrderCart->remarks;
             $salesOrder->audit_trails_id = $auditTrail->id;
-            $salesOrder->sales_order_number = "";
             $salesOrder->users_id=$user_id;
             $salesOrder->totalQuantity=$salesOrderCart->totalQty;
             $salesOrder->totalPrice=$totalPrice;
-            $salesOrder->sales_order_number=$sales_order_number;
             $salesOrder->save();
 
             foreach($products as $product) {
@@ -101,7 +94,7 @@ class SalesOrdersController extends Controller
                 $salesOrderList->subtotal=$product['qty']*$product['unitPrice'];
                 $salesOrderList->save();
             }
-            
+            Session::forget("cartSalesOrder");
         }
 
         return redirect('/salesorder')->with('success', 'Sales Order Created');
