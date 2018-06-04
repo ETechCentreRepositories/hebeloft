@@ -21,8 +21,6 @@
                 <div class="card-header">Update Transfer Request</div>
 
                 <div class="card-body">
-                <?php echo Form::open(['action' => ['TransferRequestController@update', $transferRequests->id], 'method' => 'POST']); ?>
-
                     <?php echo e(csrf_field()); ?>
 
                     <table class="table table-striped" id="inventoryTable" >
@@ -37,28 +35,38 @@
                 <?php $__currentLoopData = $transfers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $transfer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
                     <td><?php echo e($transfer->products['Name']); ?></td>
-                    <td><?php echo e($transfer->quantity); ?></td>
+                    <td align="right"><?php echo e($transfer->quantity); ?></td>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             <?php endif; ?>
         </tbody>
     </table>
-    <select name="status" class="form-control">
-                        <option value="reject">Rejected</option>
-                        <option value="accept">Accepted</option>
-                    </select>
                 <br>
-                    <?php echo e(Form::hidden('_method','PUT')); ?>
-
-                    <div class="modal-button">
-                    <?php echo e(Form::submit('Update transfer request', ['class'=>'btn btn-primary'])); ?>
-
 </div>
-                    <?php echo Form::close(); ?>
-
                 </div>
             </div>
+            
         </div>
+        <?php echo Form::open(['action' => ['TransferRequestController@update', $transferRequests->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']); ?>
+
+        <?php echo e(Form::hidden('status', 'rejected', ['class' => 'form-control'])); ?>
+
+        <?php echo e(Form::hidden('_method', 'PUT')); ?>
+
+        <?php echo e(Form::submit('Follow Up', ['class'=>'btn btn-lg btn-danger btn-rejected'])); ?>
+
+    <?php echo Form::close(); ?>
+
+    <?php echo Form::open(['action' => ['TransferRequestController@update', $transferRequests->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']); ?>
+
+        <?php echo e(Form::hidden('status', 'accepted', ['class' => 'form-control'])); ?>
+
+        <?php echo e(Form::hidden('_method', 'PUT')); ?>
+
+        <?php echo e(Form::submit('Accepted', ['class'=>'btn btn-lg btn-success btn-accepted'])); ?>
+
+    <?php echo Form::close(); ?>
+
     </div>
 </div>
 
@@ -69,5 +77,13 @@
         pointer-events: none;
         cursor: default;
     }
+    
+    .btn-rejected {
+  float: left;
+}
+
+.btn-accepted {
+  float: right;
+}
 </style>
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -2,7 +2,7 @@
     <div class="container">
         <a class="nav navbar-left" href="<?php echo e(url('/')); ?>">
             
-            <img src="http://ehostingcentre.com/hebeloft/storage/logo/hebeloft_logo.png" class="mobileLogo" style="
+            <img src="http://localhost:8000/storage/logo/hebeloft_logo.png" class="mobileLogo" style="
     height: 100%;margin-left:10px;
 ">
         </a>
@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="leftNavbar navbar-nav mr-auto">
-                <a href="/login"><img src="http://ehostingcentre.com/hebeloft/storage/logo/hebeloft_logo.png" class="logo" style="padding: 7px 0;"/></a>
+                <a href="/login"><img src="http://localhost:8000/storage/logo/hebeloft_logo.png" class="logo" style="padding: 7px 0;"/></a>
                 
             </ul>
 

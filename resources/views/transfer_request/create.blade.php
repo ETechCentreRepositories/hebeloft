@@ -44,6 +44,7 @@
         <br>
         <div class="row">
             <div class="col-md-10">
+                {{-- <div class="input-group"> --}}
                 <input type="text" id="transferRequestSearchField" class="form-control" style="background:transparent">
             </div>
             <div class="col-md-2">
@@ -97,9 +98,3 @@
         cursor: default;
     }
 </style>
-
-<script>
-    function enableCreateButton() {
-        document.getElementById("createButton").disabled = false;
-    }
-</script>

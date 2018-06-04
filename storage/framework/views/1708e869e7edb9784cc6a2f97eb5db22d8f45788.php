@@ -82,7 +82,7 @@
                                 </div>
                     <?php if($users_id->roles_id == '1'): ?>
                                 <div class="p-2">
-                                    <a href="/hebeloft/transferrequest/<?php echo e($transfer->id); ?>/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
+                                    <a href="/transferrequest/<?php echo e($transfer->id); ?>/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
                             </div>
                         </div>
@@ -188,49 +188,6 @@
     </div>
 </div>
 <?php endif; ?>
-
-<script>
-    function openViewTransferModal() {
-        document.getElementById('viewTransferModal').style.display = "block";
-    }
-    
-    function closeViewTransferModal() {
-        document.getElementById('viewTransferModal').style.display = "none";
-    }
-    $(document).ready(function(){
-            $('#search').click(function(){
-                var startDate = $('#startDate').val();
-                var endDate = $('#endDate').val();
-                console.log(startDate + endDate);
-                $("#transferRequestContent").empty();
-            $.ajax({
-                type: "GET",
-                url: "<?php echo e(URL::TO('/ajax/transferrequest/date')); ?>/" + startDate + "/" + endDate,
-                // data: "products.Name=" + productName,
-                cache: false,
-                dataType: "JSON",
-                success: function (response) {
-                    // console.log(response);
-                    for (i = 0; i < response.length; i++) {
-                        console.log(response[i]);
-                        $("#transferRequestContent").append(
-                            "<tr><td>"+ response[i].date+"</td>"
-                            + "<td>"+ response[i].status +"</td>"
-                            + "<td>"+ response[i].status_name+"</td>"
-                            <?php if($users_id->roles_id == '1'): ?>
-                            +"<td><a href='/transferrequest/"+response[i].id+"/edit'><button type='button' class='btn btn-primary action-buttons'>Edit</button></a></td></tr>"
-                            <?php endif; ?>
-                        );
-                    }
-                },
-
-                error: function (obj, textStatus, errorThrown) {
-                    console.log("Error " + textStatus + ": " + errorThrown);
-                }
-            });
-            });
-        });
-</script>
 <?php $__env->stopSection(); ?>
 
 <style>

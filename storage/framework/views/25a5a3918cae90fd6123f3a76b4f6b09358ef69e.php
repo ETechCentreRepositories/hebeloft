@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel="shortcut icon" href="http://localhost:8000/storage/logo/butterfly_logo.png">
     <script src="http://localhost:8000/js/sorttable.js"></script>
@@ -17,6 +16,8 @@
 
     <!-- Scripts -->
     <script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
+    <script src="<?php echo e(asset('js/inventory.js')); ?>" defer></script>
+    <script src="<?php echo e(asset('js/transfer_request.js')); ?>" defer></script>
     <!-- Styles -->
     <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
     <script src="<?php echo e(asset('js/jquery-ui.min.js')); ?>" type="text/javascript"></script>
@@ -50,15 +51,6 @@
         });
 
         $("#salesOrderSearchField").autocomplete({
-            source: "<?php echo e(URL::to('autocomplete-search')); ?>",
-            minLength:1,
-            select:function(key,value)
-            {
-                console.log(value);
-            }
-        });
-
-        $("#transferRequestSearchField").autocomplete({
             source: "<?php echo e(URL::to('autocomplete-search')); ?>",
             minLength:1,
             select:function(key,value)
@@ -132,43 +124,6 @@
             });
         });
         
-        var trProducts = [];
-        $(document).on("click","#addTransferRequest",function(){
-            var productName = $("#transferRequestSearchField").val();
-            console.log(productName);
-            $.ajax({
-                type: "GET",
-                url: "<?php echo e(URL::TO('/retrieve-inventory-by-product-name')); ?>/" + productName,
-                data: "",
-                cache:false,
-                datatype: "JSON",
-                success: function (response) {
-                console.log(response);
-
-                    for (i = 0; i < response.length; i++) {
-                    
-                            var productId = parseInt(response[i].products_id);
-
-                            trProducts.push(productId);
-                            console.log(trProducts);
-                            
-                            $("#addTransferRequestContent").append(
-                                "<tr id='newRow_"+productId+"'>"
-                                + "<td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
-                                + "<td>" + response[i].Name + "</td>"
-                                + "<td align='center'><input name='quantity' type='number' id='qty' type='text' style='width:60px;' value='1'/></td>"
-                                + "<td><button type='button' class='btn btn-danger action-buttons' id='removeTR'> Remove </button></td></tr>"
-                            );
-                      
-                    }
-                },
-
-                error: function (obj, testStatus, errorThrown) {
-                    console.log("fail");
-                }
-            });
-        });
-
         $("#saveSalesRecord").click(function () {
             var outlet = $('#outlet').val();
             var date = $("#salesRecordDate").val();
@@ -239,52 +194,6 @@
                 console.log("null");
             }
         });
-
-        $("#saveTransferRequest").click(function () {
-            var outlet = $('#outlet').val();
-            var dates = $("#transferRequestDate").val();
-            var remarks = $("#remarks").val();
-            if(trProducts !== null) {
-            	for(var i = 0; i<trProducts.length; i++){
-            	    var productID = trProducts[i];
-            	    var mainRow = document.getElementById("newRow_"+productID);
-            	    var quantity = mainRow.querySelectorAll('#qty')[0].value;
-            	    	console.log(productID );
-	            	console.log(quantity);
-	                console.log(outlet);
-	                console.log(dates);
-	                console.log(remarks);
-	                $.ajax({
-	                    type: "GET",
-	                    url: "<?php echo e(URL::TO('/transferrequest/addtocart/')); ?>/" + productID + "/" + quantity + "/" + outlet + "/" + dates + "/" + remarks,
-	                    // data: "",
-	                    cache:false,
-	                    datatype: "JSON",
-	                    success: function (response) {
-	                        console.log("successful");
-	                    },
-	
-	                    error: function (obj, testStatus, errorThrown) {
-	                        console.log(obj + testStatus + errorThrown);
-	                    }
-	                });
-            	}
-            } else {
-                console.log("null");
-            }
-        });
-        
-        $(document).on("click","#removeTR",function(){
-            console.log("testing");
-            var id = $("#removeTR").closest('tr').attr('id');
-            for(var i = 0; i<trProducts.length; i++) {
-                if(trProducts[i] == id) {
-                    trProducts.splice(i,1);
-                }
-            }
-            $("#removeTR").closest('tr').remove();
-            console.log(id);
-        });
         
         $(document).on("click","#removeSO",function(){
             console.log("testing");
@@ -311,6 +220,10 @@
         });
         
     });
+
+    function enableCreateButton() {
+        document.getElementById("createButton").disabled = false;
+    }
     
     function removeCartItemFromSalesRecord() {
         console.log("testing");
@@ -355,29 +268,6 @@
                     }
                 });
     }
-    
-    function removeCartItemFromTransferRequest() {
-        console.log("testing");
-        var id = $("#removeThis").closest('tr').attr('id');
-        console.log(id);
-        
-        $.ajax({
-                    type: "GET",
-                    url: "<?php echo e(URL::TO('/transferrequest/remove')); ?>/" + id,
-                    // data: "",
-                    cache:false,
-                    datatype: "JSON",
-                    success: function (response) {
-                        console.log("successful");
-                        $("#removeThis").closest('tr').remove();
-                    },
-
-                    error: function (obj, testStatus, errorThrown) {
-                        console.log("failure");
-                    }
-                });
-    }
-    
 </script>
 
 <style>

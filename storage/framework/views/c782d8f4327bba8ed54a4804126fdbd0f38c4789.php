@@ -42,14 +42,6 @@
             </div>
         </div>
         <br>
-        <div class="row">
-            <div class="col-md-3">
-                <p>Reciept number: </p>
-            </div>
-            <div class="col-md-9">
-                <input type="text" id="receiptNumber" name ="receiptNumber" class="form-control">
-            </div>
-        </div>
         <br>
         <div class="row">
             <div class="col-md-10">
@@ -68,6 +60,7 @@
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Total Price</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody id="addSalesRecordContent">
@@ -76,8 +69,9 @@
                         <tr id="<?php echo e($product['item']['id']); ?>"><td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/<?php echo e($product['item']['image']); ?>"/></td>
                         <td><?php echo e($product['item']['Name']); ?></td>
                         <td><?php echo e($product['item']['UnitPrice']); ?></td>
-                        <td><?php echo e($product['qty']); ?></td>
-                        <td id="price"><?php echo e($product['price']*$product['qty']); ?></td></tr>
+                        <td align="center"><?php echo e($product['qty']); ?></td>
+                        <td align="center" id="price"><?php echo e($product['price']*$product['qty']); ?></td>
+                        <td><button type="button" class="btn btn-danger action-buttons" id="removeThis" onClick="removeCartItemFromSalesRecord()">Remove</button></td></tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <?php endif; ?>
             </tbody>
@@ -86,11 +80,12 @@
             <?php echo e(Form::textarea('remarks', "", ['id' => 'remarks', 'class' => 'form-control', 'placeholder' => 'Remarks'])); ?>
 
         </div>
-        <br></br>
+        <br>
+        <p><span style="color: red">*</span>To order, first save as draft, then submit. If it is not saved, you cannot submit and your unsaved record will be gone.</p>
         <div class="form-group">
             <div>
             <button type="button" class="btn btn-primary" id="saveSalesRecord" onClick="enableCreateButton()">Save as Draft</button>
-            <?php echo e(Form::submit('Create Sales Record', ['class'=>'btn btn-primary', 'id'=>'createButton',  'disabled'])); ?>
+            <?php echo e(Form::submit('Submit Sales Record', ['class'=>'btn btn-primary', 'id'=>'createButton',  'disabled'])); ?>
 
             </div>
         </div>
