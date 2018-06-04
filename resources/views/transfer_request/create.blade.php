@@ -56,8 +56,13 @@
                 <tr>
                     <th>Picture</th>
                     <th>Name</th>
+                    <th>Price</th>
                     <th>Quantity</th>
+<<<<<<< HEAD
                     <th></th>
+=======
+                    <th>Subtotal</th>
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                 </tr>
             </thead>
             <tbody id="addTransferRequestContent">
@@ -65,8 +70,13 @@
                 @foreach($products as $product)
                         <tr id="{{$product['item']['id']}}"><td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/{{$product['item']['image']}}"/></td>
                         <td>{{$product['item']['Name']}}</td>
+<<<<<<< HEAD
                         <td align="center">{{$product['qty']}}</td>
                         <td><button type="button" class="btn btn-danger action-buttons" id="removeThis" onClick="removeCartItemFromTransferRequest()">Remove</button></td></tr>
+=======
+                        <td>{{$product['qty']}}</td>
+                        </tr>
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                     @endforeach
                 @endif
             </tbody>
@@ -79,7 +89,11 @@
         <div class="form-group">
             <div>
             <button type="button" class="btn btn-primary" id="saveTransferRequest" onClick="enableCreateButton()">Save as Draft</button>
+<<<<<<< HEAD
             {{Form::submit('Submit Transfer Request', ['class'=>'btn btn-primary', 'id'=>'createButton',  'disabled'])}}
+=======
+            {{Form::submit('Create Transfer Request', ['class'=>'btn btn-primary', 'id'=>'createButton',  'disabled'])}}
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
             </div>
         </div>
         {!! Form::close() !!}

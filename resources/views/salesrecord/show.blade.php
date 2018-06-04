@@ -19,6 +19,7 @@
 <br>
 <div class="container">
     <div>
+<<<<<<< HEAD
     <h3>Sales Record #{{$salesRecord->outlets->initial}}_{{$salesRecord->OrderDate}}_{{$salesRecord->id}}</h3>
         <table class="table table-striped">
             <thead>
@@ -46,6 +47,27 @@
                     <td></td>
                     <td></td>
                     <td>{{$totalPrice}}</td>
+=======
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Outlet</th>
+                    <th>Total Price</th>
+                    <th>Total Discount</th>
+                    <th>Remarks</th>
+                    <th>Date</th>
+                    <th>Receipt Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{$salesRecord->outlets['outlet_name']}}</td>
+                    <td>{{$salesRecord->total_price}}</td>
+                    <td>{{$salesRecord->total_discount}}</td>
+                    <td>{{$salesRecord->remarks}}</td>
+                    <td>{{$salesRecord->date}}</td>
+                    <td>{{$salesRecord->receiptNumber}}</td>
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                 </tr>
             </tbody>
         </table>

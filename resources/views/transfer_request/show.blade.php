@@ -18,6 +18,7 @@
 <br>
 <div class="container">
     <div>
+<<<<<<< HEAD
     	<h3>Transfer Request #{{$transferRequests->outlets->initial}}_{{$transferRequests->date}}_{{$transferRequests->id}}</h3>
         <table class="table table-striped">
             <thead>
@@ -35,6 +36,28 @@
                     <td align="right">{{$transfer->quantity}}</td>
                 </tr>
                 @endforeach
+=======
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Outlet</th>
+                    <th>Remarks</th>
+                    <th>Transfer Request Number</th>
+                    <th>Date</th>
+                    <th>Process</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{$transferRequest->outlets['outlet_name']}}</td>
+                    <td>{{$transferRequest->remarks}}</td>
+                    <td>{{$transferRequest->transfer_request_number}}</td>
+                    <td>{{$transferRequest->date}}</td>
+                    <td>{{$transferRequest->status}}</td>
+                    <td>{{$transferRequest->statuses['status_name']}}</td>
+                </tr>
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
             </tbody>
         </table>
     </div>

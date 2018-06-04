@@ -13,7 +13,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="leftNavbar navbar-nav mr-auto">
+<<<<<<< HEAD
                 <a href="/login"><img src="http://ehostingcentre.com/hebeloft/storage/logo/hebeloft_logo.png" class="logo" style="padding: 7px 0;"/></a>
+=======
+                <a href="/login"><img src="/storage/logo/hebeloft_logo.png" class="logo" style="padding: 7px 0;"/></a>
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                 {{-- <li class="navList"><a class="inventoryNav nav-link" style="color:#e3b417;" href="/hebeloft/inventory"><div class="navLabels">Inventory</div></a></li>
                 <li class="navList"><a class="salesOrderNav nav-link" style="color:#e3b417;" href="/hebeloft/salesorder"><div class="navLabels">Sales order</div></a></li> --}}
             </ul>

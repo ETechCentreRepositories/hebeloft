@@ -47,6 +47,7 @@ Auth::routes();
 Route::get('/', 'InventoryController@index')->name('inventory');
 
 //Inventory
+<<<<<<< HEAD
 Route::get('/ajax/outlet', 'InventoryController@getOutlet');
 Route::get('/ajax/product_brand', 'InventoryController@getProductBrand');
 Route::get('/ajax/inventory', 'InventoryController@getInventory');
@@ -60,26 +61,57 @@ Route::get('/retrieve-inventory-by-product-name/{productName}', 'InventoryContro
 Route::post('import-inventory', 'InventoryController@importFile')->name('import.file');
 Route::get('export-inventory/{type}', 'InventoryController@exportFile')->name('exportInventory.file');
 
+=======
+Route::get('/ajax/inventory/', 'InventoryController@getInventory');
+Route::get('/ajax/inventory/{id}', 'InventoryController@getInventoryById');
+Route::get('/autocomplete-search', 'InventoryController@search');
+Route::get('/retrieve-inventory-by-outlet/{outlet}', 'InventoryController@getInventoryByOutlet');
+Route::get('/retrieve-inventory-by-product-brand/{product_brand}', 'InventoryController@getInventoryByProductBrand');
+Route::get('/retrieve-inventory-by-product-name/{productName}', 'InventoryController@getInventoryByProductName');
+Route::post('import-inventory', 'InventoryController@importFile')->name('import.file');
+Route::get('export-inventory/{type}', 'InventoryController@exportFile')->name('inventory.export.file');
+
+//Retrieve Outlets
+Route::get('/ajax/outlet', 'InventoryController@getOutlet');
+Route::get('/ajax/inventory-outlet', 'InventoryController@getOutletByInventory');
+Route::get('export-outlets/{type}', 'OutletsController@exportFile')->name('outlets.export.file');
+
+//Export Users
+Route::get('export-users/{type}', 'UsersController@exportFile')->name('users.export.file');
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
 
 //SalesRecord 
 Route::get('/salesrecord/create', 'SalesRecordsController@getSalesRecordCart');
 Route::get('/salesrecord/addtocart/{id}/{price}/{quantity}/{outlet}/{date}/{remarks}', 'SalesRecordsController@getSalesRecordAddToCart');
 Route::get('/testing/{id}', 'UsersController@show');
+<<<<<<< HEAD
 Route::get('export-salesrecord/{type}', 'SalesRecordsController@exportFile')->name('exportSalesRecord.file');
 Route::get('/salesrecord/remove/{id}', 'SalesRecordsController@getRemoveItem');
+=======
+Route::get('/ajax/salesrecord/date/{startDate}/{endDate}', 'SalesRecordsController@sortDate');
+Route::get('export-salesrecord/{type}', 'SalesRecordsController@exportFile')->name('salesrecord.export.file');
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
 
 //SalesOrder
 Route::get('/salesorder/create', 'SalesOrdersController@getSalesOrderCart');
 Route::get('/salesorder/addtocart/{id}/{quantity}/{unitPrice}/{date}/{remarks}', 'SalesOrdersController@getSalesOrderAddToCart');
 Route::get('/testing/{id}', 'UsersController@show');
+<<<<<<< HEAD
 Route::get('/salesorder/remove/{id}', 'SalesOrdersController@getRemoveItem');
+=======
+Route::get('/ajax/salesorder/date/{startDate}/{endDate}', 'SalesOrdersController@sortDate');
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
 
 //TransferRequest
 Route::get('/transferrequest/create', 'TransferRequestController@getTransferRequestCart');
 Route::get('/transferrequest/addtocart/{id}/{quantity}/{outlet}/{date}/{remarks}', 'TransferRequestController@getTransferRequestAddToCart');
 Route::get('/testing/{id}', 'UsersController@show');
+<<<<<<< HEAD
 Route::get('/transferrequest/reduce/{id}', 'TransferRequestController@getReduceByOne');
 Route::get('/transferrequest/remove/{id}', 'TransferRequestController@getRemoveItem');
+=======
+Route::get('/ajax/transferrequest/date/{startDate}/{endDate}', 'TransferRequestController@sortDate');
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
 
 //Accept/Reject Transfer Request
 Route::post('/', function () {

@@ -62,13 +62,24 @@
         <table class="table table-striped sortable">
             <thead>
                 <tr>
+<<<<<<< HEAD
                     <th>Date</th>
                     <th>Process</th>
                     <th>Status</th>
                     <th class="emptyHeader"></th>
+=======
+                    <th>Date (YYYY-MM-DD)</th>
+                    {{-- <th>Order Id#</th> --}}
+                    {{-- <th>Outlet</th> --}}
+                    <th>Process</th>
+                    <th>Status</th>
+                    @if ($users_id->roles_id == '1')
+                    <th class="emptyHeader"></th>
+                    @endif
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="transferRequestContent">
                 @foreach($transfers as $transfer)
                 <tr>
                     <td>{{$transfer->date}}</td>
@@ -168,9 +179,14 @@
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row transfer-buttons">
                                 <div class="p-2">
+<<<<<<< HEAD
                                     <a href="/transferrequest/{{$outletTransfer->id}}"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
                                 </div>
                     @if ($users_id->roles_id == '1')
+=======
+                                    <a href="/transferrequest/{{$transfer->id}}"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
+                                </div>
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                                 <div class="p-2">
                                     <a href="/transferrequest/{{$transfer->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
@@ -197,6 +213,39 @@
     function closeViewTransferModal() {
         document.getElementById('viewTransferModal').style.display = "none";
     }
+    $(document).ready(function(){
+            $('#search').click(function(){
+                var startDate = $('#startDate').val();
+                var endDate = $('#endDate').val();
+                console.log(startDate + endDate);
+                $("#transferRequestContent").empty();
+            $.ajax({
+                type: "GET",
+                url: "{{URL::TO('/ajax/transferrequest/date')}}/" + startDate + "/" + endDate,
+                // data: "products.Name=" + productName,
+                cache: false,
+                dataType: "JSON",
+                success: function (response) {
+                    // console.log(response);
+                    for (i = 0; i < response.length; i++) {
+                        console.log(response[i]);
+                        $("#transferRequestContent").append(
+                            "<tr><td>"+ response[i].date+"</td>"
+                            + "<td>"+ response[i].status +"</td>"
+                            + "<td>"+ response[i].status_name+"</td>"
+                            @if ($users_id->roles_id == '1')
+                            +"<td><a href='/transferrequest/"+response[i].id+"/edit'><button type='button' class='btn btn-primary action-buttons'>Edit</button></a></td></tr>"
+                            @endif
+                        );
+                    }
+                },
+
+                error: function (obj, textStatus, errorThrown) {
+                    console.log("Error " + textStatus + ": " + errorThrown);
+                }
+            });
+            });
+        });
 </script>
 @endsection
 
@@ -211,6 +260,7 @@
     
     .emptyHeader {
     	pointer-events: none;
+<<<<<<< HEAD
     }
     
     #transferRequestSearchField{
@@ -218,5 +268,7 @@
         background-repeat: no-repeat; 
         background-position: 2px 3px;
         background-size: 30px 30px;
+=======
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
     }
 </style>

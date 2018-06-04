@@ -18,7 +18,11 @@ class CartSalesRecord {
         }
     }
 
+<<<<<<< HEAD
     public function add($item, $id, $price, $quantity, $date, $remarks) {
+=======
+    public function add($item, $id, $price, $quantity, $date, $remarks, $receiptNumber) {
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
         $storedItem = ['qty' => 0, 'price' => $price, 'item' => $item];
             if($this->items) {
                 if(array_key_exists($id, $this->items)) {

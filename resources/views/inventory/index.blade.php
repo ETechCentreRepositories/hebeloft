@@ -11,12 +11,15 @@
 @elseif ($users_id->roles_id == '4')
 @include('inc.navbar_wholesaler')
 @endif
-
 <br>
 <div class="topMargin container">
     <div class="drop-down_brand row">
         <div class="col-md-3">
+<<<<<<< HEAD
         <p>Search by Brand</p>
+=======
+        <p>Search item brand</p>
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
         </div>
         <div class="col-md-9">
             <select id="product_brand" class="form-control"></select>
@@ -36,12 +39,21 @@
     @endif
     
     <div class="row">
+<<<<<<< HEAD
     <div class="col-md-10">
             <input type="text" id="searchField" style="text-indent:20px;" class="form-control" style="background:transparent">
+=======
+    <div class="col-md-2">
+            <button type="button" class="btn btn-success btn-search" onclick="openImportCSVModal()">Import</button></a>
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-default btn-search" id="searchInventory">Search</button>
+            <a href="{{ route('inventory.export.file',['type'=>'csv']) }}"><button type="button" class="btn btn-inflow">Export</button></a>
         </div>
+        <div class="col-md-6">
+            <input type="text" id="searchField" class="form-control" style="background:transparent">
+        </div>
+<<<<<<< HEAD
         <br>
         </br>
     	@if ($users_id->roles_id == '1' || $users_id->roles_id == '2' || $users_id->roles_id == '3')
@@ -53,6 +65,11 @@
             </div>
         @endif
         
+=======
+        <div class="col-md-2">
+            <button type="button" class="btn btn-default btn-search" id="searchInventory">Search</button>
+        </div>
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
     </div>
     
     <br>
@@ -76,9 +93,18 @@
                 </td>
                 <td>{{$inventoryOutlet->products['Brand']}}</td>
                 <td>{{$inventoryOutlet->products['Name']}}</td>
+<<<<<<< HEAD
                 <td>${{$inventoryOutlet->products['UnitPrice']}}</td>
                 <td>{{$inventoryOutlet->products['Category']}}</td>
                 <td align="right">{{$inventoryOutlet->stock_level}}</td>
+=======
+                <td>S${{$inventoryOutlet->products['UnitPrice']}}</td>
+                {{-- <td></td>
+                <td></td>
+                <td></td> --}}
+                <td></td>
+                <td>{{$inventoryOutlet->stock_level}}/{{$inventoryOutlet->threshold_level}}</td>
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
             </tr>
             @endforeach
             @else
@@ -106,6 +132,38 @@
     </div>
 </div>
 
+<div id="importCSVModal" class="modal">
+    <span class="close cursor" onclick="closeImportCSVModal()">&times;</span>
+    <div class="card modalCard">
+        <div class="card-body">
+            <br>
+            <h3 class="card-title">Select your inventory file here </h3>
+            <br>
+            {!! Form::open(['action' => ['InventoryController@store'], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+                {{-- <f{!! Form::open(['action' => ['InventoryController@store'], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+                {{-- <form class="form-horizontal" role="form" method="POST" action="UsersController@create"> --}}
+                {{ csrf_field() }}
+
+                <div class="row">
+                <div style="text-align:center">{{Form::file('inventory_csv',array('id'=>'inventory_csv'))}}</div>
+                <h3 id="addCSVFile">testing</h3>
+                </div>
+
+                <br>
+
+                <div class="form-group">
+                    <div style="text-align:center">
+                        <button type="submit" class="btn btn-primary">
+                            Import
+                        </button>
+                    </div>
+                </div>
+            {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function(){
         $.get("{{ URL::to('ajax/product_brand')}}",function(data){
@@ -127,6 +185,7 @@
                 $("#outlet_location").append("<option value='" +
                 outlet_id + "'>" + outlet + "</option>");
             });
+            $("#outlet_location").append("<option value='1'>All</option>");
         });
     
         $("#searchField").autocomplete({
@@ -431,6 +490,35 @@
 	                }
 	            });
 	        }
+        });
+
+        $("#product_brand").change(function(){
+            var product_brand = $(this).val();
+            console.log(product_brand);
+            $("#inventoryContent").empty();
+            $.ajax({
+                type: "GET",
+                url: "{{URL::TO('/retrieve-inventory-by-product-brand')}}/" +product_brand,
+                // data: "outlet=" + outlet,
+                cache: false,
+                dataType: "JSON",
+                success: function (response) {
+                    for (i = 0; i < response.length; i++) {
+                        $("#inventoryContent").append(
+                            "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
+                            + "<td>" + response[i].Brand + "</td>"
+                            + "<td>" + response[i].Name + "</td>"
+                            + "<td>" + response[i].UnitPrice + "</td>"
+                            + "<td></td>" 
+                            + "<td>" + response[i].stock_level + "</td></tr>"
+                        );
+                    }
+                },
+                
+                error: function (obj, textStatus, errorThrown) {
+                    console.log("Error " + textStatus + ": " + errorThrown);
+                }
+            });
         });
 
         $("#searchInventory").click(function(){

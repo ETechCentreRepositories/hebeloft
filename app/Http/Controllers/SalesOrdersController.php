@@ -16,6 +16,7 @@ use DB;
 
 class SalesOrdersController extends Controller
 {
+    var $counter = 000;
     /**
      * Display a listing of the resource.
      *
@@ -49,7 +50,6 @@ class SalesOrdersController extends Controller
      */
     public function store(Request $request)
     {
-
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
 
@@ -74,6 +74,7 @@ class SalesOrdersController extends Controller
                 $totalPrice += $product['qty']*$product['unitPrice'];
             }
             
+
             $salesOrder = new SalesOrder;
             $salesOrder->statuses_id = 1;
             $salesOrder->status = "pending";
@@ -112,12 +113,19 @@ class SalesOrdersController extends Controller
         $users_id = User::find($user_id);
 
         $salesOrder = SalesOrder::find($id);
+<<<<<<< HEAD
         $salesOrderId = SalesOrder::find($id)->id;
         $salesOrderLists = SalesOrderList::where('sales_order_id', '=', $salesOrderId)->get();
         $totalPrice = DB::table('sales_order_list')->where('sales_order_id', $salesOrderId)->sum('subtotal');
         
 
         return view('salesorder.show')->with('users_id',$users_id)->with('salesOrder',$salesOrder)->with('salesOrderLists',$salesOrderLists)->with('totalPrice',$totalPrice);
+=======
+        $salesOrderLists = SalesOrderList::where('sales_order_id', '=', $salesOrder)->get();
+        
+
+        return view('salesorder.show')->with('users_id',$users_id)->with('salesOrder',$salesOrder)->with('salesOrderLists',$salesOrderLists);
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
     }
 
     /**
@@ -203,9 +211,11 @@ class SalesOrdersController extends Controller
             $oldSalesOrderCart = Session::get('cartSalesOrder');
             $salesOrderCart = new CartSalesOrder($oldSalesOrderCart);
 
+            // dd($oldSalesOrderCart);
+
             return view('salesorder.create', [
                 'products' => $salesOrderCart->items
-            ])->with('users_id',$users_id);
+            ])->with('users_id', $users_id) ;
         }
     }
 
@@ -217,6 +227,7 @@ class SalesOrdersController extends Controller
 
         return response($salesOrder);
     }
+<<<<<<< HEAD
     
     public function viewByStatusesId($statuses_id){
         $user_id = auth()->user()->id;
@@ -247,5 +258,7 @@ class SalesOrdersController extends Controller
             ])->with('users_id',$users_id);
         
     }
+=======
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
 
 }

@@ -50,7 +50,11 @@
     {!! Form::open(['action' => ['SalesOrdersController@update', $salesOrders->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
         {{Form::hidden('status', 'rejected', ['class' => 'form-control'])}}
         {{Form::hidden('_method', 'PUT')}}
+<<<<<<< HEAD
         {{Form::submit('Follow Up', ['class'=>'btn btn-primary btn-lg btn-danger btn-rejected'])}}
+=======
+        {{Form::submit('Rejected', ['class'=>'btn btn-primary btn-lg btn-danger btn-rejected'])}}
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
     {!! Form::close() !!}
     {!! Form::open(['action' => ['SalesOrdersController@update', $salesOrders->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
         {{Form::hidden('status', 'accepted', ['class' => 'form-control'])}}

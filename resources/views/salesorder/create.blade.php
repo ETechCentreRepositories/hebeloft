@@ -53,18 +53,29 @@
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Subtotal</th>
+<<<<<<< HEAD
                     <th></th>
+=======
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                 </tr>
             </thead>    
             <tbody id="addSalesOrderContent">
             @if(Session::has('cartSalesOrder'))
                 @foreach($products as $product)
+<<<<<<< HEAD
                         <tr id="{{$product['item']['id']}}"><td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/{{$product['item']['image']}}"/></td>
                         <td>{{$product['item']['Name']}}</td>
                         <td>{{$product['item']['UnitPrice']}}</td>
                         <td align="center">{{$product['qty']}}</td>
                         <td align="center">{{$product['item']['UnitPrice']*$product['qty']}}</td>
                         <td><button type="button" class="btn btn-danger action-buttons" id="removeThis" onClick="removeCartItemFromSalesOrder()">Remove</button></td></tr>
+=======
+                        <tr><td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/{{$product['item']['image']}}"/></td>
+                        <td>{{$product['item']['Name']}}</td>
+                        <td>{{$product['item']['UnitPrice']}}</td>
+                        <td>{{$product['qty']}}</td>
+                        <td>{{$product['item']['UnitPrice']*$product['qty']}}</td></tr>
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                     @endforeach
                 @endif
             </tbody>
@@ -74,13 +85,20 @@
                 <td></td>
                 <td></td>
                 <td>Total Quantity</td>
+<<<<<<< HEAD
                 <td>{{Session::has('cartSalesOrder') ? Session::get('cartSalesOrder')-> totalQty : ''}}</td>
                 </tr>
+=======
+                <td>{{Session::has('cartSalesOrder') ? Session::get('cartSalesOrder')-> totalQty : ''}}</td></tr>
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                 <tr><td></td>
                 <td></td>
                 <td></td>
                 <td>Sub total</td>
+<<<<<<< HEAD
                 <td></td>
+=======
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                 <td></td></tr>
             @endif
             </tbody>
@@ -92,8 +110,13 @@
         <p><span style="color: red">*</span>To order, first save as draft, then submit. If it is not saved, you cannot submit and your unsaved order will be gone.</p>
         <div class="form-group">
             <div>
+<<<<<<< HEAD
                 <button type="button" class="btn btn-primary" id="saveSalesOrder" onClick="enableCreateButton()">Save as draft</button>
                 {{Form::submit('Submit Order', ['class'=>'btn btn-primary', 'id'=>'createButton',  'disabled'])}}
+=======
+                <button type="button" class="btn btn-primary" id="saveSalesOrder" onClick="enableCreateButton()">Save as Draft</button>
+                {{Form::submit('Create Sales Draft', ['class'=>'btn btn-primary', 'id'=>'createButton',  'disabled'])}}
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
             </div>
         </div>
         {!! Form::close() !!}

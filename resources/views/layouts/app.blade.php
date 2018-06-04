@@ -6,9 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> --}}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+<<<<<<< HEAD
     <link rel="shortcut icon" href="http://ehostingcentre.com/hebeloft/storage/logo/butterfly_logo.png">
     <script src="http://ehostingcentre.com/hebeloft/js/sorttable.js"></script>
     <script src="http://ehostingcentre.com/hebeloft/js/jquery.min.js"></script>
+=======
+    <link rel="shortcut icon" href="http://localhost:8000/storage/logo/butterfly_logo.png">
+    <script src="http://localhost:8000/js/sorttable.js"></script>
+    <script src="http://localhost:8000/js/jquery.min.js"></script>
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -29,8 +35,12 @@
     <script>
     $(document).ready(function(){
     
+<<<<<<< HEAD
     
     $.get("{{ URL::to('ajax/outlet')}}",function(data){
+=======
+        $.get("{{ URL::to('ajax/outlet')}}",function(data){
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
             $("#outlet").empty();
             $.each(data,function(i,value){
                 var id = value.id;
@@ -67,6 +77,7 @@
                 console.log(value);
             }
         });
+<<<<<<< HEAD
 
         var products = [];
         $("#addSalesRecord").click(function() {
@@ -161,10 +172,40 @@
                                 + "<td><button type='button' class='btn btn-danger action-buttons' id='removeTR'> Remove </button></td></tr>"
                             );
                       
+=======
+
+        $("#createSalesRecordTable tr td").change(function() {
+            console.log("try")
+            // $("subtotal").html($("#quantity").val()*$("#unitPrice").val())
+        });
+
+        var products = [];
+        $("#addSalesRecord").click(function() {
+            var productName = $("#salesRecordSearchField").val();
+            $.ajax({
+                type: "GET",
+                url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
+                data: "",
+                cache:false,
+                datatype: "JSON",
+                success: function (response) {
+                    console.log("testing");
+                    for (i = 0; i < response.length; i++) {
+                        var productId = parseInt(response[i].products_id);
+                        products.push(productId);
+                        $("#addSalesRecordContent").append(
+                            "<tr id='"+productId+"'><td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
+                            + "<td>" + response[i].Name + "</td>"
+                            + "<td><input name='unitPrice' type='number' id='unitPrice' type='text' style='width:60px;' value='"+ response[i].UnitPrice +"'/></td>"
+                            + "<td><input name='quantity' type='number' id='quantity' type='text' style='width:60px;' value='1'/></td>"
+                            + "<td id='price'>"+response[i].UnitPrice+"</td></tr>"
+                        );
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                     }
                 },
 
                 error: function (obj, testStatus, errorThrown) {
+<<<<<<< HEAD
                     console.log("fail");
                 }
             });
@@ -321,18 +362,116 @@
         $.ajax({
                     type: "GET",
                     url: "{{URL::TO('/salesrecord/remove')}}/" + id,
+=======
+                    
+                }
+            });
+        });
+        
+        var orderProducts = [];
+        $("#addSalesOrder").click(function() {
+            console.log("distinct");
+            var productName = $("#salesOrderSearchField").val();
+            $.ajax({
+                type: "GET",
+                url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
+                data: "",
+                cache:false,
+                datatype: "JSON",
+                success: function (response) {
+                    console.log("testing");
+                    for (i = 0; i < response.length; i++) {
+                        var productId = parseInt(response[i].products_id);
+                        orderProducts.push(productId);
+                        $("#addSalesOrderContent").append(
+                            "<tr><td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
+                            + "<td>" + response[i].Name + "</td>"
+                            + "<td><input name='unitPrice' type='number' id='unitPrice' type='text' style='width:60px;' value='"+ response[i].UnitPrice +"'/></td>"
+                            + "<td><input name='quantity' type='number' id='quantity' type='text' style='width:60px;' value='1'/></td>"
+                            + "<td>" + response[i].UnitPrice + "</td></tr>"
+                        );
+                    }
+                },
+
+                error: function (obj, testStatus, errorThrown) {
+                    
+                }
+            });
+        });
+        
+        var trProducts = [];
+        $(document).on("click","#addTransferRequest",function(){
+            var productName = $("#transferRequestSearchField").val();
+            console.log(productName);
+            $.ajax({
+                type: "GET",
+                url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
+                data: "",
+                cache:false,
+                datatype: "JSON",
+                success: function (response) {
+                console.log(response);
+
+                    for (i = 0; i < response.length; i++) {
+                    
+                            var productId = parseInt(response[i].products_id);
+
+                            trProducts.push(productId);
+                            console.log(trProducts);
+                            
+                            $("#addTransferRequestContent").append(
+                                "<tr id='"+productId+"'>"
+                                + "<td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
+                                + "<td>" + response[i].Name + "</td>"
+                                + "<td id='price'>" + response[i].UnitPrice + "</td>"
+                                + "<td><input name='quantity' type='number' id='quantity' type='text' style='width:60px;' value='1'/>"
+                                + "<td id='subtotal'>" + response[i].UnitPrice + "</td></tr>"
+                            );
+                      
+                    }
+                },
+
+                error: function (obj, testStatus, errorThrown) {
+                    console.log("fail");
+                }
+            });
+        });
+
+        $("#saveSalesRecord").click(function () {
+            if(products !== null) {
+                var productID = products[0];
+                var price = $('#createSalesRecordTable tr:last-child td:eq(2) #unitPrice').val();
+                var quantity = $('#createSalesRecordTable tr:last-child td:eq(3) #quantity').val();
+                var outlet = $('#outlet').val();
+                var date = $("#salesRecordDate").val();
+                var remarks = $("#remarks").val();
+                var receiptNumber = $("#receiptNumber").val();
+                console.log(price);
+                console.log(quantity);
+                console.log(outlet);
+                console.log(date);
+                console.log(remarks);
+                console.log(receiptNumber);
+                $.ajax({
+                    type: "GET",
+                    url: "{{URL::TO('/salesrecord/addtocart/')}}/" + productID + "/" + price + "/" + quantity + "/" + outlet + "/" + date + "/" + remarks + "/" + receiptNumber,
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                     // data: "",
                     cache:false,
                     datatype: "JSON",
                     success: function (response) {
                         console.log("successful");
+<<<<<<< HEAD
                         $("#removeThis").closest('tr').remove();
+=======
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                     },
 
                     error: function (obj, testStatus, errorThrown) {
                         console.log("failure");
                     }
                 });
+<<<<<<< HEAD
     }
     
     function removeCartItemFromSalesOrder() {
@@ -343,18 +482,45 @@
         $.ajax({
                     type: "GET",
                     url: "{{URL::TO('/salesorder/remove')}}/" + id,
+=======
+            } else {
+                console.log("null");
+            }
+        });
+
+        $("#saveSalesOrder").click(function() {
+            if(orderProducts !== null) {
+                var productID = orderProducts[orderProducts.length-1];
+                var remarks = $("#remarks").val();
+                var date = $("#salesOrderDate").val();
+                var quantity =  $('#createSalesOrderTable tr:last-child td:eq(3) #quantity').val();
+                var unitPrice =  $('#createSalesOrderTable tr:last-child td:eq(2) #unitPrice').val();
+                console.log(unitPrice);
+                console.log(productID);
+                console.log(remarks);
+                console.log(date);
+                console.log(quantity);
+                
+                $.ajax({
+                    type: "GET",
+                    url: "{{URL::TO('/salesorder/addtocart/')}}/" + productID + "/" + quantity + "/" + unitPrice + "/" + date + "/" + remarks,
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                     // data: "",
                     cache:false,
                     datatype: "JSON",
                     success: function (response) {
                         console.log("successful");
+<<<<<<< HEAD
                         $("#removeThis").closest('tr').remove();
+=======
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                     },
 
                     error: function (obj, testStatus, errorThrown) {
                         console.log("failure");
                     }
                 });
+<<<<<<< HEAD
     }
     
     function removeCartItemFromTransferRequest() {
@@ -365,20 +531,52 @@
         $.ajax({
                     type: "GET",
                     url: "{{URL::TO('/transferrequest/remove')}}/" + id,
+=======
+            } else {
+                console.log("null");
+            }
+        });
+
+        $("#saveTransferRequest").click(function () {
+            var outlet = $('#outlet').val();
+            var date = $("#transferRequestDate").val();
+            var quantity =  $('#createTransferRequestTable tr:last-child td:eq(3) #quantity').val();
+            var remarks = $("#remarks").val();
+            if(trProducts !== null) {
+                console.log(quantity);
+                console.log(outlet);
+                console.log(date);
+                console.log(remarks);
+                var productID = trProducts[0];
+                $.ajax({
+                    type: "GET",
+                    url: "{{URL::TO('/transferrequest/addtocart/')}}/" + productID + "/" + quantity + "/" + outlet + "/" + date + "/" + remarks,
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                     // data: "",
                     cache:false,
                     datatype: "JSON",
                     success: function (response) {
                         console.log("successful");
+<<<<<<< HEAD
                         $("#removeThis").closest('tr').remove();
+=======
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                     },
 
                     error: function (obj, testStatus, errorThrown) {
                         console.log("failure");
                     }
                 });
+<<<<<<< HEAD
     }
     
+=======
+            } else {
+                console.log("null");
+            }
+        });
+    });
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
 </script>
 
 <style>

@@ -189,7 +189,17 @@ class InventoryController extends Controller
     }
     
     public function getInventory(){
+<<<<<<< HEAD
         $inventoryOutlet = InventoryOutlet::orderBy('id', 'desc')->get()->toArray();
+=======
+        $inventory = InventoryOutlet::leftJoin('products', 'inventory_has_outlets.products_id', '=', 'products.id')
+                     ->leftJoin('outlets', 'inventory_has_outlets.outlets_id', '=', 'outlets.id')
+                     ->select('inventory_has_outlets.id','inventory_has_outlets.outlets_id','inventory_has_outlets.products_id','products.Name', 'products.Category','products.Brand', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level', 'outlets.outlet_name')
+                     ->where('inventory_has_outlets.outlets_id', 13)
+                     ->distinct()
+                    //  ->where('products.Category','=', 'orange')
+                     ->get()->toArray();
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
 
         return response($inventoryOutlet);
     }
@@ -231,7 +241,18 @@ class InventoryController extends Controller
         return response($inventoryByFilter);
     }
 
+    public function getInventoryByProductBrand($product_brand){
+        $inventoryByOutlet = InventoryOutlet::leftJoin('products', 'inventory_has_outlets.products_id', '=', 'products.id')
+                    ->leftJoin('outlets', 'inventory_has_outlets.outlets_id', '=', 'outlets.id')
+                    ->select('inventory_has_outlets.id','inventory_has_outlets.outlets_id','inventory_has_outlets.products_id','products.Name', 'products.Category','products.Brand', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level', 'outlets.outlet_name', 'products.UnitPrice', 'products.image')
+                    ->where('inventory_has_outlets.id','=',$product_brand)
+                    ->get()->toArray();
+
+        return response($inventoryByOutlet);
+    }
+
     public function getInventoryByProductName($productName){
+
         $inventoryByProductName = InventoryOutlet::leftJoin('products', 'inventory_has_outlets.products_id', '=', 'products.id')
                     ->leftJoin('outlets', 'inventory_has_outlets.outlets_id', '=', 'outlets.id')
                     ->select('inventory_has_outlets.id','inventory_has_outlets.outlets_id','inventory_has_outlets.products_id','products.Name', 'products.Category','products.Brand', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level', 'outlets.outlet_name', 'products.UnitPrice', 'products.image')
@@ -242,6 +263,7 @@ class InventoryController extends Controller
 
         return response($inventoryByProductName);
     }
+<<<<<<< HEAD
     
     public function getInventoryByProductBrand($product_brand){
         $inventoryByOutlet = InventoryOutlet::leftJoin('products', 'inventory_has_outlets.products_id', '=', 'products.id')
@@ -274,4 +296,21 @@ class InventoryController extends Controller
         return response($inventoryByOutlet);
     }
 
+=======
+
+    
+public function importCsv()
+{
+    $file = public_path('file/inventory.csv');
+
+    $invenotryArr = $this->csvToArray($file);
+
+    for ($i = 0; $i < count($invenotryArr); $i ++)
+    {
+        User::firstOrCreate($invenotryArr[$i]);
+    }
+
+    return 'Jobi done or what ever';    
+}
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
 }

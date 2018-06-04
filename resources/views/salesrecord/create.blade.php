@@ -70,9 +70,14 @@
                         <tr id="{{$product['item']['id']}}"><td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/{{$product['item']['image']}}"/></td>
                         <td>{{$product['item']['Name']}}</td>
                         <td>{{$product['item']['UnitPrice']}}</td>
+<<<<<<< HEAD
                         <td align="center">{{$product['qty']}}</td>
                         <td align="center" id="price">{{$product['price']*$product['qty']}}</td>
                         <td><button type="button" class="btn btn-danger action-buttons" id="removeThis" onClick="removeCartItemFromSalesRecord()">Remove</button></td></tr>
+=======
+                        <td>{{$product['qty']}}</td>
+                        <td id="price">{{$product['price']*$product['qty']}}</td></tr>
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                     @endforeach
                 @endif
             </tbody>
@@ -85,7 +90,11 @@
         <div class="form-group">
             <div>
             <button type="button" class="btn btn-primary" id="saveSalesRecord" onClick="enableCreateButton()">Save as Draft</button>
+<<<<<<< HEAD
             {{Form::submit('Submit Sales Record', ['class'=>'btn btn-primary', 'id'=>'createButton',  'disabled'])}}
+=======
+            {{Form::submit('Create Sales Record', ['class'=>'btn btn-primary', 'id'=>'createButton',  'disabled'])}}
+>>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
             </div>
         </div>
         {!! Form::close() !!}
