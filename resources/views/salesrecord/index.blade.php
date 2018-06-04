@@ -16,8 +16,9 @@
 
 <br>
 <div class="topMargin container">
+    <a href="{{ route('exportSalesRecord.file',['type'=>'csv']) }}"><button type="button" class="btn btn-warning" style="width: auto; float: left;">Export</button></a>
     <div class="row justify-content-end">
-        <a href="/salesrecord/create"><button type="button" class="btn btn-warning">Add Sales Record</button></a>
+        <a href="/salesrecord/create"><button type="button" class="btn btn-warning">Create or View New Sales Record</button></a>
     </div>
     <br>
     <div class="drop-down_brand row">
@@ -40,7 +41,7 @@
     <br>
     <div class="row">
         <div class="col-md-10">
-            <input type="text" class="form-control" style="background:transparent;">
+            <input type="text" id="salesRecordSearchField" style="text-indent:20px;" class="form-control" style="background:transparent">
         </div>
         <div class="col-md-2">
             <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
@@ -48,24 +49,32 @@
     </div>
     <br>
     <div>
-        <table class="table table-striped">
+        <table class="table table-striped sortable">
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Receipt Number</th>
+                    <th>Date (YYYY-MM-DD)</th>
                     <th>Outlet</th>
                     <th>Total Price</th>
                     <th>Remarks</th>
+                    <th class="emptyHeader"></th>
                 </tr>
             </thead>
             <tbody>
                     @foreach($salesRecords as $salesRecord)
                     <tr>
-                        <td>{{$salesRecord->date}}</td>
-                        <td>{{$salesRecord->receiptNumber}}</td>
+                        <td>{{$salesRecord->OrderDate}}</td>
                         <td>{{$salesRecord->outlets['outlet_name']}}</td>
                         <td>{{$salesRecord->total_price}}</td>
-                        <td>{{$salesRecord->remarks}}</td>
+                        <td>{{$salesRecord->OrderRemarks}}</td>
+                        <td>
+                            <div class="d-flex flex-column">
+                                <div class="d-flex flex-row transfer-buttons">
+                                    <div class="p-2">
+                                        <a href="/salesrecord/{{$salesRecord->id}}"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                     @endforeach
             </tbody>
@@ -84,5 +93,12 @@
         color: #000000 !important;
         pointer-events: none;
         cursor: default;
+    }
+    
+    #salesRecordSearchField{
+        background-image:url(http://ehostingcentre.com/hebeloft/storage/icons/search.png); 
+        background-repeat: no-repeat; 
+        background-position: 2px 3px;
+        background-size: 30px 30px;
     }
 </style>

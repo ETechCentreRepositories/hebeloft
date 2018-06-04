@@ -12,7 +12,7 @@ class UserOutlet extends Model
     //Timestamps
     public $timestamps = false;
 
-    public function user(){
+    public function users(){
         return $this -> belongsTo('App\User');
     }
 

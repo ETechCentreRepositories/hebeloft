@@ -43,21 +43,13 @@
             </div>
         </div>
         <br>
-        <div class="row">
-            <div class="col-md-3">
-                <p>Reciept number: </p>
-            </div>
-            <div class="col-md-9">
-                <input type="text" id="receiptNumber" name ="receiptNumber" class="form-control">
-            </div>
-        </div>
         <br>
         <div class="row">
             <div class="col-md-10">
                 <input type="text" id="salesRecordSearchField" class="form-control" style="background:transparent">
             </div>
             <div class="col-md-2">
-                <button type="button" class="btn btn-default btn-search" id="addSalesRecord" onClick="getSalesRecordProduct()">Add</button>
+                <button type="button" class="btn btn-default btn-search" id="addSalesRecord">Add</button>
             </div>
         </div>
         <br>
@@ -69,16 +61,18 @@
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Total Price</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody id="addSalesRecordContent">
                 @if(Session::has('cartSalesRecord'))
                     @foreach($products as $product)
-                        <tr id="{{$product['item']['id']}}"><td><img style="width:60px; height:60px" src="/storage/product_images/{{$product['item']['image']}}"/></td>
+                        <tr id="{{$product['item']['id']}}"><td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/{{$product['item']['image']}}"/></td>
                         <td>{{$product['item']['Name']}}</td>
-                        <td><input name="unitPrice" type="number" id="unitPrice" type="text" style="width:60px;" value="{{$product['item']['UnitPrice']}}"/></td>
-                        <td><input name="quantity" type="number" id="quantity" type="text" style="width:60px;" value="{{$product['qty']}}"/></td>
-                        <td id="price"><input name="price" type="number" id="price" type="text" style="width:60px;" value="{{$product['price']}}"/></td></tr>
+                        <td>{{$product['item']['UnitPrice']}}</td>
+                        <td align="center">{{$product['qty']}}</td>
+                        <td align="center" id="price">{{$product['price']*$product['qty']}}</td>
+                        <td><button type="button" class="btn btn-danger action-buttons" id="removeThis" onClick="removeCartItemFromSalesRecord()">Remove</button></td></tr>
                     @endforeach
                 @endif
             </tbody>
@@ -86,11 +80,12 @@
         <div class="row">
             {{Form::textarea('remarks', "", ['id' => 'remarks', 'class' => 'form-control', 'placeholder' => 'Remarks'])}}
         </div>
-        <br></br>
+        <br>
+        <p><span style="color: red">*</span>To order, first save as draft, then submit. If it is not saved, you cannot submit and your unsaved record will be gone.</p>
         <div class="form-group">
             <div>
-            <button type="button" class="btn btn-primary" onClick="saveProduct();enableCreateButton()">Save as Draft</button>
-            {{Form::submit('Create Sales Record', ['class'=>'btn btn-primary', 'id'=>'createButton',  'disabled'])}}
+            <button type="button" class="btn btn-primary" id="saveSalesRecord" onClick="enableCreateButton()">Save as Draft</button>
+            {{Form::submit('Submit Sales Record', ['class'=>'btn btn-primary', 'id'=>'createButton',  'disabled'])}}
             </div>
         </div>
         {!! Form::close() !!}

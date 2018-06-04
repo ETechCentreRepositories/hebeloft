@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Outlet;
 use App\Models\AuditTrail;
+use App\Models\UserOutlet;
 use App\User;
+use DB;
 
 class OutletsController extends Controller
 {
@@ -19,7 +21,9 @@ class OutletsController extends Controller
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
         $outlets = Outlet::orderBy('id','asc')->paginate(10);
-        return view('outlets.index')->with('outlets', $outlets)->with('users_id',$users_id);
+        $userOutlets = UserOutlet::all();
+        
+        return view('outlets.index')->with('outlets', $outlets)->with('users_id',$users_id)->with('userOutlets',$userOutlets);
     }
 
     /**
@@ -52,18 +56,16 @@ class OutletsController extends Controller
         $this->validate($request, [
             'outlet_name' => 'required',
             'address' => 'required',
-            'email' => 'required',
             'telephone_number' => 'required',
-            'fax' => 'required',
         ]);
 
         // Create Outlet
         $outlet = new Outlet;
         $outlet->outlet_name = $request->input('outlet_name');
         $outlet->address = $request->input('address');
-        $outlet->email = $request->input('email');
+        $outlet->email = "";
         $outlet->telephone_number = $request->input('telephone_number');
-        $outlet->fax = $request->input('fax');
+        $outlet->fax = "";
         $outlet->save();
 
         return redirect('/outlet')->with('success', 'Outlet Created');
@@ -91,6 +93,7 @@ class OutletsController extends Controller
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id); 
         $outlet = Outlet::find($id);
+        
         return view('outlets.edit')->with('outlet', $outlet)->with('users_id',$users_id);
     }
 
@@ -147,10 +150,42 @@ class OutletsController extends Controller
             'action' => 'Deleted Outlet',
             'action_by' => $login_user->name,
         ]);
-
+        
+    }
+    
+    public function checkIfUsersExist($id){
         $outlet = Outlet::find($id);
+        $outletId = Outlet::find($id)->id;
+        $userOutlet = DB::table('users_has_outlets')->where('outlets_id', '=', $outletId);
+        $numberUserOutlet = count($userOutlet);
+        $users = [];
+        if ($numberUserOutlet == 0) {
+            $outlet -> delete();
+            return redirect('/outlet')->with('success', 'Outlet Deleted');
+        } else {
+        $users = UserOutlet::leftJoin('outlets', 'users_has_outlets.outlets_id', '=', 'outlets.id')
+               -> leftJoin('users', 'users_has_outlets.users_id', '=', 'users.id')
+               -> where('outlets_id', '=', $outletId)
+               ->get()->toArray();
+            return response($users);
+        }
+    }
 
-        $outlet->delete();
-        return redirect('/outlet')->with('success', 'Outlet Removed');
+    public function exportFile($type){
+
+        $outletexcel = Outlet::select('id','outlet_name','address','telephone_number')->get()->toArray();
+
+        return \Excel::create('outlet', function($excel) use ($outletexcel) {
+
+            $excel->sheet('sheet name', function($sheet) use ($outletexcel)
+
+            {
+
+                $sheet->fromArray($outletexcel);
+
+            });
+
+        })->download($type);
+
     }
 }

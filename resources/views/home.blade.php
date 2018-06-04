@@ -20,6 +20,7 @@
             <h3 class="dashboardLabels">Sales Order</h3>
             <div class="cardContent d-flex flex-row">
                 <div class="p-2 card salesCards card1">
+                <a href="{{URL::to('/salesorder')}}" class="hyperlink">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber1">
                             {{$salesPacks}}
@@ -29,10 +30,11 @@
                         <div class="salesProcess">
                             TO BE PACKED
                         </div>
-                    </div>
-                </div>
+                    </div> </a>
+                </div> 
                 <br>
                 <div class="p-2 card salesCards card2">
+                <a href="{{URL::to('/salesorder')}}" class="hyperlink">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber2">
                             {{$salesShips}}
@@ -42,9 +44,10 @@
                         <div class="salesProcess">
                             TO BE SHIPPED
                         </div>
-                    </div>
+                    </div> </a>
                 </div>
                 <div class="p-2 card salesCards card3">
+                <a href="{{URL::to('/salesorder')}}" class="hyperlink">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber3">
                             {{$salesDelivers}}
@@ -54,9 +57,10 @@
                         <div class="salesProcess">
                             TO BE DELIVERED
                         </div>
-                    </div>
+                    </div> </a>
                 </div>
                 <div class="p-2 card salesCards card4">
+                <a href="{{URL::to('/salesorder')}}" class="hyperlink">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber4">
                             {{$salesInvoices}}
@@ -66,7 +70,7 @@
                         <div class="salesProcess">
                             TO BE INVOICED
                         </div>
-                    </div>
+                    </div> </a>
                 </div>
             </div>
         </div>
@@ -76,6 +80,7 @@
             <h3 class="dashboardLabels">Transfer Request</h3>
             <div class="cardContent d-flex flex-row">
                 <div class="p-2 card salesCards card1">
+                <a href="{{URL::to('/transferrequest')}}" class="hyperlink">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber1">
                             {{$transferPacks}}
@@ -85,10 +90,11 @@
                         <div class="salesProcess">
                             TO BE PACKED
                         </div>
-                    </div>
+                    </div> </a>
                 </div>
                 <br>
                 <div class="p-2 card salesCards card2">
+                <a href="{{URL::to('/transferrequest')}}" class="hyperlink">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber2">
                             {{$transferShips}}
@@ -98,9 +104,10 @@
                         <div class="salesProcess">
                             TO BE SHIPPED
                         </div>
-                    </div>
+                    </div> </a>
                 </div>
                 <div class="p-2 card salesCards card3">
+                <a href="{{URL::to('/transferrequest')}}" class="hyperlink">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber3">
                             {{$transferDelivers}}
@@ -110,9 +117,10 @@
                         <div class="salesProcess">
                             TO BE DELIVERED
                         </div>
-                    </div>
+                    </div> </a>
                 </div>
                 <div class="p-2 card salesCards card4">
+                <a href="{{URL::to('/transferrequest')}}" class="hyperlink">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber4">
                             {{$transferInvoices}}
@@ -122,7 +130,7 @@
                         <div class="salesProcess">
                             TO BE INVOICED
                         </div>
-                    </div>
+                    </div> </a>
                 </div>
             </div>
         </div>
@@ -218,5 +226,11 @@
     td, thead > tr > th {
         float: left;
         border-bottom-width: 0;
+    }
+    
+    th:hover{
+        background-color: #f5f8fa !important;
+        text-decoration: none !important;
+        cursor: auto !important;
     }
 </style>

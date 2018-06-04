@@ -16,6 +16,7 @@
 
 <br>
 <div class="topMargin container">
+    <a href="{{ route('exportOutlet.file',['type'=>'csv']) }}"><button type="button" class="btn btn-warning" style="width: auto; float: left;">Export</button></a>
     <div class="row justify-content-end">
         <div>
             <button type="button" class="btn btn-warning" onclick="openCreateOutletModal()">Add new outlet</button>
@@ -24,27 +25,24 @@
     <br>
     @if(count($outlets) > 0)
     <div>
-        <table class="table table-striped">
+        <table class="table table-striped sortable">
             <thead>
                 <tr>
-                    <th>#</th>
                     <th>Branch name</th>
                     <th>Address</th>
-                    <th>Email</th>
                     <th>Telephone Number</th>
-                    <th>Fax</th>
+                    @if ($users_id->roles_id == '1')
                     <th class="emptyHeader"></th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
                 @foreach($outlets as $outlet)
-                <tr>
-                    <td>{{$outlet->id}}</td>
+                <tr id="{{$outlet->id}}">
                     <td>{{$outlet->outlet_name}}</td>
                     <td>{{$outlet->address}}</td>
-                    <td>{{$outlet->email}}</td>
                     <td>{{$outlet->telephone_number}}</td>
-                    <td>{{$outlet->fax}}</td>
+                    @if ($users_id->roles_id == '1')
                     <td>
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row outlet-buttons">
@@ -52,14 +50,12 @@
                                 <a href="/outlet/{{$outlet->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
                                 <div class="p-2">
-                                    {!!Form::open(['action' => ['OutletsController@destroy', $outlet->id], 'method' => 'POST'])!!}
-                                        {{Form::hidden('_method', 'DELETE')}}
-                                        {{Form::submit('Delete', ['class' => 'btn btn-danger action-buttons'])}}
-                                    {!!Form::close()!!}
+                                    <button type="button" class="btn btn-danger" onclick="openDeleteOutletModal()" id="delete">Delete</button>
                                 </div>
                             </div>
                         </div>
                     </td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>
@@ -68,6 +64,9 @@
     @else
     <p>No outlets found</p> 
     @endif
+</div>
+<div class="pagination">
+    {{$outlets->links()}}
 </div>
 
 @if(count($outlets) > 0)
@@ -104,11 +103,28 @@
         </div>
     </div>
 </div>
-
 @endif
 
-<div class="pagination">
-    {{$outlets->links()}}
+<div id="deleteOutletModal" class="modal">
+    <span class="close cursor" onclick="closeDeleteOutletModal()">&times;</span>
+    <div class="card modalCard">
+        <div class="card-body">
+            <br>
+            
+            <h3 class="card-title">Delete Confirmation</h3>
+            <br>
+            <h3>Are you sure you want to delete this outlet?</h3>
+            <p>The following staffs are tied to this outlet:</p>
+            @foreach($outlets as $outlet)
+            @foreach($userOutlets->where('outlets_id','==',$outlet->id) as $userOutlet)
+            <p>{{$userOutlet->users['name']}}</p>
+            @endforeach
+            @endforeach
+            {!!Form::open(['action' => ['OutletsController@destroy', $outlet->id], 'method' => 'POST'])!!}
+                {{Form::hidden('_method', 'DELETE')}}
+                {{Form::submit('Delete', ['class' => 'btn btn-danger action-buttons'])}}
+            {!!Form::close()!!}
+    </div>
 </div>
 
 <script>
@@ -118,6 +134,12 @@
     
     function closeCreateOutletModal() {
         document.getElementById('createOutletModal').style.display = "none";
+    }
+    function openDeleteOutletModal() {
+        document.getElementById('deleteOutletModal').style.display = "block";
+    }
+    function closeDeleteOutletModal() {
+        document.getElementById('deleteOutletModal').style.display = "none";
     }
 </script>
 @endsection

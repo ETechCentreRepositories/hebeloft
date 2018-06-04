@@ -47,7 +47,7 @@
                 <input type="text" id="transferRequestSearchField" class="form-control" style="background:transparent">
             </div>
             <div class="col-md-2">
-                <button type="button" class="btn btn-default btn-search" id="addTransferRequest" onClick="getTransferRequestProduct()">Add</button>
+                <button type="button" class="btn btn-default btn-search" id="addTransferRequest">Add</button>
             </div>
         </div>
         <br>
@@ -57,15 +57,16 @@
                     <th>Picture</th>
                     <th>Name</th>
                     <th>Quantity</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody id="addTransferRequestContent">
             @if(Session::has('cartTransferRequest'))
                 @foreach($products as $product)
-                        <tr id="{{$product['item']['id']}}"><td><img style="width:60px; height:60px" src="/storage/product_images/{{$product['item']['image']}}"/></td>
+                        <tr id="{{$product['item']['id']}}"><td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/{{$product['item']['image']}}"/></td>
                         <td>{{$product['item']['Name']}}</td>
-                        <td><input name="quantity" type="number" id="quantity" type="text" style="width:60px;" value="{{$product['qty']}}"/></td>
-                        </tr>
+                        <td align="center">{{$product['qty']}}</td>
+                        <td><button type="button" class="btn btn-danger action-buttons" id="removeThis" onClick="removeCartItemFromTransferRequest()">Remove</button></td></tr>
                     @endforeach
                 @endif
             </tbody>
@@ -73,14 +74,16 @@
         <div class="row">
             {{Form::textarea('remarks', "", ['id' => 'remarks', 'class' => 'form-control', 'placeholder' => 'Remarks'])}}
         </div>
-        <br></br>
+        <br>
+        <p><span style="color: red">*</span>To order, first save as draft, then submit. If it is not saved, you cannot submit and your unsaved request will be gone.</p>
         <div class="form-group">
             <div>
-            <button type="button" class="btn btn-primary" onClick="saveTRProduct();enableCreateButton()">Save as Draft</button>
-            {{Form::submit('Create Transfer Request', ['class'=>'btn btn-primary', 'id'=>'createButton',  'disabled'])}}
+            <button type="button" class="btn btn-primary" id="saveTransferRequest" onClick="enableCreateButton()">Save as Draft</button>
+            {{Form::submit('Submit Transfer Request', ['class'=>'btn btn-primary', 'id'=>'createButton',  'disabled'])}}
             </div>
         </div>
         {!! Form::close() !!}
+        
 </div>
 
 @endsection

@@ -28,9 +28,12 @@ class TransferRequestController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-        $transfers = TransferRequest::orderBy('id','asc')->paginate(10);
+        $transfers = TransferRequest::orderBy('id','desc')->paginate(10);
+        
+        $outletId = DB::table('users_has_outlets')->where('users_id', $user_id)->value('outlets_id');
+        $outletTransfers = TransferRequest::where('outlets_id', '=', $outletId)->get();
 
-        return view('transfer_request.index')->with('transfers', $transfers)->with('users_id',$users_id);
+        return view('transfer_request.index')->with('transfers', $transfers)->with('users_id',$users_id)->with('outletTransfers',$outletTransfers);
     }
 
     /**
@@ -76,7 +79,7 @@ class TransferRequestController extends Controller
             $transfers->status="pending";
             $transfers->outlets_id =  $request->input('outlet');
             $transfers->date =  $request->input('transferRequestDate');
-            $transfers->remarks = $request->input('remarks');
+            $transfers->remarks = $transferRequestCart->remarks;
             $transfers->save();
 
             foreach($products as $product) {
@@ -86,7 +89,7 @@ class TransferRequestController extends Controller
                 $transferRequestList->quantity=$product['qty'];
                 $transferRequestList->save();
             }
-
+            Session::forget("cartTransferRequest");
         }
 
         return redirect('/transferrequest')->with('success', 'Transfer Request Created');
@@ -102,10 +105,12 @@ class TransferRequestController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-        $transferRequestId = TransferRequest::find($id)->id;
-        $transfers = TransferRequestList::where('transfer_requests_id', $transferRequestId)->get();
 
-        return view('transfer_request.show')->with('transfers',$transfers)->with('users_id',$users_id);
+        $transferRequests = TransferRequest::find($id);
+        $transferRequestId = TransferRequest::find($id)->id;
+        $transfers = TransferRequestList::where('transfer_requests_id', '=', $transferRequestId)->get();
+
+        return view('transfer_request.show')->with('users_id',$users_id)->with('transferRequests',$transferRequests)->with('transfers',$transfers);
     }
 
     /**
@@ -189,7 +194,7 @@ class TransferRequestController extends Controller
 
         $request->session()->put('cartTransferRequest', $transferRequestCart);
         
-        return redirect()->route('/transferrequest/create/');
+        return redirect('transfer_request.create')->with('success', 'Added to Cart');
     }
 
     public function getTransferRequestCart() {
@@ -202,11 +207,42 @@ class TransferRequestController extends Controller
             $oldTransferRequestCart = Session::get('cartTransferRequest');
             $transferRequestCart = new CartTransferRequest($oldTransferRequestCart);
 
-            // dd($transferRequestCart);
+            //dd($transferRequestCart);
             
             return view('transfer_request.create', [
                 'products' => $transferRequestCart->items
             ])->with('users_id',$users_id);
         }
+    }
+    public function sortDate($startDate,$endDate){
+        $transferRequest = TransferRequest::select('transfer_requests.id','statuses_id','status','date','transfer_requests_number','status_name')
+                     ->leftJoin('statuses','transfer_requests.statuses_id','=','statuses.id')
+                     ->whereBetween('date',array($startDate,$endDate))
+                     ->get()->toArray();
+
+        return response($transferRequest);
+    }
+    
+    public function getReduceByOne($id) {
+        $oldTransferRequestCart = Session::get('cartTransferRequest');
+        $transferRequestCart = new CartTransferRequest($oldTransferRequestCart);
+        $transferRequestCart->reduce($id);
+        Session::put('cartTransferRequest', $transferRequestCart);
+        return redirect('transfer_request.create');
+    }
+    
+    public function getRemoveItem($id) {
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id);
+        $oldTransferRequestCart = Session::get('cartTransferRequest');
+        $transferRequestCart = new CartTransferRequest($oldTransferRequestCart);
+        $transferRequestCart->removeItem($id);
+        if($transferRequestCart->items == null) {
+             Session::forget("cartTransferRequest");
+        }
+        Session::put('cartTransferRequest', $transferRequestCart);
+        return view('transfer_request.create', [
+                'products' => $transferRequestCart->items
+            ])->with('users_id',$users_id);
     }
 }

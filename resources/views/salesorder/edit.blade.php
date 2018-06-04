@@ -23,7 +23,6 @@
                 <div class="card-header">Update Sales Order</div>
 
                 <div class="card-body">
-                {!!Form::open(['action' => ['SalesOrdersController@update', $salesOrders->id], 'method' => 'POST']) !!}
                     {{ csrf_field() }}
                     <table class="table table-striped" id="inventoryTable" >
         <thead>
@@ -37,26 +36,27 @@
                 @foreach($sales as $sale)
                 <tr>
                     <td>{{$sale->products['Name']}}</td>
-                    <td>{{$sale->quantity}}</td>
+                    <td align="right">{{$sale->quantity}}</td>
                 </tr>
                 @endforeach
             @endif
         </tbody>
     </table>
-    <select name="status" class="form-control">
-                        <option value="rejected">Reject</option>
-                        <option value="accepted">Accept</option>
-                    </select>
                 <br>
-                    {{Form::hidden('_method','PUT')}}
-                    <div class="modal-button">
-                    {{Form::submit('Update transfer request', ['class'=>'btn btn-primary'])}}
-</div>
-                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
     </div>
+    {!! Form::open(['action' => ['SalesOrdersController@update', $salesOrders->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+        {{Form::hidden('status', 'rejected', ['class' => 'form-control'])}}
+        {{Form::hidden('_method', 'PUT')}}
+        {{Form::submit('Follow Up', ['class'=>'btn btn-primary btn-lg btn-danger btn-rejected'])}}
+    {!! Form::close() !!}
+    {!! Form::open(['action' => ['SalesOrdersController@update', $salesOrders->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+        {{Form::hidden('status', 'accepted', ['class' => 'form-control'])}}
+        {{Form::hidden('_method', 'PUT')}}
+        {{Form::submit('Accepted', ['class'=>'btn btn-primary btn-lg btn-success btn-accepted'])}}
+    {!! Form::close() !!}
 </div>
 
 <style>
@@ -66,4 +66,12 @@
         pointer-events: none;
         cursor: default;
     }
+    
+    .btn-rejected {
+	  float: left;
+	}
+	
+	.btn-accepted {
+	  float: right;
+	}
 </style>

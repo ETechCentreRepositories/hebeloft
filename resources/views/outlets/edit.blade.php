@@ -26,9 +26,6 @@
         {{Form::text('address', $outlet->address, ['class' => 'form-control', 'placeholder' => 'Address'])}}
     </div>
     <div class="form-group modal-fields">
-        {{Form::text('email', $outlet->email, ['class' => 'form-control', 'placeholder' => 'Email'])}}
-    </div>
-    <div class="form-group modal-fields">
         {{Form::text('telephone_number', $outlet->telephone_number, ['class' => 'form-control', 'placeholder' => 'Telephone number'])}}
     </div>
     <div class="form-group modal-fields">
@@ -37,7 +34,7 @@
     {{Form::hidden('_method', 'PUT')}}
     <br>
     <div class="form-group modal-button">
-        {{Form::submit('Edit outlet', ['class'=>'btn btn-primary btn-lg'])}}
+        {{Form::submit('Save', ['class'=>'btn btn-primary btn-lg'])}}
     </div>
     <br>
 {!! Form::close() !!}

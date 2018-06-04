@@ -42,7 +42,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     public function outlet(){
-        return $this->hasMany('App\Models\Outlet');
+        return $this->belongsTo('App\Models\Outlet');
     }
 
     public function roles(){
@@ -53,7 +53,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return hasMany('\App\Models\AuditTrail');
     }
 
-    public function userOutlet(){
-        return belongsTo('\App\Models\UserOutlet');
+    public function users_has_outlets(){
+        return $this->belongsTo('\App\Models\UserOutlet');
     }
 }

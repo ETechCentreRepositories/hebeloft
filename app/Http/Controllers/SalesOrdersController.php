@@ -12,6 +12,7 @@ use App\CartSalesOrder;
 use App\Models\AuditTrail;
 use App\Models\SalesOrderList;
 use App\Wholesaler;
+use DB;
 
 class SalesOrdersController extends Controller
 {
@@ -24,7 +25,7 @@ class SalesOrdersController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-        $salesOrders = SalesOrder::orderBy('id','asc')->paginate(10);
+        $salesOrders = SalesOrder::orderBy('id','desc')->paginate(10);
         
         $wholesalerSalesOrders = SalesOrder::where('users_id', '=', $user_id)->get();
 
@@ -66,16 +67,22 @@ class SalesOrdersController extends Controller
             $oldSalesOrderCart = Session::get('cartSalesOrder');
             $salesOrderCart = new CartSalesOrder($oldSalesOrderCart);
             $products = $salesOrderCart->items;
+
+            $totalPrice = 0;
+
+            foreach($products as $product) {
+                $totalPrice += $product['qty']*$product['unitPrice'];
+            }
             
             $salesOrder = new SalesOrder;
             $salesOrder->statuses_id = 1;
             $salesOrder->status = "pending";
-            $salesOrder->date =  $request->input('salesOrderDate');
-            $salesOrder->remarks = $request->input('remarks');
+            $salesOrder->date =  $salesOrderCart->date;
+            $salesOrder->remarks = $salesOrderCart->remarks;
             $salesOrder->audit_trails_id = $auditTrail->id;
-            $salesOrder->sales_order_number = "";
             $salesOrder->users_id=$user_id;
-                
+            $salesOrder->totalQuantity=$salesOrderCart->totalQty;
+            $salesOrder->totalPrice=$totalPrice;
             $salesOrder->save();
 
             foreach($products as $product) {
@@ -83,8 +90,10 @@ class SalesOrdersController extends Controller
                 $salesOrderList->sales_order_id =$salesOrder['id'];
                 $salesOrderList->products_id = $product['item']['id'];
                 $salesOrderList->quantity=$product['qty'];
+                $salesOrderList->subtotal=$product['qty']*$product['unitPrice'];
                 $salesOrderList->save();
             }
+            Session::forget("cartSalesOrder");
         }
 
         return redirect('/salesorder')->with('success', 'Sales Order Created');
@@ -99,7 +108,16 @@ class SalesOrdersController extends Controller
      */
     public function show($id)
     {
-        //
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id);
+
+        $salesOrder = SalesOrder::find($id);
+        $salesOrderId = SalesOrder::find($id)->id;
+        $salesOrderLists = SalesOrderList::where('sales_order_id', '=', $salesOrderId)->get();
+        $totalPrice = DB::table('sales_order_list')->where('sales_order_id', $salesOrderId)->sum('subtotal');
+        
+
+        return view('salesorder.show')->with('users_id',$users_id)->with('salesOrder',$salesOrder)->with('salesOrderLists',$salesOrderLists)->with('totalPrice',$totalPrice);
     }
 
     /**
@@ -162,12 +180,13 @@ class SalesOrdersController extends Controller
         //
     }
 
-    public function getSalesOrderAddToCart(Request $request, $id, $quantity, $date, $remarks) {
+    public function getSalesOrderAddToCart(Request $request, $id, $quantity, $unitPrice, $date, $remarks) {
+        $user_id = auth()->user()->id;
         $product = Products::find($id);
         $oldSalesOrderCart = Session::has('cartSalesOrder') ? Session::get('cartSalesOrder') : null;
 
         $salesOrderCart = new CartSalesOrder($oldSalesOrderCart);
-        $salesOrderCart->add($product, $product->id, $quantity, $date, $remarks);
+        $salesOrderCart->add($product, $product->id, $quantity, $unitPrice, $date, $remarks, $user_id);
 
         $request->session()->put('cartSalesOrder', $salesOrderCart);
         
@@ -188,6 +207,45 @@ class SalesOrdersController extends Controller
                 'products' => $salesOrderCart->items
             ])->with('users_id',$users_id);
         }
+    }
+
+    public function sortDate($startDate,$endDate){
+        $salesOrder = SalesOrder::select('sales_order.id','statuses_id','status','date','sales_order_number','status_name')
+                     ->leftJoin('statuses','sales_order.statuses_id','=','statuses.id')
+                     ->whereBetween('date',array($startDate,$endDate))
+                     ->get()->toArray();
+
+        return response($salesOrder);
+    }
+    
+    public function viewByStatusesId($statuses_id){
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id);
+
+        $salesOrder = SalesOrder::find($id);
+        $salesOrderId = SalesOrder::find($id)->id;
+        $salesOrderLists = SalesOrderList::where('statuses_id', '=', $statuses_id)->get();
+        $totalPrice = DB::table('sales_order_list')->where('sales_order_id', $salesOrderId)->sum('subtotal');
+        
+
+        return view('salesorder.show')->with('users_id',$users_id)->with('salesOrder',$salesOrder)->with('salesOrderLists',$salesOrderLists)->with('totalPrice',$totalPrice);
+    }
+    
+    public function getRemoveItem($id) {
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id);
+        $oldSalesOrderCart = Session::get('cartSalesOrder');
+        $salesOrderCart = new CartSalesOrder($oldSalesOrderCart);
+        $salesOrderCart->removeItem($id);
+        Session::put('cartSalesOrder', $salesOrderCart);
+        if($salesOrderCart->items == null) {
+             Session::forget("cartSalesOrder");
+        }
+        Session::put('cartSalesOrder', $salesOrderCart);
+        return view('salesorder.create', [
+                'products' => $salesOrderCart->items
+            ])->with('users_id',$users_id);
+        
     }
 
 }

@@ -18,17 +18,23 @@ class CartSalesOrder {
         }
     }
 
-    public function add($item, $id, $quantity, $date, $remarks) {
-        $storedItem = ['qty' => 0, 'item' => $item];
+    public function add($item, $id, $quantity, $unitPrice, $date, $remarks) {
+        $storedItems = ['qty' => 0, 'item' => $item, 'unitPrice' => $unitPrice];
             if($this->items) {
                 if(array_key_exists($id, $this->items)) {
-                    $storedItem = $this->items[$id];
+                    $storedItems = $this->items[$id];
                 }
             }
-            $storedItem['qty'] += $quantity;
-            $this->items[$id] = $storedItem;
+
+            $storedItems['qty'] += $quantity;
+            $this->items[$id] = $storedItems;
             $this->totalQty += $quantity;
             $this->date = $date;
             $this->remarks = $remarks;
+    }
+    
+    public function removeItem($id) {
+        $this->totalQty -= $this ->items[$id]['qty'];
+        unset($this->items[$id]);
     }
 }

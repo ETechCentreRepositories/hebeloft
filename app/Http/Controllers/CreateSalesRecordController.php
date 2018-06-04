@@ -114,12 +114,4 @@ class CreateSalesRecordController extends Controller
         return console.log('testing');
     }
 
-    // public function retrieveItemBySalesId($salesRecordId){
-    //     $retrieveItemBySalesId = SalesRecordList::leftJoin('sales_record', 'sales_record_list.sales_record_id', '=', 'sales_record.id')
-    //                 ->leftJoin('products', 'sales_record_list.products_id', '=', 'products.id')
-    //                 ->where('sales_record_list.sales_record_id','=', $salesRecordId)
-    //                 ->get()->toArray();
-    //     return response($retrieveItemBySalesId);
-    //     return view('salesrecord.create')->with('items',$retrieveItemBySalesId);
-    // }
 }

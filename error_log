@@ -1,0 +1,2 @@
+[30-May-2018 04:26:09 UTC] PHP Fatal error:  Can't use method return value in write context in /home/b0a896910ll8/public_html/hebeloft/storage/framework/views/6230c3d0f9359f15c3b61767a68d78f5c218e431.php on line 122
+[30-May-2018 08:05:30 UTC] PHP Fatal error:  Can't use method return value in write context in /home/b0a896910ll8/public_html/hebeloft/storage/framework/views/6230c3d0f9359f15c3b61767a68d78f5c218e431.php on line 123
