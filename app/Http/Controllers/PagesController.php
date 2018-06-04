@@ -26,23 +26,23 @@ class PagesController extends Controller
         return view('transferrequest.index')->with('title', $title);
     }
 
+    public function salesrecord(){
+        $title = 'Sales Record';
+        return view('salesrecord.index')->with('title', $title);
+    }
+
     public function user(){
         $title = 'User';
         return view('user.index')->with('title', $title);
     }
-
-    // public function staffsignup(){
-    //     $title = 'Staff Sign Up';
-    //     return view('auth.staffsignup')->with('title', $title);
-    // }
 
     public function outlet(){
         $title = 'Outlet';
         return view('outlets.index')->with('title', $title);
     }
 
-    public function salesrecord(){
-        $title = 'Sales Record';
-        return view('salesrecord.index')->with('title', $title);
+    public function product(){
+        $title = 'Product';
+        return view('product.index')->with('title', $title);
     }
 }

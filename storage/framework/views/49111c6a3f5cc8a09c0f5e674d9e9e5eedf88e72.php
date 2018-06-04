@@ -12,7 +12,7 @@
 <?php endif; ?>
 
 <br>
-<?php if($users_id->roles_id == '1'): ?>
+<?php if($users_id->roles_id == '1' or $users_id->roles_id == '2'): ?>
 <div class="topMargin container">
     <div class="drop-down_brand row">
         <div class="col-md-3">
@@ -34,7 +34,7 @@
     <br>
     <div class="row">
         <div class="col-md-10">
-            <input type="text" class="form-control" style="background:transparent;">
+            <input type="text" id="salesOrderSearchField" style="text-indent:20px;" class="form-control" style="background:transparent">
         </div>
         <div class="col-md-2">
             <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
@@ -87,7 +87,7 @@
 <div class="topMargin container">
     <div class="row justify-content-end">
         <div>
-            <a href="salesorder/create"><button type="button" class="btn btn-warning">Create New Sales Order</button></a>
+            <a href="/hebeloft/salesorder/create"><button type="button" class="btn btn-warning">Create or View New Sales Order</button></a>
         </div>
     </div>
     <br>
@@ -111,7 +111,7 @@
     <br>
     <div class="row">
         <div class="col-md-10">
-            <input type="text" class="form-control" style="background:transparent;">
+            <input type="text" id="salesOrderSearchField" style="text-indent:20px;" class="form-control" style="background:transparent">
         </div>
         <div class="col-md-2">
             <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
@@ -119,7 +119,7 @@
     </div>
     <br>
     <div>
-        <table class="table table-striped">
+        <table class="table table-striped sortable">
             <thead>
                 <tr>
                     <th>Order Date</th>
@@ -138,7 +138,7 @@
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row transfer-buttons">
                                 <div class="p-2">
-                                    <a href="/salesorder/<?php echo e($wholesalerSalesOrder->id); ?>"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
+                                    <a href="/hebeloft/salesorder/<?php echo e($wholesalerSalesOrder->id); ?>"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
                                 </div>
                             </div>
                         </div>
@@ -199,6 +199,13 @@
     
     .emptyHeader {
     	pointer-events: none;
+    }
+    
+    #salesOrderSearchField{
+        background-image:url(http://localhost:8000/storage/icons/search.png); 
+        background-repeat: no-repeat; 
+        background-position: 2px 3px;
+        background-size: 30px 30px;
     }
 </style>
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

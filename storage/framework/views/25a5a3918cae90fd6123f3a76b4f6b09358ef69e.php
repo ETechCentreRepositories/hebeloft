@@ -39,7 +39,7 @@
                 outlet_id + "'>" +outlet + "</option>");
             });
         });
-
+        
         $("#salesRecordSearchField").autocomplete({
             source: "<?php echo e(URL::to('autocomplete-search')); ?>",
             minLength:1,
@@ -67,11 +67,6 @@
             }
         });
 
-        $("#createSalesRecordTable tr td").change(function() {
-            console.log("try")
-            // $("subtotal").html($("#quantity").val()*$("#unitPrice").val())
-        });
-
         var products = [];
         $("#addSalesRecord").click(function() {
             var productName = $("#salesRecordSearchField").val();
@@ -86,12 +81,14 @@
                     for (i = 0; i < response.length; i++) {
                         var productId = parseInt(response[i].products_id);
                         products.push(productId);
+                        console.log(products);
                         $("#addSalesRecordContent").append(
-                            "<tr id='"+productId+"'><td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
+                            "<tr id='newRow_"+productId+"'><td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
                             + "<td>" + response[i].Name + "</td>"
-                            + "<td><input name='unitPrice' type='number' id='unitPrice' type='text' style='width:60px;' value='"+ response[i].UnitPrice +"'/></td>"
-                            + "<td><input name='quantity' type='number' id='quantity' type='text' style='width:60px;' value='1'/></td>"
-                            + "<td id='price'>"+response[i].UnitPrice+"</td></tr>"
+                            + "<td align='center'><input name='unitPrice' type='number' id='unitPrice' type='text' style='width:60px;' value='"+ response[i].UnitPrice +"'/></td>"
+                            + "<td align='center'><input name='quantity' type='number' id='qty' type='text' style='width:60px;' value='1'/></td>"
+                            + "<td id='price' align='center'>"+response[i].UnitPrice+"</td>"
+                            + "<td><button type='button' class='btn btn-danger action-buttons' id='removeSR'> Remove </button></td></tr>"
                         );
                     }
                 },
@@ -117,12 +114,14 @@
                     for (i = 0; i < response.length; i++) {
                         var productId = parseInt(response[i].products_id);
                         orderProducts.push(productId);
+                        console.log(orderProducts);
                         $("#addSalesOrderContent").append(
-                            "<tr><td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
+                            "<tr id='newRow_"+productId+"'><td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
                             + "<td>" + response[i].Name + "</td>"
-                            + "<td><input name='unitPrice' type='number' id='unitPrice' type='text' style='width:60px;' value='"+ response[i].UnitPrice +"'/></td>"
-                            + "<td><input name='quantity' type='number' id='quantity' type='text' style='width:60px;' value='1'/></td>"
-                            + "<td>" + response[i].UnitPrice + "</td></tr>"
+                            + "<td align='center'><input name='unitPrice' type='number' id='unitPrice' type='text' style='width:60px;' value='"+ response[i].UnitPrice +"'/></td>"
+                            + "<td align='center'><input name='quantity' type='number' id='qty' type='text' style='width:60px;' value='1'/></td>"
+                            + "<td align='center'>" + response[i].UnitPrice + "</td>"
+                            + "<td><button type='button' class='btn btn-danger action-buttons' id='removeSO'> Remove </button></td></tr>"
                         );
                     }
                 },
@@ -154,12 +153,11 @@
                             console.log(trProducts);
                             
                             $("#addTransferRequestContent").append(
-                                "<tr id='"+productId+"'>"
+                                "<tr id='newRow_"+productId+"'>"
                                 + "<td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
                                 + "<td>" + response[i].Name + "</td>"
-                                + "<td id='price'>" + response[i].UnitPrice + "</td>"
-                                + "<td><input name='quantity' type='number' id='quantity' type='text' style='width:60px;' value='1'/>"
-                                + "<td id='subtotal'>" + response[i].UnitPrice + "</td></tr>"
+                                + "<td align='center'><input name='quantity' type='number' id='qty' type='text' style='width:60px;' value='1'/></td>"
+                                + "<td><button type='button' class='btn btn-danger action-buttons' id='removeTR'> Remove </button></td></tr>"
                             );
                       
                     }
@@ -172,23 +170,24 @@
         });
 
         $("#saveSalesRecord").click(function () {
+            var outlet = $('#outlet').val();
+            var date = $("#salesRecordDate").val();
+            var remarks = $("#remarks").val();
             if(products !== null) {
-                var productID = products[0];
-                var price = $('#createSalesRecordTable tr:last-child td:eq(2) #unitPrice').val();
-                var quantity = $('#createSalesRecordTable tr:last-child td:eq(3) #quantity').val();
-                var outlet = $('#outlet').val();
-                var date = $("#salesRecordDate").val();
-                var remarks = $("#remarks").val();
-                var receiptNumber = $("#receiptNumber").val();
+            	for(var i = 0; i<products.length; i++){
+            	    var productID = products[i];
+            	    var mainRow = document.getElementById("newRow_"+productID);
+            	    var quantity = mainRow.querySelectorAll('#qty')[0].value;
+            	    var price = mainRow.querySelectorAll('#unitPrice')[0].value;
+            	    console.log(productID);
                 console.log(price);
                 console.log(quantity);
                 console.log(outlet);
                 console.log(date);
                 console.log(remarks);
-                console.log(receiptNumber);
                 $.ajax({
                     type: "GET",
-                    url: "<?php echo e(URL::TO('/salesrecord/addtocart/')); ?>/" + productID + "/" + price + "/" + quantity + "/" + outlet + "/" + date + "/" + remarks + "/" + receiptNumber,
+                    url: "<?php echo e(URL::TO('/salesrecord/addtocart/')); ?>/" + productID + "/" + price + "/" + quantity + "/" + outlet + "/" + date + "/" + remarks,
                     // data: "",
                     cache:false,
                     datatype: "JSON",
@@ -200,24 +199,28 @@
                         console.log("failure");
                     }
                 });
+            	}
             } else {
                 console.log("null");
             }
         });
 
         $("#saveSalesOrder").click(function() {
+            var remarks = $("#remarks").val();
+            var date = $("#salesOrderDate").val();
             if(orderProducts !== null) {
-                var productID = orderProducts[orderProducts.length-1];
-                var remarks = $("#remarks").val();
-                var date = $("#salesOrderDate").val();
-                var quantity =  $('#createSalesOrderTable tr:last-child td:eq(3) #quantity').val();
-                var unitPrice =  $('#createSalesOrderTable tr:last-child td:eq(2) #unitPrice').val();
+                for(var i = 0; i < orderProducts.length; i++){
+                    var productID = orderProducts[i];
+                    var mainRow = document.getElementById("newRow_"+productID);
+            	    var quantity = mainRow.querySelectorAll('#qty')[0].value;
+            	    var unitPrice = mainRow.querySelectorAll('#unitPrice')[0].value;
+                }
+                console.log(productID);
                 console.log(unitPrice);
                 console.log(productID);
                 console.log(remarks);
                 console.log(date);
                 console.log(quantity);
-                
                 $.ajax({
                     type: "GET",
                     url: "<?php echo e(URL::TO('/salesorder/addtocart/')); ?>/" + productID + "/" + quantity + "/" + unitPrice + "/" + date + "/" + remarks,
@@ -229,7 +232,7 @@
                     },
 
                     error: function (obj, testStatus, errorThrown) {
-                        console.log("failure");
+                        console.log(obj + testStatus + errorThrown);
                     }
                 });
             } else {
@@ -239,35 +242,151 @@
 
         $("#saveTransferRequest").click(function () {
             var outlet = $('#outlet').val();
-            var date = $("#transferRequestDate").val();
-            var quantity =  $('#createTransferRequestTable tr:last-child td:eq(3) #quantity').val();
+            var dates = $("#transferRequestDate").val();
             var remarks = $("#remarks").val();
             if(trProducts !== null) {
-                console.log(quantity);
-                console.log(outlet);
-                console.log(date);
-                console.log(remarks);
-                var productID = trProducts[0];
-                $.ajax({
+            	for(var i = 0; i<trProducts.length; i++){
+            	    var productID = trProducts[i];
+            	    var mainRow = document.getElementById("newRow_"+productID);
+            	    var quantity = mainRow.querySelectorAll('#qty')[0].value;
+            	    	console.log(productID );
+	            	console.log(quantity);
+	                console.log(outlet);
+	                console.log(dates);
+	                console.log(remarks);
+	                $.ajax({
+	                    type: "GET",
+	                    url: "<?php echo e(URL::TO('/transferrequest/addtocart/')); ?>/" + productID + "/" + quantity + "/" + outlet + "/" + dates + "/" + remarks,
+	                    // data: "",
+	                    cache:false,
+	                    datatype: "JSON",
+	                    success: function (response) {
+	                        console.log("successful");
+	                    },
+	
+	                    error: function (obj, testStatus, errorThrown) {
+	                        console.log(obj + testStatus + errorThrown);
+	                    }
+	                });
+            	}
+            } else {
+                console.log("null");
+            }
+        });
+        
+        $(document).on("click","#removeTR",function(){
+            console.log("testing");
+            var id = $("#removeTR").closest('tr').attr('id');
+            for(var i = 0; i<trProducts.length; i++) {
+                if(trProducts[i] == id) {
+                    trProducts.splice(i,1);
+                }
+            }
+            $("#removeTR").closest('tr').remove();
+            console.log(id);
+        });
+        
+        $(document).on("click","#removeSO",function(){
+            console.log("testing");
+            var id = $("#removeSO").closest('tr').attr('id');
+            for(var i = 0; i<trProducts.length; i++) {
+                if(trProducts[i] == id) {
+                    trProducts.splice(i,1);
+                }
+            }
+            $("#removeSO").closest('tr').remove();
+            console.log(id);
+        });
+        
+        $(document).on("click","#removeSR",function(){
+            console.log("testing");
+            var id = $("#removeSR").closest('tr').attr('id');
+            for(var i = 0; i<trProducts.length; i++) {
+                if(trProducts[i] == id) {
+                    trProducts.splice(i,1);
+                }
+            }
+            $("#removeSR").closest('tr').remove();
+            console.log(id);
+        });
+        
+    });
+    
+    function removeCartItemFromSalesRecord() {
+        console.log("testing");
+        var id = $("#removeThis").closest('tr').attr('id');
+        console.log(id);
+        
+        $.ajax({
                     type: "GET",
-                    url: "<?php echo e(URL::TO('/transferrequest/addtocart/')); ?>/" + productID + "/" + quantity + "/" + outlet + "/" + date + "/" + remarks,
+                    url: "<?php echo e(URL::TO('/salesrecord/remove')); ?>/" + id,
                     // data: "",
                     cache:false,
                     datatype: "JSON",
                     success: function (response) {
                         console.log("successful");
+                        $("#removeThis").closest('tr').remove();
                     },
 
                     error: function (obj, testStatus, errorThrown) {
                         console.log("failure");
                     }
                 });
-            } else {
-                console.log("null");
-            }
-        });
-    });
+    }
+    
+    function removeCartItemFromSalesOrder() {
+        console.log("testing");
+        var id = $("#removeThis").closest('tr').attr('id');
+        console.log(id);
+        
+        $.ajax({
+                    type: "GET",
+                    url: "<?php echo e(URL::TO('/salesorder/remove')); ?>/" + id,
+                    // data: "",
+                    cache:false,
+                    datatype: "JSON",
+                    success: function (response) {
+                        console.log("successful");
+                        $("#removeThis").closest('tr').remove();
+                    },
+
+                    error: function (obj, testStatus, errorThrown) {
+                        console.log("failure");
+                    }
+                });
+    }
+    
+    function removeCartItemFromTransferRequest() {
+        console.log("testing");
+        var id = $("#removeThis").closest('tr').attr('id');
+        console.log(id);
+        
+        $.ajax({
+                    type: "GET",
+                    url: "<?php echo e(URL::TO('/transferrequest/remove')); ?>/" + id,
+                    // data: "",
+                    cache:false,
+                    datatype: "JSON",
+                    success: function (response) {
+                        console.log("successful");
+                        $("#removeThis").closest('tr').remove();
+                    },
+
+                    error: function (obj, testStatus, errorThrown) {
+                        console.log("failure");
+                    }
+                });
+    }
+    
 </script>
+
+<style>
+@media (min-width: 768px) {
+    .mobileLogo {
+        visibility: hidden;
+    }
+}
+</style>
    
 </head>
 <body>

@@ -14,10 +14,8 @@
 
 <br>
 <div class="topMargin container">
+    <a href="<?php echo e(route('exportOutlet.file',['type'=>'csv'])); ?>"><button type="button" class="btn btn-warning" style="width: auto; float: left;">Export</button></a>
     <div class="row justify-content-end">
-        <div class="col-md-2">
-            <a href="<?php echo e(route('outlets.export.file',['type'=>'csv'])); ?>"><button type="button" class="btn btn-inflow">Export</button></a>
-        </div>
         <div class="col-d-2">
             <button type="button" class="btn btn-warning" onclick="openCreateOutletModal()">Add new outlet</button>
         </div>
@@ -28,20 +26,21 @@
         <table class="table table-striped sortable">
             <thead>
                 <tr>
-                    <th>#</th>
                     <th>Branch name</th>
                     <th>Address</th>
                     <th>Telephone Number</th>
+                    <?php if($users_id->roles_id == '1'): ?>
                     <th class="emptyHeader"></th>
+                    <?php endif; ?>
                 </tr>
             </thead>
             <tbody>
                 <?php $__currentLoopData = $outlets; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $outlet): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <tr>
-                    <td><?php echo e($outlet->id); ?></td>
+                <tr id="<?php echo e($outlet->id); ?>">
                     <td><?php echo e($outlet->outlet_name); ?></td>
                     <td><?php echo e($outlet->address); ?></td>
                     <td><?php echo e($outlet->telephone_number); ?></td>
+                    <?php if($users_id->roles_id == '1'): ?>
                     <td>
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row outlet-buttons">
@@ -49,18 +48,12 @@
                                 <a href="/outlet/<?php echo e($outlet->id); ?>/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
                                 <div class="p-2">
-                                    <?php echo Form::open(['action' => ['OutletsController@destroy', $outlet->id], 'method' => 'POST']); ?>
-
-                                        <?php echo e(Form::hidden('_method', 'DELETE')); ?>
-
-                                        <?php echo e(Form::submit('Delete', ['class' => 'btn btn-danger action-buttons'])); ?>
-
-                                    <?php echo Form::close(); ?>
-
+                                    <button type="button" class="btn btn-danger" onclick="openDeleteOutletModal()" id="delete">Delete</button>
                                 </div>
                             </div>
                         </div>
                     </td>
+                    <?php endif; ?>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
@@ -69,6 +62,10 @@
     <?php else: ?>
     <p>No outlets found</p> 
     <?php endif; ?>
+</div>
+<div class="pagination">
+    <?php echo e($outlets->links()); ?>
+
 </div>
 
 <?php if(count($outlets) > 0): ?>
@@ -104,12 +101,32 @@
         </div>
     </div>
 </div>
-
 <?php endif; ?>
 
-<div class="pagination">
-    <?php echo e($outlets->links()); ?>
+<div id="deleteOutletModal" class="modal">
+    <span class="close cursor" onclick="closeDeleteOutletModal()">&times;</span>
+    <div class="card modalCard">
+        <div class="card-body">
+            <br>
+            
+            <h3 class="card-title">Delete Confirmation</h3>
+            <br>
+            <h3>Are you sure you want to delete this outlet?</h3>
+            <p>The following staffs are tied to this outlet:</p>
+            <?php $__currentLoopData = $outlets; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $outlet): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php $__currentLoopData = $userOutlets->where('outlets_id','==',$outlet->id); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $userOutlet): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <p><?php echo e($userOutlet->users['name']); ?></p>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php echo Form::open(['action' => ['OutletsController@destroy', $outlet->id], 'method' => 'POST']); ?>
 
+                <?php echo e(Form::hidden('_method', 'DELETE')); ?>
+
+                <?php echo e(Form::submit('Delete', ['class' => 'btn btn-danger action-buttons'])); ?>
+
+            <?php echo Form::close(); ?>
+
+    </div>
 </div>
 
 <script>
@@ -119,6 +136,12 @@
     
     function closeCreateOutletModal() {
         document.getElementById('createOutletModal').style.display = "none";
+    }
+    function openDeleteOutletModal() {
+        document.getElementById('deleteOutletModal').style.display = "block";
+    }
+    function closeDeleteOutletModal() {
+        document.getElementById('deleteOutletModal').style.display = "none";
     }
 </script>
 <?php $__env->stopSection(); ?>

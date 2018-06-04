@@ -105,19 +105,12 @@ class TransferRequestController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-<<<<<<< HEAD
 
         $transferRequests = TransferRequest::find($id);
         $transferRequestId = TransferRequest::find($id)->id;
         $transfers = TransferRequestList::where('transfer_requests_id', '=', $transferRequestId)->get();
 
         return view('transfer_request.show')->with('users_id',$users_id)->with('transferRequests',$transferRequests)->with('transfers',$transfers);
-=======
-
-        $transferRequest = TransferRequest::find($id);
-
-        return view('transfer_request.show')->with('users_id',$users_id)->with('transferRequest',$transferRequest);
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
     }
 
     /**
@@ -229,7 +222,6 @@ class TransferRequestController extends Controller
 
         return response($transferRequest);
     }
-<<<<<<< HEAD
     
     public function getReduceByOne($id) {
         $oldTransferRequestCart = Session::get('cartTransferRequest');
@@ -253,6 +245,4 @@ class TransferRequestController extends Controller
                 'products' => $transferRequestCart->items
             ])->with('users_id',$users_id);
     }
-=======
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
 }

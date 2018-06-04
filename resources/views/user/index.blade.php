@@ -16,7 +16,6 @@
 
 <br>
 <div class="topMargin container">
-<<<<<<< HEAD
     <div class="d-flex">
     @if ($users_id->roles_id == '1')
         <div class="p-2">
@@ -66,36 +65,6 @@
                                     <div class="p-2">
                                         <a href="/user/{{$user->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                     </div>
-=======
-    <div class="row justify-content-end">
-    <div class="col-md-2">
-        <a href="{{ route('users.export.file',['type'=>'csv']) }}"><button type="button" class="btn btn-inflow">Export</button></a>
-        </div>
-        <div class="col-md-2">
-        <button type="button" class="btn btn-warning" onclick="openCreateUserModal()">Add new staff</button>
-        </div>
-    </div>
-    <br>
-    <div>
-        <table class="table table-striped sortable">
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th class="emptyHeader"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @if(count($users) > 0)
-                @foreach($users as $user)
-                <tr>
-                    <td>{{$user->name}}</td>
-                    <td>{{$user->email}}</td>
-                    <td>{{$user->roles['roles_name']}}</td>
-                    <td>
-                        <div class="d-flex flex-row user-buttons">
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                                 <div class="p-2">
                                     {!!Form::open(['action' => ['UsersController@destroy', $user->id], 'method' => 'POST'])!!}
                                         {{Form::hidden('_method', 'DELETE')}}

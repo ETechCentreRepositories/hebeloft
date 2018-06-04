@@ -88,11 +88,7 @@
 <div class="topMargin container">
     <div class="row justify-content-end">
         <div>
-<<<<<<< HEAD
             <a href="/hebeloft/salesorder/create"><button type="button" class="btn btn-warning">Create or View New Sales Order</button></a>
-=======
-            <a href="salesorder/create"><button type="button" class="btn btn-warning">Create New Sales Order</button></a>
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
         </div>
     </div>
     <br>
@@ -143,11 +139,7 @@
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row transfer-buttons">
                                 <div class="p-2">
-<<<<<<< HEAD
                                     <a href="/hebeloft/salesorder/{{$wholesalerSalesOrder->id}}"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
-=======
-                                    <a href="/salesorder/{{$wholesalerSalesOrder->id}}"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                                 </div>
                             </div>
                         </div>
@@ -209,14 +201,11 @@
     .emptyHeader {
     	pointer-events: none;
     }
-<<<<<<< HEAD
     
     #salesOrderSearchField{
-        background-image:url(http://ehostingcentre.com/hebeloft/storage/icons/search.png); 
+        background-image:url(http://localhost:8000/storage/icons/search.png); 
         background-repeat: no-repeat; 
         background-position: 2px 3px;
         background-size: 30px 30px;
     }
-=======
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
 </style>

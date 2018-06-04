@@ -76,15 +76,9 @@ class SalesRecordsController extends Controller
             $salesRecord->audit_trails_id = $auditTrail->id;
             $salesRecord->outlets_id = $request->input('outlet');;
             $salesRecord->total_price = $totalPrice;
-<<<<<<< HEAD
             $salesRecord->OrderRemarks = $salesrecordCart->remarks;
             $salesRecord->OrderDate = $request->input('salesRecordDate');
             $salesRecord->Location= "";
-=======
-            $salesRecord->remarks = $request->input('remarks');
-            $salesRecord->date = $request->input('salesRecordDate');
-            $salesRecord->receiptNumber = $request->input('receiptNumber');
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
             $salesRecord->save();
             $salesRecord->Location = $salesRecord->outlets['outlet_name'];
             $salesRecord->update();
@@ -116,16 +110,11 @@ class SalesRecordsController extends Controller
         $users_id = User::find($user_id);
 
         $salesRecord = SalesRecord::find($id);
-<<<<<<< HEAD
         $salesRecordId = SalesRecord::find($id)->id;
         $records = SalesRecordList::where('sales_record_id', '=', $salesRecordId)->get();
         $totalPrice = DB::table('sales_record_list')->where('sales_record_id', $salesRecordId)->sum('subtotal');
 
         return view('salesrecord.show')->with('users_id',$users_id)->with('salesRecord',$salesRecord)->with('records',$records)->with('totalPrice',$totalPrice);
-=======
-
-        return view('salesrecord.show')->with('users_id',$users_id)->with('salesRecord',$salesRecord);
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
     }
 
     /**
@@ -199,7 +188,6 @@ class SalesRecordsController extends Controller
     }
 
     public function exportFile($type){
-<<<<<<< HEAD
         $salesrecordexcel = SalesRecordList::leftJoin('sales_record','sales_record_list.sales_record_id','=','sales_record.id')
 			  -> leftJoin('products','sales_record_list.products_id','=','products.id')
                           -> select('OrderDate', 'OrderRemarks', 'Location', 'products.Name as ItemName', 'products.Description as ItemDescription', 'quantity as ItemQuantity', 'products.UnitPrice as ItemUnitPrice')->get()->toArray();
@@ -211,27 +199,12 @@ class SalesRecordsController extends Controller
             {
 
                 $sheet->fromArray($salesrecordexcel);
-=======
-
-        $inventoryexcel = InventoryOutlet::join('products', 'inventory_has_outlets.products_id', '=', 'products.id')
-                        ->select('inventory_has_outlets.id','products.Name', 'products.Category', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level')
-                        ->get()->toArray();
-
-        return \Excel::create('sales_records', function($excel) use ($inventoryexcel) {
-
-            $excel->sheet('sheet name', function($sheet) use ($inventoryexcel)
-
-            {
-
-                $sheet->fromArray($inventoryexcel);
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
 
             });
 
         })->download($type);
 
     }
-<<<<<<< HEAD
     
     public function getRemoveItem($id) {
         $user_id = auth()->user()->id;
@@ -249,7 +222,5 @@ class SalesRecordsController extends Controller
             ])->with('users_id',$users_id);
         
     }
-=======
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
 
 }

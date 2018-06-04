@@ -18,9 +18,6 @@
 <div class="topMargin container">
     <a href="{{ route('exportOutlet.file',['type'=>'csv']) }}"><button type="button" class="btn btn-warning" style="width: auto; float: left;">Export</button></a>
     <div class="row justify-content-end">
-        <div class="col-md-2">
-            <a href="{{ route('outlets.export.file',['type'=>'csv']) }}"><button type="button" class="btn btn-inflow">Export</button></a>
-        </div>
         <div class="col-d-2">
             <button type="button" class="btn btn-warning" onclick="openCreateOutletModal()">Add new outlet</button>
         </div>
@@ -34,10 +31,7 @@
                     <th>Branch name</th>
                     <th>Address</th>
                     <th>Telephone Number</th>
-<<<<<<< HEAD
                     @if ($users_id->roles_id == '1')
-=======
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                     <th class="emptyHeader"></th>
                     @endif
                 </tr>
@@ -48,10 +42,7 @@
                     <td>{{$outlet->outlet_name}}</td>
                     <td>{{$outlet->address}}</td>
                     <td>{{$outlet->telephone_number}}</td>
-<<<<<<< HEAD
                     @if ($users_id->roles_id == '1')
-=======
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                     <td>
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row outlet-buttons">

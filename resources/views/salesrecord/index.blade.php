@@ -40,19 +40,14 @@
     </div>
     <br>
     <div class="row">
-<<<<<<< HEAD
         <div class="col-md-10">
             <input type="text" id="salesRecordSearchField" style="text-indent:20px;" class="form-control" style="background:transparent">
-=======
-        <div class="col-md-8">
-            <input type="text" class="form-control" style="background:transparent;">
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
         </div>
         <div class="col-md-2">
             <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
         </div>
         <div class="col-md-2">
-            <a href="{{ route('salesrecord.export.file',['type'=>'csv']) }}"><button type="button" class="btn btn-inflow">Export</button></a>
+            <a href="{{ route('exportSalesRecord.file',['type'=>'csv']) }}"><button type="button" class="btn btn-inflow">Export</button></a>
         </div>
     </div>
     <br>
@@ -61,10 +56,6 @@
             <thead>
                 <tr>
                     <th>Date (YYYY-MM-DD)</th>
-<<<<<<< HEAD
-=======
-                    <th>Receipt Number</th>
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                     <th>Outlet</th>
                     <th>Total Price</th>
                     <th>Remarks</th>
@@ -77,11 +68,7 @@
                         <td>{{$salesRecord->OrderDate}}</td>
                         <td>{{$salesRecord->outlets['outlet_name']}}</td>
                         <td>{{$salesRecord->total_price}}</td>
-<<<<<<< HEAD
                         <td>{{$salesRecord->OrderRemarks}}</td>
-=======
-                        <td>{{$salesRecord->remarks}}</td>
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                         <td>
                             <div class="d-flex flex-column">
                                 <div class="d-flex flex-row transfer-buttons">

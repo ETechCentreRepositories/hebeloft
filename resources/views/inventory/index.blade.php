@@ -15,11 +15,7 @@
 <div class="topMargin container">
     <div class="drop-down_brand row">
         <div class="col-md-3">
-<<<<<<< HEAD
         <p>Search by Brand</p>
-=======
-        <p>Search item brand</p>
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
         </div>
         <div class="col-md-9">
             <select id="product_brand" class="form-control"></select>
@@ -39,21 +35,15 @@
     @endif
     
     <div class="row">
-<<<<<<< HEAD
     <div class="col-md-10">
             <input type="text" id="searchField" style="text-indent:20px;" class="form-control" style="background:transparent">
-=======
-    <div class="col-md-2">
-            <button type="button" class="btn btn-success btn-search" onclick="openImportCSVModal()">Import</button></a>
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
         </div>
         <div class="col-md-2">
-            <a href="{{ route('inventory.export.file',['type'=>'csv']) }}"><button type="button" class="btn btn-inflow">Export</button></a>
+            <a href="{{ route('exportInventory.file',['type'=>'csv']) }}"><button type="button" class="btn btn-inflow">Export</button></a>
         </div>
         <div class="col-md-6">
             <input type="text" id="searchField" class="form-control" style="background:transparent">
         </div>
-<<<<<<< HEAD
         <br>
         </br>
     	@if ($users_id->roles_id == '1' || $users_id->roles_id == '2' || $users_id->roles_id == '3')
@@ -65,11 +55,6 @@
             </div>
         @endif
         
-=======
-        <div class="col-md-2">
-            <button type="button" class="btn btn-default btn-search" id="searchInventory">Search</button>
-        </div>
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
     </div>
     
     <br>
@@ -93,18 +78,9 @@
                 </td>
                 <td>{{$inventoryOutlet->products['Brand']}}</td>
                 <td>{{$inventoryOutlet->products['Name']}}</td>
-<<<<<<< HEAD
                 <td>${{$inventoryOutlet->products['UnitPrice']}}</td>
                 <td>{{$inventoryOutlet->products['Category']}}</td>
                 <td align="right">{{$inventoryOutlet->stock_level}}</td>
-=======
-                <td>S${{$inventoryOutlet->products['UnitPrice']}}</td>
-                {{-- <td></td>
-                <td></td>
-                <td></td> --}}
-                <td></td>
-                <td>{{$inventoryOutlet->stock_level}}/{{$inventoryOutlet->threshold_level}}</td>
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
             </tr>
             @endforeach
             @else

@@ -19,7 +19,6 @@
 <br>
 <div class="container">
     <div>
-<<<<<<< HEAD
     <h3>Sales Order #{{$salesOrder->date}}_{{$salesOrder->id}}</h3>
         <table class="table table-striped">
             <thead>
@@ -47,27 +46,6 @@
                     <td></td>
                     <td></td>
                     <td>{{$totalPrice}}</td>
-=======
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Wholesaler Name</th>
-                    <th>Remarks</th>
-                    <th>Sales Order Number</th>
-                    <th>Date</th>
-                    <th>Process</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{$salesOrder->users['name']}}</td>
-                    <td>{{$salesOrder->remarks}}</td>
-                    <td>{{$salesOrder->sales_order_number}}</td>
-                    <td>{{$salesOrder->date}}</td>
-                    <td>{{$salesOrder->status}}</td>
-                    <td>{{$salesOrder->statuses['status_name']}}</td>
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                 </tr>
             </tbody>
         </table>

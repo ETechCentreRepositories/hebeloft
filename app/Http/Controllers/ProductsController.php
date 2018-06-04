@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Products;
+use App\Models\AuditTrail;
+use App\User;
+use DB;
 
 class ProductsController extends Controller
 {
@@ -13,7 +17,18 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id);
+        $product = Products::orderBy('id','asc')->paginate(10);
+        
+        return view('product.index')->with('users_id',$users_id)->with('products',$product);
+    }
+    public function add()
+    {
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id);
+        
+        return view('product.add')->with('users_id',$users_id);
     }
 
     /**

@@ -2,7 +2,7 @@
     <div class="container">
         <a class="nav navbar-left" href="{{ url('/') }}">
             {{-- {{ config('app.name', 'Hebeloft') }} --}}
-            <img src="http://ehostingcentre.com/hebeloft/storage/logo/hebeloft_logo.png" class="mobileLogo" style="
+            <img src="http://localhost:8000/storage/logo/hebeloft_logo.png" class="mobileLogo" style="
     height: 100%;margin-left:10px;
 ">
         </a>
@@ -13,11 +13,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="leftNavbar navbar-nav mr-auto">
-<<<<<<< HEAD
-                <a href="/home"><img src="http://ehostingcentre.com/hebeloft/storage/logo/hebeloft_logo.png" class="logo"/></a>
-=======
-                <a href="/home"><img src="/storage/logo/hebeloft_logo.png" class="logo"/></a>
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
+                <a href="/home"><img src="http://localhost:8000/storage/logo/hebeloft_logo.png" class="logo"/></a>
                 <li class="navList"><a class="homeNav nav-link" style="color:#e3b417;" href="/home"><div class="navLabels">Home</div></a></li>
                 <li class="navList"><a class="inventoryNav nav-link" style="color:#e3b417;" href="/"><div class="navLabels">Inventory</div></a></li>
                 <li class="navList"><a class="transferRequestNav nav-link" style="color:#e3b417;" href="/transferrequest"><div class="navLabels">Transfer Request</div></a></li>
@@ -25,6 +21,7 @@
                 <li class="navList"><a class="salesRecordNav nav-link" style="color:#e3b417;" href="/salesrecord"><div class="navLabels">Sales Record</div></a></li>
                 <li class="navList"><a class="userNav nav-link" style="color:#e3b417;" href="/user"><div class="navLabels">User</div></a></li>
                 <li class="navList"><a class="outletNav nav-link" style="color:#e3b417;" href="/outlet"><div class="navLabels">Outlet</div></a></li>
+                <li class="navList"><a class="productNav nav-link" style="color:#e3b417;" href="/product"><div class="navLabels">Product</div></a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->

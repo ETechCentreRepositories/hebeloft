@@ -62,21 +62,10 @@
         <table class="table table-striped sortable">
             <thead>
                 <tr>
-<<<<<<< HEAD
                     <th>Date</th>
                     <th>Process</th>
                     <th>Status</th>
                     <th class="emptyHeader"></th>
-=======
-                    <th>Date (YYYY-MM-DD)</th>
-                    {{-- <th>Order Id#</th> --}}
-                    {{-- <th>Outlet</th> --}}
-                    <th>Process</th>
-                    <th>Status</th>
-                    @if ($users_id->roles_id == '1')
-                    <th class="emptyHeader"></th>
-                    @endif
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                 </tr>
             </thead>
             <tbody id="transferRequestContent">
@@ -179,14 +168,9 @@
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row transfer-buttons">
                                 <div class="p-2">
-<<<<<<< HEAD
                                     <a href="/transferrequest/{{$outletTransfer->id}}"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
                                 </div>
                     @if ($users_id->roles_id == '1')
-=======
-                                    <a href="/transferrequest/{{$transfer->id}}"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
-                                </div>
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
                                 <div class="p-2">
                                     <a href="/transferrequest/{{$transfer->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
@@ -260,15 +244,12 @@
     
     .emptyHeader {
     	pointer-events: none;
-<<<<<<< HEAD
     }
     
     #transferRequestSearchField{
-        background-image:url(http://ehostingcentre.com/hebeloft/storage/icons/search.png); 
+        background-image:url(http://localhost:8000/storage/icons/search.png); 
         background-repeat: no-repeat; 
         background-position: 2px 3px;
         background-size: 30px 30px;
-=======
->>>>>>> 45ac57d88eba556cce6555243add80356aa3aaa6
     }
 </style>
