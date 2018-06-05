@@ -16,7 +16,7 @@
 <div class="topMargin container">
     <div class="row justify-content-end">
         <div class="col-d-2">
-        <a href="/products/create"><button type="button" class="btn btn-warning" onclick="openCreateProductModal()">Add new Product</button>
+        <a href="/products/create"><button type="button" class="btn btn-warning" onclick="openCreateProductModal()">Add new Product</button></a>
         </div>
     </div>
     <br>

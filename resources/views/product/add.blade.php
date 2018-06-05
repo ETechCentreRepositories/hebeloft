@@ -16,78 +16,64 @@
 
 <br>
 <div class="topMargin container">
-{!! Form::open(['action' => ['UsersController@store'], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-                <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <input id="role" type="hidden" class="form-control" name="role" value="3"/>
-                            <input id="username" type="text" class="form-control" name="username" placeholder="Username" value="{{ old('username') }}" required autofocus>
-                            @if ($errors->has('username'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('username') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group hiddenField">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <input id="email" type="hidden" class="form-control" name="email" value="enquiry@hebeloft.com" value="{{ old('email') }}" required>
-
-                            @if ($errors->has('email'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <input id="phone_number" type="number" class="form-control" name="phone_number" placeholder="Phone number" value="{{ old('number') }}" required>
-
-                            @if ($errors->has('number'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('number') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                    <input id="password" type="password" class="form-control passwordField" name="password" placeholder="Password" required>
-                    @if ($errors->has('password'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('password') }}</strong>
-                        </span>
-                    @endif
-                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm password" required>
-                </div>
-
-                <br><hr><br>
-                <label >Outlet:</label>
-                <div class="form-group row">  
-                    @foreach($outlets as $outlet)
-                        <div class="col-md-5">
-                        <label class="checkbox-inline"><input name="outlet[]" type="checkbox" value="{{$outlet->id}}"> {{$outlet->outlet_name}} </label>
-                            </div>
-                    @endforeach
-                </div>
-
-                <div class="form-group">
-                    <div style="text-align:center">
-                        <button type="submit" class="btn btn-primary">
-                            Register
-                        </button>
-                    </div>
-                </div>
-            {!! Form::close() !!}
+    <h3>Add new product</h3>
+    <br>
+    {!! Form::open(['action' => 'ProductsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'style' => 'margin-bottom: 0']) !!}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Product name'])}}
             </div>
+            <div class="form-group">
+                {{Form::text('category', '', ['class' => 'form-control', 'placeholder' => 'Category'])}}
+            </div>
+            <div class="form-group">
+                {{Form::text('brand', '', ['class' => 'form-control', 'placeholder' => 'Brand'])}}
+            </div>
+            <div class="form-group">
+                {{Form::text('unitPrice', '', ['class' => 'form-control', 'placeholder' => 'UnitPrice'])}}
+            </div>
+            <div class="form-group">
+                {{Form::text('remarks', '', ['class' => 'form-control', 'placeholder' => 'Remarks'])}}
+            </div>
+            <div class="form-group">
+                {{Form::text('size', '', ['class' => 'form-control', 'placeholder' => 'Size'])}}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <input id="ogplu" type="number" class="form-control" name="ogPLU" placeholder="OG PLU"  required>
+            </div>
+            <div class="form-group">
+                <input id="bhg" type="number" class="form-control" name="bhg" placeholder="BHG"  required>
+            </div>
+            <div class="form-group">
+                <input id="metro" type="number" class="form-control" name="metro" placeholder="METRO"  required>
+            </div>
+            <div class="form-group">
+                <input id="robinson" type="number" class="form-control" name="robinson" placeholder="ROBINSON"  required>
+            </div>
+            <div class="form-group">
+                <input id="ntuc" type="number" class="form-control" name="ntuc" placeholder="NTUC"  required>
+            </div>
+            <div class="form-group">
+                {{Form::text('threshold', '', ['class' => 'form-control', 'placeholder' => 'Threshold level'])}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {{Form::textarea('description', '', ['class' => 'form-control', 'placeholder' => 'Description'])}}
+        </div>
+    </div>
+    <br>
+    <div class="form-group">
+        <div style="text-align:left">
+            <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+    </div>
+    {!! Form::close() !!}
+</div>
 @endsection
 
 <style>

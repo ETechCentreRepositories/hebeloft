@@ -92,7 +92,108 @@
         <?php echo Form::close(); ?>
 
 </div>
+<script>
+$(document).ready(function () {
 
+    $.get("<?php echo e(URL::to('ajax/outlet')); ?>",function(data){
+        $("#outlet").empty();
+            $.each(data,function(i,value){
+                var id = value.id;
+                var outlet = value.outlet_name;
+                var outlet_id = value.id;
+                $("#outlet").append("<option value='" +
+                outlet_id + "'>" +outlet + "</option>");
+        });
+    });
+
+    $("#salesRecordSearchField").autocomplete({
+        source: "<?php echo e(URL::to('autocomplete-search')); ?>",
+        minLength:1,
+        select:function(key,value)
+        {
+            console.log(value);
+        }
+    });
+    var products = [];
+    $("#addSalesRecord").click(function() {
+        var productName = $("#salesRecordSearchField").val();
+        $.ajax({
+            type: "GET",
+            url: "<?php echo e(URL::TO('/retrieve-inventory-by-product-name')); ?>/" + productName,
+            data: "",
+            cache:false,
+            datatype: "JSON",
+            success: function (response) {
+                console.log("testing");
+                for (i = 0; i < response.length; i++) {
+                    var productId = parseInt(response[i].products_id);
+                    products.push(productId);
+                    console.log(products);
+                    $("#addSalesRecordContent").append(
+                        "<tr id='newRow_"+productId+"'><td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
+                        + "<td>" + response[i].Name + "</td>"
+                        + "<td align='center'><input name='unitPrice' type='number' id='unitPrice' type='text' style='width:60px;' value='"+ response[i].UnitPrice +"'/></td>"
+                        + "<td align='center'><input name='quantity' type='number' id='qty' type='text' style='width:60px;' value='1'/></td>"
+                        + "<td id='price' align='center'>"+response[i].UnitPrice+"</td>"
+                        + "<td><button type='button' class='btn btn-danger action-buttons' id='removeSR'> Remove </button></td></tr>"
+                    );
+                }
+            },
+
+            error: function (obj, testStatus, errorThrown) {
+                
+            }
+        });
+    });
+    
+    $("#saveSalesRecord").click(function () {
+        var outlet = $('#outlet').val();
+        var date = $("#salesRecordDate").val();
+        var remarks = $("#remarks").val();
+        if(products !== null) {
+            for(var i = 0; i<products.length; i++){
+                var productID = products[i];
+                var mainRow = document.getElementById("newRow_"+productID);
+                var quantity = mainRow.querySelectorAll('#qty')[0].value;
+                var price = mainRow.querySelectorAll('#unitPrice')[0].value;
+                console.log(productID);
+                console.log(price);
+                console.log(quantity);
+                console.log(outlet);
+                console.log(date);
+                console.log(remarks);
+                $.ajax({
+                    type: "GET",
+                    url: "<?php echo e(URL::TO('/salesrecord/addtocart/')); ?>/" + productID + "/" + price + "/" + quantity + "/" + outlet + "/" + date + "/" + remarks,
+                    cache:false,
+                    datatype: "JSON",
+                    success: function (response) {
+                    console.log("successful");
+                    },
+
+                    error: function (obj, testStatus, errorThrown) {
+                    console.log("failure");
+                    }
+                });
+            }
+        } else {
+            console.log("null");
+        }
+    });
+    
+    $(document).on("click","#removeSR",function(){
+        console.log("testing");
+        var id = $("#removeSR").closest('tr').attr('id');
+        for(var i = 0; i<trProducts.length; i++) {
+            if(trProducts[i] == id) {
+                trProducts.splice(i,1);
+            }
+        }
+        $("#removeSR").closest('tr').remove();
+        console.log(id);
+    });
+});
+</script>
 <?php $__env->stopSection(); ?>
 
 <style>

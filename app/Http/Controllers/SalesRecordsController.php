@@ -76,12 +76,9 @@ class SalesRecordsController extends Controller
             $salesRecord->audit_trails_id = $auditTrail->id;
             $salesRecord->outlets_id = $request->input('outlet');;
             $salesRecord->total_price = $totalPrice;
-            $salesRecord->OrderRemarks = $salesrecordCart->remarks;
-            $salesRecord->OrderDate = $request->input('salesRecordDate');
-            $salesRecord->Location= "";
+            $salesRecord->remarks = $salesrecordCart->remarks;
+            $salesRecord->date = $request->input('salesRecordDate');
             $salesRecord->save();
-            $salesRecord->Location = $salesRecord->outlets['outlet_name'];
-            $salesRecord->update();
 
             foreach($products as $product) {
                 $salesRecordList = new SalesRecordList;
@@ -190,7 +187,7 @@ class SalesRecordsController extends Controller
     public function exportFile($type){
         $salesrecordexcel = SalesRecordList::leftJoin('sales_record','sales_record_list.sales_record_id','=','sales_record.id')
 			  -> leftJoin('products','sales_record_list.products_id','=','products.id')
-                          -> select('OrderDate', 'OrderRemarks', 'Location', 'products.Name as ItemName', 'products.Description as ItemDescription', 'quantity as ItemQuantity', 'products.UnitPrice as ItemUnitPrice')->get()->toArray();
+                          -> select('date', 'remarks', 'Location', 'products.Name as ItemName', 'products.Description as ItemDescription', 'quantity as ItemQuantity', 'products.UnitPrice as ItemUnitPrice')->get()->toArray();
 
         return \Excel::create('salesrecord', function($excel) use ($salesrecordexcel) {
 

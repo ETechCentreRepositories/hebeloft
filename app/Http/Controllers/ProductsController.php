@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Products;
-use App\Models\AuditTrail;
 use App\User;
+use App\Models\AuditTrail;
 use DB;
 
 class ProductsController extends Controller
@@ -49,7 +49,31 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        
+         //Get the login user
+         $login_user_id = auth()->user()->id;
+         $login_user = User::find($login_user_id);
+ 
+         //Audit Trail
+         $auditTrail = AuditTrail::create([
+             'action' => 'Created Outlet Staff',
+             'action_by' => $login_user->name,
+         ]);
+
+         $product = new Products;
+         $product->Name = $request->input("name");
+         $product->Category = $request->input("category");
+         $product->Brand = $request->input("brand");
+         $product->UnitPrice = $request->input("unitPrice");
+         $product->Size = $request->input("size");
+         $product->OG_PLU = $request->input("ogplu");
+         $product->BHG = $request->input("bhg");
+         $product->Metro = $request->input("metro");
+         $product->Robinsons = $request->input("robinson");
+         $product->NTUC = $request->input("ntuc");
+         $product->Description = $request->input("Description");
+         $product->save();
+
+         return redirect('/product')->with('success', 'Successfully Created a New Product');
     }
 
     /**

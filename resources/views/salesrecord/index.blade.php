@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<script src="{{ asset('js/sales_record.js') }}" defer></script>
 @section('content')
 
 @if ($users_id->roles_id == '1')
