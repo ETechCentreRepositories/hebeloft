@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 
 @if ($users_id->roles_id == '1')
@@ -98,7 +97,122 @@
         </div>
         {!! Form::close() !!}
 </div>
+<script>
+$(document).ready(function (){
+    $("#salesOrderSearchField").autocomplete({
+        source: "{{URL::to('autocomplete-search')}}",
+        minLength:1,
+        select:function(key,value)
+        {
+            console.log(value);
+        }
+    });
 
+    var orderProducts = [];
+    $("#addSalesOrder").click(function() {
+        console.log("distinct");
+        var productName = $("#salesOrderSearchField").val();
+        $.ajax({
+            type: "GET",
+            url: "{{URL::TO('/retrieve-inventory-by-product-name')}}/" + productName,
+            data: "",
+            cache:false,
+            datatype: "JSON",
+            success: function (response) {
+                 console.log("testing");
+                for (i = 0; i < response.length; i++) {
+                    var productId = parseInt(response[i].products_id);
+                    orderProducts.push(productId);
+                    console.log(orderProducts);
+                    $("#addSalesOrderContent").append(
+                        "<tr id='newRow_"+productId+"'><td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
+                        + "<td>" + response[i].Name + "</td>"
+                        + "<td align='center'><input name='unitPrice' type='number' id='unitPrice' type='text' style='width:60px;' value='"+ response[i].UnitPrice +"'/></td>"
+                        + "<td align='center'><input name='quantity' type='number' id='qty' type='text' style='width:60px;' value='1'/></td>"
+                        + "<td align='center'>" + response[i].UnitPrice + "</td>"
+                        + "<td><button type='button' class='btn btn-danger action-buttons' id='removeSO'> Remove </button></td></tr>"
+                    );
+                }
+            },
+
+            error: function (obj, testStatus, errorThrown) {
+                    
+            }
+        });
+    });
+
+    $("#saveSalesOrder").click(function() {
+        var remarks = $("#remarks").val();
+        var date = $("#salesOrderDate").val();
+        if(orderProducts !== null) {
+            for(var i = 0; i < orderProducts.length; i++){
+                var productID = orderProducts[i];
+                var mainRow = document.getElementById("newRow_"+productID);
+            	var quantity = mainRow.querySelectorAll('#qty')[0].value;
+            	var unitPrice = mainRow.querySelectorAll('#unitPrice')[0].value;
+            }
+            console.log(productID);
+            console.log(unitPrice);
+            console.log(productID);
+            console.log(remarks);
+            console.log(date);
+            console.log(quantity);
+            $.ajax({
+                type: "GET",
+                url: "{{URL::TO('/salesorder/addtocart/')}}/" + productID + "/" + quantity + "/" + unitPrice + "/" + date + "/" + remarks,
+                cache:false,
+                datatype: "JSON",
+                success: function (response) {
+                    console.log("successful");
+                },
+
+                error: function (obj, testStatus, errorThrown) {
+                    console.log(obj + testStatus + errorThrown);
+                }
+            });
+        } else {
+            console.log("null");
+        }
+    });
+
+    $(document).on("click","#removeSO",function(){
+        console.log("testing");
+        var id = $("#removeSO").closest('tr').attr('id');
+        for(var i = 0; i<trProducts.length; i++) {
+            if(trProducts[i] == id) {
+                trProducts.splice(i,1);
+            }
+        }
+        $("#removeSO").closest('tr').remove();
+        console.log(id);
+    });
+});
+
+function removeCartItemFromSalesOrder() {
+    console.log("testing");
+    var id = $("#removeThis").closest('tr').attr('id');
+    console.log(id);
+        
+    $.ajax({
+        type: "GET",
+        url: "{{URL::TO('/salesorder/remove')}}/" + id,
+        cache:false,
+        datatype: "JSON",
+            success: function (response) {
+                console.log("successful");
+                $("#removeThis").closest('tr').remove();
+                },
+
+            error: function (obj, testStatus, errorThrown) {
+                console.log("failure");
+            }
+        });
+    }
+    
+function enableCreateButton() {
+     document.getElementById("createButton").disabled = false;
+}
+</script>
 @endsection
 
 <style>

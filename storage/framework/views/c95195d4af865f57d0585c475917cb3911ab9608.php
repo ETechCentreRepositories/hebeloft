@@ -1,3 +1,4 @@
+<script src="<?php echo e(asset('js/inventory.js')); ?>" defer></script>
 <?php $__env->startSection('content'); ?>
 
 <?php if($users_id->roles_id == '1'): ?>

@@ -25,28 +25,27 @@
                 <div class="card-body">
                     {{ csrf_field() }}
                     <table class="table table-striped" id="inventoryTable" >
-        <thead>
-            <tr>
-                <th>Product Name</th>
-                <th>Quantity</th>
-            </tr>
-        </thead>
-        <tbody id="inventoryContent">
-            @if(count($transfers) > 0)
-                @foreach($transfers as $transfer)
-                <tr>
-                    <td>{{$transfer->products['Name']}}</td>
-                    <td align="right">{{$transfer->quantity}}</td>
-                </tr>
-                @endforeach
-            @endif
-        </tbody>
-    </table>
-                <br>
-</div>
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventoryContent">
+                        @if(count($transfers) > 0)
+                            @foreach($transfers as $transfer)
+                            <tr>
+                                <td>{{$transfer->products['Name']}}</td>
+                                <td align="right">{{$transfer->quantity}}</td>
+                            </tr>
+                            @endforeach
+                        @endif
+                    </tbody>
+                    </table>
+                    <br>
                 </div>
             </div>
-            
+        </div>
         </div>
         {!! Form::open(['action' => ['TransferRequestController@update', $transferRequests->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
         {{Form::hidden('status', 'rejected', ['class' => 'form-control'])}}

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<script src="{{ asset('js/sales_order.js') }}" defer></script>
 @section('content')
 
 @if ($users_id->roles_id == '1')
@@ -88,7 +88,7 @@
 <div class="topMargin container">
     <div class="row justify-content-end">
         <div>
-            <a href="/hebeloft/salesorder/create"><button type="button" class="btn btn-warning">Create or View New Sales Order</button></a>
+            <a href="/salesorder/create"><button type="button" class="btn btn-warning">Create or View New Sales Order</button></a>
         </div>
     </div>
     <br>
@@ -129,10 +129,10 @@
                     <th>View more</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="salesOrderContent">
                     @foreach($wholesalerSalesOrders as $wholesalerSalesOrder)
                     <tr>
-                        {{-- <td>{{$wholesalerSalesOrder->date}}</td> --}}
+                        <td>{{$wholesalerSalesOrder->date}}</td>
                         <td>{{$wholesalerSalesOrder->status}}</td>
                         <td>{{$wholesalerSalesOrder->statuses['status_name']}}</td>
                         <td>
@@ -151,43 +151,6 @@
     </div>
 </div>
 @endif
-
-<script>
-     $(document).ready(function(){
-            $('#refreshInventory').click(function(){
-                var startDate = $('#startDate').val();
-                var endDate = $('#endDate').val();
-                console.log(startDate + endDate);
-                $("#salesOrderContent").empty();
-            $.ajax({
-                type: "GET",
-                url: "{{URL::TO('/ajax/salesorder/date')}}/" + startDate + "/" + endDate,
-                // data: "products.Name=" + productName,
-                cache: false,
-                dataType: "JSON",
-                success: function (response) {
-                    // console.log(response);
-                    for (i = 0; i < response.length; i++) {
-                        console.log(response[i]);
-                        $("#salesOrderContent").append(
-                            "<tr><td>"+ response[i].date+"</td>"
-                            + "<td>"+ response[i].status +"</td>"
-                            + "<td>"+ response[i].status_name+"</td>"
-                            @if ($users_id->roles_id == '1')
-                            +"<td><a href='/salesorder/"+response[i].id+"/edit'><button type='button' class='btn btn-primary action-buttons'>Edit</button></a></td></tr>"
-                            @endif
-                        );
-                    }
-                },
-
-                error: function (obj, textStatus, errorThrown) {
-                    console.log("Error " + textStatus + ": " + errorThrown);
-                }
-            });
-            });
-        });
-</script>
-
 @endsection
 
 <style>

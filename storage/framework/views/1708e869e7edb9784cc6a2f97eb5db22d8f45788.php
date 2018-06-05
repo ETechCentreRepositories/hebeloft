@@ -1,3 +1,4 @@
+<script src="<?php echo e(asset('js/transfer_request.js')); ?>" defer></script>
 <?php $__env->startSection('content'); ?>
 
 <?php if($users_id->roles_id == '1'): ?>
@@ -70,8 +71,6 @@
                 <?php $__currentLoopData = $transfers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $transfer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
                     <td><?php echo e($transfer->date); ?></td>
-                    
-                    
                     <td><?php echo e($transfer->status); ?></td>
                     <td><?php echo e($transfer->statuses['status_name']); ?></td>
                     <td>
@@ -80,14 +79,14 @@
                                 <div class="p-2">
                                     <a href="/transferrequest/<?php echo e($transfer->id); ?>"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
                                 </div>
-                    <?php if($users_id->roles_id == '1'): ?>
+                                <?php if($users_id->roles_id == '1'): ?>
                                 <div class="p-2">
                                     <a href="/transferrequest/<?php echo e($transfer->id); ?>/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
+                                <?php endif; ?> 
                             </div>
                         </div>
                     </td>
-                    <?php endif; ?>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
@@ -188,6 +187,7 @@
     </div>
 </div>
 <?php endif; ?>
+
 <?php $__env->stopSection(); ?>
 
 <style>

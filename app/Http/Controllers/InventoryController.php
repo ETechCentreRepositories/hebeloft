@@ -32,7 +32,6 @@ class InventoryController extends Controller
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
         $inventoryOutlets = InventoryOutlet::orderBy('id','desc')->paginate(10);
-        // $products = Products::all();
         return view('inventory.index')->with('inventoryOutlets',$inventoryOutlets)->with('users_id',$users_id);
     }
 
@@ -127,35 +126,20 @@ class InventoryController extends Controller
     public function importFile(Request $request){
 
         if($request->hasFile('sample_file')){
-
             $path = $request->file('sample_file')->getRealPath();
-
             $data = \Excel::load($path)->get();
-
-
-
             if($data->count()){
-
                 foreach ($data as $key => $value) {
-
                     $arr[] = ['title' => $value->title, 'body' => $value->body];
-
                 }
 
                 if(!empty($arr)){
-
                     DB::table('products')->insert($arr);
-
                     dd('Insert Recorded successfully.');
-
                 }
-
             }
-
         }
-
         dd('Request data does not have any files to import.');      
-
     }
 
         /**
@@ -175,17 +159,11 @@ class InventoryController extends Controller
                         ->get()->toArray();
 
         return \Excel::create('inventory', function($excel) use ($inventoryexcel) {
-
             $excel->sheet('sheet name', function($sheet) use ($inventoryexcel)
-
             {
-
                 $sheet->fromArray($inventoryexcel);
-
             });
-
         })->download($type);
-
     }
     
     public function getInventory(){

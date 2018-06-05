@@ -51,7 +51,6 @@ Route::get('/', 'InventoryController@index')->name('inventory');
 Route::get('/ajax/outlet', 'InventoryController@getOutlet');
 Route::get('/ajax/product_brand', 'InventoryController@getProductBrand');
 Route::get('/ajax/inventory', 'InventoryController@getInventory');
-Route::get('/ajax/outlet', 'InventoryController@getOutlet');
 Route::get('/autocomplete-search', 'InventoryController@search');
 Route::get('/retrieve-inventory-by-outlet/{outlet}', 'InventoryController@getInventoryByOutlet');
 Route::get('/retrieve-inventory-by-product-brand/{product_brand}', 'InventoryController@getInventoryByProductBrand');

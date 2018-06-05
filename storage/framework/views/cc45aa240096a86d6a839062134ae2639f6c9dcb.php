@@ -44,9 +44,6 @@
         <div class="col-md-2">
             <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
         </div>
-        <div class="col-md-2">
-            <a href="<?php echo e(route('exportSalesRecord.file',['type'=>'csv'])); ?>"><button type="button" class="btn btn-inflow">Export</button></a>
-        </div>
     </div>
     <br>
     <div>
@@ -63,10 +60,10 @@
             <tbody id="salesRecordContent">
                     <?php $__currentLoopData = $salesRecords; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $salesRecord): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
-                        <td><?php echo e($salesRecord->OrderDate); ?></td>
+                        <td><?php echo e($salesRecord->date); ?></td>
                         <td><?php echo e($salesRecord->outlets['outlet_name']); ?></td>
                         <td><?php echo e($salesRecord->total_price); ?></td>
-                        <td><?php echo e($salesRecord->OrderRemarks); ?></td>
+                        <td><?php echo e($salesRecord->remarks); ?></td>
                         <td>
                             <div class="d-flex flex-column">
                                 <div class="d-flex flex-row transfer-buttons">

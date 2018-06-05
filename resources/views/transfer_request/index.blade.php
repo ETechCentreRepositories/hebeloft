@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<script src="{{ asset('js/transfer_request.js') }}" defer></script>
 @section('content')
 
 @if ($users_id->roles_id == '1')
@@ -72,8 +72,6 @@
                 @foreach($transfers as $transfer)
                 <tr>
                     <td>{{$transfer->date}}</td>
-                    {{-- <td>{{$transfer->orderId}}</td> --}}
-                    {{-- <td>{{$transfer->from_location}}</td> --}}
                     <td>{{$transfer->status}}</td>
                     <td>{{$transfer->statuses['status_name']}}</td>
                     <td>
@@ -82,14 +80,14 @@
                                 <div class="p-2">
                                     <a href="/transferrequest/{{$transfer->id}}"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
                                 </div>
-                    @if ($users_id->roles_id == '1')
+                                @if ($users_id->roles_id == '1')
                                 <div class="p-2">
                                     <a href="/transferrequest/{{$transfer->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
+                                @endif 
                             </div>
                         </div>
                     </td>
-                    @endif
                 </tr>
                 @endforeach
             </tbody>
@@ -188,6 +186,7 @@
     </div>
 </div>
 @endif
+
 @endsection
 
 <style>

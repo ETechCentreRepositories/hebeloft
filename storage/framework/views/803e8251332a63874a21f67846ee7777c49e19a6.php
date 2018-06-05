@@ -1,3 +1,4 @@
+<script src="<?php echo e(asset('js/transfer_request.js')); ?>" defer></script>
 <?php $__env->startSection('content'); ?>
 
 <?php if($users_id->roles_id == '1'): ?>

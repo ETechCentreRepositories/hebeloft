@@ -46,9 +46,6 @@
         <div class="col-md-2">
             <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
         </div>
-        <div class="col-md-2">
-            <a href="{{ route('exportSalesRecord.file',['type'=>'csv']) }}"><button type="button" class="btn btn-inflow">Export</button></a>
-        </div>
     </div>
     <br>
     <div>
@@ -65,10 +62,10 @@
             <tbody id="salesRecordContent">
                     @foreach($salesRecords as $salesRecord)
                     <tr>
-                        <td>{{$salesRecord->OrderDate}}</td>
+                        <td>{{$salesRecord->date}}</td>
                         <td>{{$salesRecord->outlets['outlet_name']}}</td>
                         <td>{{$salesRecord->total_price}}</td>
-                        <td>{{$salesRecord->OrderRemarks}}</td>
+                        <td>{{$salesRecord->remarks}}</td>
                         <td>
                             <div class="d-flex flex-column">
                                 <div class="d-flex flex-row transfer-buttons">

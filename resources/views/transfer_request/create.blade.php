@@ -45,7 +45,7 @@
         <div class="row">
             <div class="col-md-10">
                 {{-- <div class="input-group"> --}}
-                <input type="text" id="transferRequestSearchField" class="form-control" style="background:transparent">
+                <input type="text" id="createTrSearchField" class="form-control" style="background:transparent">
             </div>
             <div class="col-md-2">
                 <button type="button" class="btn btn-default btn-search" id="addTransferRequest">Add</button>
@@ -87,7 +87,127 @@
         {!! Form::close() !!}
         
 </div>
+<script>
+$(document).ready(function() {
+    $.get("{{URL::to('ajax/outlet')}}",function(data){
+        $("#outlet").empty();
+            $.each(data,function(i,value){
+                var id = value.id;
+                var outlet = value.outlet_name;
+                var outlet_id = value.id;
+                $("#outlet").append("<option value='" +
+                outlet_id + "'>" +outlet + "</option>");
+        });
+    });
 
+    $("#createTrSearchField").autocomplete({
+        source: "{{URL::to('autocomplete-search')}}",
+        minLength:1,
+        select:function(key,value)
+        {
+            console.log(value);
+        }
+    });
+
+    var trProducts = [];
+    $(document).on("click","#addTransferRequest",function(){
+        var productName = $("#transferRequestSearchField").val();
+        console.log(productName);
+        $.ajax({
+            type: "GET",
+            url: "/retrieve-inventory-by-product-name/" + productName,
+            cache:false,
+            datatype: "JSON",
+            success: function (response) {
+                console.log(response);
+                for (i = 0; i < response.length; i++) {
+                    console.log(response[i]);
+                    var productId = parseInt(response[i].products_id);
+
+                    trProducts.push(productId);
+                    console.log(trProducts);
+                        
+                    $("#addTransferRequestContent").append(
+                        "<tr id='newRow_"+productId+"'>"
+                        + "<td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
+                        + "<td>" + response[i].Name + "</td>"
+                        + "<td align='center'><input name='quantity' type='number' id='qty' type='text' style='width:60px;' value='1'/></td>"
+                        + "<td><button type='button' class='btn btn-danger action-buttons' id='removeTR'> Remove </button></td></tr>"
+                    );
+                }
+            },
+
+            error: function (obj, testStatus, errorThrown) {
+                console.log("failure");
+            }
+        });
+    });
+
+    $("#saveTransferRequest").click(function () {
+        var outlet = $('#outlet').val();
+        var dates = $("#transferRequestDate").val();
+        var remarks = $("#remarks").val();
+        if(trProducts !== null) {
+            console.log(trProducts);
+            for(var i = 0; i<trProducts.length; i++){
+                console.log(trProducts[i]);
+                var productID = trProducts[i];
+                var mainRow = document.getElementById("newRow_"+productID);
+                var quantity = mainRow.querySelectorAll('#qty')[0].value;
+                console.log(productID );
+                console.log(quantity);
+                console.log(outlet);
+                console.log(dates);
+                console.log(remarks);
+                $.ajax({
+                    type: "GET",
+                    url: "/transferrequest/addtocart/" + productID + "/" + quantity + "/" + outlet + "/" + dates + "/" + remarks,
+                    cache:false,
+                    datatype: "JSON",
+                    success: function (response) {
+                        console.log("successful");
+                    },
+
+                    error: function (obj, testStatus, errorThrown) {
+                        console.log("failure");
+                    }
+                });
+            }
+        } else {
+            console.log("null");
+        }
+    });
+
+    $(document).on("click","#removeTR",function(){
+        var id = $("#removeTR").closest('tr').attr('id');
+        for(var i = 0; i<trProducts.length; i++) {
+            if(trProducts[i] == id) {
+                trProducts.splice(i,1);
+            }
+        }
+        $("#removeTR").closest('tr').remove();
+        console.log(id);
+    });
+});
+
+function removeCartItemFromTransferRequest() {
+    var id = $("#removeThis").closest('tr').attr('id');
+    console.log(id);
+    $.ajax({
+        type: "GET",
+        url: "/transferrequest/remove/" + id,
+        cache:false,
+        datatype: "JSON",
+        success: function (response) {
+            console.log("successful");
+            $("#removeThis").closest('tr').remove();
+        },
+
+        error: function (obj, testStatus, errorThrown) {
+            console.log("failure");
+        }
+    });
+}</script>
 @endsection
 
 <style>
