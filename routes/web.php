@@ -94,3 +94,4 @@ Route::get('outlets/check/{id}','OutletsController@checkIfUsersExist');
 
 //Products
 Route::get('/products/create', 'ProductsController@add');
+// Route::get('/products/edit/{id}', 'ProductsController@edit');

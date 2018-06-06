@@ -122,7 +122,6 @@ class OutletsController extends Controller
             'telephone_number' => 'required',
         ]);
 
-        // Create Outlet
         $outlet = Outlet::find($id);
         $outlet->outlet_name = $request->input('outlet_name');
         $outlet->address = $request->input('address');

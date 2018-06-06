@@ -18,7 +18,7 @@
 <div class="topMargin container">
     <div class="row justify-content-end">
         <div class="col-d-2">
-        <a href="/products/create"><button type="button" class="btn btn-warning" onclick="openCreateProductModal()">Add new Product</button></a>
+        <a href="/products/create"><button type="button" class="btn btn-warning">Add new Product</button></a>
         </div>
     </div>
     <br>
@@ -52,10 +52,13 @@
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row product-buttons">
                                 <div class="p-2">
-                                <a href=""><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
+                                    <a href="/product/{{$product->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
                                 <div class="p-2">
-                                    <button type="button" class="btn btn-danger" onclick="openDeleteProductModal()" id="delete">Delete</button>
+                                {!!Form::open(['action' => ['ProductsController@destroy', $product->id], 'method' => 'POST'])!!}
+                                        {{Form::hidden('_method', 'DELETE')}}
+                                        {{Form::submit('Delete', ['class' => 'btn btn-danger action-buttons'])}}
+                                    {!!Form::close()!!}
                                 </div>
                             </div>
                         </div>

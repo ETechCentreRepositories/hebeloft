@@ -190,6 +190,9 @@ $(document).ready(function (){
 
 function removeCartItemFromSalesOrder() {
     console.log("testing");
+    //retreive the element inside the tr
+    //retrieve the "closest tr"
+    //retrieve .attr('id')
     var id = $("#removeThis").closest('tr').attr('id');
     console.log(id);
         

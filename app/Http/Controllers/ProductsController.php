@@ -49,31 +49,31 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-         //Get the login user
-         $login_user_id = auth()->user()->id;
-         $login_user = User::find($login_user_id);
+        //Get the login user
+        $login_user_id = auth()->user()->id;
+        $login_user = User::find($login_user_id);
  
-         //Audit Trail
-         $auditTrail = AuditTrail::create([
-             'action' => 'Created Outlet Staff',
-             'action_by' => $login_user->name,
-         ]);
+        //Audit Trail
+        $auditTrail = AuditTrail::create([
+            'action' => 'Created Outlet Staff',
+            'action_by' => $login_user->name,
+     ]);
 
-         $product = new Products;
-         $product->Name = $request->input("name");
-         $product->Category = $request->input("category");
-         $product->Brand = $request->input("brand");
-         $product->UnitPrice = $request->input("unitPrice");
-         $product->Size = $request->input("size");
-         $product->OG_PLU = $request->input("ogplu");
-         $product->BHG = $request->input("bhg");
-         $product->Metro = $request->input("metro");
-         $product->Robinsons = $request->input("robinson");
-         $product->NTUC = $request->input("ntuc");
-         $product->Description = $request->input("Description");
-         $product->save();
+        $product = new Products;
+        $product->Name = $request->input("name");
+        $product->Category = $request->input("category");
+        $product->Brand = $request->input("brand");
+        $product->UnitPrice = $request->input("unitPrice");
+        $product->Size = $request->input("size");
+        $product->OG_PLU = $request->input("ogplu");
+        $product->BHG = $request->input("bhg");
+        $product->Metro = $request->input("metro");
+        $product->Robinsons = $request->input("robinson");
+        $product->NTUC = $request->input("ntuc");
+        $product->Description = $request->input("Description");
+        $product->save();
 
-         return redirect('/product')->with('success', 'Successfully Created a New Product');
+        return redirect('/product')->with('success', 'Successfully Created a New Product');
     }
 
     /**
@@ -95,7 +95,11 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id);
+        $product = Products::find($id);
+        
+        return view('product.edit')->with('users_id',$users_id)->with('products',$product);
     }
 
     /**
@@ -107,7 +111,31 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $login_user_id = auth()->user()->id;
+        $login_user = User::find($login_user_id);
+
+        //Audit Trail
+        $auditTrail = AuditTrail::create([
+            'action' => 'Updated Product',
+            'action_by' => $login_user->name,
+        ]);
+
+        $product = Products::find($id);
+        $product->Name = $request->input("name");
+        $product->Category = $request->input("category");
+        $product->Brand = $request->input("brand");
+        $product->UnitPrice = $request->input("unitPrice");
+        $product->Remarks = $request->input("remarks");
+        $product->Size = $request->input("size");
+        $product->OG_PLU = $request->input("ogplu");
+        $product->BHG = $request->input("bhg");
+        $product->Metro = $request->input("metro");
+        $product->Robinsons = $request->input("robinson");
+        $product->NTUC = $request->input("ntuc");
+        $product->Description = $request->input("description");
+        $product->save();
+
+        return redirect('/product')->with('success', 'Successfully Edited Product');
     }
 
     /**
@@ -118,6 +146,17 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $login_user_id = auth()->user()->id;
+        $login_user = User::find($login_user_id);
+
+        //Audit Trail
+        $auditTrail = AuditTrail::create([
+            'action' => 'Deleted Product',
+            'action_by' => $login_user->name,
+        ]);
+
+        $product = Products::find($id);
+        $product->delete();
+        return redirect('/product')->with('success', 'Successfully Deleted Product');
     }
 }

@@ -14,24 +14,24 @@
 
 <br>
 <div class="topMargin container">
-    <h3>Add new product</h3>
+    <h3>Edit product</h3>
     <br>
-    <?php echo Form::open(['action' => 'ProductsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'style' => 'margin-bottom: 0']); ?>
+        <?php echo Form::open(['action' => ['ProductsController@update', $products->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']); ?>
 
-    <div class="form-group">
+        <div class="form-group">
             <div class="row">
                 <div class="col-md-1">
                     <p>Name</p>
                 </div>
                 <div class="col-md-5">
-                    <?php echo e(Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Name'])); ?>
+                    <?php echo e(Form::text('name', $products->Name, ['class' => 'form-control', 'placeholder' => 'Name'])); ?>
 
                 </div>
                 <div class="col-md-2">
                     <p style="text-align:right">OG PLU</p>
                 </div>
                 <div class="col-md-4">
-                    <input id="ogplu" type="number" class="form-control" name="ogPLU" placeholder="OG PLU" required>
+                    <input id="ogplu" type="number" class="form-control" name="ogPLU" placeholder="OG PLU" value="<?php echo e($products->OG_PLU); ?>" required>
                 </div>   
             </div>
         </div>
@@ -41,14 +41,14 @@
                     <p>Category</p>
                 </div>
                 <div class="col-md-5">
-                    <?php echo e(Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Category'])); ?>
+                    <?php echo e(Form::text('category', $products->Category, ['class' => 'form-control', 'placeholder' => 'Category'])); ?>
 
                 </div>
                 <div class="col-md-2">
                     <p style="text-align:right">BHG</p>
                 </div>
                 <div class="col-md-4">
-                    <input id="bhg" type="number" class="form-control" name="bhg" placeholder="BHG" required>
+                    <input id="bhg" type="number" class="form-control" name="bhg" placeholder="BHG" value="<?php echo e($products->BHG); ?>" required>
                 </div>
             </div>
         </div>
@@ -58,14 +58,14 @@
                     <p>Brand</p>
                 </div>
                 <div class="col-md-5">
-                    <?php echo e(Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Brand'])); ?>
+                    <?php echo e(Form::text('brand', $products->Brand, ['class' => 'form-control', 'placeholder' => 'Brand'])); ?>
 
                 </div>
                 <div class="col-md-2">
                     <p style="text-align:right">METRO</p>
                 </div>
                 <div class="col-md-4">
-                    <input id="metro" type="number" class="form-control" name="metro" placeholder="METRO" required>
+                    <input id="metro" type="number" class="form-control" name="metro" placeholder="METRO" value="<?php echo e($products->Metro); ?>" required>
                 </div>
             </div>
         </div>
@@ -75,14 +75,14 @@
                     <p>UnitPrice</p>
                 </div>
                 <div class="col-md-5">
-                    <?php echo e(Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'UnitPrice'])); ?>
+                    <?php echo e(Form::text('unitPrice', $products->UnitPrice, ['class' => 'form-control', 'placeholder' => 'UnitPrice'])); ?>
 
                 </div>
                 <div class="col-md-2">
                     <p style="text-align:right">ROBINSON</p>
                 </div>
                 <div class="col-md-4">
-                    <input id="robinson" type="number" class="form-control" name="robinson" placeholder="ROBINSON" required>
+                    <input id="robinson" type="number" class="form-control" name="robinson" placeholder="ROBINSON" value="<?php echo e($products->Robinsons); ?>" required>
                 </div>
             </div>
         </div>
@@ -92,14 +92,14 @@
                     <p>Remarks</p>
                 </div>
                 <div class="col-md-5">
-                    <?php echo e(Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Remarks'])); ?>
+                    <?php echo e(Form::text('remarks', $products->Remarks, ['class' => 'form-control', 'placeholder' => 'Remarks'])); ?>
 
                 </div>
                 <div class="col-md-2">
                     <p style="text-align:right">NTUC</p>
                 </div>
                 <div class="col-md-4">
-                    <input id="ntuc" type="number" class="form-control" name="ntuc" placeholder="NTUC" required>
+                    <input id="ntuc" type="number" class="form-control" name="ntuc" placeholder="NTUC" value="<?php echo e($products->NTUC); ?>" required>
                 </div> 
             </div>
         </div>
@@ -109,7 +109,7 @@
                     <p>Size</p>
                 </div>
                 <div class="col-md-5">
-                    <?php echo e(Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Size'])); ?>
+                    <?php echo e(Form::text('size', $products->Size, ['class' => 'form-control', 'placeholder' => 'Size'])); ?>
 
                 </div>
                 <div class="col-md-2">
@@ -121,27 +121,29 @@
                 </div>
             </div>
         </div>
-    <div class="row">
-        <div class="col-md-8">
-            <?php echo e(Form::textarea('description', '', ['class' => 'form-control', 'placeholder' => 'Description'])); ?>
+        <div class="row">
+            <div class="col-md-8">
+                <?php echo e(Form::textarea('description', $products->Description, ['class' => 'form-control', 'placeholder' => 'Description'])); ?>
 
-        </div>
-        <div class="col-md-4">
-            <h4>Product</h4>
-            <?php echo e(Form::file('image_add',array('id'=>'image_add'))); ?>
+            </div>
+            <div class="col-md-4">
+                <h4>Product</h4>
+                <?php echo e(Form::file('image_add',array('id'=>'image_add'))); ?>
 
-            <br></br>
-            <div class="centerImage col-md-3" >
-               <img src = ""  id="addImage" width="150px" />
-               <br>
+                <br></br>
+                <div class="centerImage col-md-3" >
+                <img src = "" id="addImage" width="150px" />
+                <br>
+                </div>
             </div>
         </div>
-    </div>
+        <?php echo e(Form::hidden('_method', 'PUT')); ?>
+
     <br>
     <div class="form-group">
         <div style="text-align:left">
             <button type="submit" class="btn btn-primary">Save</button>
-            </div>
+        </div>
     </div>
     <?php echo Form::close(); ?>
 
