@@ -3,7 +3,7 @@
 @section('content')
 
 @if ($users_id->roles_id == '1')
-@include('inc.navbar_superadmin')
+@include('inc.navbar_superadmin') 
 @elseif ($users_id->roles_id == '2')
 @include('inc.navbar_admin')
 @elseif ($users_id->roles_id == '3')
@@ -39,7 +39,15 @@
             <input type="text" id="salesOrderSearchField" style="text-indent:20px;" class="form-control" style="background:transparent">
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
+            <div class="d-flex flex-row transfer-buttons">
+                <div class="p-2">
+                    <button id="search" type="button" class="btn btn-sucess">Search</button>
+                </div>
+                <div class="p-2">
+                    <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
+                </div>
+            </div>
+            
         </div>
     </div>
     <br>
