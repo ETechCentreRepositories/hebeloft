@@ -55,13 +55,30 @@ class InventoryController extends Controller
     {
     	$request->file('inventory_csv')->move(public_path(), "inventory.csv");
     	if (($handle = fopen ( public_path () . '/inventory.csv', 'r' )) !== FALSE) {
-            while ( ($data = fgetcsv ( $handle, 1000, ',' )) !== FALSE ) {
-                $csv_data = new Products ();
-                $csv_data->Name = $data [0];
-                $csv_data->save();
+            $productNames = [];
+            $locations = [];
+            $quantitys = [];
+            while (($data = fgetcsv ( $handle, 1000, ',' )) !== FALSE ) {
+                // dd($this->getIdByProductName($data[0]));
+                $getID = [];
+                $getID = $this->getIdByProductName($data[0]);
+                $gettingID = array_get($getID, 0);
+                $arrayId = (array) $gettingID;
+                array_push($productNames, array_get($arrayId, "id"));
+                // array_push($locations, $data[1]);
+                // array_push($quantitys, $data[4]);
+                // //find product_id by name
+                // //find outlet_id by name
+                
+                // $inventoryOutlet = new InventoryOutlet ();
+                // $inventoryOutlet->products_id = $this->getIdByProductName($data[0]);
+                // $inventoryOutlet->stock_level = $this->getIdByOutlet($data[4]);
+                // $inventoryOutlet->save();
             }
+            dd($productNames);
+
             fclose ( $handle );
-            $finalData = $csv_data::all ();
+            $finalData = $inventoryOutlet::all ();
             return redirect('/')->with('success', 'Success');
         } else {
             return redirect('/')->with('fail', 'Fail');
@@ -112,45 +129,6 @@ class InventoryController extends Controller
     {
         //
     }
-
-       /**
-
-     * Create a new controller instance.
-
-     *
-
-     * @return void
-
-     */
-
-    public function importFile(Request $request){
-
-        if($request->hasFile('sample_file')){
-            $path = $request->file('sample_file')->getRealPath();
-            $data = \Excel::load($path)->get();
-            if($data->count()){
-                foreach ($data as $key => $value) {
-                    $arr[] = ['title' => $value->title, 'body' => $value->body];
-                }
-
-                if(!empty($arr)){
-                    DB::table('products')->insert($arr);
-                    dd('Insert Recorded successfully.');
-                }
-            }
-        }
-        dd('Request data does not have any files to import.');      
-    }
-
-        /**
-
-     * Create a new controller instance.
-
-     *
-
-     * @return void
-
-     */
 
     public function exportFile($type){
 
@@ -251,6 +229,20 @@ class InventoryController extends Controller
                     ->get()->toArray();
 
         return response($inventoryByOutlet);
+    }
+
+    public function getIdByOutlet($outlet){
+        
+        $idByOutletName = DB::table('outlets')->select('id')->where('outlet_name', $outlet)->get();
+
+        return $idByOutletName;
+    }
+
+    public function getIdByProductName($productName){
+
+        $idByProductName = DB::table('products')->select('id')->where('Name', $productName)->get();
+
+        return $idByProductName;
     }
 
 }

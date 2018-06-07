@@ -2,7 +2,7 @@
 <?php $__env->startSection('content'); ?>
 
 <?php if($users_id->roles_id == '1'): ?>
-<?php echo $__env->make('inc.navbar_superadmin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('inc.navbar_superadmin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?> 
 <?php elseif($users_id->roles_id == '2'): ?>
 <?php echo $__env->make('inc.navbar_admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <?php elseif($users_id->roles_id == '3'): ?>
@@ -38,7 +38,15 @@
             <input type="text" id="salesOrderSearchField" style="text-indent:20px;" class="form-control" style="background:transparent">
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
+            <div class="d-flex flex-row transfer-buttons">
+                <div class="p-2">
+                    <button id="search" type="button" class="btn btn-sucess">Search</button>
+                </div>
+                <div class="p-2">
+                    <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
+                </div>
+            </div>
+            
         </div>
     </div>
     <br>

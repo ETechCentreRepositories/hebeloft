@@ -57,7 +57,6 @@ Route::get('/retrieve-inventory-by-product-brand/{product_brand}', 'InventoryCon
 Route::get('/retrieve-inventory-by-product-brand/for-wholesaler/{product_brand}', 'InventoryController@getInventoryByProductBrandforWholesaler');
 Route::get('/retrieve-inventory-by-filter/{outlet}/{product_brand}', 'InventoryController@getInventoryByFilter');
 Route::get('/retrieve-inventory-by-product-name/{productName}', 'InventoryController@getInventoryByProductName');
-Route::post('import-inventory', 'InventoryController@importFile')->name('import.file');
 Route::get('export-inventory/{type}', 'InventoryController@exportFile')->name('exportInventory.file');
 
 //SalesRecord 
@@ -94,4 +93,3 @@ Route::get('outlets/check/{id}','OutletsController@checkIfUsersExist');
 
 //Products
 Route::get('/products/create', 'ProductsController@add');
-// Route::get('/products/edit/{id}', 'ProductsController@edit');
