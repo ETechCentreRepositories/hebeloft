@@ -53,29 +53,39 @@ class InventoryController extends Controller
      */
     public function store(Request $request)
     {
+        DB::table('inventory_has_outlets')->truncate();
     	$request->file('inventory_csv')->move(public_path(), "inventory.csv");
     	if (($handle = fopen ( public_path () . '/inventory.csv', 'r' )) !== FALSE) {
-            $productNames = [];
+            $productIDs = [];
             $locations = [];
-            $quantitys = [];
+            $quantities = [];
             while (($data = fgetcsv ( $handle, 1000, ',' )) !== FALSE ) {
-                // dd($this->getIdByProductName($data[0]));
-                $getID = [];
-                $getID = $this->getIdByProductName($data[0]);
-                $gettingID = array_get($getID, 0);
-                $arrayId = (array) $gettingID;
-                array_push($productNames, array_get($arrayId, "id"));
-                // array_push($locations, $data[1]);
-                // array_push($quantitys, $data[4]);
-                // //find product_id by name
-                // //find outlet_id by name
-                
-                // $inventoryOutlet = new InventoryOutlet ();
-                // $inventoryOutlet->products_id = $this->getIdByProductName($data[0]);
-                // $inventoryOutlet->stock_level = $this->getIdByOutlet($data[4]);
-                // $inventoryOutlet->save();
+                $getProductIDs = [];
+                $getProductIDs = $this->getIdByProductName($data[0]);
+                $gettingProductIDs = array_get($getProductIDs, 0);
+                $arrayProductIds = (array) $gettingProductIDs;
+                array_push($productIDs, array_get($arrayProductIds, "id"));
+                $productId = array_get($arrayProductIds, "id");
+
+                $getOutletIDs = [];
+                $getOutletIDs = $this->getIdByOutlet($data[1]);
+                $gettingOutletIDs = array_get($getOutletIDs, 0);
+                $arrayOutletIds = (array) $gettingOutletIDs;
+                array_push($locations, array_get($arrayOutletIds, "id"));
+                $outletId = array_get($arrayOutletIds, "id");
+
+                array_push($quantities, $data[4]);
             }
-            dd($productNames);
+
+            for($i=1; $i<count($quantities); $i++){
+                if(array_get($locations, $i) != null) {
+                    $inventoryOutlet = new InventoryOutlet;
+                    $inventoryOutlet->products_id = array_get($productIDs, $i);
+                    $inventoryOutlet->outlets_id = array_get($locations, $i);
+                    $inventoryOutlet->stock_level = array_get($quantities, $i);
+                    $inventoryOutlet->save();
+                }
+            }
 
             fclose ( $handle );
             $finalData = $inventoryOutlet::all ();
