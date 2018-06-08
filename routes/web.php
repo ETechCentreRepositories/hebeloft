@@ -93,3 +93,6 @@ Route::get('outlets/check/{id}','OutletsController@checkIfUsersExist');
 
 //Products
 Route::get('/products/create', 'ProductsController@add');
+Route::get('/products/updatePrice10', 'ProductsController@updatePrice10');
+Route::get('/products/updatePrice20', 'ProductsController@updatePrice20');
+Route::get('/products/revertPrice', 'ProductsController@revertPrice');

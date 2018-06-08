@@ -53,26 +53,26 @@ class InventoryController extends Controller
      */
     public function store(Request $request)
     {
+        $productIDs = [];
+        $locations = [];
+        $quantities = [];
         DB::table('inventory_has_outlets')->truncate();
     	$request->file('inventory_csv')->move(public_path(), "inventory.csv");
     	if (($handle = fopen ( public_path () . '/inventory.csv', 'r' )) !== FALSE) {
-            $productIDs = [];
-            $locations = [];
-            $quantities = [];
             while (($data = fgetcsv ( $handle, 1000, ',' )) !== FALSE ) {
                 $getProductIDs = [];
                 $getProductIDs = $this->getIdByProductName($data[0]);
                 $gettingProductIDs = array_get($getProductIDs, 0);
                 $arrayProductIds = (array) $gettingProductIDs;
                 array_push($productIDs, array_get($arrayProductIds, "id"));
-                $productId = array_get($arrayProductIds, "id");
+                // $productId = array_get($arrayProductIds, "id");
 
                 $getOutletIDs = [];
                 $getOutletIDs = $this->getIdByOutlet($data[1]);
                 $gettingOutletIDs = array_get($getOutletIDs, 0);
                 $arrayOutletIds = (array) $gettingOutletIDs;
                 array_push($locations, array_get($arrayOutletIds, "id"));
-                $outletId = array_get($arrayOutletIds, "id");
+                // $outletId = array_get($arrayOutletIds, "id");
 
                 array_push($quantities, $data[4]);
             }

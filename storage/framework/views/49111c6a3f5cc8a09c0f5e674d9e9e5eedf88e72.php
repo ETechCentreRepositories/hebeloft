@@ -38,7 +38,7 @@
             <input type="text" id="salesOrderSearchField" style="text-indent:20px;" class="form-control" style="background:transparent">
         </div>
         <div class="col-md-2">
-            <div class="d-flex flex-row transfer-buttons">
+            <div class="d-flex flex-row ">
                 <div class="p-2">
                     <button id="search" type="button" class="btn btn-sucess">Search</button>
                 </div>
@@ -46,7 +46,6 @@
                     <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
                 </div>
             </div>
-            
         </div>
     </div>
     <br>
