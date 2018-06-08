@@ -60,7 +60,7 @@
                 <th>Item</th>
                 <th>Normal Price</th>
                 <th>Category</th>
-                <th>Quantity</th>
+                <th>Quantity/Threshold Level</th>
             </tr>
         </thead>
         <tbody id="inventoryContent">
@@ -74,7 +74,7 @@
                 <td><?php echo e($inventoryOutlet->products['Name']); ?></td>
                 <td>$<?php echo e($inventoryOutlet->products['UnitPrice']); ?></td>
                 <td><?php echo e($inventoryOutlet->products['Category']); ?></td>
-                <td align="right"><?php echo e($inventoryOutlet->stock_level); ?></td>
+                <td align="right"><?php echo e($inventoryOutlet->stock_level); ?>/<?php echo e($inventoryOutlet->stock_level); ?></td>
             </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             <?php else: ?>

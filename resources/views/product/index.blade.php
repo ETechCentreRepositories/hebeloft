@@ -17,8 +17,17 @@
 <br>
 <div class="topMargin container">
     <div class="row justify-content-end">
-        <div class="col-d-2">
-        <a href="/products/create"><button type="button" class="btn btn-warning">Add new Product</button></a>
+        <div class="col-md-2">
+        <a href="/products/create"><button type="button" class="btn btn-warning btn-search">Add Product</button></a>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-10">
+            <input type="text" id="productSearchField" style="text-indent:20px;" class="form-control" style="background:transparent">
+        </div>
+        <div class="col-md-2">
+        <button id="search" type="button" class="btn btn-default btn-search">Search</button>
         </div>
     </div>
     <br>
@@ -38,7 +47,7 @@
                     @endif
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="productContent">
                 @foreach($products as $product)
                 <tr id="{{$product->id}}">
                     <td><img style="width:60px; height:60px" src="/storage/product_images/{{$product->image}}"></td>
@@ -85,5 +94,12 @@
         color: #000000 !important;
         pointer-events: none;
         cursor: default;
+    }
+
+    #productSearchField{
+        background-image:url(http://localhost:8000/storage/icons/search.png); 
+        background-repeat: no-repeat; 
+        background-position: 2px 3px;
+        background-size: 30px 30px;
     }
 </style>

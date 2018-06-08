@@ -61,7 +61,7 @@
                 <th>Item</th>
                 <th>Normal Price</th>
                 <th>Category</th>
-                <th>Quantity</th>
+                <th>Quantity/Threshold Level</th>
             </tr>
         </thead>
         <tbody id="inventoryContent">
@@ -75,7 +75,7 @@
                 <td>{{$inventoryOutlet->products['Name']}}</td>
                 <td>${{$inventoryOutlet->products['UnitPrice']}}</td>
                 <td>{{$inventoryOutlet->products['Category']}}</td>
-                <td align="right">{{$inventoryOutlet->stock_level}}</td>
+                <td align="right">{{$inventoryOutlet->stock_level}}/{{$inventoryOutlet->stock_level}}</td>
             </tr>
             @endforeach
             @else

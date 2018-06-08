@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Products;
 use App\User;
 use App\Models\AuditTrail;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
 use DB;
+use Carbon\Carbon;
 
 class ProductsController extends Controller
 {
@@ -58,20 +61,35 @@ class ProductsController extends Controller
             'action' => 'Created Outlet Staff',
             'action_by' => $login_user->name,
      ]);
+     $current_time = Carbon::now()->toDayDateTimeString();
 
         $product = new Products;
-        $product->Name = $request->input("name");
+        $product->Name = $request->input("ET_".$current_time+."_brand");
         $product->Category = $request->input("category");
+        $product->Remarks = $request->input("remarks");
         $product->Brand = $request->input("brand");
         $product->UnitPrice = $request->input("unitPrice");
         $product->Size = $request->input("size");
-        $product->OG_PLU = $request->input("ogplu");
+        $product->OG_PLU = $request->input("og");
         $product->BHG = $request->input("bhg");
         $product->Metro = $request->input("metro");
         $product->Robinsons = $request->input("robinson");
         $product->NTUC = $request->input("ntuc");
-        $product->Description = $request->input("Description");
+        $product->Description = $request->input("description");
+        $product->image = $request->input("image_add");
+        $product->Unit = $request->input("unit");
+        $product->ProductLength = $request->input("length");
+        $product->ProductWeight = $request->input("weight");
+        $product->ProductHeight = $request->input("height");
+        $product->ProductWidth = $request->input("width");
+        $product->Cost = $request->input("cost");
+        $product->LastVendor = $request->input("lastVendor");
+        $product->VendorPrice = $request->input("vendorPrice");
+        $product->Barcode = $request->input("barcode");
+        //stock level & threshold level
         $product->save();
+
+        $request->file('image_add')->store(Input::get('image_add'));
 
         return redirect('/product')->with('success', 'Successfully Created a New Product');
     }
@@ -99,7 +117,7 @@ class ProductsController extends Controller
         $users_id = User::find($user_id);
         $product = Products::find($id);
         
-        return view('product.edit')->with('users_id',$users_id)->with('products',$product);
+        return view('product.edit')->with('users_id',$users_id)->with('product',$product);
     }
 
     /**
@@ -120,20 +138,33 @@ class ProductsController extends Controller
             'action_by' => $login_user->name,
         ]);
 
-        $product = Products::find($id);
+        $product = new Products;
         $product->Name = $request->input("name");
         $product->Category = $request->input("category");
+        $product->Remarks = $request->input("remarks");
         $product->Brand = $request->input("brand");
         $product->UnitPrice = $request->input("unitPrice");
-        $product->Remarks = $request->input("remarks");
         $product->Size = $request->input("size");
-        $product->OG_PLU = $request->input("ogplu");
+        $product->OG_PLU = $request->input("og");
         $product->BHG = $request->input("bhg");
         $product->Metro = $request->input("metro");
         $product->Robinsons = $request->input("robinson");
         $product->NTUC = $request->input("ntuc");
         $product->Description = $request->input("description");
+        $product->image = $request->input("image_add");
+        $product->Unit = $request->input("unit");
+        $product->ProductLength = $request->input("length");
+        $product->ProductWeight = $request->input("weight");
+        $product->ProductHeight = $request->input("height");
+        $product->ProductWidth = $request->input("width");
+        $product->Cost = $request->input("cost");
+        $product->LastVendor = $request->input("lastVendor");
+        $product->VendorPrice = $request->input("vendorPrice");
+        $product->Barcode = $request->input("barcode");
+        //stock level & threshold level
         $product->save();
+
+        $request->file('image_add')->store(Input::get('image_add'));
 
         return redirect('/product')->with('success', 'Successfully Edited Product');
     }

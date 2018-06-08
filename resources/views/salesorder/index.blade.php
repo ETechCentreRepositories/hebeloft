@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<script src="{{ asset('js/sales_order.js') }}" defer></script>
+
 @section('content')
 
 @if ($users_id->roles_id == '1')
@@ -36,16 +36,10 @@
     <br>
     <div class="row">
         <div class="col-md-10">
-            <input type="text" id="salesOrderSearchField" style="text-indent:20px;" class="form-control" style="background:transparent">
         </div>
         <div class="col-md-2">
-            <div class="d-flex flex-row ">
-                <div class="p-2">
-                    <button id="search" type="button" class="btn btn-sucess">Search</button>
-                </div>
-                <div class="p-2">
-                    <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
-                </div>
+            <div class="d-flex flex-row">
+                <button id="search" type="button" class="btn btn-sucess btn-search">Search</button>
             </div>
         </div>
     </div>
@@ -70,7 +64,7 @@
                         <td>{{$salesOrder->statuses['status_name']}}</td>
                         <td>
                         <div class="d-flex flex-column">
-                            <div class="d-flex flex-row transfer-buttons">
+                            <div class="d-flex flex-row">
                                 <div class="p-2">
                                     <a href="/salesorder/{{$salesOrder->id}}"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
                                 </div>
@@ -158,6 +152,40 @@
     </div>
 </div>
 @endif
+<script>
+$(document).ready(function(){
+    $('#search').click(function(){
+        var startDate = $('#startDate').val();
+        var endDate = $('#endDate').val();
+        console.log(startDate + endDate);
+        $("#salesOrderContent").empty();
+        $.ajax({
+            type: "GET",
+            url: "/ajax/salesOrder/date/" + startDate + "/" + endDate,
+            cache: false,
+            dataType: "JSON",
+            success: function (response) {
+                console.log(response);
+                for (i = 0; i < response.length; i++) {
+                    console.log(response[i]);
+                    $("#salesOrderContent").append(
+                        "<tr><td>"+ response[i].date+"</td>"
+                        + "<td>"+ response[i].status +"</td>"
+                        + "<td>"+ response[i].status_name+"</td>"
+                        + "@if ($users_id->roles_id == '1')"
+                        + "<td><a href='/salesorder/"+response[i].id+"/edit'><button type='button' class='btn btn-primary action-buttons'>Edit</button></a></td></tr>"
+                        + "@endif"
+                    );
+                }
+            },
+
+            error: function (obj, textStatus, errorThrown) {
+                console.log("Error " + textStatus + ": " + errorThrown);
+            }
+        });
+    });
+});
+    </script>
 @endsection
 
 <style>
@@ -170,12 +198,5 @@
     
     .emptyHeader {
     	pointer-events: none;
-    }
-    
-    #salesOrderSearchField{
-        background-image:url(http://localhost:8000/storage/icons/search.png); 
-        background-repeat: no-repeat; 
-        background-position: 2px 3px;
-        background-size: 30px 30px;
     }
 </style>

@@ -1,4 +1,3 @@
-<script src="<?php echo e(asset('js/sales_record.js')); ?>" defer></script>
 <?php $__env->startSection('content'); ?>
 
 <?php if($users_id->roles_id == '1'): ?>
@@ -40,16 +39,10 @@
     <br>
     <div class="row">
         <div class="col-md-10">
-            <input type="text" id="salesRecordSearchField" style="text-indent:20px;" class="form-control" style="background:transparent">
         </div>
         <div class="col-md-2">
-        <div class="d-flex flex-row ">
-                <div class="p-2">
-                    <button id="search" type="button" class="btn btn-sucess">Search</button>
-                </div>
-                <div class="p-2">
-                    <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
-                </div>
+            <div class="d-flex flex-row">
+            <button id="search" type="button" class="btn btn-sucess btn-search">Search</button>
             </div>
         </div>
     </div>
@@ -90,42 +83,41 @@
         <?php echo e($salesRecords->links()); ?>
 
     </div>
-    <script>
-        $(document).ready(function(){
-            $('#refreshInventory').click(function(){
-                var startDate = $('#startDate').val();
-                var endDate = $('#endDate').val();
-                console.log(startDate + endDate);
-                $("#salesRecordContent").empty();
-            $.ajax({
-                type: "GET",
-                url: "<?php echo e(URL::TO('/ajax/salesrecord/date')); ?>/" + startDate + "/" + endDate,
-                // data: "products.Name=" + productName,
-                cache: false,
-                dataType: "JSON",
-                success: function (response) {
-                    // console.log(response);
-                    for (i = 0; i < response.length; i++) {
-                        console.log(response[i]);
-                        $("#salesRecordContent").append(
-                            "<tr><td>"+ response[i].date+"</td>"
-                            + "<td>"+ response[i].receiptNumber +"</td>"
-                            + "<td>" + response[i].outlet_name + "</td>"
-                            + "<td>" + response[i].total_price + "</td>"
-                            + "<td>"+ response[i].remarks+"</td></tr>"
-                        );
-                    }
-                },
-
-                error: function (obj, textStatus, errorThrown) {
-                    console.log("Error " + textStatus + ": " + errorThrown);
-                }
-            });
-            });
-        });
-    </script>
 </div>
+<script>
+$(document).ready(function(){
+    $('#search').click(function(){
+        var startDate = $('#startDate').val();
+        var endDate = $('#endDate').val();
+        console.log(startDate + endDate);
+        $("#salesRecordContent").empty();
+        $.ajax({
+            type: "GET",
+            url: "/ajax/salesOrder/date/" + startDate + "/" + endDate,
+            cache: false,
+            dataType: "JSON",
+            success: function (response) {
+                console.log(response);
+                for (i = 0; i < response.length; i++) {
+                    console.log(response[i]);
+                    $("#salesRecordContent").append(
+                        "<tr><td>"+ response[i].date+"</td>"
+                        + "<td>"+ response[i].status +"</td>"
+                        + "<td>"+ response[i].status_name+"</td>"
+                        + "<?php if($users_id->roles_id == '1'): ?>"
+                        + "<td><a href='/salesorder/"+response[i].id+"/edit'><button type='button' class='btn btn-primary action-buttons'>Edit</button></a></td></tr>"
+                        + "<?php endif; ?>"
+                    );
+                }
+            },
 
+            error: function (obj, textStatus, errorThrown) {
+                console.log("Error " + textStatus + ": " + errorThrown);
+            }
+        });
+    });
+});
+</script>
 <?php $__env->stopSection(); ?>
 
 <style>
@@ -134,13 +126,6 @@
         color: #000000 !important;
         pointer-events: none;
         cursor: default;
-    }
-    
-    #salesRecordSearchField{
-        background-image:url(http://ehostingcentre.com/hebeloft/storage/icons/search.png); 
-        background-repeat: no-repeat; 
-        background-position: 2px 3px;
-        background-size: 30px 30px;
     }
 </style>
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -111,8 +111,8 @@ $(document).ready(function() {
 
     var trProducts = [];
     $(document).on("click","#addTransferRequest",function(){
-        var productName = $("#transferRequestSearchField").val();
-        console.log(productName);
+        var productName = $("#createTrSearchField").val();
+        console.log("productName " + productName);
         $.ajax({
             type: "GET",
             url: "/retrieve-inventory-by-product-name/" + productName,
@@ -131,7 +131,7 @@ $(document).ready(function() {
                         "<tr id='newRow_"+productId+"'>"
                         + "<td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
                         + "<td>" + response[i].Name + "</td>"
-                        + "<td align='center'><input name='quantity' type='number' id='qty' type='text' style='width:60px;' value='1'/></td>"
+                        + "<td align='center'><select name='select'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option></select></td>"
                         + "<td><button type='button' class='btn btn-danger action-buttons' id='removeTR'> Remove </button></td></tr>"
                     );
                 }

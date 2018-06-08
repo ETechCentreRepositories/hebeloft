@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\TransferRequest;
 use App\Models\TransferRequestList;
+use App\Models\InventoryOutlet;
 use App\User;
 use App\Models\Status;
 use App\Models\AuditTrail;

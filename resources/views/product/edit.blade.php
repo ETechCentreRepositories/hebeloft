@@ -18,52 +18,39 @@
 <div class="topMargin container">
     <h3>Edit product</h3>
     <br>
-        {!! Form::open(['action' => ['ProductsController@update', $products->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+        {!! Form::open(['action' => ['ProductsController@update', $product->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
         <div class="form-group">
-            <div class="row">
+        <div class="row">
                 <div class="col-md-1">
                     <p>Name</p>
                 </div>
-                <div class="col-md-5">
-                    {{Form::text('name', $products->Name, ['class' => 'form-control', 'placeholder' => 'Name'])}}
+                <div class="col-md-4">
+                    {{Form::text('name', $product->Name, ['class' => 'form-control', 'placeholder' => 'Name'])}}
                 </div>
+                <div class="col-md-1"></div>
                 <div class="col-md-2">
-                    <p style="text-align:right">OG PLU</p>
+                    <p style="text-align:right">Category</p>
                 </div>
                 <div class="col-md-4">
-                    <input id="ogplu" type="number" class="form-control" name="ogPLU" placeholder="OG PLU" value="{{$products->OG_PLU}}" required>
-                </div>   
+                    {{Form::text('category', $product->Category, ['class' => 'form-control', 'placeholder' => 'Category'])}}
+                </div>
+                   
             </div>
         </div>
         <div class="form-group">
             <div class="row">
                 <div class="col-md-1">
-                    <p>Category</p>
-                </div>
-                <div class="col-md-5">
-                    {{Form::text('category', $products->Category, ['class' => 'form-control', 'placeholder' => 'Category'])}}
-                </div>
-                <div class="col-md-2">
-                    <p style="text-align:right">BHG</p>
+                    <p>Remarks</p>
                 </div>
                 <div class="col-md-4">
-                    <input id="bhg" type="number" class="form-control" name="bhg" placeholder="BHG" value="{{$products->BHG}}" required>
+                    {{Form::text('remarks', $product->Remarks, ['class' => 'form-control', 'placeholder' => 'Remarks'])}}
                 </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-1">
-                    <p>Brand</p>
-                </div>
-                <div class="col-md-5">
-                    {{Form::text('brand', $products->Brand, ['class' => 'form-control', 'placeholder' => 'Brand'])}}
-                </div>
+                <div class="col-md-1"></div>
                 <div class="col-md-2">
-                    <p style="text-align:right">METRO</p>
+                    <p style="text-align:right">Brand</p>
                 </div>
                 <div class="col-md-4">
-                    <input id="metro" type="number" class="form-control" name="metro" placeholder="METRO" value="{{$products->Metro}}" required>
+                    {{Form::text('brand', $product->Brand, ['class' => 'form-control', 'placeholder' => 'Brand'])}}
                 </div>
             </div>
         </div>
@@ -72,59 +59,167 @@
                 <div class="col-md-1">
                     <p>UnitPrice</p>
                 </div>
-                <div class="col-md-5">
-                    {{Form::text('unitPrice', $products->UnitPrice, ['class' => 'form-control', 'placeholder' => 'UnitPrice'])}}
+                <div class="col-md-4">
+                    {{Form::text('unitPrice', $product->UnitPrice, ['class' => 'form-control', 'placeholder' => '00.00'])}}
                 </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                    <p style="text-align:right">METRO</p>
+                </div>
+                <div class="col-md-4">
+                    <input id="metro" type="number" class="form-control" name="metro" placeholder="METRO" value="{{$product->Metro}}" required>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-1">
+                    <p>OG PLU</p>
+                </div>
+                <div class="col-md-4">
+                    <input id="og" type="number" class="form-control" name="og" placeholder="OG PLU" required>
+                </div>
+                <div class="col-md-1"></div>
                 <div class="col-md-2">
                     <p style="text-align:right">ROBINSON</p>
                 </div>
                 <div class="col-md-4">
-                    <input id="robinson" type="number" class="form-control" name="robinson" placeholder="ROBINSON" value="{{$products->Robinsons}}" required>
+                    <input id="robinson" type="number" class="form-control" name="robinson" placeholder="ROBINSON" required>
                 </div>
             </div>
         </div>
         <div class="form-group">
             <div class="row">
                 <div class="col-md-1">
-                    <p>Remarks</p>
+                    <p>BHG</p>
                 </div>
-                <div class="col-md-5">
-                    {{Form::text('remarks', $products->Remarks, ['class' => 'form-control', 'placeholder' => 'Remarks'])}}
+                <div class="col-md-4">
+                    <input id="bhg" type="number" class="form-control" name="bhg" placeholder="BHG" required>
                 </div>
+                <div class="col-md-1"></div>
                 <div class="col-md-2">
                     <p style="text-align:right">NTUC</p>
                 </div>
                 <div class="col-md-4">
-                    <input id="ntuc" type="number" class="form-control" name="ntuc" placeholder="NTUC" value="{{$products->NTUC}}" required>
+                    <input id="ntuc" type="number" class="form-control" name="ntuc" placeholder="NTUC" required>
                 </div> 
+            </div>
+        </div>
+        <hr>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-1">
+                    <p>Unit</p>
+                </div>
+                <div class="col-md-4">
+                    {{Form::text('unit', $product->Unit, ['class' => 'form-control', 'placeholder' => 'Unit'])}}
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                    <p style="text-align:right">Size</p>
+                </div>
+                <div class="col-md-4">
+                    {{Form::text('size', $product->Size, ['class' => 'form-control', 'placeholder' => 'Size'])}}
+                </div>
             </div>
         </div>
         <div class="form-group">
             <div class="row">
                 <div class="col-md-1">
-                    <p>Size</p>
+                    <p>Stock Level</p>
                 </div>
-                <div class="col-md-5">
-                    {{Form::text('size', $products->Size, ['class' => 'form-control', 'placeholder' => 'Size'])}}
+                <div class="col-md-4">
+                    {{Form::text('stock_level', '', ['class' => 'form-control', 'placeholder' => 'Stock Level'])}}
                 </div>
+                <div class="col-md-1"></div>
                 <div class="col-md-2">
-                    <p style="text-align:right"><p style="text-align:right">Threshold level</p></p>
+                    <p style="text-align:right">Threshold level</p>
                 </div>
                 <div class="col-md-4">
                     {{Form::text('threshold', '', ['class' => 'form-control', 'placeholder' => 'Threshold level'])}}
                 </div>
             </div>
         </div>
+        <hr>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-1">
+                    <p>Length</p>
+                </div>
+                <div class="col-md-4">
+                    {{Form::text('length', $product->ProductLength, ['class' => 'form-control', 'placeholder' => '00.00'])}}
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                    <p style="text-align:right">Width</p>
+                </div>
+                <div class="col-md-4">
+                    {{Form::text('width', $product->ProductWidth, ['class' => 'form-control', 'placeholder' => '00.00'])}}
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-1">
+                    <p>Weight</p>
+                </div>
+                <div class="col-md-4">
+                    {{Form::text('weight', $product->ProductWeight, ['class' => 'form-control', 'placeholder' => '00.00'])}}
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                    <p style="text-align:right">Height</p>
+                </div>
+                <div class="col-md-4">
+                    {{Form::text('height', $product->ProductHeight, ['class' => 'form-control', 'placeholder' => '00.00'])}}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-1">
+                    <p>Cost</p>
+                </div>
+                <div class="col-md-4">
+                    {{Form::text('cost', $product->Cost, ['class' => 'form-control', 'placeholder' => '00.00'])}}
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                    <p style="text-align:right">Last Vendor</p>
+                </div>
+                <div class="col-md-4">
+                    {{Form::text('lastVendor', $product->LastVendor, ['class' => 'form-control', 'placeholder' => 'Last Vendor'])}}
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-1">
+                    <p>Vendor Price</p>
+                </div>
+                <div class="col-md-4">
+                    {{Form::text('vendorPrice', $product->VendorPrice, ['class' => 'form-control', 'placeholder' => '00.00'])}}
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                    <p style="text-align:right">Barcode</p>
+                </div>
+                <div class="col-md-4">
+                    {{Form::text('barcode', $product->Barcode, ['class' => 'form-control', 'placeholder' => 'Barcode'])}}
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-8">
-                {{Form::textarea('description', $products->Description, ['class' => 'form-control', 'placeholder' => 'Description'])}}
+                {{Form::textarea('description', $product->Description, ['class' => 'form-control', 'placeholder' => 'Description'])}}
             </div>
             <div class="col-md-4">
                 <h4>Product</h4>
                 {{Form::file('image_add',array('id'=>'image_add'))}}
                 <br></br>
                 <div class="centerImage col-md-3" >
-                <img src = "" id="addImage" width="150px" />
+                <img src = "/storage/product_images/{{$product->image}}" id="addImage" width="150px" />
                 <br>
                 </div>
             </div>
