@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Products;
 use App\User;
 use App\Models\AuditTrail;
+use App\BulkUpdate;
 use DB;
 
 class ProductsController extends Controller
@@ -19,9 +20,10 @@ class ProductsController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
+        $bulk = DB::table('products')->select('bulk_update_id')->where('id', '1')->get();
         $product = Products::orderBy('id','asc')->paginate(10);
         
-        return view('product.index')->with('users_id',$users_id)->with('products',$product);
+        return view('product.index')->with('users_id',$users_id)->with('products',$product)->with('bulk',$bulk);
     }
     public function add()
     {
@@ -57,7 +59,7 @@ class ProductsController extends Controller
         $auditTrail = AuditTrail::create([
             'action' => 'Created Outlet Staff',
             'action_by' => $login_user->name,
-     ]);
+        ]);
 
         $product = new Products;
         $product->Name = $request->input("name");

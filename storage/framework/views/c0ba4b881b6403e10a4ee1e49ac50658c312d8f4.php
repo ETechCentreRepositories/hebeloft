@@ -1,3 +1,5 @@
+
+<script src="<?php echo e(asset('js/sales_record.js')); ?>" defer></script>
 <?php $__env->startSection('content'); ?>
 
 <?php if($users_id->roles_id == '1'): ?>
@@ -14,8 +16,9 @@
 
 <br>
 <div class="topMargin container">
+    <a href="<?php echo e(route('exportSalesRecord.file',['type'=>'csv'])); ?>"><button type="button" class="btn btn-warning" style="width: auto; float: left;">Export</button></a>
     <div class="row justify-content-end">
-        <a href="/salesrecord/create"><button type="button" class="btn btn-warning">Add Sales Record</button></a>
+        <a href="/salesrecord/create"><button type="button" class="btn btn-warning">Create or View New Sales Record</button></a>
     </div>
     <br>
     <div class="drop-down_brand row">
@@ -38,7 +41,7 @@
     <br>
     <div class="row">
         <div class="col-md-10">
-            <input type="text" class="form-control" style="background:transparent;">
+            <input type="text" id="salesRecordSearchField" style="text-indent:20px;" class="form-control" style="background:transparent">
         </div>
         <div class="col-md-2">
             <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
@@ -50,7 +53,6 @@
             <thead>
                 <tr>
                     <th>Date (YYYY-MM-DD)</th>
-                    <th>Receipt Number</th>
                     <th>Outlet</th>
                     <th>Total Price</th>
                     <th>Remarks</th>
@@ -61,7 +63,6 @@
                     <?php $__currentLoopData = $salesRecords; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $salesRecord): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
                         <td><?php echo e($salesRecord->date); ?></td>
-                        <td><?php echo e($salesRecord->receiptNumber); ?></td>
                         <td><?php echo e($salesRecord->outlets['outlet_name']); ?></td>
                         <td><?php echo e($salesRecord->total_price); ?></td>
                         <td><?php echo e($salesRecord->remarks); ?></td>
@@ -127,6 +128,13 @@
         color: #000000 !important;
         pointer-events: none;
         cursor: default;
+    }
+    
+    #salesRecordSearchField{
+        background-image:url(http://ehostingcentre.com/hebeloft/storage/icons/search.png); 
+        background-repeat: no-repeat; 
+        background-position: 2px 3px;
+        background-size: 30px 30px;
     }
 </style>
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

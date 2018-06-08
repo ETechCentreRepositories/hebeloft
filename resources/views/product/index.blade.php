@@ -55,7 +55,7 @@
                                     <a href="/product/{{$product->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
                                 <div class="p-2">
-                                {!!Form::open(['action' => ['ProductsController@destroy', $product->id], 'method' => 'POST'])!!}
+                                    {!!Form::open(['action' => ['ProductsController@destroy', $product->id], 'method' => 'POST'])!!}
                                         {{Form::hidden('_method', 'DELETE')}}
                                         {{Form::submit('Delete', ['class' => 'btn btn-danger action-buttons'])}}
                                     {!!Form::close()!!}
@@ -68,6 +68,7 @@
                 @endforeach
             </tbody>
         </table>
+        <button class="btn btn-primary" onclick="openBulkUpdateModal()">Bulk Update</button>
     </div>
     @else
     <p>No products found</p> 
@@ -76,6 +77,38 @@
 <div class="pagination">
     {{$products->links()}}
 </div>
+
+<div id="bulkUpdateModal" class="modal">
+    <span class="close cursor" onclick="closeBulkUpdateModal()">&times;</span>
+    <div class="card modalCard">
+        <div class="card-body">
+            <br>
+            <h3 class="card-title">Delete Confirmation</h3>
+            <br>
+            <form action="/API/bulkUpdate.php" method="post" style="width: 100%;">
+                {{Form::hidden('bulk_update_id', '2')}}
+                <div class="form-group modal-button">
+                    {{Form::submit('10% discount', ['class'=>'btn btn-primary btn-lg'])}}
+                </div>
+            </form>
+            <form action="/API/bulkUpdate.php" method="post" style="width: 100%;">
+                {{Form::hidden('bulk_update_id', $bulk)}}
+                {{Form::hidden('bulk_update_id', '2')}}
+                {{Form::submit('10% discount', ['class'=>'btn btn-primary btn-lg'])}}
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openBulkUpdateModal() {
+        document.getElementById('bulkUpdateModal').style.display = "block";
+    }
+    
+    function closeBulkUpdateModal() {
+        document.getElementById('bulkUpdateModal').style.display = "none";
+    }
+</script>
 
 @endsection
 

@@ -134,8 +134,8 @@ class InventoryController extends Controller
                 }
 
                 if(!empty($arr)){
-                    DB::table('products')->insert($arr);
-                    dd('Insert Recorded successfully.');
+                    // DB::table('inventory')->insert($arr);
+                    dd($arr);
                 }
             }
         }

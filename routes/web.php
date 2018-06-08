@@ -33,6 +33,7 @@ Route::resource('transferrequest', 'TransferRequestController');
 Route::resource('salesorder', 'SalesOrdersController');
 Route::resource('salesrecord', 'SalesRecordsController');
 Route::resource('product', 'ProductsController');
+Route::resource('bulkUpdate', 'BulkUpdateController');
 
 Route::get('/ajax/so_tbp/{$statuses_id}', 'SalesOrdersController@view');
 Route::get('/ajax/so-tbs/{$statuses_id}', 'SalesOrdersController@getOutlet');
