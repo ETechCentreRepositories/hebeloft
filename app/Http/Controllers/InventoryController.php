@@ -53,15 +53,42 @@ class InventoryController extends Controller
      */
     public function store(Request $request)
     {
+        $productIDs = [];
+        $locations = [];
+        $quantities = [];
+        DB::table('inventory_has_outlets')->truncate();
     	$request->file('inventory_csv')->move(public_path(), "inventory.csv");
     	if (($handle = fopen ( public_path () . '/inventory.csv', 'r' )) !== FALSE) {
-            while ( ($data = fgetcsv ( $handle, 1000, ',' )) !== FALSE ) {
-                $csv_data = new Products ();
-                $csv_data->Name = $data [0];
-                $csv_data->save();
+            while (($data = fgetcsv ( $handle, 1000, ',' )) !== FALSE ) {
+                $getProductIDs = [];
+                $getProductIDs = $this->getIdByProductName($data[0]);
+                $gettingProductIDs = array_get($getProductIDs, 0);
+                $arrayProductIds = (array) $gettingProductIDs;
+                array_push($productIDs, array_get($arrayProductIds, "id"));
+                // $productId = array_get($arrayProductIds, "id");
+
+                $getOutletIDs = [];
+                $getOutletIDs = $this->getIdByOutlet($data[1]);
+                $gettingOutletIDs = array_get($getOutletIDs, 0);
+                $arrayOutletIds = (array) $gettingOutletIDs;
+                array_push($locations, array_get($arrayOutletIds, "id"));
+                // $outletId = array_get($arrayOutletIds, "id");
+
+                array_push($quantities, $data[4]);
             }
+
+            for($i=1; $i<count($quantities); $i++){
+                if(array_get($locations, $i) != null) {
+                    $inventoryOutlet = new InventoryOutlet;
+                    $inventoryOutlet->products_id = array_get($productIDs, $i);
+                    $inventoryOutlet->outlets_id = array_get($locations, $i);
+                    $inventoryOutlet->stock_level = array_get($quantities, $i);
+                    $inventoryOutlet->save();
+                }
+            }
+
             fclose ( $handle );
-            $finalData = $csv_data::all ();
+            $finalData = $inventoryOutlet::all ();
             return redirect('/')->with('success', 'Success');
         } else {
             return redirect('/')->with('fail', 'Fail');
@@ -122,25 +149,6 @@ class InventoryController extends Controller
      * @return void
 
      */
-
-    public function importFile(Request $request){
-
-        if($request->hasFile('sample_file')){
-            $path = $request->file('sample_file')->getRealPath();
-            $data = \Excel::load($path)->get();
-            if($data->count()){
-                foreach ($data as $key => $value) {
-                    $arr[] = ['title' => $value->title, 'body' => $value->body];
-                }
-
-                if(!empty($arr)){
-                    // DB::table('inventory')->insert($arr);
-                    dd($arr);
-                }
-            }
-        }
-        dd('Request data does not have any files to import.');      
-    }
 
         /**
 
@@ -251,6 +259,20 @@ class InventoryController extends Controller
                     ->get()->toArray();
 
         return response($inventoryByOutlet);
+    }
+
+    public function getIdByOutlet($outlet){
+        
+        $idByOutletName = DB::table('outlets')->select('id')->where('outlet_name', $outlet)->get();
+
+        return $idByOutletName;
+    }
+
+    public function getIdByProductName($productName){
+
+        $idByProductName = DB::table('products')->select('id')->where('Name', $productName)->get();
+
+        return $idByProductName;
     }
 
 }

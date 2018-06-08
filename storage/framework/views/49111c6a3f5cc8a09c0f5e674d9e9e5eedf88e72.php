@@ -46,7 +46,6 @@
                     <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
                 </div>
             </div>
-            
         </div>
     </div>
     <br>

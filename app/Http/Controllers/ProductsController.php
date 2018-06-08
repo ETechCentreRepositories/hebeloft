@@ -161,4 +161,16 @@ class ProductsController extends Controller
         $product->delete();
         return redirect('/product')->with('success', 'Successfully Deleted Product');
     }
+
+    public function updatePrice10(Request $request) {
+
+    }
+
+    public function updatePrice20(Request $request) {
+
+    }
+
+    public function revertPrice(Request $request) {
+
+    }
 }

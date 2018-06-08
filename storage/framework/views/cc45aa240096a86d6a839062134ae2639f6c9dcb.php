@@ -43,7 +43,14 @@
             <input type="text" id="salesRecordSearchField" style="text-indent:20px;" class="form-control" style="background:transparent">
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
+        <div class="d-flex flex-row ">
+                <div class="p-2">
+                    <button id="search" type="button" class="btn btn-sucess">Search</button>
+                </div>
+                <div class="p-2">
+                    <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
+                </div>
+            </div>
         </div>
     </div>
     <br>
@@ -61,10 +68,10 @@
             <tbody id="salesRecordContent">
                     <?php $__currentLoopData = $salesRecords; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $salesRecord): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
-                        <td><?php echo e($salesRecord->date); ?></td>
+                        <td><?php echo e($salesRecord->OrderDate); ?></td>
                         <td><?php echo e($salesRecord->outlets['outlet_name']); ?></td>
                         <td><?php echo e($salesRecord->total_price); ?></td>
-                        <td><?php echo e($salesRecord->remarks); ?></td>
+                        <td><?php echo e($salesRecord->OrderRemarks); ?></td>
                         <td>
                             <div class="d-flex flex-column">
                                 <div class="d-flex flex-row transfer-buttons">

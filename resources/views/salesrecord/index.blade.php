@@ -44,7 +44,14 @@
             <input type="text" id="salesRecordSearchField" style="text-indent:20px;" class="form-control" style="background:transparent">
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
+        <div class="d-flex flex-row ">
+                <div class="p-2">
+                    <button id="search" type="button" class="btn btn-sucess">Search</button>
+                </div>
+                <div class="p-2">
+                    <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
+                </div>
+            </div>
         </div>
     </div>
     <br>
@@ -62,10 +69,10 @@
             <tbody id="salesRecordContent">
                     @foreach($salesRecords as $salesRecord)
                     <tr>
-                        <td>{{$salesRecord->date}}</td>
+                        <td>{{$salesRecord->OrderDate}}</td>
                         <td>{{$salesRecord->outlets['outlet_name']}}</td>
                         <td>{{$salesRecord->total_price}}</td>
-                        <td>{{$salesRecord->remarks}}</td>
+                        <td>{{$salesRecord->OrderRemarks}}</td>
                         <td>
                             <div class="d-flex flex-column">
                                 <div class="d-flex flex-row transfer-buttons">
