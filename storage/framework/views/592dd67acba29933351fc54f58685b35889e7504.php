@@ -15,16 +15,14 @@
 <br>
 <div class="topMargin container">
     <div class="d-flex">
-    <?php if($users_id->roles_id == '1'): ?>
         <div class="p-2">
-            <button type="button" class="btn btn-warning" onclick="openCreateAdminModal()" style="padding-right:10dp">Register an Admin</button>
-        </div>
-        <?php endif; ?>
-        <div class="p-2">
-            <button type="button" class="btn btn-warning" onclick="openCreateStaffModal()">Register a Staff</button>
-        </div>
-        <div class="ml-auto p-2">
             <a href="<?php echo e(route('exportUser.file',['type'=>'csv'])); ?>"><button type="button" class="btn btn-warning">Export</button></a>
+        </div>
+        <div class="p-2 ml-auto">
+            <?php if($users_id->roles_id == '1'): ?>
+                <button type="button" class="btn btn-warning" onclick="openCreateAdminModal()" style="padding-right:10dp">Register an Admin</button>
+            <?php endif; ?>
+            <button type="button" class="btn btn-warning" onclick="openCreateStaffModal()">Register a Staff</button>
         </div>
     </div>
     <br>
@@ -37,7 +35,7 @@
     <br>
     <div class="tab-content">
         <div class="tab-pane fade show active" id="all">
-            <table class="table table-striped sortable">
+            <table class="display" id="userTable">
                 <thead>
                     <tr>
                         <th>Username</th>
@@ -50,7 +48,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if(count($users) > 0): ?>
                     <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
                         <td><?php echo e($user->name); ?></td>
@@ -59,7 +56,7 @@
                         <td><?php echo e($user->roles['roles_name']); ?></td>
                         <?php if($users_id->roles_id == '1'): ?>
                         <td>
-                            <div class="d-flex flex-row user-buttons">
+                            <div class="d-flex flex-row">
                                     <div class="p-2">
                                         <a href="/user/<?php echo e($user->id); ?>/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                     </div>
@@ -78,15 +75,12 @@
                         <?php endif; ?>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    <?php else: ?>
-                        <p>No users found</p>
-                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
 
         <div class="tab-pane fade" id="admins">
-            <table class="table table-striped sortable">
+            <table class="display" id="adminTable">
                 <thead>
                     <tr>
                         <th>Username</th>
@@ -99,7 +93,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if(count($admins) > 0): ?>
                     <?php $__currentLoopData = $admins; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
                         <td><?php echo e($user->name); ?></td>
@@ -108,7 +101,7 @@
                         <td><?php echo e($user->roles['roles_name']); ?></td>
                         <?php if($users_id->roles_id == '1'): ?>
                         <td>
-                            <div class="d-flex flex-row user-buttons">
+                            <div class="d-flex flex-row">
                                     <div class="p-2">
                                         <a href="/user/<?php echo e($user->id); ?>/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                     </div>
@@ -127,15 +120,12 @@
                         <?php endif; ?>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    <?php else: ?>
-                        <p>No users found</p>
-                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
 
         <div class="tab-pane fade" id="staffs">
-            <table class="table table-striped sortable">
+            <table class="display" id="staffTable">
                 <thead>
                     <tr>
                         <th>Username</th>
@@ -148,7 +138,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if(count($staffs) > 0): ?>
                     <?php $__currentLoopData = $staffs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
                         <td><?php echo e($user->name); ?></td>
@@ -157,7 +146,7 @@
                         <td><?php echo e($user->roles['roles_name']); ?></td>
                         <?php if($users_id->roles_id == '1'): ?>
                         <td>
-                            <div class="d-flex flex-row user-buttons">
+                            <div class="d-flex flex-row">
                                     <div class="p-2">
                                         <a href="/hebeloft/user/<?php echo e($user->id); ?>/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                     </div>
@@ -176,16 +165,13 @@
                         <?php endif; ?>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    <?php else: ?>
-                        <p>No users found</p>
-                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
         
         
         <div class="tab-pane fade" id="wholesalers">
-            <table class="table table-striped sortable">
+            <table class="display" id="wholesalerTable">
                 <thead>
                     <tr>
                         <th>Username</th>
@@ -198,7 +184,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if(count($wholesalers) > 0): ?>
                     <?php $__currentLoopData = $wholesalers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
                         <td><?php echo e($user->name); ?></td>
@@ -207,7 +192,7 @@
                         <td><?php echo e($user->roles['roles_name']); ?></td>
                         <?php if($users_id->roles_id == '1'): ?>
                         <td>
-                            <div class="d-flex flex-row user-buttons">
+                            <div class="d-flex flex-row">
                                     <div class="p-2">
                                         <a href="/user/<?php echo e($user->id); ?>/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                     </div>
@@ -226,18 +211,10 @@
                         <?php endif; ?>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    <?php else: ?>
-                        <p>No users found</p>
-                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
     </div>
-</div>
-
-<div class="pagination">
-    <?php echo e($users->links()); ?>
-
 </div>
 
 <div id="createAdminModal" class="modal">
@@ -258,49 +235,19 @@
                         <div class="col-md-12">
                             <input id="role" type="hidden" class="form-control" name="role" value="2"/>
                             <input id="adminUsername" type="text" class="form-control" name="adminUsername" placeholder="Username" value="<?php echo e(old('username')); ?>" required autofocus>
-                            <?php if($errors->has('username')): ?>
-                                <span class="help-block">
-                                    <strong><?php echo e($errors->first('username')); ?></strong>
-                                </span>
-                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
-
-                <div class="form-group hiddenField">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <input id="adminEmail" type="hidden" class="form-control" name="adminEmail" value="enquiry@hebeloft.com" value="<?php echo e(old('email')); ?>" required>
-
-                            <?php if($errors->has('email')): ?>
-                                <span class="help-block">
-                                    <strong><?php echo e($errors->first('email')); ?></strong>
-                                </span>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-12">
                             <input id="adminPhoneNumber" type="number" class="form-control" name="adminPhoneNumber" placeholder="Phone number" value="<?php echo e(old('number')); ?>" required>
-                            <?php if($errors->has('number')): ?>
-                                <span class="help-block">
-                                    <strong><?php echo e($errors->first('number')); ?></strong>
-                                </span>
-                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group<?php echo e($errors->has('password') ? ' has-error' : ''); ?>">
                     <input id="adminPassword" type="password" class="form-control passwordField" name="adminPassword" placeholder="Password" required>
-                    <?php if($errors->has('password')): ?>
-                        <span class="help-block">
-                            <strong><?php echo e($errors->first('password')); ?></strong>
-                        </span>
-                    <?php endif; ?>
                     <input id="adminPasswordConfirm" type="password" class="form-control" name="adminPasswordConfirmation" placeholder="Confirm password" required>
                 </div>
                 <div class="form-group">
@@ -331,61 +278,25 @@
                         <div class="col-md-12">
                             <input id="role" type="hidden" class="form-control" name="role" value="3"/>
                             <input id="username" type="text" class="form-control" name="username" placeholder="Username" value="<?php echo e(old('username')); ?>" required autofocus>
-                            <?php if($errors->has('username')): ?>
-                                <span class="help-block">
-                                    <strong><?php echo e($errors->first('username')); ?></strong>
-                                </span>
-                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
-
-                <div class="form-group hiddenField">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <input id="email" type="hidden" class="form-control" name="email" value="enquiry@hebeloft.com" value="<?php echo e(old('email')); ?>" required>
-
-                            <?php if($errors->has('email')): ?>
-                                <span class="help-block">
-                                    <strong><?php echo e($errors->first('email')); ?></strong>
-                                </span>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-12">
                             <input id="phone_number" type="number" class="form-control" name="phone_number" placeholder="Phone number" value="<?php echo e(old('number')); ?>" required>
-
-                            <?php if($errors->has('number')): ?>
-                                <span class="help-block">
-                                    <strong><?php echo e($errors->first('number')); ?></strong>
-                                </span>
-                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group<?php echo e($errors->has('password') ? ' has-error' : ''); ?>">
                     <input id="password" type="password" class="form-control passwordField" name="password" placeholder="Password" required>
-                    <?php if($errors->has('password')): ?>
-                        <span class="help-block">
-                            <strong><?php echo e($errors->first('password')); ?></strong>
-                        </span>
-                    <?php endif; ?>
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm password" required>
                 </div>
 
                 <br><hr><br>
                 <label >Outlet:</label>
                 <div class="form-group row">  
-                    <?php $__currentLoopData = $outlets; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $outlet): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <div class="col-md-5">
-                        <label class="checkbox-inline"><input name="outlet[]" type="checkbox" value="<?php echo e($outlet->id); ?>"> <?php echo e($outlet->outlet_name); ?> </label>
-                            </div>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
 
                 <div class="form-group">
@@ -403,6 +314,12 @@
 </div>
 
 <script>
+    $(document).ready(function (){
+        $("#userTable").DataTable();
+        $("#adminTable").DataTable();
+        $("#staffTable").DataTable();
+        $("#wholesalerTable").DataTable();
+    });
     function openCreateStaffModal() {
         document.getElementById('createStaffModal').style.display = "block";
     }

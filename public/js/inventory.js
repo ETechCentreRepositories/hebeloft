@@ -1,4 +1,7 @@
 $(document).ready(function(){
+    $("#inventoryTable").DataTable({
+        searching: false
+    });
     $.get('ajax/product_brand',function(data){
         $("#product_brand").empty();
         $("#product_brand").append("<option value='all'>All</option>");
@@ -50,7 +53,7 @@ $(document).ready(function(){
                             + "<td>" + value.Name + "</td>"
                             + "<td>" + value.UnitPrice + "</td>"
                             + "<td>" + value.Category + "</td>" 
-                            + "<td>" + value.stock_level + "</td></tr>"
+                            + "<td>" + value.stock_level + "/" + value.threshold_level + "</td></tr>"
                         );
                     });
                 }
@@ -75,7 +78,7 @@ $(document).ready(function(){
                                 + "<td>" + response[i].Name + "</td>"
                                 + "<td>" + response[i].UnitPrice + "</td>"
                                 + "<td>" + response[i].Category + "</td>" 
-                                + "<td>" + response[i].stock_level + "</td></tr>"
+                                + "<td>" + response[i].stock_level + "/" + response[i].threshold_level + "</td></tr>"
                             );
                         }
                     }
@@ -105,7 +108,7 @@ $(document).ready(function(){
                             + "<td>" + response[i].Name + "</td>"
                             + "<td>" + response[i].UnitPrice + "</td>"
                             + "<td>" + response[i].Category + "</td>" 
-                            + "<td>" + response[i].stock_level + "</td></tr>"
+                            + "<td>" + response[i].stock_level + "/" + response[i].threshold_level + "</td></tr>"
                         );
                     }
                     }
@@ -134,7 +137,7 @@ $(document).ready(function(){
                                 + "<td>" + response[i].Name + "</td>"
                                 + "<td>" + response[i].UnitPrice + "</td>"
                                 + "<td>" + response[i].Category + "</td>" 
-                                + "<td>" + response[i].stock_level + "</td></tr>"
+                                + "<td>" + response[i].stock_level + "/" + response[i].threshold_level + "</td></tr>"
                             );
                         }
                     }
@@ -167,7 +170,7 @@ $(document).ready(function(){
                             + "<td>" + value.Name + "</td>"
                             + "<td>" + value.UnitPrice + "</td>"
                             + "<td>" + value.Category + "</td>" 
-                            + "<td>" + value.stock_level + "</td></tr>"
+                            + "<td>" + response[i].stock_level + "/" + response[i].threshold_level + "</td></tr>"
                         );
                     });
                 }
@@ -192,7 +195,7 @@ $(document).ready(function(){
                                 + "<td>" + response[i].Name + "</td>"
                                 + "<td>" + response[i].UnitPrice + "</td>"
                                 + "<td>" + response[i].Category + "</td>" 
-                                + "<td>" + response[i].stock_level + "</td></tr>"
+                                + "<td>" + response[i].stock_level + "/" + response[i].threshold_level + "</td></tr>"
                             );
                         }
                     }
@@ -222,7 +225,7 @@ $(document).ready(function(){
                             + "<td>" + response[i].Name + "</td>"
                             + "<td>" + response[i].UnitPrice + "</td>"
                             + "<td>" + response[i].Category + "</td>" 
-                            + "<td>" + response[i].stock_level + "</td></tr>"
+                            + "<td>" + response[i].stock_level + "/" + response[i].threshold_level + "</td></tr>"
                         );
                     }
                     }
@@ -251,7 +254,7 @@ $(document).ready(function(){
                                 + "<td>" + response[i].Name + "</td>"
                                 + "<td>" + response[i].UnitPrice + "</td>"
                                 + "<td>" + response[i].Category + "</td>" 
-                                + "<td>" + response[i].stock_level + "</td></tr>"
+                                + "<td>" + response[i].stock_level + "/" + response[i].threshold_level + "</td></tr>"
                             );
                         }
                     }
@@ -282,7 +285,7 @@ $(document).ready(function(){
                         + "<td>" + response[i].Name + "</td>"
                         + "<td>" + response[i].UnitPrice + "</td>"
                         + "<td></td>" 
-                        + "<td>" + response[i].stock_level + "</td></tr>"
+                        + "<td>" + response[i].stock_level + "/" + response[i].threshold_level + "</td></tr>"
                     );
                 }
             },
@@ -313,7 +316,7 @@ $(document).ready(function(){
                             + "<td>" + response[i].Name + "</td>"
                             + "<td>" + response[i].UnitPrice + "</td>"
                             + "<td>" + response[i].Category + "</td>" 
-                            + "<td>" + response[i].stock_level + "</td></tr>"
+                            + "<td>" + response[i].stock_level + "/" + response[i].threshold_level + "</td></tr>"
                         );
                     }
                 }

@@ -166,16 +166,14 @@
                 <h3 class="dashboardLabels">Sales Record</h3>
                 <table class="table table-striped">
                     <thead>
-                        <tr><th class="col-md-4">Date</th></tr>
-                        <tr><th class="col-md-4">Receipt Number</th></tr>
-                        <tr><th class="col-md-4">Outlet</th></tr>
+                        <tr><th class="col-md-6">Date</th></tr>
+                        <tr><th class="col-md-6">Outlet</th></tr>
                     </thead>
                     <tbody>
                         @foreach($salesRecords as $salesRecord)
                         <tr>
-                            <td class="col-md-4">{{$salesRecord->date}}</td>
-                            <td class="col-md-4">{{$salesRecord->receiptNumber}}</td>
-                            <td class="col-md-4">{{$salesRecord->outlets['outlet_name']}}</td>
+                            <td class="col-md-6">{{$salesRecord->OrderDate}}</td>
+                            <td class="col-md-6">{{$salesRecord->outlets['outlet_name']}}</td>
                         </tr>
                         @endforeach
                     </tbody>

@@ -20,6 +20,8 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "datatables.net": "^1.10.16",
+        "datatables.net-dt": "^1.10.16",
         "jquery-ui": "^1.12.1",
         "npm": "^6.0.1"
     }

@@ -1,3 +1,4 @@
+<script src="<?php echo e(asset('js/products.js')); ?>" defer></script>
 <?php $__env->startSection('content'); ?>
 
 <?php if($users_id->roles_id == '1'): ?>
@@ -15,14 +16,13 @@
 <br>
 <div class="topMargin container">
     <div class="row justify-content-end">
-        <div class="col-d-2">
-        <a href="/products/create"><button type="button" class="btn btn-warning">Add new Product</button></a>
+        <div class="col-md-2">
+        <a href="/products/create"><button type="button" class="btn btn-warning btn-search">Add Product</button></a>
         </div>
     </div>
     <br>
-    <?php if(count($products) > 0): ?>
     <div>
-        <table class="table table-striped sortable">
+        <table class="table-striped display" id="productTable">
             <thead>
                 <tr>
                     <th>Image</th>
@@ -36,7 +36,7 @@
                     <?php endif; ?>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="productContent">
                 <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr id="<?php echo e($product->id); ?>">
                     <td><img style="width:60px; height:60px" src="/storage/product_images/<?php echo e($product->image); ?>"></td>
@@ -71,13 +71,6 @@
             </tbody>
         </table>
     </div>
-    <?php else: ?>
-    <p>No products found</p> 
-    <?php endif; ?>
-</div>
-<div class="pagination">
-    <?php echo e($products->links()); ?>
-
 </div>
 
 <?php $__env->stopSection(); ?>
@@ -88,6 +81,13 @@
         color: #000000 !important;
         pointer-events: none;
         cursor: default;
+    }
+
+    #productSearchField{
+        background-image:url(http://localhost:8000/storage/icons/search.png); 
+        background-repeat: no-repeat; 
+        background-position: 2px 3px;
+        background-size: 30px 30px;
     }
 </style>
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

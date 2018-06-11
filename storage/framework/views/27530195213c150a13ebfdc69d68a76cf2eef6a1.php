@@ -21,9 +21,8 @@
         </div>
     </div>
     <br>
-    <?php if(count($outlets) > 0): ?>
     <div>
-        <table class="table table-striped sortable">
+        <table class="display" id="outletTable">
             <thead>
                 <tr>
                     <th>Branch name</th>
@@ -59,13 +58,6 @@
             </tbody>
         </table>
     </div>
-    <?php else: ?>
-    <p>No outlets found</p> 
-    <?php endif; ?>
-</div>
-<div class="pagination">
-    <?php echo e($outlets->links()); ?>
-
 </div>
 
 <?php if(count($outlets) > 0): ?>
@@ -130,6 +122,9 @@
 </div>
 
 <script>
+$(document).ready(function () {
+    $("#outletTable").DataTable();
+});
     function openCreateOutletModal() {
         document.getElementById('createOutletModal').style.display = "block";
     }

@@ -23,8 +23,11 @@
     <link href="<?php echo e(asset('css/jquery-ui.min.css')); ?>" rel="stylesheet" type="text/css"/> 
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+    <script type="javascript" charset="utf8" src="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.js"></script>
     
     <?php echo $__env->yieldContent('script'); ?>
+    <?php echo $__env->yieldContent('styles'); ?>
 
 <style>
 @media (min-width: 768px) {
@@ -33,24 +36,6 @@
     }
 }
 </style>
-
-<script>
-$(document).ready(function() {
-    $("#image_add").change(function(){
-        readURL(this);
-    });
-});
-function readURL(input){
-    if(input.files && input.files[0]){
-        var reader = new FileReader();
-
-        reader.onload = function(e){
-            $('#addImage').attr('src',e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-</script>
    
 </head>
 <body>

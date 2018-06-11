@@ -26,7 +26,7 @@ class SalesOrdersController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-        $salesOrders = SalesOrder::orderBy('id','desc')->paginate(10);
+        $salesOrders = SalesOrder::orderBy('id','desc')->get();
         
         $wholesalerSalesOrders = SalesOrder::where('users_id', '=', $user_id)->get();
 

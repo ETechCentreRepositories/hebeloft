@@ -17,14 +17,13 @@
 <br>
 <div class="topMargin container">
     <div class="row justify-content-end">
-        <div class="col-d-2">
-        <a href="/products/create"><button type="button" class="btn btn-warning">Add new Product</button></a>
+        <div class="col-md-2">
+        <a href="/products/create"><button type="button" class="btn btn-warning btn-search">Add Product</button></a>
         </div>
     </div>
     <br>
-    @if(count($products) > 0)
     <div>
-        <table class="table table-striped sortable">
+        <table class="table-striped display" id="productTable">
             <thead>
                 <tr>
                     <th>Image</th>
@@ -38,7 +37,7 @@
                     @endif
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="productContent">
                 @foreach($products as $product)
                 <tr id="{{$product->id}}">
                     <td><img style="width:60px; height:60px" src="/storage/product_images/{{$product->image}}"></td>
@@ -70,12 +69,6 @@
         </table>
         <button class="btn btn-primary" onclick="openBulkUpdateModal()">Bulk Update</button>
     </div>
-    @else
-    <p>No products found</p> 
-    @endif
-</div>
-<div class="pagination">
-    {{$products->links()}}
 </div>
 
 @endsection
@@ -86,5 +79,12 @@
         color: #000000 !important;
         pointer-events: none;
         cursor: default;
+    }
+
+    #productSearchField{
+        background-image:url(http://localhost:8000/storage/icons/search.png); 
+        background-repeat: no-repeat; 
+        background-position: 2px 3px;
+        background-size: 30px 30px;
     }
 </style>

@@ -18,6 +18,7 @@
             <h3 class="dashboardLabels">Sales Order</h3>
             <div class="cardContent d-flex flex-row">
                 <div class="p-2 card salesCards card1">
+                <a href="<?php echo e(URL::to('/salesorder')); ?>" class="hyperlink">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber1">
                             <?php echo e($salesPacks); ?>
@@ -28,10 +29,11 @@
                         <div class="salesProcess">
                             TO BE PACKED
                         </div>
-                    </div>
-                </div>
+                    </div> </a>
+                </div> 
                 <br>
                 <div class="p-2 card salesCards card2">
+                <a href="<?php echo e(URL::to('/salesorder')); ?>" class="hyperlink">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber2">
                             <?php echo e($salesShips); ?>
@@ -42,9 +44,10 @@
                         <div class="salesProcess">
                             TO BE SHIPPED
                         </div>
-                    </div>
+                    </div> </a>
                 </div>
                 <div class="p-2 card salesCards card3">
+                <a href="<?php echo e(URL::to('/salesorder')); ?>" class="hyperlink">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber3">
                             <?php echo e($salesDelivers); ?>
@@ -55,9 +58,10 @@
                         <div class="salesProcess">
                             TO BE DELIVERED
                         </div>
-                    </div>
+                    </div> </a>
                 </div>
                 <div class="p-2 card salesCards card4">
+                <a href="<?php echo e(URL::to('/salesorder')); ?>" class="hyperlink">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber4">
                             <?php echo e($salesInvoices); ?>
@@ -68,7 +72,7 @@
                         <div class="salesProcess">
                             TO BE INVOICED
                         </div>
-                    </div>
+                    </div> </a>
                 </div>
             </div>
         </div>
@@ -78,6 +82,7 @@
             <h3 class="dashboardLabels">Transfer Request</h3>
             <div class="cardContent d-flex flex-row">
                 <div class="p-2 card salesCards card1">
+                <a href="<?php echo e(URL::to('/transferrequest')); ?>" class="hyperlink">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber1">
                             <?php echo e($transferPacks); ?>
@@ -88,10 +93,11 @@
                         <div class="salesProcess">
                             TO BE PACKED
                         </div>
-                    </div>
+                    </div> </a>
                 </div>
                 <br>
                 <div class="p-2 card salesCards card2">
+                <a href="<?php echo e(URL::to('/transferrequest')); ?>" class="hyperlink">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber2">
                             <?php echo e($transferShips); ?>
@@ -102,9 +108,10 @@
                         <div class="salesProcess">
                             TO BE SHIPPED
                         </div>
-                    </div>
+                    </div> </a>
                 </div>
                 <div class="p-2 card salesCards card3">
+                <a href="<?php echo e(URL::to('/transferrequest')); ?>" class="hyperlink">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber3">
                             <?php echo e($transferDelivers); ?>
@@ -115,9 +122,10 @@
                         <div class="salesProcess">
                             TO BE DELIVERED
                         </div>
-                    </div>
+                    </div> </a>
                 </div>
                 <div class="p-2 card salesCards card4">
+                <a href="<?php echo e(URL::to('/transferrequest')); ?>" class="hyperlink">
                     <div class="salesCardsBody card-body">
                         <div class="salesNumber salesNumber4">
                             <?php echo e($transferInvoices); ?>
@@ -128,7 +136,7 @@
                         <div class="salesProcess">
                             TO BE INVOICED
                         </div>
-                    </div>
+                    </div> </a>
                 </div>
             </div>
         </div>
@@ -165,16 +173,14 @@
                 <h3 class="dashboardLabels">Sales Record</h3>
                 <table class="table table-striped">
                     <thead>
-                        <tr><th class="col-md-4">Date</th></tr>
-                        <tr><th class="col-md-4">Receipt Number</th></tr>
-                        <tr><th class="col-md-4">Outlet</th></tr>
+                        <tr><th class="col-md-6">Date</th></tr>
+                        <tr><th class="col-md-6">Outlet</th></tr>
                     </thead>
                     <tbody>
                         <?php $__currentLoopData = $salesRecords; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $salesRecord): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
-                            <td class="col-md-4"><?php echo e($salesRecord->date); ?></td>
-                            <td class="col-md-4"><?php echo e($salesRecord->receiptNumber); ?></td>
-                            <td class="col-md-4"><?php echo e($salesRecord->outlets['outlet_name']); ?></td>
+                            <td class="col-md-6"><?php echo e($salesRecord->OrderDate); ?></td>
+                            <td class="col-md-6"><?php echo e($salesRecord->outlets['outlet_name']); ?></td>
                         </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
