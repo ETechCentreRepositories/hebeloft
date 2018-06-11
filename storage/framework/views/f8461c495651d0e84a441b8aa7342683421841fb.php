@@ -169,14 +169,12 @@
                                 <div class="p-2">
                                     <a href="/transferrequest/<?php echo e($outletTransfer->id); ?>"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
                                 </div>
-                    <?php if($users_id->roles_id == '1'): ?>
                                 <div class="p-2">
-                                    <a href="/transferrequest/<?php echo e($transfer->id); ?>/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
+                                    <a href="/transferrequest/<?php echo e($outletTransfer->id); ?>/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
                             </div>
                         </div>
                     </td>
-                    <?php endif; ?>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>

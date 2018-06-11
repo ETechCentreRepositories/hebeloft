@@ -35,7 +35,7 @@
     </div>
     <br>
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-9">
             <input type="text" id="salesOrderSearchField" style="text-indent:20px;" class="form-control" style="background:transparent">
         </div>
         <div class="col-md-2">
@@ -45,6 +45,9 @@
                 </div>
                 <div class="p-2">
                     <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
+                </div>
+                <div class="ml-auto p-2">
+                    <a href="{{ route('exportSalesOrder.file',['type'=>'csv']) }}"><button type="button" class="btn btn-warning">Export</button></a>
                 </div>
             </div>
         </div>

@@ -11,8 +11,10 @@ use App\Models\AuditTrail;
 use App\Models\Products;
 use App\Models\Outlet;
 use App\Models\UserOutlet;
+use App\Models\InventoryOutlet;
 use Session;
 use App\CartTransferRequest;
+use Log;
 
 use DB;
 
@@ -142,6 +144,7 @@ class TransferRequestController extends Controller
     {
         $login_user_id = auth()->user()->id;
         $login_user = User::find($login_user_id);
+        $userRole = $login_user->roles_id;
 
         //Audit Trail
         $auditTrail = AuditTrail::create([
@@ -149,17 +152,52 @@ class TransferRequestController extends Controller
             'action_by' => $login_user->name,
         ]);
 
-        $this->validate($request, [
-            // 'quantity' => 'required',
-            'status' => 'required',
-        ]);
+        if ($userRole == '1') {
+            $transfer = TransferRequest::find($id);
+            // $transfer->quantity = $request->input('quantity');
+            $transfer->status = $request->input('status');
+            $transfer->save();
+        } else {
+            $transfer = TransferRequest::find($id);
+            $transferId = TransferRequest::find($id)->id;
+            $productIds = $this->productArray($transferId);
+            $outletId = DB::table('inventory_has_outlets')->select('outlets_id')->get();
+            $selectedOutlet = $transfer->outlets_id;
 
-        $transfer = TransferRequest::find($id);
-        // $transfer->quantity = $request->input('quantity');
-        $transfer->status = $request->input('status');
-        $transfer->save();
+            $getProductsArray = array_get($productIds, 0);
+            $convertProductsArray = (array) $getProductsArray;
+            $getProductsValue = array_get($convertProductsArray, "products_id");
 
-        return redirect('/transferrequest')->with('success', 'Request Updated');
+            $inventory = InventoryOutlet::where('outlets_id', '=', $selectedOutlet)->where('products_id', '=', $getProductsValue)->first();
+            $inventoryWarehouse = InventoryOutlet::where('outlets_id', '=', 13)->where('products_id', '=', $getProductsValue)->first();
+
+            $getInventoryArray = array_get($inventory, 0);
+            $convertInventoryArray = (array) $getInventoryArray;
+            $getInventoryValue = array_get($convertInventoryArray, "id");
+
+            $oldQuantity = $this->quantityArray($selectedOutlet, $getProductsValue);
+
+            $getQuantityArray = array_get($oldQuantity, 0);
+            $convertQuantityArray = (array) $getQuantityArray;
+            $getQuantityValue = array_get($convertQuantityArray, "stock_level");
+
+            $oldWarehouse = $this->warehouseArray($getProductsValue);
+
+            $getWarehouseArray = array_get($oldWarehouse, 0);
+            $convertWarehouseArray = (array) $getWarehouseArray;
+            $getWarehouseValue = array_get($convertWarehouseArray, "stock_level");
+
+            $inventory->stock_level = $getQuantityValue + $request->input('qty');
+            $inventory->save();
+
+            $inventoryWarehouse->stock_level = $getWarehouseValue - $request->input('qty');
+            $inventoryWarehouse->save();
+
+            $transfer->status = "received";
+            $transfer->save();
+        }
+
+        // return redirect('/transferrequest')->with('success', 'Request Updated');
     }
 
     /**
@@ -245,4 +283,19 @@ class TransferRequestController extends Controller
                 'products' => $transferRequestCart->items
             ])->with('users_id',$users_id);
     }
+
+    public function productArray($transferId) {
+        $productId = DB::table('transfer_requests_list')->where('transfer_requests_id', '=', $transferId)->select('products_id')->get()->toArray();
+        return $productId;
+    }
+
+    public function warehouseArray($getProductsValue) {
+        $warehouse = InventoryOutlet::where('outlets_id', '=', '13')->where('products_id', '=', $getProductsValue)->select('stock_level')->get()->toArray();
+        return $warehouse;
+     }
+
+    public function quantityArray($selectedOutlet, $getProductsValue) {
+        $quantity = InventoryOutlet::where('outlets_id', '=', $selectedOutlet)->where('products_id', '=', $getProductsValue)->select('stock_level')->get()->toArray();
+        return $quantity;
+     }
 }

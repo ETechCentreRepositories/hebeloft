@@ -41,4 +41,6 @@ $(document).ready(function(){
 
     $('#refreshInventory').click(function(){
     });
+
+    
 });
