@@ -36,7 +36,7 @@
         <div class="col-md-5">
             <div class="drop-down_brand row">
                 <div class="col-md-4">
-                    <p>To Date:</p>
+                    <p style="text-align:right">To Date:</p>
                 </div>
                 <div class="col-md-8">
                     <input id="endDate" type="date" name="to" class="form-control">

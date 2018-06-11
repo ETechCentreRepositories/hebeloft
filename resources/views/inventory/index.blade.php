@@ -13,35 +13,35 @@
 @endif
 <br>
 <div class="topMargin container">
-    <div class="drop-down_brand row">
-        <div class="col-md-3">
-            <p>Search by Brand</p>
-        </div>
-        <div class="col-md-9">
-            <select id="product_brand" class="form-control"></select>
-        </div>
-    </div>
-    <br>
-    @if ($users_id->roles_id == '1' || $users_id->roles_id == '2' || $users_id->roles_id == '3')
-    <div class="drop-down_location row">
-        <div class="col-md-3">
-            <p>Show Location</p>
-        </div>
-        <div class="col-md-9">
-            <select id="outlet_location" class="form-control" ></select>
-        </div>
-    </div>
-    <br>
-    @endif
     <div class="row">
-        <div class="col-md-10">
-            <input type="text" id="searchField" style="text-indent:20px;" class="form-control" style="background:transparent">
+        <div class="col-md-5">
+            <div class="drop-down_brand row">
+                <div class="col-md-4">
+                    <p>Search by Brand</p>
+                </div>
+                <div class="col-md-8">
+                    <select id="product_brand" class="form-control"></select>
+                </div>
+            </div>
         </div>
-        <div class="col-md-2">
+        @if ($users_id->roles_id == '1' || $users_id->roles_id == '2' || $users_id->roles_id == '3')
+        <div class="col-md-5">
+            <div class="drop-down_brand row">
+                <div class="col-md-4">
+                    <p style="text-align:right">Show Location</p>
+                </div>
+                <div class="col-md-8">
+                    <select id="outlet_location" class="form-control" ></select>
+                </div>
+            </div>
+        </div>
+        @endif
+        <div class="col-md-2 p-2">
             <button type="button" class="btn btn-default btn-search" id="searchInventory">Search</button>
         </div>
-        <br>
-        </br>
+    </div>
+    <br>
+    <div class="row">
         @if ($users_id->roles_id == '1' || $users_id->roles_id == '2' || $users_id->roles_id == '3')
         <div class="col-md-2">
             <button type="button" class="btn btn-success btn-search" onclick="openImportCSVModal()">Import</button>
@@ -51,9 +51,8 @@
         </div>
         @endif
     </div>
-    
     <br>
-    <table class="display" id="inventoryTable" >
+    <table class="display nowrap" id="inventoryTable" >
         <thead>
             <tr>
                 <th>Image</th>
@@ -83,7 +82,7 @@
             @endif
         </tbody>
     </table>
-    
+
     <div id="importCSVModal" class="modal">
         <span class="close cursor" onclick="closeImportCSVModal()">&times;</span>
         <div class="card modalCard">
@@ -103,6 +102,21 @@
        </div>
     </div>
 </div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+
+    <script type="text/javascript">
+        $("#inventoryTable").DataTable({
+            dom: 'Bfrtip', 
+            buttons: [
+                'copy'
+            ]
+    });
+    </script>
 
 @endsection
 

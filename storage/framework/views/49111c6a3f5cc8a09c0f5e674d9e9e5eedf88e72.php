@@ -14,7 +14,11 @@
 <br>
 <?php if($users_id->roles_id == '1' or $users_id->roles_id == '2'): ?>
 <div class="topMargin container">
-    <br>
+    <div class="row">
+        <div class="p-2">
+            <a href="<?php echo e(route('exportSalesOrder.file',['type'=>'csv'])); ?>"><button type="button" class="btn btn-warning">Export</button></a>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-5">
             <div class="drop-down_brand row">
@@ -29,7 +33,7 @@
         <div class="col-md-5">
             <div class="drop-down_brand row">
                 <div class="col-md-4">
-                    <p>To Date:</p>
+                    <p style="text-align:right">To Date:</p>
                 </div>
                 <div class="col-md-8">
                     <input id="endDate" type="date" name="to" class="form-control">
