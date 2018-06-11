@@ -2,7 +2,9 @@
     <div class="container">
         <a class="nav navbar-left" href="<?php echo e(url('/')); ?>">
             
-            
+            <img src="http://localhost:8000/storage/logo/hebeloft_logo.png" class="mobileLogo" style="
+    height: 100%;margin-left:10px;
+">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -11,7 +13,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="leftNavbar navbar-nav mr-auto">
-                <a href="/login"><img src="/storage/logo/hebeloft_logo.png" class="logo" style="padding: 7px 0;"/></a>
+                <a href="/login"><img src="http://localhost:8000/storage/logo/hebeloft_logo.png" class="logo" style="padding: 7px 0;"/></a>
                 
             </ul>
 

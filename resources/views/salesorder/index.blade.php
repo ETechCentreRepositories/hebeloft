@@ -36,6 +36,9 @@
                 <div class="col-md-8">
                     <input id="endDate" type="date" name="to" class="form-control">
                 </div>
+                <div class="ml-auto p-2">
+                    <a href="{{ route('exportSalesOrder.file',['type'=>'csv']) }}"><button type="button" class="btn btn-warning">Export</button></a>
+                </div>
             </div>
         </div>
         <div class="col-md-2 fullWidthButtons">

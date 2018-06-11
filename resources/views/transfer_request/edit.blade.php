@@ -37,26 +37,40 @@
                             <tr>
                                 <td>{{$transfer->products['Name']}}</td>
                                 <td align="right">{{$transfer->quantity}}</td>
+                                {{Form::hidden('qtyField', $transfer->quantity, ['class' => 'form-control','id'=>'qtyField'])}}
                             </tr>
                             @endforeach
+                                {{Form::hidden('getStatus', $transferRequests->status, ['class' => 'form-control','id'=>'getStatus'])}}
                         @endif
                     </tbody>
                     </table>
-                    <br>
                 </div>
             </div>
         </div>
         </div>
+        <br>
+        @if ($users_id->roles_id == '3')
+            @if ($transferRequests->status != "received")
+        {!! Form::open(['action' => ['TransferRequestController@update', $transferRequests->id], 'method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'received']) !!}
+            {{Form::hidden('status', '', ['class' => 'form-control','id'=>'status'])}}
+            {{Form::hidden('qty', '', ['class' => 'form-control','id'=>'qty'])}}
+            {{Form::hidden('_method', 'PUT')}}
+            {{Form::submit('Received', ['class'=>'btn btn-lg btn-success','id'=>'received','name'=>'received'])}}
+        {!! Form::close() !!}
+            @endif
+        @endif
+        @if ($users_id->roles_id == '1')
+            {!! Form::open(['action' => ['TransferRequestController@update', $transferRequests->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+            {{Form::hidden('status', 'rejected', ['class' => 'form-control'])}}
+            {{Form::hidden('_method', 'PUT')}}
+            {{Form::submit('Follow Up', ['class'=>'btn btn-lg btn-danger btn-rejected'])}}
+        {!! Form::close() !!}
         {!! Form::open(['action' => ['TransferRequestController@update', $transferRequests->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-        {{Form::hidden('status', 'rejected', ['class' => 'form-control'])}}
-        {{Form::hidden('_method', 'PUT')}}
-        {{Form::submit('Follow Up', ['class'=>'btn btn-lg btn-danger btn-rejected'])}}
-    {!! Form::close() !!}
-    {!! Form::open(['action' => ['TransferRequestController@update', $transferRequests->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-        {{Form::hidden('status', 'accepted', ['class' => 'form-control'])}}
-        {{Form::hidden('_method', 'PUT')}}
-        {{Form::submit('Accepted', ['class'=>'btn btn-lg btn-success btn-accepted'])}}
-    {!! Form::close() !!}
+            {{Form::hidden('status', 'accepted', ['class' => 'form-control'])}}
+            {{Form::hidden('_method', 'PUT')}}
+            {{Form::submit('Accepted', ['class'=>'btn btn-lg btn-success btn-accepted'])}}
+        {!! Form::close() !!}
+        @endif
     </div>
 </div>
 
@@ -68,11 +82,25 @@
         cursor: default;
     }
     
-    .btn-rejected {
-  float: left;
-}
+    .received {
+        text-align: center;
+    }
 
-.btn-accepted {
-  float: right;
-}
+    .btn-rejected {
+        float: left;
+    }
+
+    .btn-accepted {
+        float: right;
+    }
 </style>
+
+<script>
+    var qtyField = document.getElementById('qtyField').value;
+    console.log(qtyField);
+    document.getElementById("qty").value = qtyField;
+
+    var getStatus = document.getElementById('getStatus').value;
+    console.log(getStatus);
+    document.getElementById("status").value = getStatus;
+</script>

@@ -24,7 +24,7 @@ class ProductsController extends Controller
         $users_id = User::find($user_id);
         $product = Products::orderBy('id','asc')->get();
         
-        return view('product.index')->with('users_id',$users_id)->with('products',$product);
+        return view('product.index')->with('users_id',$users_id)->with('products',$product)->with('bulk',$bulk);
     }
     public function add()
     {
@@ -60,8 +60,7 @@ class ProductsController extends Controller
         $auditTrail = AuditTrail::create([
             'action' => 'Created Outlet Staff',
             'action_by' => $login_user->name,
-     ]);
-     $current_time = Carbon::now()->toDayDateTimeString();
+        ]);
 
         $product = new Products;
         $product->Name = $request->input("name");

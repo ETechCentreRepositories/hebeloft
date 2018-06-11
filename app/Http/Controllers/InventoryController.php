@@ -140,6 +140,26 @@ class InventoryController extends Controller
         //
     }
 
+       /**
+
+     * Create a new controller instance.
+
+     *
+
+     * @return void
+
+     */
+
+        /**
+
+     * Create a new controller instance.
+
+     *
+
+     * @return void
+
+     */
+
     public function exportFile($type){
 
         $inventoryexcel = InventoryOutlet::join('products', 'inventory_has_outlets.products_id', '=', 'products.id')

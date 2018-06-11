@@ -54,7 +54,7 @@
                                     <a href="/product/{{$product->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
                                 <div class="p-2">
-                                {!!Form::open(['action' => ['ProductsController@destroy', $product->id], 'method' => 'POST'])!!}
+                                    {!!Form::open(['action' => ['ProductsController@destroy', $product->id], 'method' => 'POST'])!!}
                                         {{Form::hidden('_method', 'DELETE')}}
                                         {{Form::submit('Delete', ['class' => 'btn btn-danger action-buttons'])}}
                                     {!!Form::close()!!}
@@ -67,6 +67,7 @@
                 @endforeach
             </tbody>
         </table>
+        <button class="btn btn-primary" onclick="openBulkUpdateModal()">Bulk Update</button>
     </div>
 </div>
 

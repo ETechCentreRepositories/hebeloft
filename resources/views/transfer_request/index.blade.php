@@ -157,14 +157,12 @@
                                 <div class="p-2">
                                     <a href="/transferrequest/{{$outletTransfer->id}}"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
                                 </div>
-                    @if ($users_id->roles_id == '1')
                                 <div class="p-2">
-                                    <a href="/transferrequest/{{$transfer->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
+                                    <a href="/transferrequest/{{$outletTransfer->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
                             </div>
                         </div>
                     </td>
-                    @endif
                 </tr>
                 @endforeach
             </tbody>

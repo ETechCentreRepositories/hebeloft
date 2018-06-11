@@ -33,6 +33,7 @@ Route::resource('transferrequest', 'TransferRequestController');
 Route::resource('salesorder', 'SalesOrdersController');
 Route::resource('salesrecord', 'SalesRecordsController');
 Route::resource('product', 'ProductsController');
+Route::resource('bulkUpdate', 'BulkUpdateController');
 
 Route::get('/ajax/so_tbp/{$statuses_id}', 'SalesOrdersController@view');
 Route::get('/ajax/so-tbs/{$statuses_id}', 'SalesOrdersController@getOutlet');
@@ -71,6 +72,7 @@ Route::get('/salesorder/create', 'SalesOrdersController@getSalesOrderCart');
 Route::get('/salesorder/addtocart/{id}/{quantity}/{unitPrice}/{date}/{remarks}', 'SalesOrdersController@getSalesOrderAddToCart');
 Route::get('/testing/{id}', 'UsersController@show');
 Route::get('/salesorder/remove/{id}', 'SalesOrdersController@getRemoveItem');
+Route::get('export-salesorder/{type}', 'SalesOrdersController@exportFile')->name('exportSalesOrder.file');
 
 //TransferRequest
 Route::get('/transferrequest/create', 'TransferRequestController@getTransferRequestCart');

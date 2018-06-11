@@ -58,14 +58,14 @@
             <tbody id="addSalesOrderContent">
             @if(Session::has('cartSalesOrder'))
                 @foreach($products as $product)
-                        <tr id="{{$product['item']['id']}}"><td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/{{$product['item']['image']}}"/></td>
-                        <td>{{$product['item']['Name']}}</td>
-                        <td>{{$product['item']['UnitPrice']}}</td>
-                        <td align="center">{{$product['qty']}}</td>
-                        <td align="center">{{$product['item']['UnitPrice']*$product['qty']}}</td>
-                        <td><button type="button" class="btn btn-danger action-buttons" id="removeThis" onClick="removeCartItemFromSalesOrder()">Remove</button></td></tr>
-                    @endforeach
-                @endif
+                    <tr id="{{$product['item']['id']}}"><td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/{{$product['item']['image']}}"/></td>
+                    <td>{{$product['item']['Name']}}</td>
+                    <td>{{$product['item']['UnitPrice']}}</td>
+                    <td align="center">{{$product['qty']}}</td>
+                    <td align="center">{{$product['item']['UnitPrice']*$product['qty']}}</td>
+                    <td><button type="button" class="btn btn-danger action-buttons" id="removeThis" onClick="removeCartItemFromSalesOrder()">Remove</button></td></tr>
+                @endforeach
+            @endif
             </tbody>
             <tbody id="total">
             @if(Session::has('cartSalesOrder'))

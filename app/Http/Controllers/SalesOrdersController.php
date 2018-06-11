@@ -251,4 +251,22 @@ class SalesOrdersController extends Controller
         
     }
 
+    public function exportFile($type){
+        $salesorderexcel = DB::table('sales_order')
+        ->join('statuses', 'sales_order.statuses_id', '=', 'statuses.id')
+        ->join('users', 'sales_order.users_id', '=', 'users.id')
+        ->join('wholesalers', 'users.id', '=', 'wholesalers.users_id')
+        ->select('sales_order.id', 'sales_order.totalQuantity', 'sales_order.totalPrice', 'statuses.status_name', 'sales_order.remarks', 'sales_order.date', 'users.name', 'wholesalers.shipping_address', 'wholesalers.phone_number')
+        ->orderBy('sales_order.id')
+        ->get()
+        ->toArray();
+        $data= json_decode( json_encode($salesorderexcel), true);
+
+        return \Excel::create('salesorder', function($excel) use ($data) {
+            $excel->sheet('sheet name', function($sheet) use ($data)
+            {
+                $sheet->fromArray($data);
+            });
+        })->download($type);
+    }
 }
