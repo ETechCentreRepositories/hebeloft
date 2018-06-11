@@ -26,7 +26,7 @@ class SalesRecordsController extends Controller
 
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-        $salesRecords = SalesRecord::orderBy('id','desc')->paginate(10);
+        $salesRecords = SalesRecord::orderBy('id','desc')->get();
 
         return view('salesrecord.index')->with('salesRecords', $salesRecords)->with('users_id',$users_id);
     }
@@ -76,8 +76,9 @@ class SalesRecordsController extends Controller
             $salesRecord->audit_trails_id = $auditTrail->id;
             $salesRecord->outlets_id = $request->input('outlet');;
             $salesRecord->total_price = $totalPrice;
-            $salesRecord->remarks = $salesrecordCart->remarks;
-            $salesRecord->date = $request->input('salesRecordDate');
+            $salesRecord->OrderRemarks = $salesrecordCart->remarks;
+            $salesRecord->OrderDate = $request->input('salesRecordDate');
+            $salesRecord->Location ="";
             $salesRecord->save();
 
             foreach($products as $product) {

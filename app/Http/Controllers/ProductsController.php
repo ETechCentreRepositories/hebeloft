@@ -22,7 +22,7 @@ class ProductsController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-        $product = Products::orderBy('id','asc')->paginate(10);
+        $product = Products::orderBy('id','asc')->get();
         
         return view('product.index')->with('users_id',$users_id)->with('products',$product);
     }
@@ -64,7 +64,7 @@ class ProductsController extends Controller
      $current_time = Carbon::now()->toDayDateTimeString();
 
         $product = new Products;
-        $product->Name = $request->input("ET_".$current_time+."_brand");
+        $product->Name = $request->input("name");
         $product->Category = $request->input("category");
         $product->Remarks = $request->input("remarks");
         $product->Brand = $request->input("brand");

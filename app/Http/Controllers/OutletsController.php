@@ -20,7 +20,7 @@ class OutletsController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-        $outlets = Outlet::orderBy('id','asc')->paginate(10);
+        $outlets = Outlet::orderBy('id','asc')->get();
         $userOutlets = UserOutlet::all();
         
         return view('outlets.index')->with('outlets', $outlets)->with('users_id',$users_id)->with('userOutlets',$userOutlets);

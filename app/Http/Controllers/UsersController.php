@@ -25,7 +25,7 @@ class UsersController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-        $users =User::orderBy('created_at','asc')->paginate(10);
+        $users =User::orderBy('created_at','asc')->get();
         $admins =User::orderBy('created_at','asc')->where('roles_id', '=', '2')->get();
         $staffs =User::orderBy('created_at','asc')->where('roles_id', '=', '3')->get();
         $wholesalers =User::orderBy('created_at','asc')->where('roles_id', '=', '4')->get();

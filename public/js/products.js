@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $("#productTable").DataTable();
     $("#search").click(function(){
         var productName = $("#productSearchField").val();
         console.log(productName);

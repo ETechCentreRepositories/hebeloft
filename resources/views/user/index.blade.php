@@ -17,16 +17,14 @@
 <br>
 <div class="topMargin container">
     <div class="d-flex">
-    @if ($users_id->roles_id == '1')
         <div class="p-2">
-            <button type="button" class="btn btn-warning" onclick="openCreateAdminModal()" style="padding-right:10dp">Register an Admin</button>
-        </div>
-        @endif
-        <div class="p-2">
-            <button type="button" class="btn btn-warning" onclick="openCreateStaffModal()">Register a Staff</button>
-        </div>
-        <div class="ml-auto p-2">
             <a href="{{ route('exportUser.file',['type'=>'csv']) }}"><button type="button" class="btn btn-warning">Export</button></a>
+        </div>
+        <div class="p-2 ml-auto">
+            @if ($users_id->roles_id == '1')
+                <button type="button" class="btn btn-warning" onclick="openCreateAdminModal()" style="padding-right:10dp">Register an Admin</button>
+            @endif
+            <button type="button" class="btn btn-warning" onclick="openCreateStaffModal()">Register a Staff</button>
         </div>
     </div>
     <br>
@@ -39,7 +37,7 @@
     <br>
     <div class="tab-content">
         <div class="tab-pane fade show active" id="all">
-            <table class="table table-striped sortable">
+            <table class="display" id="userTable">
                 <thead>
                     <tr>
                         <th>Username</th>
@@ -52,7 +50,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if(count($users) > 0)
                     @foreach($users as $user)
                     <tr>
                         <td>{{$user->name}}</td>
@@ -76,15 +73,12 @@
                         @endif
                     </tr>
                     @endforeach
-                    @else
-                        <p>No users found</p>
-                    @endif
                 </tbody>
             </table>
         </div>
 
         <div class="tab-pane fade" id="admins">
-            <table class="table table-striped sortable">
+            <table class="display" id="adminTable">
                 <thead>
                     <tr>
                         <th>Username</th>
@@ -97,7 +91,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if(count($admins) > 0)
                     @foreach($admins as $user)
                     <tr>
                         <td>{{$user->name}}</td>
@@ -121,15 +114,12 @@
                         @endif
                     </tr>
                     @endforeach
-                    @else
-                        <p>No users found</p>
-                    @endif
                 </tbody>
             </table>
         </div>
 
         <div class="tab-pane fade" id="staffs">
-            <table class="table table-striped sortable">
+            <table class="display" id="staffTable">
                 <thead>
                     <tr>
                         <th>Username</th>
@@ -142,7 +132,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if(count($staffs) > 0)
                     @foreach($staffs as $user)
                     <tr>
                         <td>{{$user->name}}</td>
@@ -166,16 +155,13 @@
                         @endif
                     </tr>
                     @endforeach
-                    @else
-                        <p>No users found</p>
-                    @endif
                 </tbody>
             </table>
         </div>
         
         
         <div class="tab-pane fade" id="wholesalers">
-            <table class="table table-striped sortable">
+            <table class="display" id="wholesalerTable">
                 <thead>
                     <tr>
                         <th>Username</th>
@@ -188,7 +174,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if(count($wholesalers) > 0)
                     @foreach($wholesalers as $user)
                     <tr>
                         <td>{{$user->name}}</td>
@@ -212,17 +197,10 @@
                         @endif
                     </tr>
                     @endforeach
-                    @else
-                        <p>No users found</p>
-                    @endif
                 </tbody>
             </table>
         </div>
     </div>
-</div>
-
-<div class="pagination">
-    {{$users->links()}}
 </div>
 
 <div id="createAdminModal" class="modal">
@@ -318,6 +296,12 @@
 </div>
 
 <script>
+    $(document).ready(function (){
+        $("#userTable").DataTable();
+        $("#adminTable").DataTable();
+        $("#staffTable").DataTable();
+        $("#wholesalerTable").DataTable();
+    });
     function openCreateStaffModal() {
         document.getElementById('createStaffModal').style.display = "block";
     }

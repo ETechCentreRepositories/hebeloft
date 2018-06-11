@@ -149,27 +149,28 @@ $(document).ready(function (){
                 var productID = orderProducts[i];
                 var mainRow = document.getElementById("newRow_"+productID);
             	var quantity = mainRow.querySelectorAll('#qty')[0].value;
-            	var unitPrice = mainRow.querySelectorAll('#unitPrice')[0].value;
-            }
-            console.log(productID);
-            console.log(unitPrice);
-            console.log(productID);
-            console.log(remarks);
-            console.log(date);
-            console.log(quantity);
-            $.ajax({
-                type: "GET",
-                url: "{{URL::TO('/salesorder/addtocart/')}}/" + productID + "/" + quantity + "/" + unitPrice + "/" + date + "/" + remarks,
-                cache:false,
-                datatype: "JSON",
-                success: function (response) {
-                    console.log("successful");
-                },
+                var unitPrice = mainRow.querySelectorAll('#unitPrice')[0].value;
+                console.log(productID);
+                console.log(unitPrice);
+                console.log(productID);
+                console.log(remarks);
+                console.log(date);
+                console.log(quantity);
+                $.ajax({
+                    type: "GET",
+                    url: "{{URL::TO('/salesorder/addtocart/')}}/" + productID + "/" + quantity + "/" + unitPrice + "/" + date + "/" + remarks,
+                    cache:false,
+                    datatype: "JSON",
+                    success: function (response) {
+                        console.log("successful");
+                    },
 
-                error: function (obj, testStatus, errorThrown) {
-                    console.log(obj + testStatus + errorThrown);
-                }
-            });
+                    error: function (obj, testStatus, errorThrown) {
+                        console.log(obj + testStatus + errorThrown);
+                    }
+                });
+            }
+            
         } else {
             console.log("null");
         }

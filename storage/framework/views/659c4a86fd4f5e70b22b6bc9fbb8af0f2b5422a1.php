@@ -21,18 +21,8 @@
         </div>
     </div>
     <br>
-    <div class="row">
-        <div class="col-md-10">
-            <input type="text" id="productSearchField" style="text-indent:20px;" class="form-control" style="background:transparent">
-        </div>
-        <div class="col-md-2">
-        <button id="search" type="button" class="btn btn-default btn-search">Search</button>
-        </div>
-    </div>
-    <br>
-    <?php if(count($products) > 0): ?>
     <div>
-        <table class="table table-striped sortable">
+        <table class="table-striped display" id="productTable">
             <thead>
                 <tr>
                     <th>Image</th>
@@ -81,13 +71,6 @@
             </tbody>
         </table>
     </div>
-    <?php else: ?>
-    <p>No products found</p> 
-    <?php endif; ?>
-</div>
-<div class="pagination">
-    <?php echo e($products->links()); ?>
-
 </div>
 
 <?php $__env->stopSection(); ?>

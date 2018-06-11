@@ -49,7 +49,7 @@
     </div>
     <br>
     <div>
-        <table class="table table-striped sortable">
+        <table class="display" id="transferRequestTable">
             <thead>
                 <tr>
                     <th>Date</th>
@@ -82,10 +82,6 @@
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
         </table>
-    </div>
-    <div class="pagination">
-        <?php echo e($transfers->links()); ?>
-
     </div>
 </div>
 <?php endif; ?>
@@ -134,7 +130,7 @@
     </div>
     <br>
     <div>
-        <table class="table table-striped sortable">
+        <table class="display" id="transferRequestTable">
             <thead>
                 <tr>
                     <th>Date (YYYY-MM-DD)</th>
@@ -172,14 +168,13 @@
             </tbody>
         </table>
     </div>
-    <div class="pagination">
-        <?php echo e($transfers->links()); ?>
-
-    </div>
 </div>
 <?php endif; ?>
 <script>
 $(document).ready(function(){
+    $("#transferRequestTable").DataTable({
+        searching: false
+    });
     $('#search').click(function(){
         var startDate = $('#startDate').val();
         var endDate = $('#endDate').val();

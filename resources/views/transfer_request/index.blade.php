@@ -51,7 +51,7 @@
     </div>
     <br>
     <div>
-        <table class="table table-striped sortable">
+        <table class="display" id="transferRequestTable">
             <thead>
                 <tr>
                     <th>Date</th>
@@ -84,9 +84,6 @@
                 @endforeach
             </tbody>
         </table>
-    </div>
-    <div class="pagination">
-        {{$transfers->links()}}
     </div>
 </div>
 @endif
@@ -135,7 +132,7 @@
     </div>
     <br>
     <div>
-        <table class="table table-striped sortable">
+        <table class="display" id="transferRequestTable">
             <thead>
                 <tr>
                     <th>Date (YYYY-MM-DD)</th>
@@ -173,13 +170,13 @@
             </tbody>
         </table>
     </div>
-    <div class="pagination">
-        {{$transfers->links()}}
-    </div>
 </div>
 @endif
 <script>
 $(document).ready(function(){
+    $("#transferRequestTable").DataTable({
+        searching: false
+    });
     $('#search').click(function(){
         var startDate = $('#startDate').val();
         var endDate = $('#endDate').val();

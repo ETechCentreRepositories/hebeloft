@@ -52,7 +52,7 @@
     </div>
     
     <br>
-    <table class="table table-striped sortable" id="inventoryTable" >
+    <table class="display" id="inventoryTable" >
         <thead>
             <tr>
                 <th>Image</th>
@@ -106,10 +106,6 @@
     </div>
 </div>
 
-<div class="pagination" id="pagination">
-    <?php echo e($inventoryOutlets->links()); ?>
-
-</div>
 <?php $__env->stopSection(); ?>
 
 <style>

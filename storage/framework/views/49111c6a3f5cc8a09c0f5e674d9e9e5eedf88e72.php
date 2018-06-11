@@ -14,36 +14,37 @@
 <br>
 <?php if($users_id->roles_id == '1' or $users_id->roles_id == '2'): ?>
 <div class="topMargin container">
-    <div class="drop-down_brand row">
-        <div class="col-md-3">
-            <p>From Date:</p>
-        </div>
-        <div class="col-md-9">
-            <input id="startDate" type="date" name="from" class="form-control">
-        </div>
-    </div>
-    <br>
-    <div class="drop-down_location row">
-        <div class="col-md-3">
-            <p>To Date:</p>
-        </div>
-        <div class="col-md-9">
-            <input id="endDate" type="date" name="to" class="form-control">
-        </div>
-    </div>
     <br>
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-5">
+            <div class="drop-down_brand row">
+                <div class="col-md-4">
+                    <p>From Date:</p>
+                </div>
+                <div class="col-md-8">
+                    <input id="startDate" type="date" name="from" class="form-control">
+                </div>
+            </div>
         </div>
-        <div class="col-md-2">
-            <div class="d-flex flex-row">
+        <div class="col-md-5">
+            <div class="drop-down_brand row">
+                <div class="col-md-4">
+                    <p>To Date:</p>
+                </div>
+                <div class="col-md-8">
+                    <input id="endDate" type="date" name="to" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 fullWidthButtons">
+            <div class="p-2">
                 <button id="search" type="button" class="btn btn-sucess btn-search">Search</button>
             </div>
         </div>
     </div>
     <br>
     <div>
-        <table class="table table-striped sortable">
+        <table class="display" id="salesOrderTable">
             <thead>
                 <tr>
                     <th>Date (YYYY-MM-DD)</th>
@@ -55,12 +56,12 @@
                 </tr>
             </thead>
             <tbody id="salesOrderContent">
-                    <?php $__currentLoopData = $salesOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $salesOrder): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <tr>
-                        <td><?php echo e($salesOrder->date); ?></td>
-                        <td><?php echo e($salesOrder->status); ?></td>
-                        <td><?php echo e($salesOrder->statuses['status_name']); ?></td>
-                        <td>
+                <?php $__currentLoopData = $salesOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $salesOrder): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <tr>
+                    <td><?php echo e($salesOrder->date); ?></td>
+                    <td><?php echo e($salesOrder->status); ?></td>
+                    <td><?php echo e($salesOrder->statuses['status_name']); ?></td>
+                    <td>
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row">
                                 <div class="p-2">
@@ -76,10 +77,6 @@
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
         </table>
-    </div>
-    <div class="pagination">
-        <?php echo e($salesOrders->links()); ?>
-
     </div>
 </div>
 <?php endif; ?>
@@ -120,7 +117,7 @@
     </div>
     <br>
     <div>
-        <table class="table table-striped sortable">
+        <table class="display" id="salesOrderTable">
             <thead>
                 <tr>
                     <th>Order Date</th>
@@ -153,6 +150,9 @@
 <?php endif; ?>
 <script>
 $(document).ready(function(){
+    $("#salesOrderTable").DataTable({
+        searching: false
+    });
     $('#search').click(function(){
         var startDate = $('#startDate').val();
         var endDate = $('#endDate').val();

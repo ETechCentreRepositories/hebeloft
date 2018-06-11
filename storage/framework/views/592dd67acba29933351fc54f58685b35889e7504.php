@@ -15,16 +15,14 @@
 <br>
 <div class="topMargin container">
     <div class="d-flex">
-    <?php if($users_id->roles_id == '1'): ?>
         <div class="p-2">
-            <button type="button" class="btn btn-warning" onclick="openCreateAdminModal()" style="padding-right:10dp">Register an Admin</button>
-        </div>
-        <?php endif; ?>
-        <div class="p-2">
-            <button type="button" class="btn btn-warning" onclick="openCreateStaffModal()">Register a Staff</button>
-        </div>
-        <div class="ml-auto p-2">
             <a href="<?php echo e(route('exportUser.file',['type'=>'csv'])); ?>"><button type="button" class="btn btn-warning">Export</button></a>
+        </div>
+        <div class="p-2 ml-auto">
+            <?php if($users_id->roles_id == '1'): ?>
+                <button type="button" class="btn btn-warning" onclick="openCreateAdminModal()" style="padding-right:10dp">Register an Admin</button>
+            <?php endif; ?>
+            <button type="button" class="btn btn-warning" onclick="openCreateStaffModal()">Register a Staff</button>
         </div>
     </div>
     <br>
@@ -37,7 +35,7 @@
     <br>
     <div class="tab-content">
         <div class="tab-pane fade show active" id="all">
-            <table class="table table-striped sortable">
+            <table class="display" id="userTable">
                 <thead>
                     <tr>
                         <th>Username</th>
@@ -50,7 +48,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if(count($users) > 0): ?>
                     <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
                         <td><?php echo e($user->name); ?></td>
@@ -78,15 +75,12 @@
                         <?php endif; ?>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    <?php else: ?>
-                        <p>No users found</p>
-                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
 
         <div class="tab-pane fade" id="admins">
-            <table class="table table-striped sortable">
+            <table class="display" id="adminTable">
                 <thead>
                     <tr>
                         <th>Username</th>
@@ -99,7 +93,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if(count($admins) > 0): ?>
                     <?php $__currentLoopData = $admins; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
                         <td><?php echo e($user->name); ?></td>
@@ -127,15 +120,12 @@
                         <?php endif; ?>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    <?php else: ?>
-                        <p>No users found</p>
-                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
 
         <div class="tab-pane fade" id="staffs">
-            <table class="table table-striped sortable">
+            <table class="display" id="staffTable">
                 <thead>
                     <tr>
                         <th>Username</th>
@@ -148,7 +138,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if(count($staffs) > 0): ?>
                     <?php $__currentLoopData = $staffs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
                         <td><?php echo e($user->name); ?></td>
@@ -176,16 +165,13 @@
                         <?php endif; ?>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    <?php else: ?>
-                        <p>No users found</p>
-                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
         
         
         <div class="tab-pane fade" id="wholesalers">
-            <table class="table table-striped sortable">
+            <table class="display" id="wholesalerTable">
                 <thead>
                     <tr>
                         <th>Username</th>
@@ -198,7 +184,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if(count($wholesalers) > 0): ?>
                     <?php $__currentLoopData = $wholesalers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
                         <td><?php echo e($user->name); ?></td>
@@ -226,18 +211,10 @@
                         <?php endif; ?>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    <?php else: ?>
-                        <p>No users found</p>
-                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
     </div>
-</div>
-
-<div class="pagination">
-    <?php echo e($users->links()); ?>
-
 </div>
 
 <div id="createAdminModal" class="modal">
@@ -337,6 +314,12 @@
 </div>
 
 <script>
+    $(document).ready(function (){
+        $("#userTable").DataTable();
+        $("#adminTable").DataTable();
+        $("#staffTable").DataTable();
+        $("#wholesalerTable").DataTable();
+    });
     function openCreateStaffModal() {
         document.getElementById('createStaffModal').style.display = "block";
     }
