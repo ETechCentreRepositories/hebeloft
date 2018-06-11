@@ -122,21 +122,9 @@ class UsersController extends Controller
         $users_id = User::find($user_id);
         $outlets = Outlet::all();
         $roles = Role::all();
-        // $user_id = $user->id;
-        // $outlets = Outlet::all();
-        // $outletsId = Outlet::find($id);
-        // $userOutlets = DB::select('SELECT outlets_id FROM users_has_outlets WHERE users_id ='. $user_id);
-        // dd($userOutlets);
-
-        // $roles = Role::select('id', 'roles_name')->get();
-        // foreach ($roles as $role) {
-        //     $roleList[$role->id] = $role->roles_name;
-        // }
 
         return view('user.edit')->with('id',$id)->with('users', $users)->with('outlets',$outlets)->with('roles', $roles)->with('users_id',$users_id);
-        
-        // return view('user.edit', compact('roleList'))->with('user', $user)->with('outlets',$outlets)->with('roles', $user->roles)->with('userOutlets',$userOutlets);
-    }
+        }
 
     /**
      * Update the specified resource in storage.
@@ -160,6 +148,7 @@ class UsersController extends Controller
         $users->name = $request->input('name');
         $users->roles_id = $request->input('roles_id');
         $users->password = Hash::make($request->input('password'));
+
         $users->save();
 
         $userOutletExists = UserOutlet::where('users_id', $id)->get();
