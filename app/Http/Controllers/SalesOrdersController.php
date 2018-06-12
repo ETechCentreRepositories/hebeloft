@@ -292,4 +292,46 @@ class SalesOrdersController extends Controller
         $pdf = PDF::loadView('salesorder.so', compact('datas'));
         return $pdf->download('sales_order.pdf');
     }
+
+    public function generatePO($salesOrderId){
+        $salesOrders = SalesOrder::find($salesOrderId);
+        $salesOrderId = SalesOrder::find($salesOrderId)->id;
+
+        // $sales = SalesOrderList::where('sales_order_id', $salesOrderId)->get()->toArray();
+
+        $salesOrder = DB::table('sales_order')
+        ->where('sales_order.id', '=', $salesOrderId)
+        ->join('sales_order_list', 'sales_order_list.sales_order_id', '=', 'sales_order.id')
+        ->join('users', 'users.id', '=', 'sales_order.users_id')
+        ->join('products', 'sales_order_list.products_id', '=', 'products.id')
+        ->get()
+        ->toArray();
+        $datas = json_decode( json_encode($salesOrder), true);
+
+        // dd($salesOrder);
+
+        $pdf = PDF::loadView('salesorder.po', compact('datas'));
+        return $pdf->download('packing_list.pdf');
+    }
+
+    public function generateDO($salesOrderId){
+        $salesOrders = SalesOrder::find($salesOrderId);
+        $salesOrderId = SalesOrder::find($salesOrderId)->id;
+
+        // $sales = SalesOrderList::where('sales_order_id', $salesOrderId)->get()->toArray();
+
+        $salesOrder = DB::table('sales_order')
+        ->where('sales_order.id', '=', $salesOrderId)
+        ->join('sales_order_list', 'sales_order_list.sales_order_id', '=', 'sales_order.id')
+        ->join('users', 'users.id', '=', 'sales_order.users_id')
+        ->join('products', 'sales_order_list.products_id', '=', 'products.id')
+        ->get()
+        ->toArray();
+        $datas = json_decode( json_encode($salesOrder), true);
+
+        // dd($salesOrder);
+
+        $pdf = PDF::loadView('salesorder.do', compact('datas'));
+        return $pdf->download('delivery_order.pdf');
+    }
 }
