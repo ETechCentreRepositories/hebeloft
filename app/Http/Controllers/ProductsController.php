@@ -190,15 +190,18 @@ class ProductsController extends Controller
         return redirect('/product')->with('success', 'Successfully Deleted Product');
     }
 
-    public function updatePrice10(Request $request) {
+    public function search(Request $request){
+        $search = $request->keyword;
+        $inventoryOutlets = InventoryOutlet::join('products', 'inventory_has_outlets.products_id', '=', 'products.id')
+                            ->join('outlets', 'inventory_has_outlets.outlets_id', '=', 'outlets.id')
+                            ->where('Name','LIKE', "%".$search.'%')
+                            ->where('outlets_id', '=', 13)
+                            ->get();
+        $data = [];
 
-    }
-
-    public function updatePrice20(Request $request) {
-
-    }
-
-    public function revertPrice(Request $request) {
-
+        foreach($inventoryOutlets as $key => $value){
+            $data [] = ['id' => $value->id, 'value'=>$value->Name];
+        }
+        return response($data);    
     }
 }

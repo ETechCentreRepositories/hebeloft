@@ -111,7 +111,19 @@ $(document).ready(function () {
         });
     });
 
-    
+    $("#image_add").change(function(){
+        console.log("image_add");
+        readURL(this);
+    });
+
+    $("#searchField").autocomplete({
+        source: 'autocompletesearch',
+        minLength:1,
+        select:function(key,value)
+        {
+            console.log(value);
+        }
+    });
 });
 
 function readURL(input){
@@ -124,3 +136,4 @@ function readURL(input){
         reader.readAsDataURL(input.files[0]);
     }
 }
+

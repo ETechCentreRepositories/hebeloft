@@ -184,11 +184,7 @@ class InventoryController extends Controller
 
     public function search(Request $request){
         $search = $request->keyword;
-        $inventoryOutlets = InventoryOutlet::join('products', 'inventory_has_outlets.products_id', '=', 'products.id')
-                            ->join('outlets', 'inventory_has_outlets.outlets_id', '=', 'outlets.id')
-                            ->where('Name','LIKE', "%".$search.'%')
-                            ->where('outlets_id', '=', 13)
-                            ->get();
+        $inventoryOutlets = Products::all();
         $data = [];
 
         foreach($inventoryOutlets as $key => $value){
@@ -196,6 +192,7 @@ class InventoryController extends Controller
         }
         return response($data);    
     }
+    
     public function getInventoryByFilter($outlet, $product_brand){
         $inventoryByFilter = InventoryOutlet::leftJoin('products', 'inventory_has_outlets.products_id', '=', 'products.id')
                     ->leftJoin('outlets', 'inventory_has_outlets.outlets_id', '=', 'outlets.id')
