@@ -79,7 +79,12 @@ class OutletsController extends Controller
      */
     public function show($id)
     {
-        //
+        $user_id = auth()->user()->id;
+        $users_id = User::find($user_id); 
+        $outlet = Outlet::find($id);
+        $userOutlets = UserOutlet::all();
+        
+        return view('outlets.show')->with('outlet', $outlet)->with('users_id',$users_id)->with('userOutlets',$userOutlets);
     }
 
     /**
@@ -92,7 +97,7 @@ class OutletsController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id); 
-        $outlet = Outlet::find($id);
+        $outlet = DB::table('outlets')->where('id', '=', $id);
         
         return view('outlets.edit')->with('outlet', $outlet)->with('users_id',$users_id);
     }
@@ -149,6 +154,18 @@ class OutletsController extends Controller
             'action' => 'Deleted Outlet',
             'action_by' => $login_user->name,
         ]);
+        $outlet = Outlet::find($id);
+        $user = DB::table('users_has_outlets')->where('outlets_id', '=', $id)->get()->toArray();
+        $user_array = (array) $user;
+        $user = array_get($user_array, 0);
+        $userer = (array) $user;
+        $user_id = array_get($userer, "users_id");
+        // dd($user_id);
+        $user = User::find($user_id);
+        // dd($user);
+        $user->onDelete('cascade');
+        // $outlet->delete();
+        return redirect('/outlet')->with('success', 'Successfully Deleted Outlet');
         
     }
     
