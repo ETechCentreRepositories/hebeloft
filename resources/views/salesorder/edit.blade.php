@@ -60,7 +60,7 @@
     {!! Form::close() !!}
 </div>
 <div style="text-align: center;">
-    <a href="{{ route('generatePDF.file',$salesOrders) }}"><button class="btn btn-primary btn-lg" style="margin: 0 2% 0 0;">Generate Sales Order</button></a>
+    <a href="{{ route('generateSO.file',$salesOrders) }}"><button class="btn btn-primary btn-lg" style="margin: 0 2% 0 0;">Generate Sales Order</button></a>
     <a href="#"><button class="btn btn-primary btn-lg" style="margin: 0 2%;">Generate Packing List</button></a>
     <a href="#"><button class="btn btn-primary btn-lg" style="margin: 0 0 0 2%;">Generate Delivery Order</button></a>
     </div>

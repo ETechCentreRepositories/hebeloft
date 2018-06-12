@@ -272,22 +272,24 @@ class SalesOrdersController extends Controller
         })->download($type);
     }
 
-    public function generatePDF($salesOrderId){
+    public function generateSO($salesOrderId){
         $salesOrders = SalesOrder::find($salesOrderId);
         $salesOrderId = SalesOrder::find($salesOrderId)->id;
 
         // $sales = SalesOrderList::where('sales_order_id', $salesOrderId)->get()->toArray();
 
-        $sales = DB::table('sales_order_list')
-        ->where('sales_order_id', '=', $salesOrderId)
+        $salesOrder = DB::table('sales_order')
+        ->where('sales_order.id', '=', $salesOrderId)
+        ->join('sales_order_list', 'sales_order_list.sales_order_id', '=', 'sales_order.id')
+        ->join('users', 'users.id', '=', 'sales_order.users_id')
         ->join('products', 'sales_order_list.products_id', '=', 'products.id')
         ->get()
         ->toArray();
-        $data = json_decode( json_encode($sales), true);
+        $datas = json_decode( json_encode($salesOrder), true);
 
-        // dd($salesssss);
+        // dd($salesOrder);
 
-        $pdf = PDF::loadView('salesorder.test', compact('data'));
-        return $pdf->download('invoice.pdf');
+        $pdf = PDF::loadView('salesorder.so', compact('datas'));
+        return $pdf->download('sales_order.pdf');
     }
 }

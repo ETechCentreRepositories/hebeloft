@@ -72,8 +72,8 @@
                                 <b style="font-size: 18px;">Sales Order</b>
                             </div>
                             <div class="blackBorder addPadding">
-                                Invoice # DS-171202<br>
-                                Date 4/12/2017
+                                Invoice #SO-{{$datas[0]['date']}}-{{$datas[0]['sales_order_id']}}<br>
+                                Date {{$datas[0]['date']}}
                             </div>
                         </td>
                     </tr>
@@ -87,23 +87,27 @@
                             Billing Address
                         </td>
                         <td class="noTopBorder">
-                            <b>SINCHONG MEHECO LTD</b><br>
+                            <b>{{$datas[0]['company_name']}}</b><br>
+                            {{$datas[0]['billing_address']}}
+                            <!-- <b>SINCHONG MEHECO LTD</b><br>
                             10<br>
                             JALAN KILANG TIMOR<br>
                             #02-01, LTH BUILDING<br>
                             Singapore<br>
-                            159306<br>
+                            159306<br> -->
                         </td>
                         <td class="wrapContentTd noTopBorder">
                             Shipping Address
                         </td>
                         <td class="noTopBorder">
-                            <b>SINCHONG MEHECO LTD</b><br>
+                            <b>{{$datas[0]['company_name']}}</b><br>
+                            {{$datas[0]['shipping_address']}}
+                            <!-- <b>SINCHONG MEHECO LTD</b><br>
                             10<br>
                             JALAN KILANG TIMOR<br>
                             #02-01, LTH BUILDING<br>
                             Singapore<br>
-                            159306<br>
+                            159306<br> -->
                         </td>
                     </tr>
                 </tbody>
@@ -117,8 +121,8 @@
                             Phone
                         </td>
                         <td class="noTopBorder">
-                            KELVIN ZENG<br>
-                            65 6221 3900
+                            {{$datas[0]['name']}}<br>
+                            {{$datas[0]['phone_number']}}
                         </td>
                         <td class="wrapContentTd noTopBorder">
                         </td>
@@ -150,17 +154,19 @@
                     <tr>
                         <th class="blackBorder coloredHeader">Item</th>
                         <th class="blackBorder coloredHeader rightAlign">Quantity</th>
-                        <th class="blackBorder coloredHeader rightAlign">Unit Price</th>
-                        <th class="blackBorder coloredHeader rightAlign">Sub-total</th>
+                        <th class="blackBorder coloredHeader rightAlign">Unit Price (SGD)</th>
+                        <th class="blackBorder coloredHeader rightAlign">Sub-total (SGD)</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($datas as $data)
                     <tr>
-                        <td class="blackBorder">{{$data[0]['Name']}}</td>
-                        <td class="blackBorder rightAlign">{{$data[0]['quantity']}}</td>
-                        <td class="blackBorder rightAlign">{{$data[0]['UnitPrice']}}</td>
-                        <td class="blackBorder rightAlign">{{$data[0]['subtotal']}}</td>
+                        <td class="blackBorder">{{$data['Name']}}</td>
+                        <td class="blackBorder rightAlign">{{$data['quantity']}}</td>
+                        <td class="blackBorder rightAlign">{{$data['UnitPrice']}}</td>
+                        <td class="blackBorder rightAlign">{{$data['subtotal']}}</td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
 
@@ -171,8 +177,9 @@
                             Remarks
                         </td>
                         <td class="blackBorder">
+                        {{$datas[0]['remarks']}}
                         </td>
-                        <td class="wrapContentTd noTopBorder noTopPadding">
+                        <!-- <td class="wrapContentTd noTopBorder noTopPadding">
                             Before Tax<br>
                             GST Incl.<br>
                             <div style="font-size: 16px">Total</div><br>
@@ -181,7 +188,7 @@
                             <div class="blackBorder noBottomBorder">$2,166.07</div>
                             <div class="blackBorder noBottomBorder">$151.63</div>
                             <div class="blackBorder" style="font-size: 16px">$2,317.70</div>
-                        </td>
+                        </td> -->
                     </tr>
                 </tbody>
             </table>
