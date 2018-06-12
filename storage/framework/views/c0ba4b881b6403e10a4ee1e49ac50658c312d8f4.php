@@ -16,46 +16,42 @@
 <br>
 <div class="topMargin container">
     <a href="<?php echo e(route('exportSalesRecord.file',['type'=>'csv'])); ?>"><button type="button" class="btn btn-warning" style="width: auto; float: left;">Export</button></a>
-    <div class="row justify-content-end">
-        <a href="/salesrecord/create"><button type="button" class="btn btn-warning">Create or View New Sales Record</button></a>
-    </div>
-    <br>
-    <div class="drop-down_brand row">
-        <div class="col-md-3">
-            <p>From Date:</p>
-        </div>
-        <div class="col-md-9">
-            <input id="startDate" type="date" name="from" class="form-control">
-        </div>
-    </div>
-    <br>
-    <div class="drop-down_location row">
-        <div class="col-md-3">
-            <p>To Date:</p>
-        </div>
-        <div class="col-md-9">
-            <input id="endDate" type="date" name="to" class="form-control">
-        </div>
-    </div>
-    <br>
     <div class="row">
-        <div class="col-md-10">
-            <input type="text" id="salesRecordSearchField" style="text-indent:20px;" class="form-control" style="background:transparent">
+        <div class="col-md-9"></div>
+        <div class="col-md-3 fullWidthButtons">
+            <a href="/salesrecord/create"><button type="button" class="btn btn-warning">Create or View New Sales Record</button></a>
         </div>
-        <div class="col-md-2">
-        <div class="d-flex flex-row ">
-                <div class="p-2">
-                    <button id="search" type="button" class="btn btn-sucess">Search</button>
+    </div>
+    <div class="row">
+    <div class="col-md-4">
+            <div class="drop-down_brand row">
+                <div class="col-md-4">
+                    <p>From Date:</p>
                 </div>
-                <div class="p-2">
-                    <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
+                <div class="col-md-8">
+                    <input id="startDate" type="date" name="from" class="form-control">
                 </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="drop-down_brand row">
+                <div class="col-md-4">
+                    <p>To Date:</p>
+                </div>
+                <div class="col-md-8">
+                    <input id="endDate" type="date" name="to" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 fullWidthButtons">
+            <div class="p-2">
+                <button id="search" type="button" class="btn btn-sucess btn-search">Search</button>
             </div>
         </div>
     </div>
     <br>
     <div>
-        <table class="table table-striped sortable">
+        <table class="display" id="salesRecordTable">
             <thead>
                 <tr>
                     <th>Date (YYYY-MM-DD)</th>
@@ -86,12 +82,11 @@
             </tbody>
         </table>
     </div>
-    <div class="pagination">
-        <?php echo e($salesRecords->links()); ?>
-
-    </div>
     <script>
         $(document).ready(function(){
+            $("#salesRecordTable").DataTable({
+        searching: false
+    });
             $('#refreshInventory').click(function(){
                 var startDate = $('#startDate').val();
                 var endDate = $('#endDate').val();

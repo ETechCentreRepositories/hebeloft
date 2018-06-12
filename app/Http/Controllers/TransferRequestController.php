@@ -12,7 +12,6 @@ use App\Models\AuditTrail;
 use App\Models\Products;
 use App\Models\Outlet;
 use App\Models\UserOutlet;
-use App\Models\InventoryOutlet;
 use Session;
 use App\CartTransferRequest;
 use Log;
