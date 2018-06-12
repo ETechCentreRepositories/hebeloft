@@ -34,7 +34,7 @@
         <div class="col-md-5">
             <div class="drop-down_brand row">
                 <div class="col-md-4">
-                    <p>To Date:</p>
+                    <p style="text-align:right">To Date:</p>
                 </div>
                 <div class="col-md-8">
                     <input id="endDate" type="date" name="to" class="form-control">
@@ -155,14 +155,12 @@
                                 <div class="p-2">
                                     <a href="/transferrequest/<?php echo e($outletTransfer->id); ?>"><button type="button" class="btn btn-primary action-buttons">View More</button></a>
                                 </div>
-                    <?php if($users_id->roles_id == '1'): ?>
                                 <div class="p-2">
-                                    <a href="/transferrequest/<?php echo e($transfer->id); ?>/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
+                                    <a href="/transferrequest/<?php echo e($outletTransfer->id); ?>/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
                             </div>
                         </div>
                     </td>
-                    <?php endif; ?>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>

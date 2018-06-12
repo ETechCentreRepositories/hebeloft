@@ -237,7 +237,7 @@
 
                 <br></br>
                 <div class="centerImage col-md-3" >
-                <img src = "" id="addImage" width="150px" />
+                <img src = "/storage/product_images/<?php echo e($product->image); ?>" id="addImage" width="150px" />
                 <br>
                 </div>
             </div>

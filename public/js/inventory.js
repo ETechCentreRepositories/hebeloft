@@ -1,7 +1,5 @@
 $(document).ready(function(){
-    $("#inventoryTable").DataTable({
-        searching: false
-    });
+    
     $.get('ajax/product_brand',function(data){
         $("#product_brand").empty();
         $("#product_brand").append("<option value='all'>All</option>");
@@ -70,7 +68,6 @@ $(document).ready(function(){
                     if(response.length == 0) {
                         $("#inventoryContent").append("<p style='text-align: center;'>No Inventory found</p>");
                     } else {
-                        document.getElementById('pagination').style.display = 'none';
                         for (i = 0; i < response.length; i++) {
                             $("#inventoryContent").append(
                                 "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
@@ -100,7 +97,6 @@ $(document).ready(function(){
                     if(response.length == 0) {
                         $("#inventoryContent").append("<p style='text-align: center;'>No Inventory found</p>");
                     } else {
-                    document.getElementById('pagination').style.display = 'none';
                     for (i = 0; i < response.length; i++) {
                         $("#inventoryContent").append(
                             "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
@@ -129,7 +125,6 @@ $(document).ready(function(){
                     if(response.length == 0) {
                         $("#inventoryContent").append("<p style='text-align: center;'>No Inventory found</p>");
                     } else {
-                        document.getElementById('pagination').style.display = 'none';
                         for (i = 0; i < response.length; i++) {
                             $("#inventoryContent").append(
                                 "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
@@ -187,7 +182,6 @@ $(document).ready(function(){
                     if(response.length == 0) {
                         $("#inventoryContent").append("<p style='text-align: center;'>No Inventory found</p>");
                     } else {
-                        document.getElementById('pagination').style.display = 'none';
                         for (i = 0; i < response.length; i++) {
                             $("#inventoryContent").append(
                                 "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
@@ -217,7 +211,6 @@ $(document).ready(function(){
                     if(response.length == 0) {
                         $("#inventoryContent").append("<p style='text-align: center;'>No Inventory found</p>");
                     } else {
-                    document.getElementById('pagination').style.display = 'none';
                     for (i = 0; i < response.length; i++) {
                         $("#inventoryContent").append(
                             "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
@@ -246,7 +239,6 @@ $(document).ready(function(){
                     if(response.length == 0) {
                         $("#inventoryContent").append("<p style='text-align: center;'>No Inventory found</p>");
                     } else {
-                        document.getElementById('pagination').style.display = 'none';
                         for (i = 0; i < response.length; i++) {
                             $("#inventoryContent").append(
                                 "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
@@ -265,67 +257,6 @@ $(document).ready(function(){
                 }
             });
         }
-    });
-
-    $("#product_brand").change(function(){
-        var product_brand = $(this).val();
-        console.log(product_brand);
-        $("#inventoryContent").empty();
-        $.ajax({
-            type: "GET",
-            url: "/retrieve-inventory-by-product-brand/" +product_brand,
-            // data: "outlet=" + outlet,
-            cache: false,
-            dataType: "JSON",
-            success: function (response) {
-                for (i = 0; i < response.length; i++) {
-                    $("#inventoryContent").append(
-                        "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
-                        + "<td>" + response[i].Brand + "</td>"
-                        + "<td>" + response[i].Name + "</td>"
-                        + "<td>" + response[i].UnitPrice + "</td>"
-                        + "<td></td>" 
-                        + "<td>" + response[i].stock_level + "/" + response[i].threshold_level + "</td></tr>"
-                    );
-                }
-            },
-            
-            error: function (obj, textStatus, errorThrown) {
-                console.log("Error " + textStatus + ": " + errorThrown);
-            }
-        });
-    });
-
-    $("#searchInventory").click(function(){
-        var productName = $("#searchField").val();
-        console.log(productName);
-        $("#inventoryContent").empty();
-        $.ajax({
-            type: "GET",
-            url: "/retrieve-inventory-by-product-name/" + productName,
-            cache: false,
-            dataType: "JSON",
-            success: function (response) {
-                if(response == null) {$("#inventoryContent").append(
-                    "<p style='text-align: center;'>No Inventory found</p>")
-                } else {
-                    for (i = 0; i < response.length; i++) {
-                        $("#inventoryContent").append(
-                            "<tr><td><img style='width:60px; height:60px' src='/storage/product_images/"+ response[i].image +"'/></td>"
-                            + "<td>" + response[i].Brand + "</td>"
-                            + "<td>" + response[i].Name + "</td>"
-                            + "<td>" + response[i].UnitPrice + "</td>"
-                            + "<td>" + response[i].Category + "</td>" 
-                            + "<td>" + response[i].stock_level + "/" + response[i].threshold_level + "</td></tr>"
-                        );
-                    }
-                }
-            },
-
-            error: function (obj, textStatus, errorThrown) {
-                console.log("Error " + textStatus + ": " + errorThrown);
-            }
-        });
     });
 });
 

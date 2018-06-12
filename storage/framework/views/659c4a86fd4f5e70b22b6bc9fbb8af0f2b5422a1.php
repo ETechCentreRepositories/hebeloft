@@ -53,7 +53,7 @@
                                     <a href="/product/<?php echo e($product->id); ?>/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
                                 <div class="p-2">
-                                <?php echo Form::open(['action' => ['ProductsController@destroy', $product->id], 'method' => 'POST']); ?>
+                                    <?php echo Form::open(['action' => ['ProductsController@destroy', $product->id], 'method' => 'POST']); ?>
 
                                         <?php echo e(Form::hidden('_method', 'DELETE')); ?>
 
@@ -70,6 +70,7 @@
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
         </table>
+        <button class="btn btn-primary" onclick="openBulkUpdateModal()">Bulk Update</button>
     </div>
 </div>
 
