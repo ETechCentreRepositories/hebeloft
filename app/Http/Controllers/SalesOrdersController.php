@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use Illuminate\Http\Request;
 use App\Models\SalesOrder;
 use App\Models\InventoryOutlet;
@@ -13,6 +14,7 @@ use App\Models\AuditTrail;
 use App\Models\SalesOrderList;
 use App\Wholesaler;
 use DB;
+
 
 class SalesOrdersController extends Controller
 {
@@ -256,11 +258,11 @@ class SalesOrdersController extends Controller
         ->join('statuses', 'sales_order.statuses_id', '=', 'statuses.id')
         ->join('users', 'sales_order.users_id', '=', 'users.id')
         ->join('wholesalers', 'users.id', '=', 'wholesalers.users_id')
-        ->select('sales_order.id', 'sales_order.totalQuantity', 'sales_order.totalPrice', 'statuses.status_name', 'sales_order.remarks', 'sales_order.date', 'users.name', 'wholesalers.shipping_address', 'wholesalers.phone_number')
+        ->select('sales_order.id', 'sales_order.totalQuantity', 'sales_order.totalPrice', 'statuses.status_name', 'sales_order.remarks', 'sales_order.date', 'users.name', 'wholesalers.shipping_address')
         ->orderBy('sales_order.id')
         ->get()
         ->toArray();
-        $data= json_decode( json_encode($salesorderexcel), true);
+        $data = json_decode( json_encode($salesorderexcel), true);
 
         return \Excel::create('salesorder', function($excel) use ($data) {
             $excel->sheet('sheet name', function($sheet) use ($data)
@@ -268,5 +270,24 @@ class SalesOrdersController extends Controller
                 $sheet->fromArray($data);
             });
         })->download($type);
+    }
+
+    public function generatePDF($salesOrderId){
+        $salesOrders = SalesOrder::find($salesOrderId);
+        $salesOrderId = SalesOrder::find($salesOrderId)->id;
+
+        // $sales = SalesOrderList::where('sales_order_id', $salesOrderId)->get()->toArray();
+
+        $sales = DB::table('sales_order_list')
+        ->where('sales_order_id', '=', $salesOrderId)
+        ->join('products', 'sales_order_list.products_id', '=', 'products.id')
+        ->get()
+        ->toArray();
+        $data = json_decode( json_encode($sales), true);
+
+        // dd($salesssss);
+
+        $pdf = PDF::loadView('salesorder.test', compact('data'));
+        return $pdf->download('invoice.pdf');
     }
 }

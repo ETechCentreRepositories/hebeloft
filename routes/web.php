@@ -72,6 +72,7 @@ Route::get('/salesorder/addtocart/{id}/{quantity}/{unitPrice}/{date}/{remarks}',
 Route::get('/testing/{id}', 'UsersController@show');
 Route::get('/salesorder/remove/{id}', 'SalesOrdersController@getRemoveItem');
 Route::get('export-salesorder/{type}', 'SalesOrdersController@exportFile')->name('exportSalesOrder.file');
+Route::get('generate-PDF/{salesOrders}', 'SalesOrdersController@generatePDF')->name('generatePDF.file');
 
 //TransferRequest
 Route::get('/transferrequest/create', 'TransferRequestController@getTransferRequestCart');

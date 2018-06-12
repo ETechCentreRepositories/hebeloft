@@ -105,14 +105,6 @@
     </div>
 </div>
 
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#inventoryTable").DataTable();
-        });
-        
-    </script>
-
 <?php $__env->stopSection(); ?>
 
 <style>
