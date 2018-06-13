@@ -109,8 +109,15 @@ class SalesRecordsController extends Controller
 
         $salesRecord = SalesRecord::find($id);
         $salesRecordId = SalesRecord::find($id)->id;
-        $records = SalesRecordList::where('sales_record_id', '=', $salesRecordId)->get();
+        $records = DB::table('sales_record')
+        ->where('sales_record.id', '=', $salesRecordId)
+        ->join('sales_record_list', 'sales_record_list.sales_record_id', '=', 'sales_record.id')
+        ->join('products', 'sales_record_list.products_id', '=', 'products.id')
+        ->get()
+        ->toArray();
+
         $totalPrice = DB::table('sales_record_list')->where('sales_record_id', $salesRecordId)->sum('subtotal');
+
 
         return view('salesrecord.show')->with('users_id',$users_id)->with('salesRecord',$salesRecord)->with('records',$records)->with('totalPrice',$totalPrice);
     }

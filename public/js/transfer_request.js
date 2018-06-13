@@ -38,9 +38,5 @@ $(document).ready(function(){
             console.log(value);
         }
     });
-
-    $('#refreshInventory').click(function(){
-    });
-
     
 });

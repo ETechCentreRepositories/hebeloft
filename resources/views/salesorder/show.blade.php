@@ -19,7 +19,11 @@
 <br>
 <div class="container">
     <div>
-    <h3>Sales Order #{{$salesOrder->date}}_{{$salesOrder->id}}</h3>
+    <h3>Sales Order #SO_{{$salesOrder->date}}_{{$salesOrder->id}}</h3>
+        <br>Date    : {{$salesOrderLists[0]->date}}
+        <br>Status  : {{$salesOrderLists[0]->status_name}}
+        <br>Contact : {{$salesOrderLists[0]->phone_number}} ({{$salesOrderLists[0]->name}})
+        <br>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -33,9 +37,9 @@
             <tbody>
             @foreach($salesOrderLists as $salesOrderList)
                 <tr>
-                    <td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/{{$salesOrderList->products['image']}}"></td>
-                    <td>{{$salesOrderList->products['Name']}}</td>
-                    <td>{{$salesOrderList->products['UnitPrice']}}</td>
+                    <td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/{{$salesOrderList->image}}"></td>
+                    <td>{{$salesOrderList->Name}}</td>
+                    <td>{{$salesOrderList->UnitPrice}}</td>
                     <td align="right">{{$salesOrderList->quantity}}</td>
                     <td>{{$salesOrderList->subtotal}}</td>
                 </tr>
@@ -49,21 +53,30 @@
                 </tr>
             </tbody>
         </table>
-        {{-- <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                </tr>
-            </thead>
+        <table class="table headerTable">
             <tbody>
-            @foreach($salesOrderLists as $salesOrderList)
                 <tr>
-                    <td>{{$salesOrderList->products['Name']}}</td>
-                    <td>{{$salesOrderList->quantity}}</td>
+                    <td class="wrapContentTd noTopBorder">
+                        Remarks
+                    </td>
+                    <td class="blackBorder">
+                    {{$salesOrderLists[0]->remarks}}
                 </tr>
-                @endforeach
             </tbody>
-        </table> --}}
+        </table>
     </div>
 </div>
+
+<style>
+    .salesOrderNav {
+        background-color: #f5f8fa !important;
+        color: #000000 !important;
+        pointer-events: none;
+        cursor: default;
+        
+    }
+    
+    .emptyHeader {
+    	pointer-events: none;
+    }
+</style>

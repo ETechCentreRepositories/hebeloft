@@ -158,15 +158,14 @@ class UsersController extends Controller
             }
         }
 
-        $outlets = $request->outlet; 
-        $num_outlet = count($outlets);
-        for($i = 0 ; $i < $num_outlet ; $i++){
-            // echo "<br>". $outlets[$i];
-            $userOutlet = new UserOutlet;
-            $userOutlet->users_id = $id;
-            $userOutlet->outlets_id = $outlets[$i];
-            $userOutlet->save();
-        }
+        // $outlets = $request->outlet; 
+        // $num_outlet = count($outlets);
+        // for($i = 0 ; $i < $num_outlet ; $i++){
+        //     $userOutlet = new UserOutlet;
+        //     $userOutlet->users_id = $id;
+        //     $userOutlet->outlets_id = $outlets[$i];
+        //     $userOutlet->save();
+        // }
 
         return redirect('/user')->with('success', 'User Updated');
     }

@@ -62,6 +62,16 @@ class ProductsController extends Controller
             'action_by' => $login_user->name,
         ]);
 
+        if($request->hasFile('image')){
+            $fileNameWithExt = $request->file('image')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+            $path = $request->file('image')->storeAs('public/product_images', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'no_image.jpg';
+        }
+
         $product = new Products;
         $product->Name = $request->input("name");
         $product->Category = $request->input("category");
@@ -85,10 +95,9 @@ class ProductsController extends Controller
         $product->LastVendor = $request->input("lastVendor");
         $product->VendorPrice = $request->input("vendorPrice");
         $product->Barcode = $request->input("barcode");
+        $product->image = $fileNameToStore;
         //stock level & threshold level
         $product->save();
-
-        $request->file('image_add')->store(Input::get('image_add'));
 
         return redirect('/product')->with('success', 'Successfully Created a New Product');
     }
@@ -192,16 +201,22 @@ class ProductsController extends Controller
 
     public function search(Request $request){
         $search = $request->keyword;
-        $inventoryOutlets = InventoryOutlet::join('products', 'inventory_has_outlets.products_id', '=', 'products.id')
-                            ->join('outlets', 'inventory_has_outlets.outlets_id', '=', 'outlets.id')
-                            ->where('Name','LIKE', "%".$search.'%')
-                            ->where('outlets_id', '=', 13)
-                            ->get();
+        $inventoryOutlets = Products::all();
         $data = [];
 
         foreach($inventoryOutlets as $key => $value){
-            $data [] = ['id' => $value->id, 'value'=>$value->Name];
+            $data [] = ['id' => $value->id, 'value'=>$value->Description];
         }
+      
         return response($data);    
+    }
+
+    public function getProductByName($productName){
+
+        $productByName = DB::table('products')
+                    ->where('Description','=', $productName)
+                    ->get()->toArray();
+
+        return $productByName;
     }
 }

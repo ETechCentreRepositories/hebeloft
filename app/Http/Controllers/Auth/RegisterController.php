@@ -86,7 +86,8 @@ class RegisterController extends Controller
         $wholesaler =  Wholesaler::create([
             'users_id'=> $user->id,
             'billing_address'=>$data['billing_address'],
-            'shipping_address'=>$data['shipping_address']
+            'shipping_address'=>$data['shipping_address'],
+            'company_name'=>$data['company_name']
         ]);
         
         return $user;

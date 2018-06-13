@@ -145,55 +145,59 @@
         <div class="col-md-6">
             <div class="dashboardTables">
                 <h3 class="dashboardLabels">Audit Trails</h3>
-                <table class="table table-striped">
+                <table class="table table-striped" id="auditTrailTable">
                     <thead>
-                        <tr><th class="col-md-4">Done By</th></tr>
-                        <tr><th class="col-md-4">Action</th></tr>
-                        <tr><th class="col-md-4">Date/Time</th></tr>
+                        <tr><th class="col-md-3">Done By</th>
+                        <th class="col-md-3">Action</th>
+                        <th class="col-md-3">Date/Time</th></tr>
                     </thead>
                     <tbody>
                         <?php $__currentLoopData = $auditTrails; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $auditTrail): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
-                            <td class="col-md-4"><?php echo e($auditTrail->action_by); ?></td>
-                            <td class="col-md-4"><?php echo e($auditTrail->action); ?></td>
-                            <td class="col-md-4"><?php echo e($auditTrail->created_at); ?></td>
+                            <td class="col-md-3"><?php echo e($auditTrail->action_by); ?></td>
+                            <td class="col-md-3"><?php echo e($auditTrail->action); ?></td>
+                            <td class="col-md-3"><?php echo e($auditTrail->created_at); ?></td>
                         </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
                 </table>
-            </div>
-            <div class="pagination">
-                <?php echo e($auditTrails->links()); ?>
-
             </div>
         </div>
         
         <div class="col-md-6">
             <div class="dashboardTables">
                 <h3 class="dashboardLabels">Sales Record</h3>
-                <table class="table table-striped">
+                <table class="table table-striped" id="salesRecordTable">
                     <thead>
-                        <tr><th class="col-md-6">Date</th></tr>
-                        <tr><th class="col-md-6">Outlet</th></tr>
+                        <tr>
+                        <th class="col-md-5">Date</th>
+                        <th class="col-md-5">Outlet</th>
+                        </tr>
                     </thead>
                     <tbody>
                         <?php $__currentLoopData = $salesRecords; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $salesRecord): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
-                            <td class="col-md-6"><?php echo e($salesRecord->OrderDate); ?></td>
-                            <td class="col-md-6"><?php echo e($salesRecord->outlets['outlet_name']); ?></td>
+                            <td class="col-md-5"><?php echo e($salesRecord->OrderDate); ?></td>
+                            <td class="col-md-5"><?php echo e($salesRecord->outlet_name); ?></td>
                         </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
                 </table>
             </div>
-            <div class="pagination">
-                <?php echo e($salesRecords->links()); ?>
-
-            </div>
         </div>
     </div>
 </div>
 
+<script>
+ $(document).ready(function () {
+     $("#salesRecordTable").DataTable({
+         searching:false
+     });
+     $("#auditTrailTable").DataTable({
+         searching:false
+     });
+ });
+</script>
 
 <?php $__env->stopSection(); ?>
 

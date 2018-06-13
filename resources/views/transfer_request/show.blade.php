@@ -19,6 +19,10 @@
 <div class="container">
     <div>
     	<h3>Transfer Request #{{$transferRequests->outlets->initial}}_{{$transferRequests->date}}_{{$transferRequests->id}}</h3>
+        <br>Date    : {{$transfers[0]->date}}
+        <br>Status  : {{$transfers[0]->status}}
+        <br>Contact : 9818 2584 (Helen)
+        <br>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -30,12 +34,38 @@
             <tbody>
             @foreach($transfers as $transfer)
                 <tr>
-                    <td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/{{$transfer->products['image']}}"></td>
-                    <td>{{$transfer->products['Name']}}</td>
+                    <td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/{{$transfer->image}}"></td>
+                    <td>{{$transfer->Name}}</td>
                     <td align="right">{{$transfer->quantity}}</td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+        <br><br/>
+        <table class="table headerTable">
+            <tbody>
+                <tr>
+                    <td class="wrapContentTd noTopBorder">
+                        Remarks
+                    </td>
+                    <td class="blackBorder">
+                    {{$transfers[0]->remarks}}
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
+
+<style>
+    .transferRequestNav {
+        background-color: #f5f8fa !important;
+        color: #000000 !important;
+        pointer-events: none;
+        cursor: default;
+        
+    }
+    
+    .emptyHeader {
+    	pointer-events: none;
+    }
+</style>

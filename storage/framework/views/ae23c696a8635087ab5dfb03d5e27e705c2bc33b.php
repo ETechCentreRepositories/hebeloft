@@ -27,10 +27,6 @@
 
     </div>
     <div class="form-group modal-fields">
-        <?php echo e(Form::text('email', $outlet->email, ['class' => 'form-control', 'placeholder' => 'Email'])); ?>
-
-    </div>
-    <div class="form-group modal-fields">
         <?php echo e(Form::text('telephone_number', $outlet->telephone_number, ['class' => 'form-control', 'placeholder' => 'Telephone number'])); ?>
 
     </div>
@@ -42,7 +38,7 @@
 
     <br>
     <div class="form-group modal-button">
-        <?php echo e(Form::submit('Edit outlet', ['class'=>'btn btn-primary btn-lg'])); ?>
+        <?php echo e(Form::submit('Save', ['class'=>'btn btn-primary btn-lg'])); ?>
 
     </div>
     <br>
@@ -54,7 +50,7 @@
 <style>
     .outletNav {
         background-color: #f5f8fa !important;
-        color: #566B30 !important;
+        color: #000000 !important;
         pointer-events: none;
         cursor: default;
     }

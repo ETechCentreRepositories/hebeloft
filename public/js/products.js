@@ -1,5 +1,53 @@
 $(document).ready(function () {
     $("#productTable").DataTable();
+    $("#searchField").autocomplete({
+        source: "/autocomplete-search-description/",
+        minLength:1,
+        select:function(key,value)
+        {
+            console.log(value);
+        }
+    });
+    $("#selectThis").click(function () {
+        var productName = $("#searchField").val();
+        console.log(productName);
+        $.ajax({
+            type: "GET",
+            url: "/retrieve-product-by-name/" + productName,
+            data: "",
+            cache:false,
+            datatype: "JSON",
+            success: function (response) {
+                console.log("success");
+                $("#Name").val(response[0]['Description']);
+                $("#category").val(response[0]['Category']);
+                $("#remarks").val(response[0]['Remarks']);
+                $("#brand").val(response[0]['Brand']);
+                $("#unitPrice").val(response[0]['UnitPrice']);
+                $("#metro").val(response[0]['Metro']);
+                $("#og").val(response[0]['OG_PLU']);
+                $("#robinson").val(response[0]['Robinsons']);
+                $("#bhg").val(response[0]['BHG']);
+                $("#ntuc").val(response[0]['NTUC']);
+                $("#unit").val(response[0]['Unit']);
+                $("#size").val(response[0]['Size']);
+                $("#length").val(response[0]['ProductLength']);
+                $("#width").val(response[0]['ProductWidth']);
+                $("#weight").val(response[0]['ProductWeight']);
+                $("#height").val(response[0]['ProductHeight']);
+                $("#cost").val(response[0]['Cost']);
+                $("#lastVendor").val(response[0]['LastVendor']);
+                $("#vendorPrice").val(response[0]['VendorPrice']);
+                $("#Barcode").val(response[0]['BarCode']);
+
+                console.log(response);
+            },
+
+            error: function (obj, testStatus, errorThrown) {
+                console.log("fail");
+            }
+        });
+    });
     $("#search").click(function(){
         var productName = $("#productSearchField").val();
         console.log(productName);
@@ -116,14 +164,6 @@ $(document).ready(function () {
         readURL(this);
     });
 
-    $("#searchField").autocomplete({
-        source: 'autocompletesearch',
-        minLength:1,
-        select:function(key,value)
-        {
-            console.log(value);
-        }
-    });
 });
 
 function readURL(input){

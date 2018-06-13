@@ -57,7 +57,6 @@
             }else{
                 $("#email").val(""); 
             }
-            
         });
     });
 </script>

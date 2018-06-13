@@ -29,6 +29,7 @@
                                         <strong><?php echo e($errors->first('email')); ?></strong>
                                     </span>
                                 <?php endif; ?>
+                                <label><input id="outletStaff" type="checkbox" name="outletStaff[]" value=""> I am an outlet staff</label>
                             </div>
                         </div>
 
@@ -46,6 +47,20 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#outletStaff").click(function(){
+            $status = $(this).is(":checked");
+            if($status){
+	        $("#email").val("enquiry@hebeloft.com"); 
+            }else{
+                $("#email").val(""); 
+            }
+            
+        });
+    });
+</script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

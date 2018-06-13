@@ -28,8 +28,8 @@ class HomeController extends Controller
         $transferShips = DB::table('transfer_requests')->where('statuses_id', 2)->count();
         $transferDelivers = DB::table('transfer_requests')->where('statuses_id', 3)->count();
         $transferInvoices = DB::table('transfer_requests')->where('statuses_id', 4)->count();
-        $auditTrails = AuditTrail::orderBy('created_at','desc')->paginate(4);
-        $salesRecords = SalesRecord::orderBy('id','desc')->paginate(10);
+        $auditTrails = DB::table('audit_trail')->orderBy('created_at','desc')->get()->toArray();
+        $salesRecords = DB::table('sales_record')->join('outlets', 'outlets.id', '=', 'sales_record.outlets_id')->orderBy('sales_record.id','desc')->get()->toArray();
         
         return view('home')->with('users_id',$users_id)->with('salesPacks', $salesPacks)->
         with('salesShips', $salesShips)->with('salesDelivers', $salesDelivers)->

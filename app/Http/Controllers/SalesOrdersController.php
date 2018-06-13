@@ -76,7 +76,6 @@ class SalesOrdersController extends Controller
                 $totalPrice += $product['qty']*$product['unitPrice'];
             }
             
-
             $salesOrder = new SalesOrder;
             $salesOrder->statuses_id = 1;
             $salesOrder->status = "pending";
@@ -116,9 +115,17 @@ class SalesOrdersController extends Controller
 
         $salesOrder = SalesOrder::find($id);
         $salesOrderId = SalesOrder::find($id)->id;
-        $salesOrderLists = SalesOrderList::where('sales_order_id', '=', $salesOrderId)->get();
+        $salesOrderLists = DB::table('sales_order')
+        ->where('sales_order.id', '=', $salesOrderId)
+        ->join('sales_order_list', 'sales_order_list.sales_order_id', '=', 'sales_order.id')
+        ->join('products', 'sales_order_list.products_id', '=', 'products.id')
+        ->join('users', 'sales_order.users_id', '=', 'users.id')
+        ->join('statuses', 'sales_order.statuses_id', '=', 'statuses.id')
+        ->get()
+        ->toArray();
+
+        // dd($salesOrderLists);
         $totalPrice = DB::table('sales_order_list')->where('sales_order_id', $salesOrderId)->sum('subtotal');
-        
 
         return view('salesorder.show')->with('users_id',$users_id)->with('salesOrder',$salesOrder)->with('salesOrderLists',$salesOrderLists)->with('totalPrice',$totalPrice);
     }
@@ -275,19 +282,7 @@ class SalesOrdersController extends Controller
     public function generateSO($salesOrderId){
         $salesOrders = SalesOrder::find($salesOrderId);
         $salesOrderId = SalesOrder::find($salesOrderId)->id;
-
-        // $sales = SalesOrderList::where('sales_order_id', $salesOrderId)->get()->toArray();
-
-        $salesOrder = DB::table('sales_order')
-        ->where('sales_order.id', '=', $salesOrderId)
-        ->join('sales_order_list', 'sales_order_list.sales_order_id', '=', 'sales_order.id')
-        ->join('users', 'users.id', '=', 'sales_order.users_id')
-        ->join('products', 'sales_order_list.products_id', '=', 'products.id')
-        ->get()
-        ->toArray();
-        $datas = json_decode( json_encode($salesOrder), true);
-
-        // dd($salesOrder);
+        $datas = json_decode( json_encode($this->dbQuery($salesOrderId)), true);
 
         $pdf = PDF::loadView('salesorder.so', compact('datas'));
         return $pdf->download('sales_order.pdf');
@@ -296,19 +291,7 @@ class SalesOrdersController extends Controller
     public function generatePO($salesOrderId){
         $salesOrders = SalesOrder::find($salesOrderId);
         $salesOrderId = SalesOrder::find($salesOrderId)->id;
-
-        // $sales = SalesOrderList::where('sales_order_id', $salesOrderId)->get()->toArray();
-
-        $salesOrder = DB::table('sales_order')
-        ->where('sales_order.id', '=', $salesOrderId)
-        ->join('sales_order_list', 'sales_order_list.sales_order_id', '=', 'sales_order.id')
-        ->join('users', 'users.id', '=', 'sales_order.users_id')
-        ->join('products', 'sales_order_list.products_id', '=', 'products.id')
-        ->get()
-        ->toArray();
-        $datas = json_decode( json_encode($salesOrder), true);
-
-        // dd($salesOrder);
+        $datas = json_decode( json_encode($this->dbQuery($salesOrderId)), true);
 
         $pdf = PDF::loadView('salesorder.po', compact('datas'));
         return $pdf->download('packing_list.pdf');
@@ -317,21 +300,21 @@ class SalesOrdersController extends Controller
     public function generateDO($salesOrderId){
         $salesOrders = SalesOrder::find($salesOrderId);
         $salesOrderId = SalesOrder::find($salesOrderId)->id;
+        $datas = json_decode( json_encode($this->dbQuery($salesOrderId)), true);
 
-        // $sales = SalesOrderList::where('sales_order_id', $salesOrderId)->get()->toArray();
+        $pdf = PDF::loadView('salesorder.do', compact('datas'));
+        return $pdf->download('delivery_order.pdf');
+    }
 
+    public function dbQuery($salesOrderId) {
         $salesOrder = DB::table('sales_order')
         ->where('sales_order.id', '=', $salesOrderId)
         ->join('sales_order_list', 'sales_order_list.sales_order_id', '=', 'sales_order.id')
         ->join('users', 'users.id', '=', 'sales_order.users_id')
+        ->join('wholesalers', 'users.id', '=', 'wholesalers.users_id')
         ->join('products', 'sales_order_list.products_id', '=', 'products.id')
         ->get()
         ->toArray();
-        $datas = json_decode( json_encode($salesOrder), true);
-
-        // dd($salesOrder);
-
-        $pdf = PDF::loadView('salesorder.do', compact('datas'));
-        return $pdf->download('delivery_order.pdf');
+        return $salesOrder;
     }
 }

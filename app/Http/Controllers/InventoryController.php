@@ -190,6 +190,7 @@ class InventoryController extends Controller
         foreach($inventoryOutlets as $key => $value){
             $data [] = ['id' => $value->id, 'value'=>$value->Name];
         }
+      
         return response($data);    
     }
     
