@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use Illuminate\Http\Request;
 use App\Models\SalesOrder;
 use App\Models\InventoryOutlet;
@@ -13,6 +14,7 @@ use App\Models\AuditTrail;
 use App\Models\SalesOrderList;
 use App\Wholesaler;
 use DB;
+
 
 class SalesOrdersController extends Controller
 {
@@ -256,11 +258,11 @@ class SalesOrdersController extends Controller
         ->join('statuses', 'sales_order.statuses_id', '=', 'statuses.id')
         ->join('users', 'sales_order.users_id', '=', 'users.id')
         ->join('wholesalers', 'users.id', '=', 'wholesalers.users_id')
-        ->select('sales_order.id', 'sales_order.totalQuantity', 'sales_order.totalPrice', 'statuses.status_name', 'sales_order.remarks', 'sales_order.date', 'users.name', 'wholesalers.shipping_address', 'wholesalers.phone_number')
+        ->select('sales_order.id', 'sales_order.totalQuantity', 'sales_order.totalPrice', 'statuses.status_name', 'sales_order.remarks', 'sales_order.date', 'users.name', 'wholesalers.shipping_address')
         ->orderBy('sales_order.id')
         ->get()
         ->toArray();
-        $data= json_decode( json_encode($salesorderexcel), true);
+        $data = json_decode( json_encode($salesorderexcel), true);
 
         return \Excel::create('salesorder', function($excel) use ($data) {
             $excel->sheet('sheet name', function($sheet) use ($data)
@@ -268,5 +270,68 @@ class SalesOrdersController extends Controller
                 $sheet->fromArray($data);
             });
         })->download($type);
+    }
+
+    public function generateSO($salesOrderId){
+        $salesOrders = SalesOrder::find($salesOrderId);
+        $salesOrderId = SalesOrder::find($salesOrderId)->id;
+
+        // $sales = SalesOrderList::where('sales_order_id', $salesOrderId)->get()->toArray();
+
+        $salesOrder = DB::table('sales_order')
+        ->where('sales_order.id', '=', $salesOrderId)
+        ->join('sales_order_list', 'sales_order_list.sales_order_id', '=', 'sales_order.id')
+        ->join('users', 'users.id', '=', 'sales_order.users_id')
+        ->join('products', 'sales_order_list.products_id', '=', 'products.id')
+        ->get()
+        ->toArray();
+        $datas = json_decode( json_encode($salesOrder), true);
+
+        // dd($salesOrder);
+
+        $pdf = PDF::loadView('salesorder.so', compact('datas'));
+        return $pdf->download('sales_order.pdf');
+    }
+
+    public function generatePO($salesOrderId){
+        $salesOrders = SalesOrder::find($salesOrderId);
+        $salesOrderId = SalesOrder::find($salesOrderId)->id;
+
+        // $sales = SalesOrderList::where('sales_order_id', $salesOrderId)->get()->toArray();
+
+        $salesOrder = DB::table('sales_order')
+        ->where('sales_order.id', '=', $salesOrderId)
+        ->join('sales_order_list', 'sales_order_list.sales_order_id', '=', 'sales_order.id')
+        ->join('users', 'users.id', '=', 'sales_order.users_id')
+        ->join('products', 'sales_order_list.products_id', '=', 'products.id')
+        ->get()
+        ->toArray();
+        $datas = json_decode( json_encode($salesOrder), true);
+
+        // dd($salesOrder);
+
+        $pdf = PDF::loadView('salesorder.po', compact('datas'));
+        return $pdf->download('packing_list.pdf');
+    }
+
+    public function generateDO($salesOrderId){
+        $salesOrders = SalesOrder::find($salesOrderId);
+        $salesOrderId = SalesOrder::find($salesOrderId)->id;
+
+        // $sales = SalesOrderList::where('sales_order_id', $salesOrderId)->get()->toArray();
+
+        $salesOrder = DB::table('sales_order')
+        ->where('sales_order.id', '=', $salesOrderId)
+        ->join('sales_order_list', 'sales_order_list.sales_order_id', '=', 'sales_order.id')
+        ->join('users', 'users.id', '=', 'sales_order.users_id')
+        ->join('products', 'sales_order_list.products_id', '=', 'products.id')
+        ->get()
+        ->toArray();
+        $datas = json_decode( json_encode($salesOrder), true);
+
+        // dd($salesOrder);
+
+        $pdf = PDF::loadView('salesorder.do', compact('datas'));
+        return $pdf->download('delivery_order.pdf');
     }
 }

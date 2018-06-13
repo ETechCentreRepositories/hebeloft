@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    
+    $("#inventoryTable").DataTable();
     $.get('ajax/product_brand',function(data){
         $("#product_brand").empty();
         $("#product_brand").append("<option value='all'>All</option>");

@@ -47,7 +47,7 @@
                                 <a href="/outlet/<?php echo e($outlet->id); ?>/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
                                 <div class="p-2">
-                                    <button type="button" class="btn btn-danger" onclick="openDeleteOutletModal()" id="delete">Delete</button>
+                                <a href="/outlet/<?php echo e($outlet->id); ?>"><button type="button" class="btn btn-danger" id="delete">Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -105,10 +105,8 @@
             <br>
             <h3>Are you sure you want to delete this outlet?</h3>
             <p>The following staffs are tied to this outlet:</p>
-            <?php $__currentLoopData = $outlets; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $outlet): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <?php $__currentLoopData = $userOutlets->where('outlets_id','==',$outlet->id); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $userOutlet): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <p><?php echo e($userOutlet->users['name']); ?></p>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             <?php echo Form::open(['action' => ['OutletsController@destroy', $outlet->id], 'method' => 'POST']); ?>
 

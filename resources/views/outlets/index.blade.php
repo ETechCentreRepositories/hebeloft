@@ -49,7 +49,7 @@
                                 <a href="/outlet/{{$outlet->id}}/edit"><button type="button" class="btn btn-primary action-buttons">Edit</button></a>
                                 </div>
                                 <div class="p-2">
-                                    <button type="button" class="btn btn-danger" onclick="openDeleteOutletModal()" id="delete">Delete</button>
+                                <a href="/outlet/{{$outlet->id}}"><button type="button" class="btn btn-danger" id="delete">Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -101,10 +101,8 @@
             <br>
             <h3>Are you sure you want to delete this outlet?</h3>
             <p>The following staffs are tied to this outlet:</p>
-            @foreach($outlets as $outlet)
             @foreach($userOutlets->where('outlets_id','==',$outlet->id) as $userOutlet)
             <p>{{$userOutlet->users['name']}}</p>
-            @endforeach
             @endforeach
             {!!Form::open(['action' => ['OutletsController@destroy', $outlet->id], 'method' => 'POST'])!!}
                 {{Form::hidden('_method', 'DELETE')}}

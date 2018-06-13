@@ -19,55 +19,74 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="card">
                 <div class="card-header">Update Sales Order</div>
-
                 <div class="card-body">
-                <?php echo Form::open(['action' => ['SalesOrdersController@update', $salesOrders->id], 'method' => 'POST']); ?>
-
                     <?php echo e(csrf_field()); ?>
 
                     <table class="table table-striped" id="inventoryTable" >
-        <thead>
-            <tr>
-                <th>Product Name</th>
-                <th>Quantity</th>
-            </tr>
-        </thead>
-        <tbody id="inventoryContent">
-            <?php if(count($sales) > 0): ?>
-                <?php $__currentLoopData = $sales; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sale): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <tr>
-                    <td><?php echo e($sale->products['Name']); ?></td>
-                    <td><?php echo e($sale->quantity); ?></td>
-                </tr>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            <?php endif; ?>
-        </tbody>
-    </table>
-    <select name="status" class="form-control">
-                        <option value="rejected">Reject</option>
-                        <option value="accepted">Accept</option>
-                    </select>
-                <br>
-                    <?php echo e(Form::hidden('_method','PUT')); ?>
-
-                    <div class="modal-button">
-                    <?php echo e(Form::submit('Update transfer request', ['class'=>'btn btn-primary'])); ?>
-
-</div>
-                    <?php echo Form::close(); ?>
-
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventoryContent">
+                            <?php if(count($sales) > 0): ?>
+                                <?php $__currentLoopData = $sales; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sale): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <tr>
+                                    <td><?php echo e($sale->products['Name']); ?></td>
+                                    <td align="right"><?php echo e($sale->quantity); ?></td>
+                                </tr>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                    <br>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <br>
+    <?php echo Form::open(['action' => ['SalesOrdersController@update', $salesOrders->id], 'method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'rejected']); ?>
 
+        <?php echo e(Form::hidden('status', 'rejected', ['class' => 'form-control'])); ?>
+
+        <?php echo e(Form::hidden('_method', 'PUT')); ?>
+
+        <?php echo e(Form::submit('Follow Up', ['class'=>'btn btn-primary btn-lg btn-danger btn-rejected'])); ?>
+
+    <?php echo Form::close(); ?>
+
+    
+    <?php echo Form::open(['action' => ['SalesOrdersController@update', $salesOrders->id], 'method' => 'POST', 'enctype' => 'multipart/form-data', 'class' => 'accepted']); ?>
+
+        <?php echo e(Form::hidden('status', 'accepted', ['class' => 'form-control'])); ?>
+
+        <?php echo e(Form::hidden('_method', 'PUT')); ?>
+
+        <?php echo e(Form::submit('Accepted', ['class'=>'btn btn-primary btn-lg btn-success btn-accepted'])); ?>
+
+    <?php echo Form::close(); ?>
+
+</div>
+<div style="text-align: center;">
+    <a href="<?php echo e(route('generateSO.file',$salesOrders)); ?>"><button class="btn btn-primary btn-lg" style="margin: 0 2% 0 0;">Generate Sales Order</button></a>
+    <a href="<?php echo e(route('generatePO.file',$salesOrders)); ?>"><button class="btn btn-primary btn-lg" style="margin: 0 2%;">Generate Packing List</button></a>
+    <a href="<?php echo e(route('generateDO.file',$salesOrders)); ?>"><button class="btn btn-primary btn-lg" style="margin: 0 0 0 2%;">Generate Delivery Order</button></a>
+    </div>
 <style>
-    .transferRequestNav {
+    .salesOrderNav {
         background-color: #f5f8fa !important;
         color: #000000 !important;
         pointer-events: none;
         cursor: default;
     }
+    
+    .rejected {
+	  float: left;
+	}
+	
+	.accepted {
+	  float: right;
+	}
 </style>
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

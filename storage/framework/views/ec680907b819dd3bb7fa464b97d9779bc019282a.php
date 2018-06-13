@@ -1,3 +1,4 @@
+<script src="<?php echo e(asset('js/products.js')); ?>" defer></script>
 <?php $__env->startSection('content'); ?>
 
 <?php if($users_id->roles_id == '1'): ?>
@@ -227,9 +228,15 @@
             </div>
         </div>
     <div class="row">
-        <div class="col-md-8">
-            <?php echo e(Form::textarea('description', '', ['class' => 'form-control', 'placeholder' => 'Description'])); ?>
+        <div class="col-md-7">
+            <?php echo e(Form::textarea('description', '', ['class' => 'form-control', 'placeholder' => 'Description', 'id' => 'desc'])); ?>
 
+        </div>
+        <div class="col-md-7">
+            <input type="text" id="searchField" style="text-indent:20px;" class="form-control" style="background:transparent;">
+        </div>
+        <div class="col-md-1">
+            <input type="checkbox" onclick="myFunction()" id="myCheck">Existing product</div>
         </div>
         <div class="col-md-4">
             <h4>Select image File</h4>
@@ -246,35 +253,22 @@
     <div class="form-group">
         <div style="text-align:left">
             <button type="submit" class="btn btn-primary">Save</button>
-            </div>
+        </div>
     </div>
     <?php echo Form::close(); ?>
 
 </div>
 
 <script>
-$(document).ready(function () {
-    $("#image_add").change(function(){
-        console.log("image_add");
-        readURL(this);
-    });
-    $("#productSearchField").autocomplete({
-        source: 'autocomplete-search',
-        minLength:1,
-        select:function(key,value)
-        {
-            console.log(value);
-        }
-    });
-});
+    function myFunction() {
+    var checkBox = document.getElementById("myCheck");
 
-function readURL(input){
-    if(input.files && input.files[0]){
-        var reader = new FileReader();
-        reader.onload = function(e){
-            $('#addImage').attr('src',e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
+    if (checkBox.checked == true){
+        document.getElementById("searchField").style.display = "block";
+        document.getElementById("desc").style.display = "none";
+    } else {
+        document.getElementById("desc").style.display = "block";
+        document.getElementById("searchField").style.display = "none";
     }
 }
 </script>
@@ -287,6 +281,10 @@ function readURL(input){
         color: #000000 !important;
         pointer-events: none;
         cursor: default;
+    }
+
+    #searchField {
+        display: none;
     }
 </style>
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
