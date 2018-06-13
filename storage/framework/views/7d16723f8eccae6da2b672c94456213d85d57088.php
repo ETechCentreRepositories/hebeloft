@@ -33,10 +33,7 @@
                                 <?php endif; ?>
                             </div>
                         </div>
-
                         <div class="form-group row">
-                           
-
                             <div class="col-md-12">
                                 <input id="phone_number" type="number" class="form-control<?php echo e($errors->has('phone_number') ? ' is-invalid' : ''); ?>" name="phone_number" value="<?php echo e(old('phone_number')); ?>" placeholder="Phone Number" required>
 
@@ -47,7 +44,6 @@
                                 <?php endif; ?>
                             </div>
                         </div>
-
                         <div class="form-group row">
 
                             <div class="col-md-6">
@@ -59,12 +55,22 @@
                                     </span>
                                 <?php endif; ?>
                             </div>
-
                             <div class="col-md-6">
                                 <input id="shipping_address" type="text" class="form-control<?php echo e($errors->has('shipping_address') ? ' is-invalid' : ''); ?>" name="shipping_address" value="<?php echo e(old('shipping_address')); ?>" placeholder="Shipping Address" required>
                                 <?php if($errors->has('shipping_address')): ?>
                                     <span class="invalid-feedback">
                                         <strong><?php echo e($errors->first('shipping_address')); ?></strong>
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <input id="company_name" type="text" class="form-control<?php echo e($errors->has('company_name') ? ' is-invalid' : ''); ?>" name="company_name" value="<?php echo e(old('company_name')); ?>" placeholder="Company Name" required>
+
+                                <?php if($errors->has('billing_address')): ?>
+                                    <span class="invalid-feedback">
+                                        <strong><?php echo e($errors->first('billing_address')); ?></strong>
                                     </span>
                                 <?php endif; ?>
                             </div>

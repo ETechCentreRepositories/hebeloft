@@ -19,7 +19,10 @@
 <br>
 <div class="container">
     <div>
-    <h3>Sales Record #{{$salesRecord->outlets->initial}}_{{$salesRecord->OrderDate}}_{{$salesRecord->id}}</h3>
+    <h3>Sales Record #SR_{{$salesRecord->outlets->initial}}_{{$salesRecord->OrderDate}}_{{$salesRecord->id}}</h3>
+        <br>Date    : {{$records[0]->OrderDate}}
+        <br>Loaction  : {{$records[0]->Location}}
+        <br>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -33,9 +36,9 @@
             <tbody>
             @foreach($records as $record)
                 <tr>
-                    <td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/{{$record->products['image']}}"></td>
-                    <td>{{$record->products['Name']}}</td>
-                    <td>{{$record->products['UnitPrice']}}</td>
+                    <td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/{{$record->image}}"></td>
+                    <td>{{$record->Name}}</td>
+                    <td>{{$record->UnitPrice}}</td>
                     <td align="right">{{$record->quantity}}</td>
                     <td>{{$record->subtotal}}</td>
                 </tr>
@@ -49,5 +52,30 @@
                 </tr>
             </tbody>
         </table>
+        <table class="table headerTable">
+            <tbody>
+                <tr>
+                    <td class="wrapContentTd noTopBorder">
+                        Remarks
+                    </td>
+                    <td class="blackBorder">
+                    {{$records[0]->OrderRemarks}}
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
+
+<style>
+    .salesRecordNav {
+        background-color: #f5f8fa !important;
+        color: #000000 !important;
+        pointer-events: none;
+        cursor: default;
+        
+    }
+    
+    .emptyHeader {
+    	pointer-events: none;
+    }
+</style>

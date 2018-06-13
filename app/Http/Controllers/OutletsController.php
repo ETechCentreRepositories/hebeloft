@@ -97,7 +97,7 @@ class OutletsController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id); 
-        $outlet = DB::table('outlets')->where('id', '=', $id);
+        $outlet = Outlet::find($id);
         
         return view('outlets.edit')->with('outlet', $outlet)->with('users_id',$users_id);
     }

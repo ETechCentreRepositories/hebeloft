@@ -58,14 +58,14 @@
             <tbody id="addSalesOrderContent">
             <?php if(Session::has('cartSalesOrder')): ?>
                 <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <tr id="<?php echo e($product['item']['id']); ?>"><td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/<?php echo e($product['item']['image']); ?>"/></td>
-                        <td><?php echo e($product['item']['Name']); ?></td>
-                        <td><?php echo e($product['item']['UnitPrice']); ?></td>
-                        <td align="center"><?php echo e($product['qty']); ?></td>
-                        <td align="center"><?php echo e($product['item']['UnitPrice']*$product['qty']); ?></td>
-                        <td><button type="button" class="btn btn-danger action-buttons" id="removeThis" onClick="removeCartItemFromSalesOrder()">Remove</button></td></tr>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                <?php endif; ?>
+                    <tr id="<?php echo e($product['item']['id']); ?>"><td><img style="width:60px; height:60px" src="/hebeloft/storage/product_images/<?php echo e($product['item']['image']); ?>"/></td>
+                    <td><?php echo e($product['item']['Name']); ?></td>
+                    <td><?php echo e($product['item']['UnitPrice']); ?></td>
+                    <td align="center"><?php echo e($product['qty']); ?></td>
+                    <td align="center"><?php echo e($product['item']['UnitPrice']*$product['qty']); ?></td>
+                    <td><button type="button" class="btn btn-danger action-buttons" id="removeThis" onClick="removeCartItemFromSalesOrder()">Remove</button></td></tr>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php endif; ?>
             </tbody>
             <tbody id="total">
             <?php if(Session::has('cartSalesOrder')): ?>
@@ -152,27 +152,28 @@ $(document).ready(function (){
                 var productID = orderProducts[i];
                 var mainRow = document.getElementById("newRow_"+productID);
             	var quantity = mainRow.querySelectorAll('#qty')[0].value;
-            	var unitPrice = mainRow.querySelectorAll('#unitPrice')[0].value;
-            }
-            console.log(productID);
-            console.log(unitPrice);
-            console.log(productID);
-            console.log(remarks);
-            console.log(date);
-            console.log(quantity);
-            $.ajax({
-                type: "GET",
-                url: "<?php echo e(URL::TO('/salesorder/addtocart/')); ?>/" + productID + "/" + quantity + "/" + unitPrice + "/" + date + "/" + remarks,
-                cache:false,
-                datatype: "JSON",
-                success: function (response) {
-                    console.log("successful");
-                },
+                var unitPrice = mainRow.querySelectorAll('#unitPrice')[0].value;
+                console.log(productID);
+                console.log(unitPrice);
+                console.log(productID);
+                console.log(remarks);
+                console.log(date);
+                console.log(quantity);
+                $.ajax({
+                    type: "GET",
+                    url: "<?php echo e(URL::TO('/salesorder/addtocart/')); ?>/" + productID + "/" + quantity + "/" + unitPrice + "/" + date + "/" + remarks,
+                    cache:false,
+                    datatype: "JSON",
+                    success: function (response) {
+                        console.log("successful");
+                    },
 
-                error: function (obj, testStatus, errorThrown) {
-                    console.log(obj + testStatus + errorThrown);
-                }
-            });
+                    error: function (obj, testStatus, errorThrown) {
+                        console.log(obj + testStatus + errorThrown);
+                    }
+                });
+            }
+            
         } else {
             console.log("null");
         }
@@ -193,6 +194,9 @@ $(document).ready(function (){
 
 function removeCartItemFromSalesOrder() {
     console.log("testing");
+    //retreive the element inside the tr
+    //retrieve the "closest tr"
+    //retrieve .attr('id')
     var id = $("#removeThis").closest('tr').attr('id');
     console.log(id);
         

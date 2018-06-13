@@ -139,53 +139,59 @@
         <div class="col-md-6">
             <div class="dashboardTables">
                 <h3 class="dashboardLabels">Audit Trails</h3>
-                <table class="table table-striped">
+                <table class="table table-striped" id="auditTrailTable">
                     <thead>
-                        <tr><th class="col-md-4">Done By</th></tr>
-                        <tr><th class="col-md-4">Action</th></tr>
-                        <tr><th class="col-md-4">Date/Time</th></tr>
+                        <tr><th class="col-md-3">Done By</th>
+                        <th class="col-md-3">Action</th>
+                        <th class="col-md-3">Date/Time</th></tr>
                     </thead>
                     <tbody>
                         @foreach($auditTrails as $auditTrail)
                         <tr>
-                            <td class="col-md-4">{{$auditTrail->action_by}}</td>
-                            <td class="col-md-4">{{$auditTrail->action}}</td>
-                            <td class="col-md-4">{{$auditTrail->created_at}}</td>
+                            <td class="col-md-3">{{$auditTrail->action_by}}</td>
+                            <td class="col-md-3">{{$auditTrail->action}}</td>
+                            <td class="col-md-3">{{$auditTrail->created_at}}</td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
-            </div>
-            <div class="pagination">
-                {{$auditTrails->links()}}
             </div>
         </div>
         
         <div class="col-md-6">
             <div class="dashboardTables">
                 <h3 class="dashboardLabels">Sales Record</h3>
-                <table class="table table-striped">
+                <table class="table table-striped" id="salesRecordTable">
                     <thead>
-                        <tr><th class="col-md-6">Date</th></tr>
-                        <tr><th class="col-md-6">Outlet</th></tr>
+                        <tr>
+                        <th class="col-md-5">Date</th>
+                        <th class="col-md-5">Outlet</th>
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach($salesRecords as $salesRecord)
                         <tr>
-                            <td class="col-md-6">{{$salesRecord->OrderDate}}</td>
-                            <td class="col-md-6">{{$salesRecord->outlets['outlet_name']}}</td>
+                            <td class="col-md-5">{{$salesRecord->OrderDate}}</td>
+                            <td class="col-md-5">{{$salesRecord->outlet_name}}</td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-            <div class="pagination">
-                {{$salesRecords->links()}}
-            </div>
         </div>
     </div>
 </div>
 
+<script>
+ $(document).ready(function () {
+     $("#salesRecordTable").DataTable({
+         searching:false
+     });
+     $("#auditTrailTable").DataTable({
+         searching:false
+     });
+ });
+</script>
 
 @endsection
 

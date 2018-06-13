@@ -110,7 +110,12 @@ class TransferRequestController extends Controller
 
         $transferRequests = TransferRequest::find($id);
         $transferRequestId = TransferRequest::find($id)->id;
-        $transfers = TransferRequestList::where('transfer_requests_id', '=', $transferRequestId)->get();
+        $transfers = DB::table('transfer_requests')
+        ->where('transfer_requests.id', '=', $transferRequestId)
+        ->join('transfer_requests_list', 'transfer_requests_list.transfer_requests_id', '=', 'transfer_requests.id')
+        ->join('products', 'transfer_requests_list.products_id', '=', 'products.id')
+        ->get()
+        ->toArray();
 
         return view('transfer_request.show')->with('users_id',$users_id)->with('transferRequests',$transferRequests)->with('transfers',$transfers);
     }

@@ -280,6 +280,13 @@
                 <br><hr><br>
                 <label >Outlet:</label>
                 <div class="form-group row">  
+                    @foreach($outlets as $outlet)
+                        <div class="col-md-5">
+                        <label class="checkbox-inline"><input name="outlet[]" type="checkbox" value="{{$outlet->id}}"> {{$outlet->outlet_name}} </label>
+                            </div>
+                    @endforeach
+                </div>
+                <div class="form-group row">  
                 </div>
 
                 <div class="form-group">

@@ -297,6 +297,13 @@
                 <br><hr><br>
                 <label >Outlet:</label>
                 <div class="form-group row">  
+                    <?php $__currentLoopData = $outlets; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $outlet): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="col-md-5">
+                        <label class="checkbox-inline"><input name="outlet[]" type="checkbox" value="<?php echo e($outlet->id); ?>"> <?php echo e($outlet->outlet_name); ?> </label>
+                            </div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </div>
+                <div class="form-group row">  
                 </div>
 
                 <div class="form-group">

@@ -97,4 +97,5 @@ Route::get('outlets/check/{id}','OutletsController@checkIfUsersExist');
 
 //Products
 Route::get('/products/create', 'ProductsController@add');
-Route::get('/autocompletesearch', 'InventoryController@search');
+Route::get('/autocomplete-search-description', 'ProductsController@search');
+Route::get('/retrieve-product-by-name/{productName}', 'ProductsController@getProductByName');

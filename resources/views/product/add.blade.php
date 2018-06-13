@@ -25,14 +25,14 @@
                     <p>Name</p>
                 </div>
                 <div class="col-md-4">
-                    {{Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Name'])}}
+                    {{Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Name', 'id'=>'Name'])}}
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
                     <p style="text-align:right">Category</p>
                 </div>
                 <div class="col-md-4">
-                    {{Form::text('category', '', ['class' => 'form-control', 'placeholder' => 'Category'])}}
+                    {{Form::text('category', '', ['class' => 'form-control', 'placeholder' => 'Category', 'id'=>'category'])}}
                 </div>
                    
             </div>
@@ -43,14 +43,14 @@
                     <p>Remarks</p>
                 </div>
                 <div class="col-md-4">
-                    {{Form::text('remarks', '', ['class' => 'form-control', 'placeholder' => 'Remarks'])}}
+                    {{Form::text('remarks', '', ['class' => 'form-control', 'placeholder' => 'Remarks', 'id'=>'remarks'])}}
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
                     <p style="text-align:right">Brand</p>
                 </div>
                 <div class="col-md-4">
-                    {{Form::text('brand', '', ['class' => 'form-control', 'placeholder' => 'Brand'])}}
+                    {{Form::text('brand', '', ['class' => 'form-control', 'placeholder' => 'Brand', 'id'=>'brand'])}}
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@
                     <p>UnitPrice</p>
                 </div>
                 <div class="col-md-4">
-                    {{Form::text('unitPrice', '', ['class' => 'form-control', 'placeholder' => '00.00'])}}
+                    {{Form::text('unitPrice', '', ['class' => 'form-control', 'placeholder' => '00.00', 'id'=>'unitPrice'])}}
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
@@ -112,14 +112,14 @@
                     <p>Unit</p>
                 </div>
                 <div class="col-md-4">
-                    {{Form::text('unit', '', ['class' => 'form-control', 'placeholder' => 'Unit'])}}
+                    {{Form::text('unit', '', ['class' => 'form-control', 'placeholder' => 'Unit', 'id'=>'unit'])}}
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
                     <p style="text-align:right">Size</p>
                 </div>
                 <div class="col-md-4">
-                    {{Form::text('size', '', ['class' => 'form-control', 'placeholder' => 'Size'])}}
+                    {{Form::text('size', '', ['class' => 'form-control', 'placeholder' => 'Size', 'id'=>'size'])}}
                 </div>
             </div>
         </div>
@@ -129,14 +129,14 @@
                     <p>Stock Level</p>
                 </div>
                 <div class="col-md-4">
-                    {{Form::text('stock_level', '', ['class' => 'form-control', 'placeholder' => 'Stock Level'])}}
+                    {{Form::text('stock_level', '', ['class' => 'form-control', 'placeholder' => 'Stock Level', 'id'=>'stock_level'])}}
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
                     <p style="text-align:right">Threshold level</p>
                 </div>
                 <div class="col-md-4">
-                    {{Form::text('threshold', '', ['class' => 'form-control', 'placeholder' => 'Threshold level'])}}
+                    {{Form::text('threshold', '', ['class' => 'form-control', 'placeholder' => 'Threshold level', 'id'=>'threshold'])}}
                 </div>
             </div>
         </div>
@@ -147,14 +147,14 @@
                     <p>Length</p>
                 </div>
                 <div class="col-md-4">
-                    {{Form::text('length', '', ['class' => 'form-control', 'placeholder' => '00.00'])}}
+                    {{Form::text('length', '', ['class' => 'form-control', 'placeholder' => '00.00', 'id'=>'length'])}}
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
                     <p style="text-align:right">Width</p>
                 </div>
                 <div class="col-md-4">
-                    {{Form::text('width', '', ['class' => 'form-control', 'placeholder' => '00.00'])}}
+                    {{Form::text('width', '', ['class' => 'form-control', 'placeholder' => '00.00', 'id'=>'width'])}}
                 </div>
             </div>
         </div>
@@ -164,14 +164,14 @@
                     <p>Weight</p>
                 </div>
                 <div class="col-md-4">
-                    {{Form::text('weight', '', ['class' => 'form-control', 'placeholder' => '00.00'])}}
+                    {{Form::text('weight', '', ['class' => 'form-control', 'placeholder' => '00.00', 'id'=>'weight'])}}
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
                     <p style="text-align:right">Height</p>
                 </div>
                 <div class="col-md-4">
-                    {{Form::text('height', '', ['class' => 'form-control', 'placeholder' => '00.00'])}}
+                    {{Form::text('height', '', ['class' => 'form-control', 'placeholder' => '00.00', 'id'=>'height'])}}
                 </div>
             </div>
         </div>
@@ -182,14 +182,14 @@
                     <p>Cost</p>
                 </div>
                 <div class="col-md-4">
-                    {{Form::text('cost', '', ['class' => 'form-control', 'placeholder' => '00.00'])}}
+                    {{Form::text('cost', '', ['class' => 'form-control', 'placeholder' => '00.00', 'id'=>'cost'])}}
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
                     <p style="text-align:right">Last Vendor</p>
                 </div>
                 <div class="col-md-4">
-                    {{Form::text('lastVendor', '', ['class' => 'form-control', 'placeholder' => 'Last Vendor'])}}
+                    {{Form::text('lastVendor', '', ['class' => 'form-control', 'placeholder' => 'Last Vendor', 'id'=>'lastVendor'])}}
                 </div>
             </div>
         </div>
@@ -199,14 +199,14 @@
                     <p>Vendor Price</p>
                 </div>
                 <div class="col-md-4">
-                    {{Form::text('vendorPrice', '', ['class' => 'form-control', 'placeholder' => '00.00'])}}
+                    {{Form::text('vendorPrice', '', ['class' => 'form-control', 'placeholder' => '00.00', 'id'=>'vendorPrice'])}}
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
                     <p style="text-align:right">Barcode</p>
                 </div>
                 <div class="col-md-4">
-                    {{Form::text('barcode', '', ['class' => 'form-control', 'placeholder' => 'Barcode'])}}
+                    {{Form::text('barcode', '', ['class' => 'form-control', 'placeholder' => 'Barcode', 'id'=>'Barcode'])}}
                 </div>
             </div>
         </div>
@@ -217,25 +217,29 @@
         <div class="col-md-7">
             <input type="text" id="searchField" style="text-indent:20px;" class="form-control" style="background:transparent;">
         </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-primary" id="selectThis">SELECT</button>
+        </div>
         <div class="col-md-1">
             <input type="checkbox" onclick="myFunction()" id="myCheck">Existing product</div>
         </div>
         <div class="col-md-4">
             <h4>Select image File</h4>
-            {{Form::file('image_add',array('id'=>'image_add'))}}
+            {{Form::file('image',array('id'=>'image_add'))}}
             <br></br>
             <div class="centerImage col-md-3" >
                <img src="" id="addImage" width="150px" />
                <br>
             </div>
         </div>
-    </div>
-    <br>
-    <div class="form-group">
-        <div style="text-align:left">
-            <button type="submit" class="btn btn-primary">Save</button>
+        <div class="form-group">
+            <div style="text-align:left">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
         </div>
     </div>
+    <br>
+    
     {!! Form::close() !!}
 </div>
 
