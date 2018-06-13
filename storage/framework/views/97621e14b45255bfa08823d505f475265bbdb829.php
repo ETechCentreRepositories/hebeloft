@@ -23,9 +23,14 @@
     <link href="<?php echo e(asset('css/jquery-ui.min.css')); ?>" rel="stylesheet" type="text/css"/> 
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+
     <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
-    <script type="javascript" charset="utf8" src="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.js"></script>
-    
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css">
+
     <?php echo $__env->yieldContent('script'); ?>
     <?php echo $__env->yieldContent('styles'); ?>
 

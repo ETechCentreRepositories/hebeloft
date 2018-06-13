@@ -171,10 +171,6 @@ class TransferRequestController extends Controller
             $inventory = InventoryOutlet::where('outlets_id', '=', $selectedOutlet)->where('products_id', '=', $getProductsValue)->first();
             $inventoryWarehouse = InventoryOutlet::where('outlets_id', '=', 13)->where('products_id', '=', $getProductsValue)->first();
 
-            $getInventoryArray = array_get($inventory, 0);
-            $convertInventoryArray = (array) $getInventoryArray;
-            $getInventoryValue = array_get($convertInventoryArray, "id");
-
             $oldQuantity = $this->quantityArray($selectedOutlet, $getProductsValue);
 
             $getQuantityArray = array_get($oldQuantity, 0);
