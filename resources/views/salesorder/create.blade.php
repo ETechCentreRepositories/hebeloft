@@ -127,8 +127,8 @@ $(document).ready(function (){
                     $("#addSalesOrderContent").append(
                         "<tr id='newRow_"+productId+"'><td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
                         + "<td>" + response[i].Name + "</td>"
-                        + "<td align='center'><input name='unitPrice' type='number' id='unitPrice' type='text' style='width:60px;' value='"+ response[i].UnitPrice +"'/></td>"
-                        + "<td align='center'><input name='quantity' type='number' id='qty' type='text' style='width:60px;' value='1'/></td>"
+                        + "<td align='center'><input name='unitPrice' type='number' id='unitPrice' type='text' style='width:60px;' value='"+ response[i].UnitPrice +"' readonly></td>"
+                        + "<td align='center'><input name='quantity' type='number' id='qty' type='text' style='width:60px;' value='1'  min='0'/></td>"
                         + "<td align='center'>" + response[i].UnitPrice + "</td>"
                         + "<td><button type='button' class='btn btn-danger action-buttons' id='removeSO'> Remove </button></td></tr>"
                     );

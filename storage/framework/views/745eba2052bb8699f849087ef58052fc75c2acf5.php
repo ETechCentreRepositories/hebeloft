@@ -91,6 +91,17 @@
 </div>
 <script>
 $(document).ready(function() {
+    $("#qty").bind('keyup', function(event) {
+        var currValue = $(this).val();
+
+        if(currValue.search(/[^0-9]/) != -1)
+        {
+            // Change this to something less obnoxious
+            alert('Only numerical inputs please');
+        }
+
+        $(this).val(currValue.replace(/[^0-9]/, ''));
+    });
     $.get("<?php echo e(URL::to('ajax/outlet')); ?>",function(data){
         $("#outlet").empty();
             $.each(data,function(i,value){
@@ -133,7 +144,8 @@ $(document).ready(function() {
                         "<tr id='newRow_"+productId+"'>"
                         + "<td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
                         + "<td>" + response[i].Name + "</td>"
-                        + "<td align='center'><select name='select'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option></select></td>"
+                        + "<td id='price' align='center'><input name='unitPrice' type='number' id='unitPrice' type='text' style='width:60px;' value='"+ response[i].UnitPrice +"' readonly></td>"
+                        + "<td id='quantity' align='center'><input name='quantity' type='number' id='qty' type='text' style='width:60px;' value='1' min='0' step='1'/></td>"
                         + "<td><button type='button' class='btn btn-danger action-buttons' id='removeTR'> Remove </button></td></tr>"
                     );
                 }

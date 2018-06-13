@@ -17,9 +17,6 @@
 <div class="topMargin container">
     <div class="row justify-content-end">
     <div class="col-md-2">
-            <a href=""><button type="button" class="btn btn-warning btn-search">Bulk Update Price</button></a>
-        </div>
-        <div class="col-md-2">
             <a href="/products/create"><button type="button" class="btn btn-warning btn-search">Add Product</button></a>
         </div>
     </div>

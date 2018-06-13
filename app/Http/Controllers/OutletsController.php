@@ -163,7 +163,7 @@ class OutletsController extends Controller
         // dd($user_id);
         $user = User::find($user_id);
         // dd($user);
-        $user->onDelete('cascade');
+        $user->onDelete('cascadel');
         // $outlet->delete();
         return redirect('/outlet')->with('success', 'Successfully Deleted Outlet');
         
