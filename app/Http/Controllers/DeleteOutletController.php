@@ -10,8 +10,8 @@ class DeleteOutletController extends Controller
     {
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id);
-        // $outlets = Outlet::orderBy('id','asc')->get();
-        // $userOutlets = UserOutlet::all();
+        $outlets = Outlet::orderBy('id','asc')->get();
+        $userOutlets = UserOutlet::all();
         
         return view('outlets.index')->with('outlets', $outlets)->with('users_id',$users_id)->with('userOutlets',$userOutlets);
     }
@@ -79,6 +79,32 @@ class DeleteOutletController extends Controller
      */
     public function destroy($id)
     {
+        $login_user_id = auth()->user()->id;
+        $login_user = User::find($login_user_id);
 
+        //Audit Trail
+        $auditTrail = AuditTrail::create([
+            'action' => 'Deleted Outlet Staff',
+            'action_by' => $login_user->name,
+        ]);
+
+        $userOutletExists = UserOutlet::where('users_id',$id)->get();
+        $wholesalerExists = Wholesaler::where('users_id',$id)->get();
+
+        if($userOutletExists){
+            foreach($userOutletExists as $userOutletExist){
+                $userOutletExist->delete();
+            }
+        }
+
+        if($wholesalerExists){
+            foreach($wholesalerExists as $wholesalerExist){
+                $wholesalerExist->delete();
+            }
+        }
+
+        $user = User::find($id);
+        $user->delete();
+        return redirect('/user')->with('success', 'User Removed');
     }
 }

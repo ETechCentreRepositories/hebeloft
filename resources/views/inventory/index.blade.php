@@ -14,7 +14,7 @@
 <br>
 <div class="topMargin container">
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-6">
             <div class="drop-down_brand row">
                 <div class="col-md-4">
                     <p>Search by Brand</p>
@@ -25,7 +25,7 @@
             </div>
         </div>
         @if ($users_id->roles_id == '1' || $users_id->roles_id == '2' || $users_id->roles_id == '3')
-        <div class="col-md-5">
+        <div class="col-md-6">
             <div class="drop-down_brand row">
                 <div class="col-md-4">
                     <p style="text-align:right">Show Location</p>
@@ -36,9 +36,6 @@
             </div>
         </div>
         @endif
-        <div class="col-md-2 p-2">
-            <button type="button" class="btn btn-default btn-search" id="searchInventory">Search</button>
-        </div>
     </div>
     <br>
     <div class="row">

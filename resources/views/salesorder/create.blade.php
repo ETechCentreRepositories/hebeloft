@@ -124,6 +124,7 @@ $(document).ready(function (){
                     var productId = parseInt(response[i].products_id);
                     orderProducts.push(productId);
                     console.log(orderProducts);
+                    console.log(response[i]);
                     $("#addSalesOrderContent").append(
                         "<tr id='newRow_"+productId+"'><td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
                         + "<td>" + response[i].Name + "</td>"

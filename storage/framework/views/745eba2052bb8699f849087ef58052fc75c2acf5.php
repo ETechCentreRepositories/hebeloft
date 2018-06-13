@@ -91,17 +91,6 @@
 </div>
 <script>
 $(document).ready(function() {
-    $("#qty").bind('keyup', function(event) {
-        var currValue = $(this).val();
-
-        if(currValue.search(/[^0-9]/) != -1)
-        {
-            // Change this to something less obnoxious
-            alert('Only numerical inputs please');
-        }
-
-        $(this).val(currValue.replace(/[^0-9]/, ''));
-    });
     $.get("<?php echo e(URL::to('ajax/outlet')); ?>",function(data){
         $("#outlet").empty();
             $.each(data,function(i,value){
@@ -136,6 +125,21 @@ $(document).ready(function() {
                 for (i = 0; i < response.length; i++) {
                     console.log(response[i]);
                     var productId = parseInt(response[i].products_id);
+                    var stockLevel = response[i].stock_level;
+                    var thresholdLevel = response[i].threshold_level;
+                    var maxQty = stockLevel - thresholdLevel;
+                    console.log("stock level: " + stockLevel);
+                    console.log("threshold level: " + thresholdLevel);
+                    console.log("maxQty: " + maxQty);
+                    var quantity = 0;
+                    if(maxQty < thresholdLevel){
+                        quantity = maxQty;
+                    } else if (maxQty > thresholdLevel) {
+                        quantity = thresholdLevel;
+                    } else if ( maxQty == thresholdLevel) {
+                        quantity = thresholdLevel;
+                    }
+                    console.log(quantity);
 
                     trProducts.push(productId);
                     console.log(trProducts);
@@ -145,7 +149,7 @@ $(document).ready(function() {
                         + "<td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
                         + "<td>" + response[i].Name + "</td>"
                         + "<td id='price' align='center'><input name='unitPrice' type='number' id='unitPrice' type='text' style='width:60px;' value='"+ response[i].UnitPrice +"' readonly></td>"
-                        + "<td id='quantity' align='center'><input name='quantity' type='number' id='qty' type='text' style='width:60px;' value='1' min='0' step='1'/></td>"
+                        + "<td id='quantity' align='center'><input name='quantity' type='number' id='qty' type='text' style='width:60px;' value='"+ quantity +"' min='"+ response[i].threshold_level +"' max='"+ maxQty +"'/></td>"
                         + "<td><button type='button' class='btn btn-danger action-buttons' id='removeTR'> Remove </button></td></tr>"
                     );
                 }

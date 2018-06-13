@@ -122,7 +122,7 @@
         <div class="col-md-2 fullWidthButtons">
             <div class="d-flex flex-row">
                 <div class="p-2">
-                    <button id="search" type="button" class="btn btn-sucess">Search</button>
+                    <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
                 </div>
                 <div class="p-2">
                     <button type="button" class="btn btn-primary">Refresh</button>
@@ -143,7 +143,7 @@
                     <th class="emptyHeader"></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="addTransferRequestContent">
                 @foreach($outletTransfers as $outletTransfer)
                 <tr>
                     <td>{{$outletTransfer->date}}</td>
@@ -175,6 +175,34 @@ $(document).ready(function(){
     $("#transferRequestTable").DataTable({
         searching: false
     });
+    $('#refreshInventory').click(function(){
+                var startDate = $('#startDate').val();
+                var endDate = $('#endDate').val();
+                console.log(startDate + endDate);
+                $("#addTransferRequestContent").empty();
+                $.ajax({
+                    type: "GET",
+                    url: "{{URL::TO('/ajax/transferrequest/date')}}/" + startDate + "/" + endDate,
+                    cache: false,
+                    dataType: "JSON",
+                    success: function (response) {
+                        console.log("success");
+                        for (i = 0; i < response.length; i++) {
+                            $("#salesRecordContent").append(
+                                + "<td>"+ response[i].outlet_name +"</td>"
+                                + "<td>"+ response[i].remarks+"</td>",    
+                                @if ($users_id->roles_id == '1')
+                                +"<td><a href='/salesrecord/"+response[i].id+"/edit'><button type='button' class='btn btn-primary action-buttons'>Edit</button></a></td></tr>"
+                                @endif
+                            );
+                        }
+                    },
+
+                    error: function (obj, textStatus, errorThrown) {
+                        console.log("Error " + textStatus + ": " + errorThrown);
+                    }
+                });
+            });
     $('#search').click(function(){
         var startDate = $('#startDate').val();
         var endDate = $('#endDate').val();
