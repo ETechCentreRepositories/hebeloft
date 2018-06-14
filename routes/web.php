@@ -65,6 +65,7 @@ Route::get('/salesrecord/addtocart/{id}/{price}/{quantity}/{outlet}/{date}/{rema
 Route::get('/testing/{id}', 'UsersController@show');
 Route::get('export-salesrecord/{type}', 'SalesRecordsController@exportFile')->name('exportSalesRecord.file');
 Route::get('/salesrecord/remove/{id}', 'SalesRecordsController@getRemoveItem');
+Route::get('/ajax/salesrecord/date/{startDate}/{endDate}', 'SalesRecordsController@sortDate');
 
 //SalesOrder
 Route::get('/salesorder/create', 'SalesOrdersController@getSalesOrderCart');
@@ -75,6 +76,7 @@ Route::get('export-salesorder/{type}', 'SalesOrdersController@exportFile')->name
 Route::get('generate-SO/{salesOrders}', 'SalesOrdersController@generateSO')->name('generateSO.file');
 Route::get('generate-PO/{salesOrders}', 'SalesOrdersController@generatePO')->name('generatePO.file');
 Route::get('generate-DO/{salesOrders}', 'SalesOrdersController@generateDO')->name('generateDO.file');
+Route::get('/ajax/salesorder/date/{startDate}/{endDate}', 'SalesOrdersController@sortDate');
 
 //TransferRequest
 Route::get('/transferrequest/create', 'TransferRequestController@getTransferRequestCart');
@@ -82,6 +84,7 @@ Route::get('/transferrequest/addtocart/{id}/{quantity}/{outlet}/{date}/{remarks}
 Route::get('/testing/{id}', 'UsersController@show');
 Route::get('/transferrequest/reduce/{id}', 'TransferRequestController@getReduceByOne');
 Route::get('/transferrequest/remove/{id}', 'TransferRequestController@getRemoveItem');
+Route::get('/ajax/transferrequest/date/{startDate}/{endDate}', 'TransferRequestController@sortDate');
 
 //Accept/Reject Transfer Request
 Route::post('/', function () {

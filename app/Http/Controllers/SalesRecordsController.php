@@ -186,7 +186,7 @@ class SalesRecordsController extends Controller
     
     public function sortDate($startDate,$endDate){
         $salesRecord = SalesRecord::leftJoin('outlets','sales_record.outlets_id','=','outlets.id')
-                     ->whereBetween('date',array($startDate,$endDate))
+                     ->whereBetween('OrderDate',array($startDate,$endDate))
                      ->get()->toArray();
 
         return response($salesRecord);

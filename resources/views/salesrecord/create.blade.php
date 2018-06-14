@@ -130,8 +130,8 @@ $(document).ready(function () {
                     $("#addSalesRecordContent").append(
                         "<tr id='newRow_"+productId+"'><td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
                         + "<td>" + response[i].Name + "</td>"
-                        + "<td align='center'><input name='unitPrice' type='number' id='unitPrice' type='text' style='width:60px;' value='"+ response[i].UnitPrice +"'/></td>"
-                        + "<td align='center'><input name='quantity' type='number' id='qty' type='text' style='width:60px;' value='1'/></td>"
+                        + "<td align='center'><input name='unitPrice' type='number' id='unitPrice' type='text' style='width:60px;' value='"+ response[i].UnitPrice +"' readonly></td>"
+                        + "<td align='center'><input name='quantity' type='number' id='qty' type='text' style='width:60px;' value='"+ response[i].threshold_level +"'  min='"+ response[i].threshold_level +"'/></td>"
                         + "<td id='price' align='center'>"+response[i].UnitPrice+"</td>"
                         + "<td><button type='button' class='btn btn-danger action-buttons' id='removeSR'> Remove </button></td></tr>"
                     );
@@ -182,15 +182,34 @@ $(document).ready(function () {
     $(document).on("click","#removeSR",function(){
         console.log("testing");
         var id = $("#removeSR").closest('tr').attr('id');
-        for(var i = 0; i<trProducts.length; i++) {
-            if(trProducts[i] == id) {
-                trProducts.splice(i,1);
+        for(var i = 0; i<products.length; i++) {
+            if(products[i] == id) {
+                products.splice(i,1);
             }
         }
         $("#removeSR").closest('tr').remove();
         console.log(id);
     });
 });
+
+function removeCartItemFromSalesRecord() {
+    var id = $("#removeThis").closest('tr').attr('id');
+    console.log(id);
+    $.ajax({
+        type: "GET",
+        url: "/salesrecord/remove/" + id,
+        cache:false,
+        datatype: "JSON",
+        success: function (response) {
+            console.log("successful");
+            $("#removeThis").closest('tr').remove();
+        },
+
+        error: function (obj, testStatus, errorThrown) {
+            console.log("failure");
+        }
+    });
+}
 </script>
 @endsection
 

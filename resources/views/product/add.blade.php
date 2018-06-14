@@ -67,7 +67,7 @@
                     <p style="text-align:right">METRO</p>
                 </div>
                 <div class="col-md-4">
-                    <input id="metro" type="number" class="form-control" name="metro" placeholder="METRO" required>
+                    <input id="metro" type="number" class="form-control" name="metro" placeholder="METRO" min="0" required>
                 </div>
             </div>
         </div>
@@ -77,14 +77,14 @@
                     <p>OG PLU</p>
                 </div>
                 <div class="col-md-4">
-                    <input id="og" type="number" class="form-control" name="og" placeholder="OG PLU" required>
+                    <input id="og" type="number" class="form-control" name="og" placeholder="OG PLU" min="0" required>
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
                     <p style="text-align:right">ROBINSON</p>
                 </div>
                 <div class="col-md-4">
-                    <input id="robinson" type="number" class="form-control" name="robinson" placeholder="ROBINSON" required>
+                    <input id="robinson" type="number" class="form-control" name="robinson" placeholder="ROBINSON" min="0" required>
                 </div>
             </div>
         </div>
@@ -94,14 +94,14 @@
                     <p>BHG</p>
                 </div>
                 <div class="col-md-4">
-                    <input id="bhg" type="number" class="form-control" name="bhg" placeholder="BHG" required>
+                    <input id="bhg" type="number" class="form-control" name="bhg" placeholder="BHG" min="0" required>
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
                     <p style="text-align:right">NTUC</p>
                 </div>
                 <div class="col-md-4">
-                    <input id="ntuc" type="number" class="form-control" name="ntuc" placeholder="NTUC" required>
+                    <input id="ntuc" type="number" class="form-control" name="ntuc" placeholder="NTUC" min="0" required>
                 </div> 
             </div>
         </div>
@@ -129,14 +129,14 @@
                     <p>Stock Level</p>
                 </div>
                 <div class="col-md-4">
-                    {{Form::text('stock_level', '', ['class' => 'form-control', 'placeholder' => 'Stock Level', 'id'=>'stock_level'])}}
+                    {{Form::number('stock_level', '', ['class' => 'form-control', 'placeholder' => 'Stock Level', 'id'=>'stock_level', 'min' => 0])}}
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
                     <p style="text-align:right">Threshold level</p>
                 </div>
                 <div class="col-md-4">
-                    {{Form::text('threshold', '', ['class' => 'form-control', 'placeholder' => 'Threshold level', 'id'=>'threshold'])}}
+                    {{Form::number('threshold', '', ['class' => 'form-control', 'placeholder' => 'Threshold level', 'id'=>'threshold', 'min' => 0])}}
                 </div>
             </div>
         </div>

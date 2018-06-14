@@ -69,7 +69,7 @@ class UsersController extends Controller
 	        $user = new User;
 	        $user->roles_id = "3";
 	        $user->name = $request->input('username');
-	        $user->email = "";
+	        $user->email = "enquiry@hebeloft.com";
 	        $user->phone_number = $request->input('phone_number');
 	        $user->password = Hash::make($request->input('password'));
 	        $user->save();

@@ -42,7 +42,7 @@
         </div>
         <div class="col-md-2 fullWidthButtons">
             <div class="p-2">
-                <button id="search" type="button" class="btn btn-sucess btn-search">Search</button>
+                <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
             </div>
         </div>
     </div>
@@ -93,32 +93,34 @@
         </div>
     </div>
     <br>
-    <div class="drop-down_brand row">
-        <div class="col-md-3">
-            <p>From Date:</p>
-        </div>
-        <div class="col-md-9">
-            <input type="date" name="from" class="form-control">
-        </div>
-    </div>
-    <br>
-    <div class="drop-down_location row">
-        <div class="col-md-3">
-            <p>To Date:</p>
-        </div>
-        <div class="col-md-9">
-            <input type="date" name="to" class="form-control">
-        </div>
-    </div>
-    <br>
     <div class="row">
-        <div class="col-md-10">
-            <input type="text" id="salesOrderSearchField" style="text-indent:20px;" class="form-control" style="background:transparent">
+        <div class="col-md-5">
+            <div class="drop-down_brand row">
+                <div class="col-md-4">
+                    <p>From Date:</p>
+                </div>
+                <div class="col-md-8">
+                    <input id="startDate" type="date" name="from" class="form-control">
+                </div>
+            </div>
         </div>
-        <div class="col-md-2">
-            <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
+        <div class="col-md-5">
+            <div class="drop-down_brand row">
+                <div class="col-md-4">
+                    <p style="text-align:right">To Date:</p>
+                </div>
+                <div class="col-md-8">
+                    <input id="endDate" type="date" name="to" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 fullWidthButtons">
+            <div class="p-2">
+                <button type="button" class="btn btn-default btn-refresh" id="refreshInventory">Refresh</button>
+            </div>
         </div>
     </div>
+    <br>
     <br>
     <div>
         <table class="display" id="salesOrderTable">
@@ -157,6 +159,36 @@ $(document).ready(function(){
     $("#salesOrderTable").DataTable({
         searching: false
     });
+    $('#refreshInventory').click(function(){
+        var startDate = $('#startDate').val();
+        var endDate = $('#endDate').val();
+        console.log(startDate + endDate);
+        $("#salesOrderContent").empty();
+        $.ajax({
+            type: "GET",
+            url: "<?php echo e(URL::TO('/ajax/salesorder/date')); ?>/" + startDate + "/" + endDate,
+            cache: false,
+            dataType: "JSON",
+            success: function (response) {
+                for (i = 0; i < response.length; i++) {
+                    console.log(response[i]);
+                    $("#salesOrderContent").append(
+                        "<tr><td>"+ response[i].date+"</td>"
+                        + "<td>"+ response[i].status +"</td>"
+                        + "<td>"+ response[i].status_name+"</td>"
+                            <?php if($users_id->roles_id == '1'): ?>
+                        +"<td><a href='/salesorder/"+response[i].id+"/edit'><button type='button' class='btn btn-primary action-buttons'>Edit</button></a></td></tr>"
+                        <?php endif; ?>
+                    );
+                }
+            },
+
+            error: function (obj, textStatus, errorThrown) {
+                console.log("Error " + textStatus + ": " + errorThrown);
+            }
+        });
+    });
+
     $('#search').click(function(){
         var startDate = $('#startDate').val();
         var endDate = $('#endDate').val();
@@ -168,7 +200,7 @@ $(document).ready(function(){
             cache: false,
             dataType: "JSON",
             success: function (response) {
-                console.log(response);
+                console.log(success);
                 for (i = 0; i < response.length; i++) {
                     console.log(response[i]);
                     $("#salesOrderContent").append(

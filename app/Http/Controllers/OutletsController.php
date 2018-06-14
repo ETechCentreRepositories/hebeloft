@@ -7,6 +7,7 @@ use App\Models\Outlet;
 use App\Models\AuditTrail;
 use App\Models\UserOutlet;
 use App\User;
+use App\Models\Wholesaler;
 use DB;
 
 class OutletsController extends Controller
@@ -82,8 +83,8 @@ class OutletsController extends Controller
         $user_id = auth()->user()->id;
         $users_id = User::find($user_id); 
         $outlet = Outlet::find($id);
-        $userOutlets = UserOutlet::all();
-        
+        $userOutlets = DB::table('users_has_outlets')->join('users', 'users.id', '=', 'users_has_outlets.users_id')->where('outlets_id', '=', $id)->get()->toArray();
+        // dd($userOutlets);
         return view('outlets.show')->with('outlet', $outlet)->with('users_id',$users_id)->with('userOutlets',$userOutlets);
     }
 
@@ -144,29 +145,41 @@ class OutletsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, $outlet_id)
     {
-        $login_user_id = auth()->user()->id;
-        $login_user = User::find($login_user_id);
+        if($id != null && $outlet_id = null) {
+            $login_user_id = auth()->user()->id;
+            $login_user = User::find($login_user_id);
 
-        //Audit Trail
-        $auditTrail = AuditTrail::create([
-            'action' => 'Deleted Outlet',
-            'action_by' => $login_user->name,
-        ]);
-        $outlet = Outlet::find($id);
-        $user = DB::table('users_has_outlets')->where('outlets_id', '=', $id)->get()->toArray();
-        $user_array = (array) $user;
-        $user = array_get($user_array, 0);
-        $userer = (array) $user;
-        $user_id = array_get($userer, "users_id");
-        // dd($user_id);
-        $user = User::find($user_id);
-        // dd($user);
-        $user->onDelete('cascade');
-        // $outlet->delete();
-        return redirect('/outlet')->with('success', 'Successfully Deleted Outlet');
-        
+            //Audit Trail
+            $auditTrail = AuditTrail::create([
+                'action' => 'Deleted Outlet Staff',
+                'action_by' => $login_user->name,
+            ]);
+
+            $userOutletExists = UserOutlet::where('users_id',$id)->get();
+            $wholesalerExists = Wholesaler::where('users_id',$id)->get();
+
+            if($userOutletExists){
+                foreach($userOutletExists as $userOutletExist){
+                    $userOutletExist->delete();
+                }
+            }
+
+            if($wholesalerExists){
+                foreach($wholesalerExists as $wholesalerExist){
+                    $wholesalerExist->delete();
+                }
+            }
+
+            $user = User::find($id);
+            $user->delete();
+            return redirect('/outlet')->with('success', 'User Removed');
+        } else {
+            $outlet = Outlet::find($outlet_id);
+            $outlet->delete();
+            return redirect('/outlet')->with('success', 'Outlet Removed');
+        }
     }
     
     public function checkIfUsersExist($id){

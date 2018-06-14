@@ -125,6 +125,21 @@ $(document).ready(function() {
                 for (i = 0; i < response.length; i++) {
                     console.log(response[i]);
                     var productId = parseInt(response[i].products_id);
+                    var stockLevel = response[i].stock_level;
+                    var thresholdLevel = response[i].threshold_level;
+                    var maxQty = stockLevel - thresholdLevel;
+                    console.log("stock level: " + stockLevel);
+                    console.log("threshold level: " + thresholdLevel);
+                    console.log("maxQty: " + maxQty);
+                    var quantity = 0;
+                    if(maxQty < thresholdLevel){
+                        quantity = maxQty;
+                    } else if (maxQty > thresholdLevel) {
+                        quantity = thresholdLevel;
+                    } else if ( maxQty == thresholdLevel) {
+                        quantity = thresholdLevel;
+                    }
+                    console.log(quantity);
 
                     trProducts.push(productId);
                     console.log(trProducts);
@@ -133,7 +148,8 @@ $(document).ready(function() {
                         "<tr id='newRow_"+productId+"'>"
                         + "<td><img style='width:60px; height:60px' src='/hebeloft/storage/product_images/"+ response[i].image +"'/></td>"
                         + "<td>" + response[i].Name + "</td>"
-                        + "<td align='center'><select name='select'><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option></select></td>"
+                        + "<td id='price' align='center'><input name='unitPrice' type='number' id='unitPrice' type='text' style='width:60px;' value='"+ response[i].UnitPrice +"' readonly></td>"
+                        + "<td id='quantity' align='center'><input name='quantity' type='number' id='qty' type='text' style='width:60px;' value='"+ quantity +"' min='"+ response[i].threshold_level +"' max='"+ maxQty +"'/></td>"
                         + "<td><button type='button' class='btn btn-danger action-buttons' id='removeTR'> Remove </button></td></tr>"
                     );
                 }
