@@ -51,6 +51,7 @@ Route::get('/', 'InventoryController@index')->name('inventory');
 Route::get('/ajax/outlet', 'InventoryController@getOutlet');
 Route::get('/ajax/product_brand', 'InventoryController@getProductBrand');
 Route::get('/ajax/inventory', 'InventoryController@getInventory');
+Route::get('/ajax/category', 'InventoryController@getCategory');
 Route::get('/autocomplete-search', 'InventoryController@search');
 Route::get('/retrieve-inventory-by-outlet/{outlet}', 'InventoryController@getInventoryByOutlet');
 Route::get('/retrieve-inventory-by-product-brand/{product_brand}', 'InventoryController@getInventoryByProductBrand');
@@ -58,6 +59,9 @@ Route::get('/retrieve-inventory-by-product-brand/for-wholesaler/{product_brand}'
 Route::get('/retrieve-inventory-by-filter/{outlet}/{product_brand}', 'InventoryController@getInventoryByFilter');
 Route::get('/retrieve-inventory-by-product-name/{productName}', 'InventoryController@getInventoryByProductName');
 Route::get('export-inventory/{type}', 'InventoryController@exportFile')->name('exportInventory.file');
+Route::get('export-inventory-brand/{type}/{brand}', 'InventoryController@exportFileBrand')->name('exportInventory_brand.file');
+Route::get('export-inventory-category/{type}/{category}', 'InventoryController@exportFileCategory')->name('exportInventory_category.file');
+Route::get('export-inventory-outlet/{type}/{outlet}', 'InventoryController@exportFileOutlet')->name('exportInventory_outlet.file');
 
 //SalesRecord 
 Route::get('/salesrecord/create', 'SalesRecordsController@getSalesRecordCart');

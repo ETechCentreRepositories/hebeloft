@@ -41,7 +41,11 @@
             </table>
         @endif
         @if(count($userOutlets) < 1)
+<<<<<<< HEAD
             {!!Form::open(['action' => ['OutletsController@destroy', '', $outlet->id], 'method' => 'POST'])!!}
+=======
+            {!!Form::open(['action' => ['OutletsController@destroy','', $outlet->id], 'method' => 'POST'])!!}
+>>>>>>> fe0d5e1e3e54f769f1368ad41e6f08dd4a072df7
             {{Form::hidden('_method', 'DELETE')}}
             {{Form::submit('Delete', ['class' => 'btn btn-danger action-buttons'])}}
             {!!Form::close()!!}

@@ -2,15 +2,19 @@ $(document).ready(function(){
     $("#inventoryTable").DataTable();
     $.get('ajax/product_brand',function(data){
         $("#product_brand").empty();
+        $("#brand").empty();
         $("#product_brand").append("<option value='all'>All</option>");
         $.each(data,function(i,value){
             var brand = value.Brand;
             $("#product_brand").append("<option value='" +
             value.id + "'>" + brand + "</option>");
+            $("#brand").append("<option value='" +
+            value.id + "'>" + brand + "</option>");
         });
     });
     $.get('ajax/outlet',function(data){
         $("#outlet_location").empty();
+        $("#outlet").empty();
         $("#outlet_location").append("<option value='all'>All</option>");
         $.each(data,function(i,value){
             var id = value.id;
@@ -18,8 +22,17 @@ $(document).ready(function(){
             var outlet_id = value.id;
             $("#outlet_location").append("<option value='" +
             outlet_id + "'>" + outlet + "</option>");
+            $("#outlet").append("<option value='" +
+            outlet_id + "'>" + outlet + "</option>");
         });
         $("#outlet_location").append("<option value='1'>All</option>");
+    });
+    $.get('ajax/category',function(data){
+        $("#category").empty();
+        $.each(data,function(i,value){
+            $("#category").append("<option value='" +
+            value.Category + "'>" + value.Category + "</option>");
+        });
     });
 
     $("#searchField").autocomplete({
@@ -258,6 +271,22 @@ $(document).ready(function(){
             });
         }
     });
+
+    $("#exportBrand").click(function (){
+        $.ajax({
+            type: "GET",
+            url: "{{'exportInventory_outlet.file',['type'=>'csv']}}",
+            cache: false,
+            dataType: "JSON",
+            success: function (response) {
+                console.log(response);
+                
+            },
+            
+            error: function (obj, textStatus, errorThrown) {
+                console.log("Error " + textStatus + ": " + errorThrown);
+            }
+    });
 });
 
 function openImportCSVModal() {
@@ -266,4 +295,25 @@ function openImportCSVModal() {
 
 function closeImportCSVModal() {
     document.getElementById('importCSVModal').style.display = "none";
+}
+function openExportCategoryModal() {
+    document.getElementById('exportCategoryModal').style.display = "block";
+}
+
+function closeExportCategoryModal() {
+    document.getElementById('exportCategoryModal').style.display = "none";
+}
+function openExportOutletModal() {
+    document.getElementById('exportOutletModal').style.display = "block";
+}
+
+function closeExportOutletModal() {
+    document.getElementById('exportOutletModal').style.display = "none";
+}
+function openExportBrandModal() {
+    document.getElementById('exportBrandModal').style.display = "block";
+}
+
+function closeExportBrandModal() {
+    document.getElementById('exportBrandModal').style.display = "none";
 }

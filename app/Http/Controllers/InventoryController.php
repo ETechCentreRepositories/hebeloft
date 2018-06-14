@@ -153,7 +153,8 @@ class InventoryController extends Controller
     public function exportFile($type){
 
         $inventoryexcel = InventoryOutlet::join('products', 'inventory_has_outlets.products_id', '=', 'products.id')
-                        ->select('inventory_has_outlets.id','products.Name', 'products.Category', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level')
+                        ->join('outlets', 'outlets.id', '=', 'inventory_has_outlets.outlets_id')
+                        ->select('inventory_has_outlets.id','products.Name', 'products.Category', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level', 'outlets.initial')
                         ->get()->toArray();
 
         return \Excel::create('inventory', function($excel) use ($inventoryexcel) {
@@ -163,6 +164,52 @@ class InventoryController extends Controller
             });
         })->download($type);
     }
+    public function exportFileBrand($type){
+
+        $inventoryexcel = InventoryOutlet::join('products', 'inventory_has_outlets.products_id', '=', 'products.id')
+                        ->join('outlets', 'outlets.id', '=', 'inventory_has_outlets.outlets_id')
+                        ->where('products.Brand', '=', 'Skylake')
+                        ->select('inventory_has_outlets.id','products.Name', 'products.Category', 'products.Brand', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level', 'outlets.initial')
+                        ->get()->toArray();
+
+        return \Excel::create('inventory_brand', function($excel) use ($inventoryexcel) {
+            $excel->sheet('sheet name', function($sheet) use ($inventoryexcel)
+            {
+                $sheet->fromArray($inventoryexcel);
+            });
+        })->download($type);
+    }
+    public function exportFileCategory($type){
+
+        $inventoryexcel = InventoryOutlet::join('products', 'inventory_has_outlets.products_id', '=', 'products.id')
+                        ->join('outlets', 'outlets.id', '=', 'inventory_has_outlets.outlets_id')
+                        ->where('products.Category', '=', 'BG0070152')
+                        ->select('inventory_has_outlets.id','products.Name', 'products.Category', 'products.Brand', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level', 'outlets.initial')
+                        ->get()->toArray();
+
+        return \Excel::create('inventory_category', function($excel) use ($inventoryexcel) {
+            $excel->sheet('sheet name', function($sheet) use ($inventoryexcel)
+            {
+                $sheet->fromArray($inventoryexcel);
+            });
+        })->download($type);
+    }
+    public function exportFileOutlet($type){
+
+        $inventoryexcel = InventoryOutlet::join('products', 'inventory_has_outlets.products_id', '=', 'products.id')
+                        ->join('outlets', 'outlets.id', '=', 'inventory_has_outlets.outlets_id')
+                        ->where('outlets.outlet_name', '=', 'OG ALBERT')
+                        ->select('inventory_has_outlets.id','products.Name', 'products.Category', 'products.Brand', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level', 'outlets.initial')
+                        ->get()->toArray();
+
+        return \Excel::create('inventory_outlet', function($excel) use ($inventoryexcel) {
+            $excel->sheet('sheet name', function($sheet) use ($inventoryexcel)
+            {
+                $sheet->fromArray($inventoryexcel);
+            });
+        })->download($type);
+    }
+
     
     public function getInventory(){
         $inventoryOutlet = InventoryOutlet::orderBy('id', 'desc')->get()->toArray();
@@ -177,7 +224,13 @@ class InventoryController extends Controller
     }
     
     public function getProductBrand(){
-        $productBrand = Products::orderBy('id', 'desc')->get()->toArray();
+        $productBrand = Products::select('Brand')->orderBy('id', 'desc')->get()->toArray();
+
+        return response($productBrand);
+    }
+
+    public function getCategory(){
+        $productBrand = Products::select('Category')->orderBy('id', 'desc')->get()->toArray();
 
         return response($productBrand);
     }
