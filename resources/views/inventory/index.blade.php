@@ -113,7 +113,7 @@
             </div>
        </div>
     </div>
-    <div id="exportBrandModal" class="modal">
+    {{-- <div id="exportBrandModal" class="modal">
         <span class="close cursor" onclick="closeExportBrandModal()">&times;</span>
         <div class="card modalCard">
             <div class="card-body">
@@ -128,7 +128,7 @@
                 </div>
             </div>
        </div>
-    </div>
+    </div> --}}
     <div id="exportCategoryModal" class="modal">
         <span class="close cursor" onclick="closeExportCategoryModal()">&times;</span>
         <div class="card modalCard">
@@ -145,7 +145,7 @@
             </div>
        </div>
     </div>
-    <div id="exportOutletModal" class="modal">
+    {{-- <div id="exportOutletModal" class="modal">
         <span class="close cursor" onclick="closeExportOutletModal()">&times;</span>
         <div class="card modalCard">
             <div class="card-body">
@@ -160,7 +160,7 @@
                 </div>
             </div>
        </div>
-    </div>
+    </div> --}}
 </div>
 
 @endsection
