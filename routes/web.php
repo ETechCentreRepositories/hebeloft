@@ -24,6 +24,7 @@ Route::get('/staffsignup', 'UsersController@create');
 Route::get('/outlet', 'PagesController@outlet');
 Route::get('/salesrecord', 'PagesController@salesrecord');
 Route::get('/product', 'PagesController@product');
+Route::get('/purchaseorder', 'PagesController@purchaseorder');
 
 Route::resource('home', 'HomeController');
 Route::resource('inventory', 'InventoryController');
@@ -33,6 +34,7 @@ Route::resource('transferrequest', 'TransferRequestController');
 Route::resource('salesorder', 'SalesOrdersController');
 Route::resource('salesrecord', 'SalesRecordsController');
 Route::resource('product', 'ProductsController');
+Route::resource('purchaseorder', 'PurchaseOrdersController');
 
 Route::get('/ajax/so_tbp/{$statuses_id}', 'SalesOrdersController@view');
 Route::get('/ajax/so-tbs/{$statuses_id}', 'SalesOrdersController@getOutlet');

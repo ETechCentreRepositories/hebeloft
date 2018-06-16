@@ -45,4 +45,9 @@ class PagesController extends Controller
         $title = 'Product';
         return view('product.index')->with('title', $title);
     }
+
+    public function purchaseorder(){
+        $title = 'Purchase Order';
+        return view('purchaseorder.index')->with('title', $title);
+    }
 }
