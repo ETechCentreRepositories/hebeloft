@@ -225,7 +225,11 @@ function removeCartItemFromTransferRequest() {
             console.log("failure");
         }
     });
-}</script>
+    }
+    function enableCreateButton() {
+        document.getElementById("createButton").disabled = false;
+    }
+    </script>
 <?php $__env->stopSection(); ?>
 
 <style>

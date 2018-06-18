@@ -46,19 +46,19 @@
     </div>
     <br>
     <h3>Generate Report</h3>
-    <br>
+    <h6>Sort By : </h6>
     <div class="row">
         <div class="col-md-2">
             <a href="{{ route('exportInventory.file',['type'=>'csv']) }}"><button type="button" class="btn btn-warning" style="width: 100%;">All</button></a>
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-warning" onclick="openExportBrandModal()" style="width: 100%;">By Brand</button></a>
+        <a href="{{ route('exportInventory_brand.file',['type'=>'csv']) }}"><button type="button" class="btn btn-warning" style="width: 100%;">By Brand</button></a>
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-warning" onclick="openExportCategoryModal()" style="width: 100%;">By Category</button></a>
+        <a href="{{ route('exportInventory_category.file',['type'=>'csv']) }}"><button type="button" class="btn btn-warning" style="width: 100%;">By Category</button></a>
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-warning" onclick="openExportOutletModal()" style="width: 100%;">By Outlets</button></a>
+        <a href="{{ route('exportInventory_outlet.file',['type'=>'csv']) }}"><button type="button" class="btn btn-warning" style="width: 100%;">By Outlets</button></a>
         </div>
     </div>
     @endif
@@ -113,55 +113,8 @@
             </div>
        </div>
     </div>
-    {{-- <div id="exportBrandModal" class="modal">
-        <span class="close cursor" onclick="closeExportBrandModal()">&times;</span>
-        <div class="card modalCard">
-            <div class="card-body">
-                <h3>Select Brand</h3>
-                <br><br><br><br><br>
-                <div style="text-align:center">
-                    <select id="brand" class="form-control"></select>
-                </div>
-                <br>
-                <div style="text-align:center">
-                <a href="{{ route('exportInventory_brand.file',['type'=>'csv'], ['brand'=>$brand]) }}"><button type="button" class="btn btn-primary">Export</button></a>
-                </div>
-            </div>
-       </div>
-    </div> --}}
-    <div id="exportCategoryModal" class="modal">
-        <span class="close cursor" onclick="closeExportCategoryModal()">&times;</span>
-        <div class="card modalCard">
-            <div class="card-body">
-                <h3>Select Category</h3>
-                <br><br><br><br><br>
-                <div style="text-align:center">
-                    <select id="category" class="form-control" ></select>
-                </div>
-                <br>
-                <div style="text-align:center">
-                    <button type="button" id="exportBrand" class="btn btn-primary">Export</button>
-                </div>
-            </div>
-       </div>
-    </div>
-    {{-- <div id="exportOutletModal" class="modal">
-        <span class="close cursor" onclick="closeExportOutletModal()">&times;</span>
-        <div class="card modalCard">
-            <div class="card-body">
-                <h3>Select Outlet</h3>
-                <br><br><br><br><br>
-                <div style="text-align:center">
-                    <select id="outlet" class="form-control" ></select>
-                </div>
-                <br>
-                <div style="text-align:center">
-                    <a href="{{ route('exportInventory_outlet.file',['type'=>'csv']) }}"><button type="button" class="btn btn-primary">Export</button></a>
-                </div>
-            </div>
-       </div>
-    </div> --}}
 </div>
+
 
 @endsection
 

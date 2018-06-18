@@ -15,7 +15,7 @@
 <?php if($users_id->roles_id == '1' or $users_id->roles_id == '2'): ?>
 <div class="topMargin container">
     <div class="row">
-        <div class="col-md-9"></div>
+        <div class="col-md-9"><a href="<?php echo e(route('exporttransferrequest.file',['type'=>'csv'])); ?>"><button type="button" class="btn btn-warning">Export</button></a></div>
         <div class="col-md-3 fullWidthButtons">
             <div class="p-2">
                 <a href="/transferrequest/create"><button type="button" class="btn btn-warning centered-buttons">Create or View New Transfer Request</button></a>

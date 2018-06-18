@@ -299,4 +299,19 @@ class TransferRequestController extends Controller
         $quantity = InventoryOutlet::where('outlets_id', '=', $selectedOutlet)->where('products_id', '=', $getProductsValue)->select('stock_level')->get()->toArray();
         return $quantity;
      }
+
+     public function exportFile($type){
+        $transfers = DB::table('transfer_requests')
+        ->join('transfer_requests_list', 'transfer_requests_list.transfer_requests_id', '=', 'transfer_requests.id')
+        ->get()
+        ->toArray();
+        $data = json_decode( json_encode($transfers), true);
+
+        return \Excel::create('transfer_request', function($excel) use ($data) {
+            $excel->sheet('sheet name', function($sheet) use ($data)
+            {
+                $sheet->fromArray($data);
+            });
+        })->download($type);
+    }
 }

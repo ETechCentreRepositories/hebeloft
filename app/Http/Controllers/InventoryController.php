@@ -140,16 +140,6 @@ class InventoryController extends Controller
         //
     }
 
-    public function html()
-{
-    return $this->builder()
-                ->columns('')
-                ->ajax('')
-                ->addAction('')
-                ->parameters([
-                    'buttons'      => ['export', 'print', 'reset', 'reload'],
-                ]);
-}
     public function exportFile($type){
 
         $inventoryexcel = InventoryOutlet::join('products', 'inventory_has_outlets.products_id', '=', 'products.id')
@@ -164,15 +154,17 @@ class InventoryController extends Controller
             });
         })->download($type);
     }
+    
     public function exportFileBrand($type){
 
         $inventoryexcel = InventoryOutlet::join('products', 'inventory_has_outlets.products_id', '=', 'products.id')
                         ->join('outlets', 'outlets.id', '=', 'inventory_has_outlets.outlets_id')
-                        ->where('products.Brand', '=', 'Skylake')
                         ->select('inventory_has_outlets.id','products.Name', 'products.Category', 'products.Brand', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level', 'outlets.initial')
+                        ->orderBy('products.Brand')
                         ->get()->toArray();
+        
 
-        return \Excel::create('inventory_brand', function($excel) use ($inventoryexcel) {
+        return \Excel::create('inventory_by_brand', function($excel) use ($inventoryexcel) {
             $excel->sheet('sheet name', function($sheet) use ($inventoryexcel)
             {
                 $sheet->fromArray($inventoryexcel);
@@ -180,11 +172,10 @@ class InventoryController extends Controller
         })->download($type);
     }
     public function exportFileCategory($type){
-
         $inventoryexcel = InventoryOutlet::join('products', 'inventory_has_outlets.products_id', '=', 'products.id')
                         ->join('outlets', 'outlets.id', '=', 'inventory_has_outlets.outlets_id')
-                        ->where('products.Category', '=', 'BG0070152')
                         ->select('inventory_has_outlets.id','products.Name', 'products.Category', 'products.Brand', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level', 'outlets.initial')
+                        ->orderBy('products.Category')
                         ->get()->toArray();
 
         return \Excel::create('inventory_category', function($excel) use ($inventoryexcel) {
@@ -195,11 +186,10 @@ class InventoryController extends Controller
         })->download($type);
     }
     public function exportFileOutlet($type){
-
         $inventoryexcel = InventoryOutlet::join('products', 'inventory_has_outlets.products_id', '=', 'products.id')
                         ->join('outlets', 'outlets.id', '=', 'inventory_has_outlets.outlets_id')
-                        ->where('outlets.outlet_name', '=', 'OG ALBERT')
                         ->select('inventory_has_outlets.id','products.Name', 'products.Category', 'products.Brand', 'products.ItemType','inventory_has_outlets.threshold_level','inventory_has_outlets.stock_level', 'outlets.initial')
+                        ->orderBy('outlets.initial')
                         ->get()->toArray();
 
         return \Excel::create('inventory_outlet', function($excel) use ($inventoryexcel) {
@@ -224,7 +214,7 @@ class InventoryController extends Controller
     }
     
     public function getProductBrand(){
-        $productBrand = Products::select('Brand')->orderBy('id', 'desc')->get()->toArray();
+        $productBrand = Products::orderBy('id', 'desc')->get()->toArray();
 
         return response($productBrand);
     }

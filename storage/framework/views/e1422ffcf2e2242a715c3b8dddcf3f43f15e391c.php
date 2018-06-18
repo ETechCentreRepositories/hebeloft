@@ -18,6 +18,7 @@
                 <li class="navList"><a class="inventoryNav nav-link" style="color:#e3b417;" href="/"><div class="navLabels">Inventory</div></a></li>
                 <li class="navList"><a class="productNav nav-link" style="color:#e3b417;" href="/product"><div class="navLabels">Product</div></a></li>
                 <li class="navList"><a class="transferRequestNav nav-link" style="color:#e3b417;" href="/transferrequest"><div class="navLabels">Transfer Request</div></a></li>
+                <li class="navList"><a class="purchaseOrderNav nav-link" style="color:#e3b417;" href="/purchaseorder"><div class="navLabels">Purchase Order</div></a></li>
                 <li class="navList"><a class="salesOrderNav nav-link" style="color:#e3b417;" href="/salesorder"><div class="navLabels">Sales Order</div></a></li>
                 <li class="navList"><a class="salesRecordNav nav-link" style="color:#e3b417;" href="/salesrecord"><div class="navLabels">Sales Record</div></a></li>
                 <li class="navList"><a class="userNav nav-link" style="color:#e3b417;" href="/user"><div class="navLabels">User</div></a></li>

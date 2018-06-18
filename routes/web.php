@@ -61,9 +61,9 @@ Route::get('/retrieve-inventory-by-product-brand/for-wholesaler/{product_brand}'
 Route::get('/retrieve-inventory-by-filter/{outlet}/{product_brand}', 'InventoryController@getInventoryByFilter');
 Route::get('/retrieve-inventory-by-product-name/{productName}', 'InventoryController@getInventoryByProductName');
 Route::get('export-inventory/{type}', 'InventoryController@exportFile')->name('exportInventory.file');
-Route::get('export-inventory-brand/{type}/{brand}', 'InventoryController@exportFileBrand')->name('exportInventory_brand.file');
-Route::get('export-inventory-category/{type}/{category}', 'InventoryController@exportFileCategory')->name('exportInventory_category.file');
-Route::get('export-inventory-outlet/{type}/{outlet}', 'InventoryController@exportFileOutlet')->name('exportInventory_outlet.file');
+Route::get('export-inventory-brand/{type}', 'InventoryController@exportFileBrand')->name('exportInventory_brand.file');
+Route::get('export-inventory-category/{type}', 'InventoryController@exportFileCategory')->name('exportInventory_category.file');
+Route::get('export-inventory-outlet/{type}', 'InventoryController@exportFileOutlet')->name('exportInventory_outlet.file');
 
 //SalesRecord 
 Route::get('/salesrecord/create', 'SalesRecordsController@getSalesRecordCart');
@@ -88,6 +88,7 @@ Route::get('/ajax/salesorder/date/{startDate}/{endDate}', 'SalesOrdersController
 Route::get('/transferrequest/create', 'TransferRequestController@getTransferRequestCart');
 Route::get('/transferrequest/addtocart/{id}/{quantity}/{outlet}/{date}/{remarks}', 'TransferRequestController@getTransferRequestAddToCart');
 Route::get('/testing/{id}', 'UsersController@show');
+Route::get('export-transferrequest/{type}', 'TransferRequestController@exportFile')->name('exporttransferrequest.file');
 Route::get('/transferrequest/reduce/{id}', 'TransferRequestController@getReduceByOne');
 Route::get('/transferrequest/remove/{id}', 'TransferRequestController@getRemoveItem');
 Route::get('/ajax/transferrequest/date/{startDate}/{endDate}', 'TransferRequestController@sortDate');
@@ -108,3 +109,5 @@ Route::get('outlets/check/{id}','OutletsController@checkIfUsersExist');
 Route::get('/products/create', 'ProductsController@add');
 Route::get('/autocomplete-search-description', 'ProductsController@search');
 Route::get('/retrieve-product-by-name/{productName}', 'ProductsController@getProductByName');
+
+Route::get('export-PO/{type}', 'PurchaseOrdersController@exportFile')->name('exportPO.file');

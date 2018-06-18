@@ -110,7 +110,6 @@ $(document).ready(function (){
 
     var orderProducts = [];
     $("#addSalesOrder").click(function() {
-        console.log("distinct");
         var productName = $("#salesOrderSearchField").val();
         $.ajax({
             type: "GET",
@@ -120,6 +119,7 @@ $(document).ready(function (){
             datatype: "JSON",
             success: function (response) {
                  console.log("testing");
+                 console.log(response);
                 for (i = 0; i < response.length; i++) {
                     var productId = parseInt(response[i].products_id);
                     orderProducts.push(productId);
@@ -192,9 +192,6 @@ $(document).ready(function (){
 
 function removeCartItemFromSalesOrder() {
     console.log("testing");
-    //retreive the element inside the tr
-    //retrieve the "closest tr"
-    //retrieve .attr('id')
     var id = $("#removeThis").closest('tr').attr('id');
     console.log(id);
         
@@ -228,8 +225,3 @@ function enableCreateButton() {
         cursor: default;
     }
 </style>
-<script>
-    function enableCreateButton() {
-        document.getElementById("createButton").disabled = false;
-    }
-</script>

@@ -266,7 +266,7 @@ class SalesOrdersController extends Controller
         ->join('users', 'sales_order.users_id', '=', 'users.id')
         ->join('wholesalers', 'users.id', '=', 'wholesalers.users_id')
         ->select('sales_order.id', 'sales_order.totalQuantity', 'sales_order.totalPrice', 'statuses.status_name', 'sales_order.remarks', 'sales_order.date', 'users.name', 'wholesalers.shipping_address')
-        ->orderBy('sales_order.id')
+        ->orderBy('sales_order.date', 'desc')
         ->get()
         ->toArray();
         $data = json_decode( json_encode($salesorderexcel), true);

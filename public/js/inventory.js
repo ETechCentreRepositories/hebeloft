@@ -3,13 +3,15 @@ $(document).ready(function(){
     $.get('ajax/product_brand',function(data){
         $("#product_brand").empty();
         $("#brand").empty();
+        $( "#tryExport" ).empty();
         $("#product_brand").append("<option value='all'>All</option>");
         $.each(data,function(i,value){
             var brand = value.Brand;
-            $("#product_brand").append("<option value='" +
-            value.id + "'>" + brand + "</option>");
-            $("#brand").append("<option value='" +
-            value.id + "'>" + brand + "</option>");
+            $("#product_brand").append("<option value='" +value.id + "'>"
+            + brand + "</option>");
+            $("#brand").append("<option value='" + value.id + "'>"
+            + brand + "</option>");
+            // $( "#tryExport" ).append( "<a href='{{ route('exportInventory_outlet.file',['type'=>'csv', 'brand', "+ value.id+"]) }}'><button type='button' class='btn btn-primary'>Export</button></a>" );
         });
     });
     $.get('ajax/outlet',function(data){
@@ -30,8 +32,8 @@ $(document).ready(function(){
     $.get('ajax/category',function(data){
         $("#category").empty();
         $.each(data,function(i,value){
-            $("#category").append("<option value='" +
-            value.Category + "'>" + value.Category + "</option>");
+            $("#category").append("<option value='" + value.Category + "'>"
+            + value.Category + "</option>");
         });
     });
 
@@ -270,22 +272,7 @@ $(document).ready(function(){
                 }
             });
         }
-    });
-
-    $("#exportBrand").click(function (){
-        $.ajax({
-            type: "GET",
-            url: "{{'exportInventory_outlet.file',['type'=>'csv']}}",
-            cache: false,
-            dataType: "JSON",
-            success: function (response) {
-                console.log(response);
-                
-            },
-            
-            error: function (obj, textStatus, errorThrown) {
-                console.log("Error " + textStatus + ": " + errorThrown);
-            }
+        
     });
 });
 
